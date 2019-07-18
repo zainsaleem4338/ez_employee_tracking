@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :employees
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -7,7 +8,16 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  get 'menus/index' => 'menus#index'
+  get 'menus/new' => 'menus#new'
+  root 'menus#index'
 
+  # resources :employees
+  get '/employees/index' => 'employees#index', :as => :employees
+  get '/employees/new' => 'employees#new', :as => :new_employee
+  post '/employees/create' => 'employees#create', :as => :create_employee
+  delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
+  # match '/employee/create' => 'employees#create', :as => :create_employees
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
