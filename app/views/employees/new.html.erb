@@ -1,51 +1,51 @@
 <h1>Add An Employee</h1>
 <br>
 <%= render 'shared/errors', obj: @employee %>
-<%= form_for @employee, url: create_employee_path(@employee), method: :post ,:html => {class: "form-horizontal", role: "form"} do |e| %>
+<%= form_for @employee, url: create_employee_path(@employee), method: :post ,:html => {class: "form-horizontal", role: "form"} do |form| %>
   <div class="form-group">
     <div class="control-label col-sm-2">
-      <%= e.label :name %>
+      <%= form.label :name %>
     </div>
     <div class="col-sm-8">
-      <%= e.text_field :name, class:"form-control", placeholder:"Name of Employee", autofocus: true %>
+      <%= form.text_field :name, class:"form-control", placeholder:"Name of Employee", autofocus: true %>
     </div>
   </div>
   <div class="form-group">
     <div class="control-label col-sm-2">
-      <%= e.label :email %> 
+      <%= form.label :email %> 
     </div>
     <div class="col-sm-8">
-      <%= e.text_field :email, class:"form-control", placeholder:"Email of Employee" %>
+      <%= form.text_field :email, class:"form-control", placeholder:"Email of Employee" %>
     </div>
   </div>
   <div class="form-group">
     <div class="control-label col-sm-2">
-      <%= e.label :role %>
+      <%= form.label :role %>
     </div>
     <div class="col-sm-8">
-      <%= e.select(:role, options_for_select([['Employee'],['Team Lead']]), {}, {class: "form-control"}) %>
+      <%= form.select(:role, options_for_select([['Employee'],['Team Lead']]), {}, {class: "form-control"}) %>
     </div>
   </div>
   <div class="form-group">
     <div class="control-label col-sm-2">
-      <%= e.label :department_id %>
+      <%= form.label :department_id %>
     </div>
     <div class="col-sm-8">
-      <%= e.select(:department_id, options_for_select([['Development', 1],['Product', 2]]), {}, {class: "form-control"}) %>
+      <%= form.select(:department_id, options_for_select([['Development', 1],['Product', 2]]), {}, {class: "form-control"}) %>
     </div>
   </div>
   <div class="form-group">
     <div class="control-label col-sm-2">
-      <%= e.label :password %> 
+      <%= form.label :password %> 
     </div>
     <div class="col-sm-8">
-      <%= e.password_field :password, class:"form-control", placeholder:"Password of Employee" %>
+      <%= form.password_field :password, class:"form-control", placeholder:"Password of Employee" %>
     </div>
   </div>
-  <%= e.hidden_field :company_id, :value => @employee.company_id %>
+  <%= form.hidden_field :company_id, :value => @employee.company_id %>
   <div class="from-group">
     <div class="col-sm-offset-2 col-sm-8">
-      <%= e.submit class:'btn btn-primary btn-lg btn-block' %>
+      <%= form.submit class:'btn btn-primary btn-lg btn-block' %>
     </div>
   </div>
 <% end %>

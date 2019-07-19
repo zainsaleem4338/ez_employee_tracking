@@ -1,5 +1,5 @@
 class RemoveUniquenessOnEmployees < ActiveRecord::Migration
   def change
-    change_column :employees, :email, :string, :unique => false
+    change_column :employees, :email, :string, unique: false
   end
 end

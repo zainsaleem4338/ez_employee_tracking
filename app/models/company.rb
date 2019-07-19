@@ -1,4 +1,3 @@
-# Company Model
 class Company < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true,
             length:
