@@ -10,9 +10,9 @@ class EmployeesController < ApplicationController
 
   def create
     @employee = Employee.new(employee_params)
-    # binding.pry
+    @employee.password = generate_password
     if @employee.save
-      flash.now[:success] = 'Employee successfully created!'
+      flash[:success] = 'Employee successfully created!'
       redirect_to root_path
     else
       render 'new'
@@ -31,5 +31,10 @@ class EmployeesController < ApplicationController
 
   def employee_params
     params.require(:employee).permit(:name, :email, :password, :role, :company_id, :department_id)
+  end
+
+  def generate_password
+    o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+    (0...10).map { o[rand(o.length)] }.join
   end
 end
