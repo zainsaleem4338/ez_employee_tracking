@@ -1,4 +1,3 @@
-# Employee Controller
 class EmployeesController < ApplicationController
   def index
     @employees = current_employee.company.employees.active_members
@@ -23,8 +22,10 @@ class EmployeesController < ApplicationController
     @employee = current_employee.company.employees.find_by(sequence_num: params[:id])
     @employee.active = false
     flash[:danger] = 'Employee is now inactive!'
-    @employee.save
-    redirect_to employees_path
+    if @employee.save
+      redirect_to employees_path
+    else
+      redirect_to root_path
   end
 
   private
