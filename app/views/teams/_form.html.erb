@@ -1,0 +1,38 @@
+<%= form_for(@team) do |f| %>
+  <% if @team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% @team.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, required: true, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :department_id, "Department"%><br>
+    <%= f.collection_select :department_id, Department.order(:name),:id,:name, include_blank: true, class: "form-control", :onchange => 'callMe()' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :team_lead_id, "Team Leader" %><br>
+    <%= f.text_field :team_lead_id, data: { load: @team.employee_lists('Team Leader') }, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :employee_tokens, "Team Members" %><br>
+    <%= f.text_field :employee_tokens, data: { load: @team.employee_lists('Team Member') }, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-success" %>
+  </div>
+<% end %>
