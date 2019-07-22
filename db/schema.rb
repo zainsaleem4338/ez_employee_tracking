@@ -11,12 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190718172533) do
+ActiveRecord::Schema.define(version: 20190718141654) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
     t.string "description", limit: 255
   end
+
+  add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",   null: false
@@ -45,5 +47,6 @@ ActiveRecord::Schema.define(version: 20190718172533) do
 
   add_index "employees", ["email", "company_id"], name: "index_employees_on_email_and_company_id", unique: true, using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
+  add_index "employees", ["sequence_num", "company_id"], name: "index_employees_on_sequence_num_and_company_id", unique: true, using: :btree
 
 end

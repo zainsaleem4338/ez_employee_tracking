@@ -13,7 +13,6 @@ describe 'Employees' do
         binding.pry
         employee = FactoryGirl.create(:employee)
         expect { employee }.should raise_error(StandardError)
-        # Instead SequnceID is messing with something
       end
     end
   end

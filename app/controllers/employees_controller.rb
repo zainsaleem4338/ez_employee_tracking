@@ -25,6 +25,7 @@ class EmployeesController < ApplicationController
       redirect_to employees_path
     else
       redirect_to root_path
+    end
   end
 
   private
