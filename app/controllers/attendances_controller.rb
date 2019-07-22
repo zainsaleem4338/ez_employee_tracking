@@ -48,8 +48,4 @@ class AttendancesController < ApplicationController
   def post_params
     params.require(:post).permit(:id)
   end
-
-  def pre_create_update_computation
-    # add employee and company object creation
-  end
 end
