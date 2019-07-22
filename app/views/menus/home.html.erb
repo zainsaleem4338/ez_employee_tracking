@@ -1,0 +1,17 @@
+<div class="card border-success mb-3">
+  <div class="card-header"><center><h2>Select Company</h2></center></div>
+  <div class="card-body text-success company-body">
+    <% @companies.each do |company| %>
+      <center>
+        <div class="card border-success mb-3 text-transition" style="max-width: 18rem;">
+          <%= link_to 'http://' + company.subdomain + '.localhost:3000/employees/sign_in', style: 'text-decoration:none' do %>
+            <div class="card-header subdomain-color"><%= company.subdomain %></div>
+            <div class="card-body text-success">
+              <h5 class="card-title"><%= company.name %></h5>
+            </div>
+          <% end %>
+        </div>
+      </center>
+    <% end %>
+  </div>
+</div>

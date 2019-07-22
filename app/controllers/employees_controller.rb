@@ -12,7 +12,7 @@ class EmployeesController < ApplicationController
     @employee.password = generate_password
     if @employee.save
       flash[:success] = 'Employee successfully created!'
-      redirect_to root_path
+      redirect_to menus_index_path
     else
       render 'new'
     end
@@ -25,7 +25,8 @@ class EmployeesController < ApplicationController
     if @employee.save
       redirect_to employees_path
     else
-      redirect_to root_path
+      redirect_to menus_index_path
+    end
   end
 
   private
@@ -36,6 +37,7 @@ class EmployeesController < ApplicationController
 
   def generate_password
     o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
-    (0...10).map { o[rand(o.length)] }.join
+    string = (0...10).map { o[rand(o.length)] }.join
+    return string
   end
 end

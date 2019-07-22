@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :employees
+  devise_for :employees, controllers: { sessions: 'sessions' }
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
-  root 'menus#index'
+  get 'menus/home' => 'menus#home'
+  root 'menus#home'
 
   get '/employees/index' => 'employees#index', :as => :employees
   get '/employees/new' => 'employees#new', :as => :new_employee
