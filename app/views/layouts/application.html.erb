@@ -9,12 +9,13 @@
 		<%= stylesheet_link_tag 'application', media: 'all',
 		'data-turbolinks-track' => true %>
 		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-		<%= csrf_meta_tags %>
 		<%= stylesheet_link_tag "https://cdn.rawgit.com/nizarmah/calendar-javascript-lib/master/calendarorganizer.min.css" %>
 
 		<!-- For Calendar -->
 		<%= javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js" %>
 		<%= javascript_include_tag "//code.jquery.com/jquery-1.11.1.min.js" %>
+
+		<%= csrf_meta_tags %>
 
 		<%= render 'layouts/shim' %>
 	</head>

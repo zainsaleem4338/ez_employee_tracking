@@ -12,8 +12,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'devise-i18n'
 gem 'devise-bootstrap-views', '~> 1.0'
+gem 'devise-i18n'
 
 # Bootstep
 gem 'autoprefixer-rails', '~> 9.6', '>= 9.6.1'
@@ -58,5 +58,5 @@ group :test do
   gem 'faker', '~> 1.6.1'
   gem 'pry'
   gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'simplecov', require: false
 end
-gem 'simplecov', require: false, group: :test
