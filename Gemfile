@@ -1,50 +1,29 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
-# Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.3.18'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-# gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-# Tokeninput jQuery plugin which allows your users to select multiple items from a predefined list
 gem 'rails-jquery-tokeninput'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
-# Select2 is a jQuery based replacement for select boxes.
 gem 'select2-rails'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
+gem 'autoprefixer-rails', '~> 9.6', '>= 9.6.1'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'devise', '3.4.1'
+gem 'devise-bootstrap-views', '~> 1.0'
+gem 'devise-i18n'
+gem 'factory_girl_rails'
+gem 'jbuilder', '~> 2.0'
+gem 'jquery-rails'
+gem 'mysql2', '~> 0.3.18'
+gem 'nested_form'
+gem 'rails', '4.2.0'
+gem 'sass', '~> 3.7', '>= 3.7.4'
+gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails', '>= 2.1.0'
+gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sequenceid'
+gem 'uglifier', '>= 1.3.0'
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  # gem 'byebug'
-  # Use pry for testing purpose
-  gem 'pry'
-  # rspec-rails brings the RSpec testing framework
-  gem 'rspec-rails'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'better_errors'
+  gem 'pry', '=0.10.1'
+  gem 'pry-rails', '=0.3.3'
+  gem 'rspec-rails', '~> 3.8'
   gem 'spring'
-  # SequenceId is the gem for Rails 3 that allows for creating URL permalinks that start from 1 and increment in a continuum.
-  gem 'sequenceid'
-  # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 end

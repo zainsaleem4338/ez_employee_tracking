@@ -11,17 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190722062209) do
+ActiveRecord::Schema.define(version: 20190718141654) do
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "employee_id", limit: 4
+    t.string "name",        limit: 255, null: false
+    t.string "description", limit: 255
   end
 
-  add_index "companies", ["employee_id"], name: "index_companies_on_employee_id", using: :btree
+  add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",        limit: 255,   null: false
@@ -42,16 +39,33 @@ ActiveRecord::Schema.define(version: 20190722062209) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.string   "email",         limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "company_id",    limit: 4
-    t.integer  "department_id", limit: 4
+    t.string   "email",                  limit: 255, default: "",   null: false
+    t.string   "encrypted_password",     limit: 255, default: "",   null: false
+    t.string   "reset_password_token",   limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          limit: 4,   default: 0,    null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "confirmation_token",     limit: 255
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email",      limit: 255
+    t.string   "name",                   limit: 255,                null: false
+    t.string   "role",                   limit: 255,                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id",             limit: 4
+    t.integer  "sequence_num",           limit: 4,                  null: false
+    t.integer  "department_id",          limit: 4
+    t.boolean  "active",                 limit: 1,   default: true
   end
 
-  add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
-  add_index "employees", ["department_id"], name: "index_employees_on_department_id", using: :btree
+  add_index "employees", ["email", "company_id"], name: "index_employees_on_email_and_company_id", unique: true, using: :btree
+  add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
+  add_index "employees", ["sequence_num", "company_id"], name: "index_employees_on_sequence_num_and_company_id", unique: true, using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",          limit: 255,   null: false
@@ -65,10 +79,7 @@ ActiveRecord::Schema.define(version: 20190722062209) do
   add_index "teams", ["company_id"], name: "index_teams_on_company_id", using: :btree
   add_index "teams", ["department_id"], name: "index_teams_on_department_id", using: :btree
 
-  add_foreign_key "companies", "employees"
   add_foreign_key "departments", "companies"
-  add_foreign_key "employees", "companies"
-  add_foreign_key "employees", "departments"
   add_foreign_key "teams", "companies"
   add_foreign_key "teams", "departments"
 end

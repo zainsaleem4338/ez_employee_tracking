@@ -22,11 +22,11 @@
   
   <div class="form-group">
     <%= f.label :team_lead_id, "Team Leader" %><br>
-    <%= f.text_field :team_lead_id, data: { load: @team.employee_lists('Team Leader') }, class: "form-control" %>
+    <%= f.text_field :team_lead_id, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[1]) }, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :employee_tokens, "Team Members" %><br>
-    <%= f.text_field :employee_tokens, data: { load: @team.employee_lists('Team Member') }, class: "form-control" %>
+    <%= f.text_field :employee_tokens, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[0]) }, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :description %><br>
