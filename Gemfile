@@ -24,6 +24,22 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'autoprefixer-rails', '~> 9.6', '>= 9.6.1'
+gem 'bootstrap', '~> 4.0'
+gem 'popper_js', '~> 1.14', '>= 1.14.5'
+gem 'sass', '~> 3.7', '>= 3.7.4'
+gem 'sassc-rails', '>= 2.1.0'
+
+gem 'pry'
+gem 'rails4-autocomplete'
+gem "jquery-ui-rails"
+
+gem 'rails-jquery-tokeninput'
+
+gem 'rspec-rails', '~> 3.8'
+
+  gem 'factory_bot'
+  gem 'capybara', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -44,3 +60,8 @@ group :development, :test do
   gem 'spring'
 end
 
+group :test do
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'database_cleaner', '~> 1.5'
+  gem 'faker', '~> 1.6.1'
+end

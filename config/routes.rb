@@ -1,4 +1,29 @@
 Rails.application.routes.draw do
+
+    # get 'projects/resources'
+
+  root 'employees#signin'
+
+  resources :projects
+  # resources :tasks
+
+  get 'signin' => 'employees#signin'
+  post 'signin_url' => 'employees#after_signin'
+
+  get 'employeeslist' => 'employees#employees_list'
+  get 'teamslist' => 'teams#teams_list'
+  get 'project/:id/new_task' => 'tasks#new', as: :new_task_page
+  get 'projects/:id/tasks' => 'tasks#index', as: :tasks_page
+  get 'employees/:id/projects' => 'projects#index', as: :projects_page
+  get 'projects/:id/tasks/:id' => "tasks#edit", as: :edit_a_task_page
+  patch 'projects/:id/tasks/:id' => "tasks#update", as: :update_a_task_page
+
+  resources :tasks do
+    get :autocomplete_employee_email, :on => :collection
+    get :autocomplete_team_name, :on => :collection
+  end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

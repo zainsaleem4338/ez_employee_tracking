@@ -1,0 +1,83 @@
+<div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
+  <%= notice %>
+</div>
+
+<%= form_for(@task) do |f| %>
+<% if @task.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+  <ul>
+    <% @task.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="row d-flex justify-content-start">
+
+  <div class="form-group col-md-6">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: "form-control", placeholder: "Enter the task name" %>
+  </div>
+</div>
+<div class="row d-flex justify-content-start">
+
+  <div class="form-group col-md-6">
+    <%= f.label :description %><br>
+
+
+    <%= f.text_field :description, class: "form-control", placeholder: "Enter description" %>
+  </div>
+</div>
+
+<div class="row d-flex justify-content-start">
+
+  <div class="form-group col-md-6 add_someone">
+    <label class="col"><input type="radio" name="adding"; value="1" checked="checked" class="js-toggle-team-employee-input-token" data-type="Employee">Add a task for Employee</label>
+    <label class="col"><input type="radio" name="adding"; value="2" class="js-toggle-team-employee-input-token team_radio"  data-type="Team"/>Add a task for Team</label>
+
+
+    <div class= "adding_employee_field js-toggleable-input-token">
+      <%= f.label "Employee Email" %><br>
+    </div>
+
+    <div class= "adding_team_field collapse js-toggleable-input-token">
+      <%= f.label "Team Name" %><br>
+    </div>
+    <% binding.pry %>
+
+    <%= f.text_field :assignable_id, data: {load: @task.get_employee_name}, class: "assign_team" %>
+
+
+    <small id="emailHelp" class="form-text text-muted">You can choose to not assign task right now.</small>
+  </div>
+</div>
+
+<div class="row d-flex justify-content-start">
+  <div class="form-group col-md-4">
+    <%= f.label "Start Date" %><br>
+    <%= f.date_field :start_date, class: "form-control" %>
+  </div>
+
+  <div class="form-group col-md-4">
+   <%= f.label "Expected End Date" %><br>
+   <%= f.date_field :end_date, class: "form-control" %>
+ </div>
+</div>
+
+
+<div class="actions">
+  <%= f.hidden_field :company_id, :value => @task.project.company_id  %>
+  <%= f.hidden_field :project_id, :value => @task.project.id  %>
+  <%= f.hidden_field :assignable_type, :value => "Employee", class: "assignable_type" %>
+
+
+  <%= f.submit class: "btn btn-primary submit_form"  %>
+  <%= link_to 'Back', tasks_page_url(@task.project), class: "btn btn-primary" %>
+
+</div>
+
+<% end %>
+
