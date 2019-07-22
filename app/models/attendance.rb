@@ -6,5 +6,4 @@ class Attendance < ActiveRecord::Base
   validates :login_time, presence: true
   validates :employee_id, presence: true
   validates :status, inclusion: { in: STATUS }, numericality: true
-
 end
