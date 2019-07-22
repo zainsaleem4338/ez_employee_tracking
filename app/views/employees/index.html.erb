@@ -1,0 +1,50 @@
+<h1>Welcome</h1>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- Alert bar -->
+      <div class="alert alert-success alert-dismissable present" id="present" style="display: none;">
+         
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+          ×
+        </button>
+        <h4>
+          Success!
+        </h4><br> <strong> <%= @employee.email%> </strong> your attendance has been marked.
+      </div>
+
+      <!-- Update logout alert -->
+      <div class="alert alert-success alert-dismissable" id="update_attendance" style="display: none;">
+         
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+          ×
+        </button>
+        <h4>
+          Success!
+        </h4><br> <strong> <%= @employee.email%> </strong> your logout time has been added.
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <p><%= @employee.email%></p>
+    </div>
+
+    <div class="col-sm">
+      <% unless present_marked? %>
+      	<%= link_to 'Mark Present', employee_attendance_path, class: 'btn btn-lg btn-primary mark_present', remote: true %>
+      <% end %>
+      <%= link_to 'Update Logout', update_attendance_path, class: 'btn btn-lg btn-primary update_attendance', style: "display: none;", remote: true %>
+    </div>
+    
+    <div class="col-sm">
+      <% if admin? %>
+			<%= link_to 'View Attendance', attendances_path, class: 'btn btn-lg btn-primary view_attendance' %>
+			<% end %>
+    </div>
+  </div>
+</div>

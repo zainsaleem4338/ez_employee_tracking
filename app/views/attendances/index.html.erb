@@ -1,0 +1,44 @@
+<h1>Admin Panel - Attendance and Calendar</h1>
+
+<script>
+	function hideAttendance() {
+	  var attendance_list = document.getElementById("admin_attendance");
+	  var calendar = document.getElementById("admin_calendar");
+	  attendance_list.style.display = "none";
+	  calendar.style.display = "flex";
+	}
+	function hideCalendar() {
+	  var calendar = document.getElementById("admin_calendar");
+	  var attendance_list = document.getElementById("admin_attendance");
+	  calendar.style.display = "none";
+	  attendance_list.style.display = "flex";
+	}
+</script>
+
+<div class="container-fluid" style="margin-top: 60px">
+	<div class="row">
+		<div class="col-md-12">
+
+			<!-- Badges -->
+			<ul class="nav nav-pills">
+				<li class="nav-item">
+					 <a class="nav-link btn btn-success" onclick="hideCalendar()">Attendance </a>
+				</li>
+				<li class="nav-item">
+					 <a class="nav-link" onclick="hideAttendance()">Events <span class="badge badge-secondary">16</span></a>
+				</li>
+			</ul>
+
+			<div class="row" id="admin_attendance" style="margin-top: 20px">
+				<%= render 'attendances/show_attendance' %>
+
+			</div>
+
+			<div class="row" id="admin_calendar" style="margin-top: 20px; display: none">
+				<div class="col-md-12" style="margin-top: 20px;">
+					<%= render 'attendances/calendar' %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
