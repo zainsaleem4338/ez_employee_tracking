@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DepartmentsController, type: :controller do
-  context 'Test Cases for create department' do
+  context 'Test cases for create department' do
     it 'should return object' do
       department = Department.new(name: 'Rails', description: 'Rails department')
       expect(department.save).to be true
@@ -11,7 +11,7 @@ RSpec.describe DepartmentsController, type: :controller do
       expect(department.save).to be false
     end
   end
-  context 'Test Cases for update department' do
+  context 'Test cases for update department' do
     new_department = Department.create(name: 'Rails', description: 'Rails department')
     it 'should return object' do
       expect(new_department.update(name: 'Ruby on Rails')).to be true

@@ -22,14 +22,7 @@ class Team < ActiveRecord::Base
         return self
       end
     rescue ActiveRecord::RecordInvalid => e
-      if e.record.is_a? EmployeeTeam
-        if e.record.employee_id.nil? && e.record.employee_type == 'Team Leader'
-          self.errors.add(:base, 'Team leader name is required')
-        end
-        if e.record.employee_id.nil? && e.record.employee_type == 'Team Member'
-          self.errors.add(:base, 'Team member names are required')
-        end
-      end
+      self.add_errors(e)
       false
     rescue Exception
       false
@@ -45,16 +38,13 @@ class Team < ActiveRecord::Base
         team_lead = team_employees.find_by(employee_type: 'Team Leader')
         team_members = team_employees.where(employee_type: 'Team Member').pluck(:employee_id)
         team_lead_query = team_employees.where(employee_id: team_lead_id)
-        # previous team leader delete
         team_lead.delete if team_lead_query.empty? && team_lead.present?
         team_lead_query.first_or_create!(employee_type: 'Team Leader')
         if team_members_ids.empty?
           self.errors.add(:base, 'Team members name required')
           return false
         end
-        # find previous team members id by subtract with updated members
         previous_team_member_ids = team_members - team_members_ids
-        # delete team members
         previous_team_member_ids.each do |member_id|
           team_employees.find_by(employee_id: member_id).delete
         end
@@ -64,17 +54,21 @@ class Team < ActiveRecord::Base
         return self
       end
     rescue ActiveRecord::RecordInvalid => e
-      if e.record.is_a? EmployeeTeam
-        if e.record.employee_id.nil? && e.record.employee_type == 'Team Leader'
-          self.errors.add(:base, 'Team leader name is required')
-        end
-        if e.record.employee_id.nil? && e.record.employee_type == 'Team Member'
-          self.errors.add(:base, 'Team member names are required')
-        end
-      end
+      self.add_errors(e)
       false
     rescue Exception
       false
+    end
+  end
+
+  def add_errors(error)
+    if error.record.is_a? EmployeeTeam
+      if error.record.employee_id.nil? && error.record.employee_type == 'Team Leader'
+        self.errors.add(:base, 'Team leader name is required')
+      end
+      if error.record.employee_id.nil? && error.record.employee_type == 'Team Member'
+        self.errors.add(:base, 'Team member names are required')
+      end
     end
   end
 

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use mysql as the database for Active Record
@@ -19,18 +18,12 @@ gem 'jquery-rails'
 # gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
-
+# Tokeninput jQuery plugin which allows your users to select multiple items from a predefined list
 gem 'rails-jquery-tokeninput'
-
-gem 'rspec-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
-gem 'sequenceid'
-
-gem 'pry'
+# Select2 is a jQuery based replacement for select boxes.
 gem 'select2-rails'
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -44,11 +37,14 @@ gem 'select2-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
+  # Use pry for testing purpose
+  gem 'pry'
+  # rspec-rails brings the RSpec testing framework
+  gem 'rspec-rails'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # SequenceId is the gem for Rails 3 that allows for creating URL permalinks that start from 1 and increment in a continuum.
+  gem 'sequenceid'
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
 end
-

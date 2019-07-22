@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190718085844) do
+ActiveRecord::Schema.define(version: 20190722062209) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.integer  "user_id",     limit: 4
+    t.integer  "employee_id", limit: 4
   end
 
-  add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
+  add_index "companies", ["employee_id"], name: "index_companies_on_employee_id", using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",        limit: 255,   null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20190718085844) do
   add_index "teams", ["company_id"], name: "index_teams_on_company_id", using: :btree
   add_index "teams", ["department_id"], name: "index_teams_on_department_id", using: :btree
 
-  add_foreign_key "companies", "employees", column: "user_id"
+  add_foreign_key "companies", "employees"
   add_foreign_key "departments", "companies"
   add_foreign_key "employees", "companies"
   add_foreign_key "employees", "departments"

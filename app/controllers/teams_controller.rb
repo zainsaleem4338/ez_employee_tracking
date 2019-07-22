@@ -3,13 +3,17 @@ class TeamsController < ApplicationController
   def index
     @teams = Team.all
   end
+
   def show
   end
+
   def new
     @team = Team.new
   end
+
   def edit
   end
+
   def create
     @team = Team.new(team_params)
     respond_to do |format|
@@ -22,6 +26,7 @@ class TeamsController < ApplicationController
       end
     end
   end
+
   def update
     respond_to do |format|
       if @team.update_team(params[:team][:team_lead_id], params[:team][:employee_tokens])

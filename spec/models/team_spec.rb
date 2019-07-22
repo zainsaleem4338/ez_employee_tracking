@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Team, type: :model do
   department = Department.create(name: 'Computer Science', description: 'CS')
-  team = Team.new(name: 'Zain Team', description: 'This is our team', department_id: department.id) 
+  team = Team.new(name: 'Zain Team', description: 'This is our team', department_id: department.id)
   context 'Test Cases for create team' do
     it 'should return object' do
       expect(team.create_team('2', '3')).to eql team
