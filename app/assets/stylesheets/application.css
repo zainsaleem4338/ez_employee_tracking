@@ -11,6 +11,9 @@
  * file per style scope.
  *
  *= require token-input
- *= require_tree .
+ *= require token-input-facebook
+ *= require select2
  *= require_self
+ *= require_tree .
  */
+@import "departments";

@@ -24,4 +24,4 @@ test:
 
 production:
   <<: *default
-  database: ez_employee_tracking_production_2
+  database: ez_employee_tracking_production
