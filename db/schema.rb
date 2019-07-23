@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20190722053819) do
 
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
 
+  create_table "departments", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "company_id", limit: 4
+  end
+
+  add_index "departments", ["company_id"], name: "index_departments_on_company_id", using: :btree
+
   create_table "employees", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",   null: false
     t.string   "encrypted_password",     limit: 255, default: "",   null: false
@@ -47,20 +56,10 @@ ActiveRecord::Schema.define(version: 20190722053819) do
     t.boolean  "active",                 limit: 1,   default: true
   end
 
+  add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
   add_index "employees", ["email", "company_id"], name: "index_employees_on_email_and_company_id", unique: true, using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
   add_index "employees", ["sequence_num", "company_id"], name: "index_employees_on_sequence_num_and_company_id", unique: true, using: :btree
-  add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
-
-
-  create_table "departments", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "company_id", limit: 4
-  end
-
-  add_index "departments", ["company_id"], name: "index_departments_on_company_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",              limit: 255
@@ -115,5 +114,4 @@ ActiveRecord::Schema.define(version: 20190722053819) do
   add_foreign_key "tasks", "companies"
   add_foreign_key "tasks", "projects"
   add_foreign_key "teams", "companies"
-
 end

@@ -70,8 +70,7 @@ Rails.application.routes.draw do
   delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
 
   resources :projects
-  # resources :tasks
-
+  
   get 'signin' => 'employees#signin'
   post 'signin_url' => 'employees#after_signin'
 

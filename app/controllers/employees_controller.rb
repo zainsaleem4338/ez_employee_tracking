@@ -29,14 +29,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def after_signin
-    @employee = Employee.find_by(email: params[:email])
-    if @employee.nil?
-      render 'signin'
-    else
-      redirect_to projects_page_url(@employee)
-    end
-  end
 
   def employees_list
     @employees = Employee.order(:email)

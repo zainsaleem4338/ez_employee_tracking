@@ -1,6 +1,4 @@
-<div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
-  <%= notice %>
-</div>
+
 
 <h1>Details of the Project: <b><%= @project.name.capitalize %></b></h1>
 <%= link_to 'Create a Task', new_task_page_url(@project), class: "btn btn-primary" %>

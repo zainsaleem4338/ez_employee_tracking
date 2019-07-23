@@ -3,23 +3,17 @@ class TasksController < ApplicationController
   before_action :set_task_update, only: [:update, :destroy]
 
   def index
-    # binding.pry
-    current_employee = Employee.find(1)
-    if current_employee.role == "admin"
+    if current_employee.role == "Admin"
       @project = current_employee.company.projects.find(params[:id])
     end
   end
 
   def new
-    # binding.pry
-    current_employee = Employee.find(1)
     @task = current_employee.company.projects.find(params[:id]).tasks.new
   end
 
   def create
-    binding.pry
     @task = Task.create(tasks_create_params)
-    # binding.pry
     @task.set_status
     if @task.save
       redirect_to tasks_page_url(@task.project), notice: "Returing from the create"
@@ -28,7 +22,7 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit
+  def edit  
   end
 
   def update
@@ -55,14 +49,11 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    # binding.pry
-    current_employee = Employee.find(1)
     @task = current_employee.company.projects.find(params[:id]).tasks.find(params[:format])
     @task_type = params[:task_type]
   end
 
   def set_task_update
-    # binding.pry
     @task = Task.find(params[:id])
   end
 

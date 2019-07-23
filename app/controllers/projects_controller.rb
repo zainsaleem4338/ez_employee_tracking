@@ -3,19 +3,16 @@ class ProjectsController < ApplicationController
   before_action :set_department, only: [:edit, :index, :new, :create]
 
   def index
-    current_employee = Employee.find(1)
-    if current_employee.role == "admin"
+    if current_employee.role == "Admin"
       @projects = current_employee.company.projects
     end
   end
 
   def new
-    current_employee = Employee.find(1)
     @project = current_employee.company.projects.new
   end
 
   def create
-    current_employee = Employee.find(1)
     @project = current_employee.company.projects.create(projects_params)
     @project.status = "new"
     if @project.save
@@ -50,12 +47,12 @@ class ProjectsController < ApplicationController
   end
 
   def set_department
-    current_employee = Employee.find(1)
+    # current_employee = Employee.find(1)
     @departments = current_employee.company.departments
   end
 
   def set_project
-    current_employee = Employee.find(1)
+    # current_employee = Employee.find(1)
     @project = current_employee.company.projects.find(params[:id])
   end
 end
