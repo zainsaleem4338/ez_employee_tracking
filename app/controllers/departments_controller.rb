@@ -1,7 +1,7 @@
 class DepartmentsController < ApplicationController
   before_action :set_department, only: [:show, :edit, :update, :destroy]
   def index
-    @departments = Department.all
+    @departments = current_employee.company.departments.all
   end
 
   def show
@@ -15,7 +15,7 @@ class DepartmentsController < ApplicationController
   end
 
   def create
-    @department = Department.new(department_params)
+    @department = current_employee.company.departments.new(department_params)
     respond_to do |format|
       if @department.save
         format.html { redirect_to @department, notice: 'Department was successfully created.' }
@@ -40,16 +40,19 @@ class DepartmentsController < ApplicationController
   end
 
   def destroy
-    @department.destroy
     respond_to do |format|
-      format.html { redirect_to departments_url, notice: 'Department was successfully destroyed.' }
-      format.json { head :no_content }
+      if @department.destroyed?
+        format.html { redirect_to @department, notice: 'Department was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { render :index, notice: 'Department did not destroyed' }
+      end
     end
   end
   
   private
     def set_department
-      @department = Department.find(params[:id])
+      @department = current_employee.company.departments.find(params[:id])
     end
     def department_params
       params.require(:department).permit(:name, :description)

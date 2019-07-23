@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   def index
-    @teams = Team.all
+    @teams = current_employee.company.teams.all
   end
 
   def show
@@ -15,7 +15,7 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.new(team_params)
+    @team = current_employee.company.teams.new(team_params)
     respond_to do |format|
       if @team.create_team(params[:team][:team_lead_id], params[:team][:employee_tokens])
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
@@ -29,7 +29,8 @@ class TeamsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @team.update_team(params[:team][:team_lead_id], params[:team][:employee_tokens])
+      if params[:team][[:team_lead_id]].present? && params[:team][:employee_tokens].present? &&
+        current_employee.company.teams.update_team(params[:team][:team_lead_id], params[:team][:employee_tokens])
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :created, location: @team }
       else
@@ -40,16 +41,19 @@ class TeamsController < ApplicationController
   end
 
   def destroy
-    @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
-      format.json { head :no_content }
+      if @team.destroyed?
+        format.html { redirect_to @team, notice: 'Team was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { render :index, notice: 'Team did not destroyed' }
+      end
     end
   end
 
   private
     def set_team
-      @team = Team.find(params[:id])
+      @team = current_employee.company.teams.find(params[:id])
     end
     def team_params
       params.require(:team).permit(:name, :description, :department_id)

@@ -1,5 +1,6 @@
 class Company < ActiveRecord::Base
   has_many :departments
+  has_many :teams
   validates :name, presence: true, uniqueness: true,
             length:
             {

@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
   end
 
   def employees_lists
-    @employees = Employee.order(:name)
+    @employees = current_employee.company.employees.order(:name)
     respond_to do |format|
       format.json { render json: @employees.where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:term]}%") }
     end
