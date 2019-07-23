@@ -22,7 +22,6 @@ RSpec.describe Task, type: :model do
     end
 
     it "should set the status equal to new" do 
-      binding.pry
       expect(task4.status).to eq("new")
     end
 

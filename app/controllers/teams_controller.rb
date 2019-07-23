@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
-  
+
   def index
     @teams = current_employee.company.teams.all
   end
@@ -31,7 +31,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if params[:team][[:team_lead_id]].present? && params[:team][:employee_tokens].present? &&
-        current_employee.company.teams.update_team(params[:team][:team_lead_id], params[:team][:employee_tokens])
+          current_employee.company.teams.update_team(params[:team][:team_lead_id], params[:team][:employee_tokens])
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :created, location: @team }
       else

@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :set_department, only: [:edit, :index, :new, :create]
 
   def index
-    if current_employee.role == "Admin"
+    if current_employee.role == Employee::ADMIN_ROLE
       @projects = current_employee.company.projects
     end
   end
@@ -28,14 +28,14 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_path, :notice => "Deleted Successfully"
+    redirect_to projects_path, notice: "Deleted Successfully"
   end
 
   def update
     if @project.update(projects_params)
-      redirect_to projects_path, :notice => "Updated Successfully"
+      redirect_to projects_path, notice: "Updated Successfully"
     else
-      redirect_to projects_path, :notice => "Cannot be updated"
+      redirect_to projects_path, notice: "Cannot be updated"
     end
   end
 
@@ -47,12 +47,10 @@ class ProjectsController < ApplicationController
   end
 
   def set_department
-    # current_employee = Employee.find(1)
     @departments = current_employee.company.departments
   end
 
   def set_project
-    # current_employee = Employee.find(1)
     @project = current_employee.company.projects.find(params[:id])
   end
 end

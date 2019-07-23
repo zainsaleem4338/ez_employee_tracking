@@ -7,7 +7,7 @@ class Team < ActiveRecord::Base
   has_many :employee_teams
   has_many :employees, through: :employee_teams, dependent: :destroy
   validates :name, :department_id, presence: true
-  has_many :tasks, :as => :assignable
+  has_many :tasks, as: :assignable
   belongs_to :company
   
   def create_team(team_lead_id, employee_ids)

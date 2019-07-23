@@ -1,4 +1,4 @@
-<%= form_for(@team) do |f| %>
+<%= form_for(@team) do |form| %>
   <% if @team.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
@@ -12,27 +12,27 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, required: true, class: "form-control" %>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, required: true, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :department_id, "Department" %><br>
-    <%= f.collection_select :department_id, current_employee.company.departments.order(:name),:id,:name, include_blank: true, class: "form-control" %>
+    <%= form.label :department_id, "Department" %><br>
+    <%= form.collection_select :department_id, current_employee.company.departments.order(:name),:id,:name, include_blank: true, class: "form-control" %>
   </div>
   
   <div class="form-group">
-    <%= f.label :team_lead_id, "Team Leader" %><br>
-    <%= f.text_field :team_lead_id, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]) }, class: "form-control" %>
+    <%= form.label :team_lead_id, "Team Leader" %><br>
+    <%= form.text_field :team_lead_id, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]) }, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :employee_tokens, "Team Members" %><br>
-    <%= f.text_field :employee_tokens, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]) }, class: "form-control" %>
+    <%= form.label :employee_tokens, "Team Members" %><br>
+    <%= form.text_field :employee_tokens, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]) }, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, class: "form-control" %>
+    <%= form.label :description %><br>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit class: "btn btn-success" %>
+    <%= form.submit class: "btn btn-success" %>
   </div>
 <% end %>

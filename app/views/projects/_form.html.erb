@@ -2,11 +2,10 @@
   <%= notice %>
 </div>
 
-<%= form_for(@project) do |f| %>
+<%= form_for(@project) do |form| %>
 <% if @project.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
   <ul>
     <% @project.errors.full_messages.each do |message| %>
     <li><%= message %></li>
@@ -14,45 +13,34 @@
   </ul>
 </div>
 <% end %>
-
 <div class="row d-flex justify-content-start">
-
   <div class="form-group col-md-6">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 </div>
 <div class="row d-flex justify-content-start">
-
   <div class="form-group col-md-6">
-    <%= f.label :description %><br>
-    <%= f.text_field :description, class: "form-control", placeholder: "Enter description" %>
+    <%= form.label :description %><br>
+    <%= form.text_field :description, class: "form-control", placeholder: "Enter description" %>
   </div>
 </div>
 <div class="row d-flex justify-content-start">
-
-
   <div class="form-group col-md-6">
-<%= f.select :department_id, options_for_select(@departments.collect { | department | [department.name, department.id] }), {}, {} %>
-
+  <%= form.select :department_id, options_for_select(@departments.collect { | department | [department.name, department.id] }), {}, {} %>
   </div>
 </div>
-
 <div class="row d-flex justify-content-start">
   <div class="form-group col-md-4">
-    <%= f.label "Start Date" %><br>
-    <%= f.date_field :start_date, class: "form-control" %>
+    <%= form.label "Start Date" %><br>
+    <%= form.date_field :start_date, class: "form-control" %>
   </div>
-
   <div class="form-group col-md-4">
-   <%= f.label "Expected End Date" %><br>
-   <%= f.date_field :expected_end_date, class: "form-control" %>
+   <%= form.label "Expected End Date" %><br>
+   <%= form.date_field :expected_end_date, class: "form-control" %>
  </div>
 </div>
-
-
 <div class="actions">
-  <%= f.submit class: "btn btn-primary"  %>
+  <%= form.submit class: "btn btn-primary"  %>
 </div>
 <% end %>
-
