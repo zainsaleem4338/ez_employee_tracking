@@ -1,6 +1,5 @@
 FactoryGirl.define do
-  factory :company do
-    name 'MyString'
-    description 'MyString'
+  factory :company, :class => 'Company' do |f|
+    f.name "Envisage"
   end
 end
