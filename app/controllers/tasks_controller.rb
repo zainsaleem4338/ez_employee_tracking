@@ -19,7 +19,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    # binding.pry
+    binding.pry
     @task = Task.create(tasks_create_params)
     # binding.pry
     @task.set_status
@@ -53,7 +53,7 @@ class TasksController < ApplicationController
 
   def tasks_create_params
     params.require(:task).
-    permit(:company_id, :start_date, :end_date, :description, :name, :project_id, :assignable_id, :assignable_type)
+    permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :assignable_id, :assignable_type)
   end
 
   def set_task

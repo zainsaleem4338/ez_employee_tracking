@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
 
   def projects_params
     params.require(:project).
-    permit(:description, :name, :start_date, :end_date, :department_id)
+    permit(:description, :name, :start_date, :expected_end_date, :department_id)
   end
 
   def set_department

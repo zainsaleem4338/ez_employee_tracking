@@ -12,9 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery
-//= require jquery_ujs
-//= require jquery-ui
 //= require rails-jquery-tokeninput
-//= require autocomplete-rails
+//= require jquery.tokeninput
 //= require_tree .
