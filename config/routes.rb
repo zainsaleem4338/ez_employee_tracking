@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'employee_lists' => 'employees#employees_lists'
+  resources :teams
+  resources :departments
   devise_for :employees
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
