@@ -14,32 +14,4 @@
  *= require_self
  */
 
-.alert-notice {
-  padding: 20px;
-  background-color: #4CAF50;
-  color: white;
-}
-.company-body {
-  max-height: 305px;
-  overflow-y: scroll;
-  background-color: #e0dad9
-}
-.subdomain-color{
-  color: #4CAF50;
-}
-.text-transition:hover {
-  background-color: #4CAF50;
-  transition: 1s;
-}
-
-.text-transition:hover .subdomain-color{
-  text-decoration: none;
-  color:#FFF;
-}
-
-.text-transition:hover .card-title{
-  text-decoration: none;
-  color:#FFF;
-}
-
 

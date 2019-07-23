@@ -14,10 +14,12 @@ class SessionsController < Devise::SessionsController
       return redirect_to new_employee_session_path
     end
     if current_company.subdomain == employee.company.subdomain
-      flash[:notice] = "Employee signed in successfully!"
       clean_up_passwords(employee)
       sign_in(resource_name, employee)
       yield employee if block_given?
+      if !flash.key?('alert')
+        flash[:notice] = "Employee signed in successfully!"
+      end
       respond_with employee, location: menus_index_path   
     else
       flash[:danger] = "Employee does not belong to #{current_company.name}!"
