@@ -1,6 +1,4 @@
 class TasksController < ApplicationController
-  autocomplete :employee, :email, :extra_data => [:id]
-  autocomplete :team, :name
   before_action :set_task, only: [:edit, :show]
   before_action :set_task_update, only: [:update, :destroy]
 
