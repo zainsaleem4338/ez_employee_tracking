@@ -2,6 +2,134 @@
 
 /* universal */
 
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+small {
+  font-size: 80%;
+}
+
+small,
+.small {
+  font-size: 80%;
+  font-weight: 400;
+}
+
+form.user .custom-checkbox.small label {
+  line-height: 1.5rem;
+}
+
+form.user .form-control-user {
+  font-size: 0.8rem;
+  border-radius: 10rem;
+  padding: 1.5rem 1rem;
+}
+
+form.user .btn-user {
+  font-size: 0.8rem;
+  border-radius: 10rem;
+  padding: 0.75rem 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+form.user .form-control-user {
+  font-size: 0.8rem;
+  border-radius: 10rem;
+  padding: 1.5rem 1rem;
+}
+
+.was-validated .custom-control-input:valid ~ .custom-control-label, .custom-control-input.is-valid ~ .custom-control-label {
+  color: #1cc88a;
+}
+
+.was-validated .custom-control-input:valid ~ .custom-control-label::before, .custom-control-input.is-valid ~ .custom-control-label::before {
+  border-color: #1cc88a;
+}
+
+.was-validated .custom-control-input:valid ~ .valid-feedback,
+.was-validated .custom-control-input:valid ~ .valid-tooltip, .custom-control-input.is-valid ~ .valid-feedback,
+.custom-control-input.is-valid ~ .valid-tooltip {
+  display: block;
+}
+
+.was-validated .custom-control-input:valid:checked ~ .custom-control-label::before, .custom-control-input.is-valid:checked ~ .custom-control-label::before {
+  border-color: #34e3a4;
+  background-color: #34e3a4;
+}
+
+.was-validated .custom-control-input:valid:focus ~ .custom-control-label::before, .custom-control-input.is-valid:focus ~ .custom-control-label::before {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(28, 200, 138, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(28, 200, 138, 0.25);
+}
+
+.was-validated .custom-control-input:valid:focus:not(:checked) ~ .custom-control-label::before, .custom-control-input.is-valid:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: #1cc88a;
+}
+
+.was-validated .custom-control-input:invalid ~ .custom-control-label, .custom-control-input.is-invalid ~ .custom-control-label {
+  color: #e74a3b;
+}
+
+.was-validated .custom-control-input:invalid ~ .custom-control-label::before, .custom-control-input.is-invalid ~ .custom-control-label::before {
+  border-color: #e74a3b;
+}
+
+.was-validated .custom-control-input:invalid ~ .invalid-feedback,
+.was-validated .custom-control-input:invalid ~ .invalid-tooltip, .custom-control-input.is-invalid ~ .invalid-feedback,
+.custom-control-input.is-invalid ~ .invalid-tooltip {
+  display: block;
+}
+
+.was-validated .custom-control-input:invalid:checked ~ .custom-control-label::before, .custom-control-input.is-invalid:checked ~ .custom-control-label::before {
+  border-color: #ed7468;
+  background-color: #ed7468;
+}
+
+.was-validated .custom-control-input:invalid:focus ~ .custom-control-label::before, .custom-control-input.is-invalid:focus ~ .custom-control-label::before {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(231, 74, 59, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(231, 74, 59, 0.25);
+}
+
+.was-validated .custom-control-input:invalid:focus:not(:checked) ~ .custom-control-label::before, .custom-control-input.is-invalid:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: #e74a3b;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 0.35rem;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
+  border-color: #4e73df;
+  background-color: #4e73df;
+}
+
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3e%3cpath stroke='%23fff' d='M0 2h4'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
+  background-color: rgba(78, 115, 223, 0.5);
+}
+
+.custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
+  background-color: rgba(78, 115, 223, 0.5);
+}
+
+form.user .custom-checkbox.small label {
+  line-height: 1.5rem;
+}
+
 
  /* for calendar */
 
