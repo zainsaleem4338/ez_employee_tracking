@@ -35,7 +35,7 @@ class AttendancesController < ApplicationController
     unless @employees_todays_attendance.blank?
       @employee_attendance = @company.attendances.find_by(employee_id: @current_employee.id)
       @employee_attendance.logout_time = DateTime.now
-      @result = @employee_attendance.save!
+      @employee_attendance.save!
     end
 
     respond_to do |format|
