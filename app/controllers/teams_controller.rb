@@ -30,8 +30,8 @@ class TeamsController < ApplicationController
 
   def update
     respond_to do |format|
-      if params[:team][[:team_lead_id]].present? && params[:team][:employee_tokens].present? &&
-        current_employee.company.teams.update_team(params[:team][:team_lead_id], params[:team][:employee_tokens])
+      if params[:team].present? &&
+        @team.update_team(params[:team][:team_lead_id], params[:team][:employee_tokens], update_team_params)
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :created, location: @team }
       else
@@ -42,12 +42,13 @@ class TeamsController < ApplicationController
   end
 
   def destroy
+    @team.destroy
     respond_to do |format|
       if @team.destroyed?
-        format.html { redirect_to @team, notice: 'Team was successfully destroyed.' }
+        format.html { redirect_to teams_path, notice: 'Team was successfully destroyed.' }
         format.json { head :no_content }
       else
-        format.html { render :index, notice: 'Team did not destroyed' }
+        format.html { redirect_to teams_path, notice: 'Unable to delete team' }
       end
     end
   end
@@ -68,4 +69,5 @@ class TeamsController < ApplicationController
   def update_team_params
     params.require(:team).permit(:name, :description)
   end
+
 end

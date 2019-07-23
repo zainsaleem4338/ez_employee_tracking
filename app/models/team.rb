@@ -33,7 +33,7 @@ class Team < ActiveRecord::Base
     end
   end
 
-  def update_team(team_lead_id, employee_ids)
+  def update_team(team_lead_id, employee_ids, update_team_params)
     team_members_ids = get_employee_ids(employee_ids)
     begin
       if team_members_ids.empty?
@@ -47,7 +47,7 @@ class Team < ActiveRecord::Base
       team_lead.delete if team_lead_query.empty? && team_lead.present?
       previous_team_member_ids = team_members - team_members_ids
       self.transaction do
-        self.save!
+        self.update!(update_team_params)
         team_lead_query.first_or_create!(employee_type: EMPLOYEE_TYPE[:team_leader])
         previous_team_member_ids.each do |member_id|
           team_employees.find_by(employee_id: member_id).delete
