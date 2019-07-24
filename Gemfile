@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 gem 'autoprefixer-rails', '~> 9.6', '>= 9.6.1'
 gem 'bootstrap', '~> 4.0'
+gem 'cancancan'
 gem 'capybara', '~> 2.5'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise', '3.4.1'

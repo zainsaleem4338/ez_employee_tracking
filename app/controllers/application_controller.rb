@@ -1,8 +1,14 @@
 class ApplicationController < ActionController::Base
+  alias_method :current_user, :current_employee
   protect_from_forgery with: :exception
   before_action :authenticate_employee!
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:warning] = exception.message
+    redirect_to root_path
+  end
   protected
 
   CONST_CREATE = 'create'.freeze

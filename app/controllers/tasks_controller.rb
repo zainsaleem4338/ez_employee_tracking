@@ -1,12 +1,16 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :show]
-  before_action :set_task_update, only: [:update, :destroy]
+  before_action :set_task, only: [:edit]
+  before_action :set_task_update, only: [:show, :update, :destroy, :update_status]
 
   def index
     if current_employee.role == Employee::ADMIN_ROLE
       @project = current_employee.company.projects.find(params[:id])
     end
   end
+
+  def show
+  end
+
 
   def new
     @task = current_employee.company.projects.find(params[:id]).tasks.new
@@ -41,13 +45,21 @@ class TasksController < ApplicationController
     redirect_to tasks_page_url(project), notice: "Deleted Successfully"
   end
 
+  def update_status
+    if @task.update(tasks_create_params)
+      redirect_to tasks_page_url(@task.project), notice: "Updated Successfully"
+    else
+      redirect_to tasks_page_url(@task.project), notice: "Cannot be updated!"
+
+    end
+  end
 
 
   private
 
   def tasks_create_params
     params.require(:task).
-      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id)
+    permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status)
   end
 
   def set_task
@@ -57,5 +69,7 @@ class TasksController < ApplicationController
   def set_task_update
     @task = Task.find(params[:id])
   end
+
+
 
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   root 'menus#index'
 
   get 'employee_lists' => 'employees#employees_lists'
@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   get 'projects/:id/tasks' => 'tasks#index', as: :tasks_page
   get 'projects/:id/tasks/:id' => "tasks#edit", as: :edit_a_task_page
   patch 'projects/:id/tasks/:id' => "tasks#update", as: :update_a_task_page
+  get 'tasks_update_status/:id' => "tasks#update_status", as: :edit_task_status
+  patch 'tasks_update_status/:id' => "tasks#update_status", as: :update_task_status
+
 
   get 'employees/:id/projects' => 'projects#index', as: :projects_page
 
