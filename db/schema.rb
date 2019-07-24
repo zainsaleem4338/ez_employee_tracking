@@ -11,11 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190720131840) do
+ActiveRecord::Schema.define(version: 20190720160841) do
+
+  create_table "attendances", force: :cascade do |t|
+    t.datetime "login_time"
+    t.datetime "logout_time"
+    t.integer  "status",      limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "employee_id", limit: 4
+    t.integer  "company_id",  limit: 4
+  end
+
+  add_index "attendances", ["company_id"], name: "index_attendances_on_company_id", using: :btree
+  add_index "attendances", ["employee_id"], name: "index_attendances_on_employee_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
-    t.string "name",        limit: 255, null: false
-    t.string "description", limit: 255
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
@@ -116,6 +131,8 @@ ActiveRecord::Schema.define(version: 20190720131840) do
   add_index "teams", ["company_id"], name: "index_teams_on_company_id", using: :btree
   add_index "teams", ["department_id"], name: "index_teams_on_department_id", using: :btree
 
+  add_foreign_key "attendances", "companies"
+  add_foreign_key "attendances", "employees"
   add_foreign_key "departments", "companies"
   add_foreign_key "employees", "companies"
   add_foreign_key "projects", "companies"
