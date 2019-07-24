@@ -2,6 +2,8 @@ require 'date'
 
 class Employee < ActiveRecord::Base
   ADMIN_ROLE = 'Admin'.freeze
+  EMPLOYEE_ROLE = 'Employee'.freeze
+  TEAM_ROLE = 'Team'.freeze
   belongs_to :company, :inverse_of => :employees
   belongs_to :department
   has_many :employee_teams

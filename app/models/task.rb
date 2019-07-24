@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
   EMPLOYEE = 'Employee'.freeze
   TEAM     = 'Team'.freeze
+  NEW_STATUS = 'new'.freeze
+  ASSIGNED_STATUS = 'assigned'.freeze
   belongs_to :company
   belongs_to :project
   belongs_to :assignable, polymorphic: true
@@ -17,16 +19,18 @@ class Task < ActiveRecord::Base
   end
 
   def set_status
-    return self.status = "assigned" if !self.assignable_id.nil?
-    self.status = "new"
+    binding.pry
+    return self.status = Task::ASSIGNED_STATUS unless self.assignable_id.nil?
+    self.status = Task::NEW_STATUS
     self.assignable_type = nil
   end
 
   def set_assignable(assignable_team_id, assignable_employee_id,assignable_type)
-    if !assignable_team_id.empty?
+    unless assignable_team_id.empty?
       self.assignable_id = assignable_team_id
       self.assignable_type = Task::TEAM
-    elsif !assignable_employee_id.empty?
+    end
+    unless assignable_employee_id.empty?
       self.assignable_id = assignable_employee_id
       self.assignable_type = Task::EMPLOYEE
     end
@@ -38,8 +42,8 @@ class Task < ActiveRecord::Base
       return
     else 
       if assignable_type == Task::EMPLOYEE
-        self.update(assignable_type: assignable_type, assignable_id: assignable_employee_id, status: "assigned") if !assignable_employee_id.empty?
-        self.update(assignable_type: nil, assignable_id: nil, status: "new") if assignable_employee_id.empty?
+        self.update(assignable_type: assignable_type, assignable_id: assignable_employee_id, status: Task::ASSIGNED_STATUS) unless assignable_employee_id.empty?
+        self.update(assignable_type: nil, assignable_id: nil, status: Task::NEW_STATUS) if assignable_employee_id.empty?
       elsif assignable_type == Task::TEAM
         self.update(assignable_type: assignable_type, assignable_id: assignable_team_id, status: Task::TEAM)
       end

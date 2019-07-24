@@ -37,14 +37,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-
-  def employees_list
-    @employees = Employee.order(:email)
-    respond_to do |format|
-      format.json { render json: Employee.where('role != ? AND name like ?', 'admin',"%#{params[:q]}%" ) }
-    end
-  end
-
   private
 
   def employee_params

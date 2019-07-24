@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_employee.company.projects.create(projects_params)
-    @project.status = "new"
+    @project.status = Project::NEW_STATUS
     if @project.save
       redirect_to projects_path, notice: "Returing from the create"
     else

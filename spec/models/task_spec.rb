@@ -22,11 +22,11 @@ RSpec.describe Task, type: :model do
     end
 
     it "should set the status equal to new" do 
-      expect(task4.status).to eq("new")
+      expect(task4.status).to eq(Task::NEW_STATUS)
     end
 
     it "should set the status equal to assigned" do 
-      expect(task5.status).to eq("assigned")
+      expect(task5.status).to eq(Task::ASSIGNED_STATUS)
     end
 
   end
