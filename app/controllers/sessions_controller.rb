@@ -2,7 +2,6 @@ class SessionsController < Devise::SessionsController
   def new
     super
   end
-
   def create
     if(current_company == nil)
       flash[:danger] = 'Invalid Company!'
