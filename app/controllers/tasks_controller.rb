@@ -14,8 +14,8 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(tasks_create_params)
-    @task.set_status
     @task.set_assignable(params[:assignable_team_id], params[:assignable_employee_id], params[:task][:assignable_type])
+    @task.set_status
     if @task.save
       redirect_to tasks_page_url(@task.project), notice: "Returing from the create"
     else

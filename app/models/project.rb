@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+  NEW_STATUS = 'new'.freeze
   belongs_to :department
   belongs_to :company
   has_many :tasks

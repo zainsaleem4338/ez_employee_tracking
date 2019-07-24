@@ -6,7 +6,6 @@
 <% if @task.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
   <ul>
     <% @task.errors.full_messages.each do |message| %>
     <li><%= message %></li>
@@ -16,7 +15,6 @@
 <% end %>
 
 <div class="row d-flex justify-content-start">
-
   <div class="form-group col-md-6">
     <%= form.label :name %><br>
     <%= form.text_field :name, class: "form-control", placeholder: "Enter the task name" %>
@@ -31,76 +29,46 @@
 </div>
 
 <div class="row d-flex justify-content-start">
-
   <div class="form-group col-md-6 add_someone">
-  <% if @task.assignable_type.nil? || @task.assignable_type == "Employee"%>
-
+    <% if @task.assignable_type.nil? || @task.assignable_type == Employee::EMPLOYEE_ROLE %>
     <label class="col"><input type="radio" name="adding"; value="1" checked="checked" class="js-toggle-team-employee-input-token" data-type="Employee">Add a task for Employee</label>
     <label class="col"><input type="radio" name="adding"; value="2" class="js-toggle-team-employee-input-token team_radio"  data-type="Team"/>Add a task for Team</label>
-
     <div class= "adding_employee_field js-toggleable-input-token">
       <%= form.label :assignable_id, "Employee Email" %><br>
       <%= text_field_tag :assignable_employee_id, @task.assignable, class: "js-assign-employee" %>
-      <% if @task.assignable_type.nil? %>
-      <% assignable_employee_hash = nil %>
-      <% elsif @task.assignable_type == "Employee" %>
-      <% assignable_employee_hash = [@task.assignable].to_json.html_safe %>
-      <% end %>
+      <% assignable_employee_hash = set_assignable_hash(@task,Employee::EMPLOYEE_ROLE) %>
       <%= javascript_tag do %>
-      $('.js-assign-employee').tokenInput('/employee_lists.json', {tokenValue: 'id', prePopulate: <%= assignable_employee_hash %>, tokenLimit: 1 });
+       $('.js-assign-employee').tokenInput('/employee_lists.json', {tokenValue: 'id', prePopulate: <%= assignable_employee_hash %>, tokenLimit: 1 });
       <% end %>
     </div>
-
     <div class= "adding_team_field collapse js-toggleable-input-token">
       <%= form.label :assignable_id, "Team Name" %><br>
-      <% assignable_hash = [@task.assignable].to_json.html_safe %>
       <%= text_field_tag :assignable_team_id, @task.assignable, class: "js-assign-team" %>
-      <% if @task.assignable_type.nil? %>
-      <% assignable_team_hash = nil %>
-      <% elsif @task.assignable_type == "Team" %>
-      <% assignable_team_hash = [@task.assignable].to_json.html_safe %>
-      <% end %>
+      <% assignable_team_hash = set_assignable_hash(@task,Employee::TEAM_ROLE) %>
       <%= javascript_tag do %>
-      $('.js-assign-team').tokenInput('/teamslist.json', { prePopulate: <%= assignable_team_hash %>, tokenLimit: 1 });
+        $('.js-assign-team').tokenInput('/teamslist.json', { prePopulate: <%= assignable_team_hash %>, tokenLimit: 1 });
       <% end %>
-
     </div>
     <% else %>
-
     <label class="col"><input type="radio" name="adding"; value="1" class="js-toggle-team-employee-input-token team_radio" data-type="Employee">Add a task for Employee</label>
     <label class="col"><input type="radio" name="adding"; value="2" checked="checked" class="js-toggle-team-employee-input-token"  data-type="Team"/>Add a task for Team</label>
-
     <div class= "adding_employee_field collapse js-toggleable-input-token">
       <%= form.label :assignable_id, "Employee Email" %><br>
       <%= text_field_tag :assignable_employee_id, @task.assignable, class: "js-assign-employee" %>
-      <% if @task.assignable_type.nil? %>
-      <% assignable_employee_hash = nil%>
-      <% elsif @task.assignable_type == "Employee" %>
-      <% assignable_employee_hash = [@task.assignable].to_json.html_safe %>
-      <% end %>
+      <% assignable_employee_hash = set_assignable_hash(@task,Employee::EMPLOYEE_ROLE) %>
       <%= javascript_tag do %>
-      <% assignable_hash = [@task.assignable].to_json.html_safe %>
-      $('.js-assign-employee').tokenInput('/employee_lists.json', { prePopulate: <%= assignable_employee_hash %>, tokenLimit: 1 });
+        $('.js-assign-employee').tokenInput('/employee_lists.json', { prePopulate: <%= assignable_employee_hash %>, tokenLimit: 1 });
       <% end %>
     </div>
-
     <div class= "adding_team_field js-toggleable-input-token">
       <%= form.label :assignable_id, "Team Name" %><br>
-      <% assignable_hash = [@task.assignable].to_json.html_safe %>
       <%= text_field_tag :assignable_team_id, @task.assignable, class: "js-assign-team" %>
-      <% if @task.assignable_type.nil? %>
-      <% assignable_team_hash = nil%>
-      <% elsif @task.assignable_type == "Team" %>
-      <% assignable_team_hash = [@task.assignable].to_json.html_safe %>
-      <% end %>
+      <% assignable_team_hash = set_assignable_hash(@task,Employee::TEAM_ROLE) %>
       <%= javascript_tag do %>
-      $('.js-assign-team').tokenInput('/teamslist.json', { prePopulate: <%= assignable_team_hash %>, tokenLimit: 1 });
+        $('.js-assign-team').tokenInput('/teamslist.json', { prePopulate: <%= assignable_team_hash %>, tokenLimit: 1 });
       <% end %>
-
     </div>
-
     <% end %>
-
     <small id="emailHelp" class="form-text text-muted">You can choose to not assign task right now.</small>
   </div>
 </div>
@@ -110,13 +78,11 @@
     <%= form.label "Start Date" %><br>
     <%= form.date_field :start_date, class: "form-control" %>
   </div>
-
   <div class="form-group col-md-4">
    <%= form.label "Expected End Date" %><br>
    <%= form.date_field :expected_end_date, class: "form-control" %>
  </div>
 </div>
-
 
 <div class="actions">
   <%= form.hidden_field :company_id, value: @task.project.company_id  %>
