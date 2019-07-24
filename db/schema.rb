@@ -33,6 +33,24 @@ ActiveRecord::Schema.define(version: 20190720160841) do
 
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
 
+  create_table "departments", force: :cascade do |t|
+    t.string   "name",        limit: 255,   null: false
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "company_id",  limit: 4
+  end
+
+  add_index "departments", ["company_id"], name: "index_departments_on_company_id", using: :btree
+
+  create_table "employee_teams", force: :cascade do |t|
+    t.integer  "employee_id",   limit: 4,   null: false
+    t.integer  "team_id",       limit: 4,   null: false
+    t.string   "employee_type", limit: 255, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",   null: false
     t.string   "encrypted_password",     limit: 255, default: "",   null: false
@@ -62,6 +80,21 @@ ActiveRecord::Schema.define(version: 20190720160841) do
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
   add_index "employees", ["sequence_num", "company_id"], name: "index_employees_on_sequence_num_and_company_id", unique: true, using: :btree
 
+  create_table "teams", force: :cascade do |t|
+    t.string   "name",          limit: 255,   null: false
+    t.text     "description",   limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "company_id",    limit: 4
+    t.integer  "department_id", limit: 4,     null: false
+  end
+
+  add_index "teams", ["company_id"], name: "index_teams_on_company_id", using: :btree
+  add_index "teams", ["department_id"], name: "index_teams_on_department_id", using: :btree
+
   add_foreign_key "attendances", "companies"
   add_foreign_key "attendances", "employees"
+  add_foreign_key "departments", "companies"
+  add_foreign_key "teams", "companies"
+  add_foreign_key "teams", "departments"
 end

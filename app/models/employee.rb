@@ -1,6 +1,11 @@
 require 'date'
 
 class Employee < ActiveRecord::Base
+  ADMIN_ROLE = 'Admin'.freeze
+  belongs_to :company
+  belongs_to :department
+  has_many :employee_teams
+  has_many :teams, through: :employee_teams, dependent: :destroy
   scope :active_members, -> { where(active: true) }
 
   sequenceid :company, :employees
@@ -12,7 +17,6 @@ class Employee < ActiveRecord::Base
             uniqueness: { scope: :company_id } 
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }
   validates :role, presence: true
-  belongs_to :company
   accepts_nested_attributes_for :company
   has_many :attendances
 
