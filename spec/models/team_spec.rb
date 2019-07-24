@@ -36,34 +36,35 @@ RSpec.describe Team, type: :model do
 
   context 'Test Cases for update team' do
     department = Department.create(name: 'Computer Science', description: 'CS')
-    new_team = Team.create(name: 'the Zain Team', description: 'This is our team', department_id: department.id) 
+    new_team = Team.create(name: 'the Zain Team', department_id: department.id)
+    update_params = { name: 'Zain team', description: 'This is our team' }
     it 'should return object' do
-      expect(new_team.update_team('2', '3')).to eql new_team
+      expect(new_team.update_team('2', '3', update_params)).to eql new_team
     end
     it 'should return false' do
-      expect(new_team.update_team('', '3')).to be false
+      expect(new_team.update_team('2', '', update_params)).to be false
     end
     it 'should return false' do
-      new_team.name = ''
-      expect(new_team.update_team('2', '3')).to be false
+      expect(new_team.update_team('', '', update_params)).to be false
     end
     it 'should return false' do
-      expect(new_team.update_team('2', '')).to be false
+      update_params = { name: '', description: 'This is our team' }
+      expect(new_team.update_team('', '3', update_params)).to be false
     end
     it 'should return false' do
-      expect(new_team.update_team('', '')).to be false
+      update_params = { name: '', description: 'This is our team' }
+      expect(new_team.update_team('2', '', update_params)).to be false
     end
     it 'should return false' do
-      new_team.name = ''
-      expect(new_team.update_team('', '3')).to be false
+      update_params = { name: '', description: 'This is our team' }
+      expect(new_team.update_team('', '', update_params)).to be false
     end
     it 'should return false' do
-      new_team.name = ''
-      expect(new_team.update_team('2', '')).to be false
+      expect(new_team.update_team('', '3', update_params)).to be false
     end
     it 'should return false' do
-      new_team.name = ''
-      expect(new_team.update_team('', '')).to be false
+      update_params = { name: '', description: 'This is our team' }
+      expect(new_team.update_team('2', '3', update_params)).to be false
     end
   end
 end
