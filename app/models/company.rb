@@ -1,4 +1,6 @@
 class Company < ActiveRecord::Base
+  has_many :departments
+  has_many :teams
   validates :name, presence: true, uniqueness: true,
             length:
             {
@@ -7,4 +9,5 @@ class Company < ActiveRecord::Base
             }
   has_many :employees
   has_many :messages
+  has_many :attendances
 end

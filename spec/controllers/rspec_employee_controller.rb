@@ -10,10 +10,8 @@ describe 'Employees' do
     end
     context 'when the employee is created' do
       it 'should return true' do
-        binding.pry
         employee = FactoryGirl.create(:employee)
         expect { employee }.should raise_error(StandardError)
-        # Instead SequnceID is messing with something
       end
     end
   end

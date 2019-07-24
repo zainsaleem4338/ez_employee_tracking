@@ -13,5 +13,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require rails-jquery-tokeninput
+//= require select2-full
 //= require_tree .
 

@@ -13,6 +13,19 @@
 
 ActiveRecord::Schema.define(version: 20190724054438) do
 
+  create_table "attendances", force: :cascade do |t|
+    t.datetime "login_time"
+    t.datetime "logout_time"
+    t.integer  "status",      limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "employee_id", limit: 4
+    t.integer  "company_id",  limit: 4
+  end
+
+  add_index "attendances", ["company_id"], name: "index_attendances_on_company_id", using: :btree
+  add_index "attendances", ["employee_id"], name: "index_attendances_on_employee_id", using: :btree
+
   create_table "companies", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
     t.string "description", limit: 255
@@ -20,6 +33,24 @@ ActiveRecord::Schema.define(version: 20190724054438) do
   end
 
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
+
+  create_table "departments", force: :cascade do |t|
+    t.string   "name",        limit: 255,   null: false
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "company_id",  limit: 4
+  end
+
+  add_index "departments", ["company_id"], name: "index_departments_on_company_id", using: :btree
+
+  create_table "employee_teams", force: :cascade do |t|
+    t.integer  "employee_id",   limit: 4,   null: false
+    t.integer  "team_id",       limit: 4,   null: false
+    t.string   "employee_type", limit: 255, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "employees", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",   null: false
@@ -56,4 +87,21 @@ ActiveRecord::Schema.define(version: 20190724054438) do
     t.integer "company_id",  limit: 4
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.string   "name",          limit: 255,   null: false
+    t.text     "description",   limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "company_id",    limit: 4
+    t.integer  "department_id", limit: 4,     null: false
+  end
+
+  add_index "teams", ["company_id"], name: "index_teams_on_company_id", using: :btree
+  add_index "teams", ["department_id"], name: "index_teams_on_department_id", using: :btree
+
+  add_foreign_key "attendances", "companies"
+  add_foreign_key "attendances", "employees"
+  add_foreign_key "departments", "companies"
+  add_foreign_key "teams", "companies"
+  add_foreign_key "teams", "departments"
 end
