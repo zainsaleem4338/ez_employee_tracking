@@ -2,13 +2,14 @@
 # It should create a employee
 class EmployeesController < ApplicationController
   def index
+    @results = Geocoder.search('CCA, 264, Sector FF Dha Phase 4, Lahore, Punjab')
     @employees = current_employee.company.employees.active_members
   end
 
   def employees_lists
     @employees = current_employee.company.employees.active_members.order(:name)
     respond_to do |format|
-      format.json { render json: @employees.where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:term]}%") }
+      format.json { render json: @employees.where('role != ? AND name like ?', Employee::ADMIN_ROLE, '%#{params[:term]}%') }
     end
   end
 

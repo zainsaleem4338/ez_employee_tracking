@@ -1,5 +1,10 @@
 <h1>All Employees List</h1>
 
+<% unless @result.blank? %>
+<h3>Address: <%= @results.first %></h3>
+<h3>Coordinates: <%= @results.first.coordinates %></h3>
+<% end %>
+
 <ul class="list-group">
   <% @employees.each do |employee| %>
     <li class="list-group-item list-group-item-info">
