@@ -7,7 +7,8 @@ class Ability
     if user.role == Employee::ADMIN_ROLE
       can :manage, Department
       can [:read, :employees_lists], Employee, active: true
-      can [:new, :create], Employee
+      can [:new, :create], Employee, {company_id: user.company_id}
+      can :destroy, Employee
     end
     # Define abilities for the passed in user here. For example:
     #

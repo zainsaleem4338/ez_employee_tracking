@@ -5,10 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
 
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:warning] = exception.message
-    redirect_to root_path
-  end
+
   protected
 
   CONST_CREATE = 'create'.freeze

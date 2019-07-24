@@ -43,7 +43,7 @@ group :development do
   gem 'database_cleaner'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'pry', '=0.10.1'
-  gem 'pry-rails', '=0.3.3'
+  # gem 'pry-rails', '=0.3.3'
   gem 'rspec-rails', '~> 3.8'
   gem 'shoulda-matchers', require: false  
   gem 'spring'
@@ -53,7 +53,7 @@ end
 group :test do
   gem 'better_errors'
   gem 'pry', '=0.10.1'
-  gem 'pry-rails', '=0.3.3'
+  # gem 'pry-rails', '=0.3.3'
   gem 'rspec-rails', '~> 3.8'
   gem 'database_cleaner'
   gem 'faker', '~> 1.6.1'
