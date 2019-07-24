@@ -1,16 +1,10 @@
 class EmployeesController < ApplicationController
   load_and_authorize_resource :employee, through_association: :company
 
-  def index
-  end
-
   def employees_lists
     respond_to do |format|
       format.json { render json: @employees.order(:name).where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:term]}%") }
     end
-  end
-
-  def new
   end
 
   def show

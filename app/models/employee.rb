@@ -4,6 +4,8 @@ class Employee < ActiveRecord::Base
   ADMIN_ROLE = 'Admin'.freeze
   EMPLOYEE_ROLE = 'Employee'.freeze
   TEAM_ROLE = 'Team'.freeze
+  TEAM_LEAD_ROLE = 'Team Lead'.freeze
+
   belongs_to :company, :inverse_of => :employees
   belongs_to :department
   has_many :employee_teams
@@ -41,4 +43,24 @@ class Employee < ActiveRecord::Base
   def email_changed?
     false
   end
+
+  def get_team_members
+  	employees = []
+  	if self.role == Employee::TEAM_LEAD_ROLE
+  		# binding.pry
+  		self.employee_teams.each do |team|
+  			# team_members = []
+  			EmployeeTeam.where(team_id: team.id).each do |team_member|
+  				employees << team_member.employee
+  			end
+  			# p team_members
+  			# employees_json = {team: team.team.name, team_members: team_members}
+  			# employees << e
+  		end
+  	else
+  		p "hell"
+  	end
+  	employees
+  end
+
 end
