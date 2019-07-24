@@ -12,13 +12,13 @@ class Team < ActiveRecord::Base
     begin
       self.transaction do
         self.save!
-        self.employee_teams.create!(employee_id: team_lead_id, employee_type: EMPLOYEE_TYPE[:team_member])
+        self.employee_teams.create!(employee_id: team_lead_id, employee_type: EMPLOYEE_TYPE[:team_leader])
         if team_members_ids.empty?
           self.errors.add(:base, 'Team members name required')
           return false
         end
         team_members_ids.each do |team_member|
-          self.employee_teams.create!(employee_id: team_member, employee_type: EMPLOYEE_TYPE[:team_leader])
+          self.employee_teams.create!(employee_id: team_member, employee_type: EMPLOYEE_TYPE[:team_member])
         end
         return self
       end
