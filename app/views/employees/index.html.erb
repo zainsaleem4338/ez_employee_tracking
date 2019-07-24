@@ -1,0 +1,14 @@
+<h1>All Employees List</h1>
+
+<ul class="list-group">
+  <% @employees.each do |employee| %>
+    <li class="list-group-item list-group-item-info">
+      <ul>
+        <li><%= employee.name %></li>
+        <li><%= employee.email %></li>
+        <li><%= employee.role %></li> 
+        <li><b><%= link_to "Delete this employee", delete_employee_path(employee), method: :delete, data: { confirm: "Are you sure you want to delete the employee?" } %></b></li> 
+      </ul>
+    </li>
+  <% end %>
+</ul>
