@@ -47,7 +47,7 @@
       <% assignable_employee_hash = [@task.assignable].to_json.html_safe %>
       <% end %>
       <%= javascript_tag do %>
-      $('.js-assign-employee').tokenInput('/employeeslist.json', {tokenValue: 'id', prePopulate: <%= assignable_employee_hash %>, tokenLimit: 1 });
+      $('.js-assign-employee').tokenInput('/employee_lists.json', {tokenValue: 'id', prePopulate: <%= assignable_employee_hash %>, tokenLimit: 1 });
       <% end %>
     </div>
 
@@ -80,7 +80,7 @@
       <% end %>
       <%= javascript_tag do %>
       <% assignable_hash = [@task.assignable].to_json.html_safe %>
-      $('.js-assign-employee').tokenInput('/employeeslist.json', { prePopulate: <%= assignable_employee_hash %>, tokenLimit: 1 });
+      $('.js-assign-employee').tokenInput('/employee_lists.json', { prePopulate: <%= assignable_employee_hash %>, tokenLimit: 1 });
       <% end %>
     </div>
 

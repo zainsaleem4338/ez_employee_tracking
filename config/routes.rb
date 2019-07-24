@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   
   root 'menus#index'
 
-  get 'employee_lists' => 'employees#employees_lists'
   resources :teams
   resources :departments
   resources :projects
@@ -22,7 +21,7 @@ Rails.application.routes.draw do
   post '/employees/create' => 'employees#create', :as => :create_employee
   delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
 
-  get 'employeeslist' => 'employees#employees_list'
+  get 'employee_lists' => 'employees#employees_lists'
 
   get 'teamslist' => 'teams#teams_list'
 
