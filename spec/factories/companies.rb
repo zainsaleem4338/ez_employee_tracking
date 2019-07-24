@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :company, :class => 'Company' do |f|
-    f.name "Envisage"
+  factory :company, :class => 'Company' do |form|
+    form.name "Envisage"
   end
 end
