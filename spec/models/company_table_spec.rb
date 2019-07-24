@@ -7,11 +7,11 @@ describe 'Company' do
         FactoryGirl.create(:company)
         expect { FactoryGirl.create(:company) }.to raise_error(ActiveRecord::RecordInvalid)
       end
-      # it 'it should return error' do
-      #   company = Company.new
-      #   company.name = 'B'
-      #   expect(company.save).to eq(false)
-      # end
+      it 'it should return error' do
+        company = Company.new
+        company.name = 'B'
+        expect(company.save).to eq(false)
+      end
     end
   end
 end
