@@ -19,12 +19,12 @@ hash_new_team =  {
 
 jQuery ->
     $(document).ready ->
-      $('.assign_team').tokenInput('/teamslist.json', hash_new);
-      $('.assign_employee').tokenInput('/employeeslist.json', hash_new_team);
+      $('.js-assign-team').tokenInput('/teamslist.json', hash_new);
+      $('.js-assign-employee').tokenInput('/employeeslist.json', hash_new_team);
 
     
     $('.js-toggle-team-employee-input-token').change ->
       $('.js-toggleable-input-token').slideToggle();
-      $('.assignable_type').val($(this).data('type'));
+      $('.js-assignable_type').val($(this).data('type'));
    
       

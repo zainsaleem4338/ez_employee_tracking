@@ -1,3 +1,5 @@
+require 'date'
+
 class Employee < ActiveRecord::Base
   ADMIN_ROLE = 'Admin'.freeze
   belongs_to :company, :inverse_of => :employees
@@ -16,7 +18,14 @@ class Employee < ActiveRecord::Base
   validates :role, presence: true
   accepts_nested_attributes_for :company
   has_many :tasks, :as => :assignable
+  has_many :attendances
 
+  def todays_attendance_of_employee(company)
+    # one employee should not have multiple attendances for one day
+    @start_time = DateTime.now.change(hour: 10)
+    @end_time = DateTime.now.change(hour: 18)
+    company.attendances.find_by(employee_id: id, login_time: (@start_time..@end_time))
+  end
 
   def with_company
     build_company if company.nil?

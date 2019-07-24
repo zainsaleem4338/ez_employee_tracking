@@ -1,3 +1,5 @@
+# This is a controller for employees
+# It should create a employee
 class EmployeesController < ApplicationController
   load_and_authorize_resource :employee, through_association: :company
   def index
@@ -12,6 +14,10 @@ class EmployeesController < ApplicationController
 
   def new
     # @employee = current_employee.company.employees.new
+  end
+
+  def show
+    @employee = Employee.find(current_employee.id)
   end
 
   def create
