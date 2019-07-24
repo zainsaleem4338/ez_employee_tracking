@@ -4,3 +4,18 @@ $(document).ready(function() {
     $("#company-subdomain").val(data.val().toLowerCase());
 })});
 
+function send(data) {
+  var chatinput = document.getElementById("chat-input");
+  var chatoutput = document.getElementById("chat-output");
+  var textstyle = document.querySelector(".text");
+
+  chatoutput.innerText += data ;
+  chatinput.value = "";
+
+  // Style
+  textstyle.style.backgroundColor = "#89d3ff";
+  textstyle.style.color = "#fff";
+  textstyle.style.padding = "10px 20px";
+  textstyle.style.borderRadius = "5px";
+
+}

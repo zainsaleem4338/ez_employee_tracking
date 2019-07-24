@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   get '/employees/new' => 'employees#new', :as => :new_employee
   post '/employees/create' => 'employees#create', :as => :create_employee
   delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
+
+  get '/messages/index' => 'messages#index'
+  post '/messages/' => 'messages#create'
 end
