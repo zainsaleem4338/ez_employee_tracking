@@ -12,21 +12,76 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item active">
-          <%= link_to "Home", employees_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#_" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Actions
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to "All Employees", employees_path, class: 'dropdown-item' %>
-            <%= link_to "Add Employee", new_employee_path, class: 'dropdown-item' %>
-          </div>
+          <%= link_to "Home", menus_index_path, class: 'nav-link' %>
         </li>
       </ul>
+
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><%= link_to "Dashboard", show_employee_path, class: 'nav-link'%></li>
-        <li class="nav-item"><%= link_to "Logout", destroy_employee_session_path, class: 'nav-link' , method: :delete %></li>
+        <!-- Notifications -->
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw"></i>
+            <sup>9+</sup>  
+          </a>
+
+          <!-- Notification Dropdown-->
+          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">Notifications</h6>
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-file-alt"></i>
+              <span class="small-gray">A new report is here!</span>
+            </a>
+          </div>
+
+        </li>
+
+        <!-- Messages -->
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-envelope fa-fw"></i>
+            <sup>7</sup>
+          </a>
+
+          <!-- Messages Dropdown-->
+          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+            <h6 class="dropdown-header">
+              Messages
+            </h6>
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-comment-alt"></i>
+              <span class="small-gray">New Message!</span>
+            </a>
+          </div>
+        </li>
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <!-- User -->
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="small-gray"><%= current_employee.name %></span>
+            <img src="https://source.unsplash.com/QAB-WJcbgJk/60x60" class="img-profile rounded-circle">
+          </a>
+
+          <!-- User option Dropdown -->
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              <span class="small">Profile</span>
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+              <span class="small">Settings</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              <span><%= link_to "Logout", destroy_employee_session_path, class: 'nav-link small' , method: :delete %> </span>
+            </a>
+          </div>
+        </li>
+
+        
       </ul>
     </div>
   </div>

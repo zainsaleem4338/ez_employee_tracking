@@ -1,8 +1,14 @@
-# This is a controller for employees
-# It should create a employee
 class EmployeesController < ApplicationController
+
   def index
     @employees = current_employee.company.employees.active_members
+  end
+
+  def employees_lists
+    @employees = current_employee.company.employees.active_members.order(:name)
+    respond_to do |format|
+      format.json { render json: @employees.where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:term]}%") }
+    end
   end
 
   def new

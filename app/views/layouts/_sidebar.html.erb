@@ -10,49 +10,75 @@
 	</div>
 
 	<ul class="list-unstyled components">
+    <li>
+      <a href=<%= show_employee_path %>>
+        <i class="fas fa-chart-line"></i>
+        Dashboard
+      </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
 		<li class="active">
 			<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-				<i class="fas fa-home"></i>
-				Home
+				<i class="fas fa-building"></i>
+				Department
 			</a>
 			<ul class="collapse list-unstyled" id=
 			"homeSubmenu">
 				<li>
-					<a href="#">Dashboard</a>
+					<a href=<%= new_department_path %>>Add Department</a>
 				</li>
 				<li>
-					<a href="#">Employees list</a>
-				</li>
-				<li>
-					<a href="#">Departments</a>
+					<a href=<%= departments_path %>>View Departments</a>
 				</li>
 			</ul>
 		</li>
+    <li>
+      <a href=<%= teams_path %>>
+        <i class="fas fa-user-friends"></i>
+        Teams
+      </a>
+    </li>
 
 		<li>
 			<a href="#secondSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-				<i class="fas fa-user-friends"></i>
-				Teams
+				<i class="fas fa-user"></i>
+				Employees
 			</a>
 			<ul class="collapse list-unstyled" id=
 			"secondSubmenu">
 				<li>
-					<a href="#">Departments</a>
+					<a href=<%= new_employee_path %>>Add Employee</a>
 				</li>
 				<li>
-					<a href="#">Team Laeds</a>
-				</li>
-				<li>
-					<a href="#">Events</a>
+					<a href=<%= employees_path %>>View Employees</a>
 				</li>
 			</ul>
 		</li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    
 		<li>
 			<a href="#">
-				<i class="fas fa-briefcase"></i>
-				About
+				<i class="fas fa-calendar"></i>
+				Events
 			</a>
 		</li>
+    <li>
+      <a href="#">
+        <i class="fas fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fas fa-briefcase"></i>
+        About
+      </a>
+    </li>
 		<li>
 			<a href="#">
 				<i class="fas fa-phone"></i>
