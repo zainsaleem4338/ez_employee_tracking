@@ -9,6 +9,7 @@
       <th>Description</th>
       <th>Team Leader</th>
       <th>Team Members</th>
+      <th>Team Picture</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><%= team.description %></td>
         <td><%= team.employee_lists('Team Leader').pluck(:name)[0] %></td>
         <td><%= team.employee_lists('Team Member').count %></td>
+        <td><%= image_tag team.team_pic.url(:thumb), class: "rounded-circle" %></td>
         <td><%= link_to 'Show', team, class: "btn btn-secondary" %>
           <%= link_to 'Edit', edit_team_path(team), class: "btn btn-info" %>
           <%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>

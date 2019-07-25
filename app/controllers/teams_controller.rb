@@ -17,7 +17,7 @@ class TeamsController < ApplicationController
   def create
     @team = current_employee.company.teams.new(team_params)
     respond_to do |format|
-      if @team.create_team(params[:team][:team_lead_id], params[:team][:employee_tokens])
+      if @team.create_team(params[:team][:team_lead_id], params[:employee_tokens])
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else
@@ -30,7 +30,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if params[:team].present? &&
-        @team.update_team(params[:team][:team_lead_id], params[:team][:employee_tokens], update_team_params)
+        @team.update_team(params[:team][:team_lead_id], params[:employee_tokens], update_team_params)
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :created, location: @team }
       else
@@ -57,9 +57,9 @@ class TeamsController < ApplicationController
       @team = current_employee.company.teams.find(params[:id])
     end
     def team_params
-      params.require(:team).permit(:name, :description, :department_id)
+      params.require(:team).permit(:name, :description, :department_id, :team_pic)
     end
     def update_team_params
-      params.require(:team).permit(:name, :description)
+      params.require(:team).permit(:name, :description, :team_pic)
     end
 end

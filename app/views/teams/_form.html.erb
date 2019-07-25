@@ -1,4 +1,4 @@
-<%= form_for(@team) do |f| %>
+<%= form_for(@team, html: { multipart: true }) do |f| %>
   <% if @team.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
@@ -21,12 +21,52 @@
   </div>
   
   <div class="form-group">
-    <%= f.label :team_lead_id, "Team Leader" %><br>
-    <%= f.text_field :team_lead_id, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]) }, class: "form-control" %>
+    <%= f.label :team_lead_id, "Team Leader" %>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label for="team_leader" id="leader">
+      <% if @team.persisted? %>
+        <%= @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name)[0] %>
+      <% end %>
+    </label>
+    <button type="button" class="btn-edit" id="leader_edit"><i class="fa fa-edit"></i></button>
+    <div class="row" id="team_leader_field">
+      <div class="col-md-5">
+        <%= f.text_field :team_lead_id, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]) }, class: "form-control" %>
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-primary" id="ok_leader">Ok</button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" id="append_team_members">
+    <table class="table">
+      <tbody id="member_table">
+        <% if @team.persisted? %>
+          <% @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).each do |member|%>
+            <%= render 'layouts/employees_list', member: member %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
   </div>
   <div class="form-group">
-    <%= f.label :employee_tokens, "Team Members" %><br>
-    <%= f.text_field :employee_tokens, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]) }, class: "form-control" %>
+    <button type="button" class="btn btn-primary" id="add_team_members">
+    Add Team Members</button>
+  </div>
+  <div class="form-group" id="team_members_view">
+    <%= label_tag "Team Members" %><br>
+    <div class="row">
+      <div class="col-md-5">
+        <%= text_field_tag "team_employee_ids", "", class: "form-control" %>
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-primary" id="ok">Ok</button>
+      </div>
+    </div>
+  </div>  
+  <div class="form-group">
+    <%= f.label :team_pic, "Team Image" %><br>
+    <%= f.file_field :team_pic, class:"form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :description %><br>

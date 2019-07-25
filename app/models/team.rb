@@ -6,19 +6,25 @@ class Team < ActiveRecord::Base
   has_many :employee_teams
   has_many :employees, through: :employee_teams, dependent: :destroy
   validates :name, :department_id, presence: true
+  has_attached_file :team_pic, styles: { medium: '300x300>', thumb: '100x100>' }
+  validates_attachment_content_type :team_pic, content_type: /\Aimage\/.*\z/
 
   def create_team(team_lead_id, employee_ids)
-    team_members_ids = get_employee_ids(employee_ids)
+    if employee_ids.nil?
+      self.errors.add(:base, 'Team members name required')
+      return false
+    end
+    team_members_ids = employee_ids.map(&:to_i)
     begin
       self.transaction do
         self.save!
-        self.employee_teams.create!(employee_id: team_lead_id, employee_type: EMPLOYEE_TYPE[:team_member])
+        self.employee_teams.create!(employee_id: team_lead_id, employee_type: EMPLOYEE_TYPE[:team_leader])
         if team_members_ids.empty?
           self.errors.add(:base, 'Team members name required')
           return false
         end
         team_members_ids.each do |team_member|
-          self.employee_teams.create!(employee_id: team_member, employee_type: EMPLOYEE_TYPE[:team_leader])
+          self.employee_teams.create!(employee_id: team_member, employee_type: EMPLOYEE_TYPE[:team_member])
         end
         return self
       end
@@ -31,7 +37,11 @@ class Team < ActiveRecord::Base
   end
 
   def update_team(team_lead_id, employee_ids, update_team_params)
-    team_members_ids = get_employee_ids(employee_ids)
+    if employee_ids.nil?
+      self.errors.add(:base, 'Team members name required')
+      return false
+    end
+    team_members_ids = employee_ids.map(&:to_i)
     begin
       if team_members_ids.empty?
         self.errors.add(:base, 'Team members name required')
@@ -71,10 +81,6 @@ class Team < ActiveRecord::Base
         self.errors.add(:base, 'Team member names are required')
       end
     end
-  end
-
-  def get_employee_ids(employee_ids)
-    employee_ids.split(',').map(&:to_i)
   end
 
   def employee_lists(employee_type)

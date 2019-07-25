@@ -12,10 +12,12 @@ class Employee < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { minimum: 5, maximum: 50 },
             format: { with: VALID_EMAIL_REGEX },
-            uniqueness: { scope: :company_id } 
+            uniqueness: { scope: :company_id }
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }
   validates :role, presence: true
   accepts_nested_attributes_for :company
+  has_attached_file :avatar, styles: { medium: '300x300>', thumb: '200x200>' }
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   def with_company
     build_company if company.nil?
