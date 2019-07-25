@@ -1,5 +1,3 @@
-# This is a controller for employees
-# It should create a employee
 class EmployeesController < ApplicationController
 
   def index

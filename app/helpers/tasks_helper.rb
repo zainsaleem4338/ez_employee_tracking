@@ -1,6 +1,5 @@
 module TasksHelper
 	def set_assignable_hash(task, assignable_type)
-		binding.pry
 		return nil if task.assignable_type.nil?
 		return [task.assignable].to_json.html_safe if task.assignable_type == assignable_type
 	end
