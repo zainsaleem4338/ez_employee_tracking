@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  
   devise_for :employees, controllers: { sessions: 'sessions' }
   resources :teams
   resources :departments
-  resources :attendances
+  resources :attendances 
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
   get 'menus/home' => 'menus#home'
+  post 'menus/home' => 'menus#home'
+  post 'menus/search_email' => 'menus#search_email'
   root 'menus#home'
 
   get 'employee_lists' => 'employees#employees_lists'
