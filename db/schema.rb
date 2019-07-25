@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190720160841) do
+ActiveRecord::Schema.define(version: 20190721173010) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20190720160841) do
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "subdomain",   limit: 255
   end
 
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree

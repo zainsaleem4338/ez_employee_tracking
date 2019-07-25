@@ -21,8 +21,10 @@
   </head>
   <body>
     <% if employee_signed_in? %>
-    <%= render 'layouts/header' %>
-    <%= render 'shared/notification' %>
+      <%= render 'layouts/header' %>
+      <%= render 'shared/notification' %>
+    <% else %>
+      <%= render 'menus/header' %><br>
     <% end %>
     <div class='container'>
       <%= yield %>

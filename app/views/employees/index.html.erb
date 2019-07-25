@@ -1,4 +1,4 @@
-<h1>All Employees List</h1>
+<h1>All Employees of <%= current_company.name %></h1>
 
 <ul class="list-group">
   <% @employees.each do |employee| %>
@@ -7,6 +7,7 @@
         <li><%= employee.name %></li>
         <li><%= employee.email %></li>
         <li><%= employee.role %></li> 
+        <li><%= employee.company.name %></li> 
         <li><b><%= link_to "Delete this employee", delete_employee_path(employee), method: :delete, data: { confirm: "Are you sure you want to delete the employee?" } %></b></li> 
       </ul>
     </li>
