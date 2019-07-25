@@ -3,12 +3,12 @@ class SessionsController < Devise::SessionsController
     super
   end
   def create
-    if(current_company == nil)
+    if(current_company.blank?)
       flash[:danger] = 'Invalid Company!'
       return redirect_to new_employee_session_path
     end
     employee = Employee.find_by(email: params[:employee][:email], company_id: current_company.id)
-    if employee == nil || !employee.valid_password?(params[:employee][:password])
+    if employee.blank? || !employee.valid_password?(params[:employee][:password])
       flash[:danger] = "Invalid password or email!"
       return redirect_to new_employee_session_path
     end
@@ -16,7 +16,7 @@ class SessionsController < Devise::SessionsController
       clean_up_passwords(employee)
       sign_in(resource_name, employee)
       yield employee if block_given?
-      if !flash.key?('alert')
+      if flash[:alert].blank?
         flash[:notice] = "Employee signed in successfully!"
       end
       respond_with employee, location: menus_index_path   

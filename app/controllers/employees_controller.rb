@@ -49,8 +49,7 @@ class EmployeesController < ApplicationController
   end
 
   def generate_password
-    o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
-    string = (0...10).map { o[rand(o.length)] }.join
-    return string
+    random_password = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+    (0...10).map { random_password[rand(random_password.length)] }.join
   end
 end
