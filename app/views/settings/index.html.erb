@@ -1,0 +1,66 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Days</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Monday</th>
+      <% if @settings.working_days[:monday] %>
+        <td><span class="badge badge-success">On</span></td>
+      <% else %>
+        <td><span class="badge badge-danger">Off</span></td>
+      <% end %>   
+    </tr>
+    <tr>
+      <th>Tuesday</th>
+      <% if @settings.working_days[:tuesday] %>
+        <td><span class="badge badge-success">On</span></td>
+      <% else %>
+        <td><span class="badge badge-danger">Off</span></td>
+      <% end %>   
+    </tr>
+    <tr>
+      <th>Wednesday</th>
+      <% if @settings.working_days[:wednesday] %>
+        <td><span class="badge badge-success">On</span></td>
+      <% else %>
+        <td><span class="badge badge-danger">Off</span></td>
+      <% end %>   
+    </tr>
+    <tr>
+      <th>Thursday</th>
+      <% if @settings.working_days[:thursday] %>
+        <td><span class="badge badge-success">On</span></td>
+      <% else %>
+        <td><span class="badge badge-danger">Off</span></td>
+      <% end %>   
+    </tr>
+    <tr>
+      <th>Friday</th>
+      <% if @settings.working_days[:friday] %>
+        <td><span class="badge badge-success">On</span></td>
+      <% else %>
+        <td><span class="badge badge-danger">Off</span></td>
+      <% end %>   
+    </tr>
+    <tr>
+      <th>Saturday</th>
+      <% if @settings.working_days[:saturday] %>
+        <td><span class="badge badge-success">On</span></td>
+      <% else %>
+        <td><span class="badge badge-danger">Off</span></td>
+      <% end %>   
+    </tr>
+    <tr>
+      <th>Sunday</th>
+      <% if @settings.working_days[:sunday] %>
+        <td><span class="badge badge-success">On</span></td>
+      <% else %>
+        <td><span class="badge badge-danger">Off</span></td>
+      <% end %>   
+    </tr>
+  </tbody>
+</table>

@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   devise_for :employees, controllers: { sessions: 'sessions' }
   resources :teams
   resources :departments
-  resources :attendances 
+  resources :attendances
+
+  get '/settings/new' => 'settings#new'
+  post '/settings/create' => 'settings#create', as: :create_settings
+  get '/settings/index' => 'settings#index', as: :index_settings
+
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
   get 'menus/home' => 'menus#home'
