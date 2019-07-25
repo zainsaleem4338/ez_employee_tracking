@@ -18,6 +18,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'select2-rails'
 gem 'sequenceid'
 gem 'uglifier', '>= 1.3.0'
+gem 'faye'
+gem 'thin'
 
 group :development, :test do
   gem 'better_errors'

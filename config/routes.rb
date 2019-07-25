@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   get '/employees/show' => 'employees#show', :as => :show_employee
   post '/employees/create' => 'employees#create', :as => :create_employee
   delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
+
+  get '/messages/index' => 'messages#index'
+  post '/messages/' => 'messages#create'
   get 'employee/attendance' => 'attendances#create', as: :employee_attendance
   get 'employee/attendance/update' => 'attendances#update', as: :update_attendance
 end

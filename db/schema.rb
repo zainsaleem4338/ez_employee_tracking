@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190721173010) do
+ActiveRecord::Schema.define(version: 20190724054438) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -80,6 +80,12 @@ ActiveRecord::Schema.define(version: 20190721173010) do
   add_index "employees", ["email", "company_id"], name: "index_employees_on_email_and_company_id", unique: true, using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
   add_index "employees", ["sequence_num", "company_id"], name: "index_employees_on_sequence_num_and_company_id", unique: true, using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.string  "message",     limit: 255
+    t.integer "employee_id", limit: 4
+    t.integer "company_id",  limit: 4
+  end
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",          limit: 255,   null: false

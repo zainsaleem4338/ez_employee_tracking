@@ -17,6 +17,8 @@ class Employee < ActiveRecord::Base
             uniqueness: { scope: :company_id }
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }
   validates :role, presence: true
+  belongs_to :company
+  has_many :messages
   accepts_nested_attributes_for :company
   has_many :attendances
 

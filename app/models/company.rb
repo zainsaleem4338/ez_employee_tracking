@@ -8,5 +8,6 @@ class Company < ActiveRecord::Base
               maximum: 50
             }
   has_many :employees
+  has_many :messages
   has_many :attendances
 end
