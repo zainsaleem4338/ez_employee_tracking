@@ -8,8 +8,15 @@
   <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"%>
   <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" %>
 
-  <%= stylesheet_link_tag "vendor/fontawesome-free/css/all.min.css" %>
-  <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" %>
+  <%= stylesheet_link_tag "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" %>
+
+  <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"%>
+
+  <script src="https://kit.fontawesome.com/f2933a2170.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
   <%= javascript_include_tag 'application'%>
   <%= csrf_meta_tags %>
@@ -17,11 +24,22 @@
 </head>
   <body>
     <% if employee_signed_in? %>
-      <%= render 'layouts/header' %>
+      <div class="wrapper">
+        <%= render 'layouts/sidebar' %>
+        <div id="content">
+          <div id="header_div">
+            <%= render 'layouts/header' %>
+          </div>
+          <%= yield %>
+        
+        </div>
+      </div>
       <%= render 'shared/notification' %>
+    <% else %>
+      <div class='container'>
+        <%= yield %>
+      </div>
     <% end %>
-    <div class='container'>
-      <%= yield %>
-    </div>
+    
   </body>
 </html>
