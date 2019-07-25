@@ -1,6 +1,5 @@
 require 'attendance'
-# Used in idex.html.erb
-# Helper for the employee views
+
 module EmployeesHelper
   def present_marked?
     @company = Company.find(current_employee.company_id)

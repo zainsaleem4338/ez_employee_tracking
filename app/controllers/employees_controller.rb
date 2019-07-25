@@ -1,6 +1,5 @@
-# This is a controller for employees
-# It should create a employee
 class EmployeesController < ApplicationController
+
   def index
     @employees = current_employee.company.employees.active_members
   end

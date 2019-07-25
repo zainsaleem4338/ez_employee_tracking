@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+
   def index
     @teams = current_employee.company.teams.all
   end
@@ -52,14 +53,21 @@ class TeamsController < ApplicationController
     end
   end
 
+  def teams_list
+    respond_to do |format|
+      format.json { render json: Team.where('name like ?',"%#{params[:q]}%" ) }
+    end
+  end
+
   private
-    def set_team
-      @team = current_employee.company.teams.find(params[:id])
-    end
-    def team_params
-      params.require(:team).permit(:name, :description, :department_id)
-    end
-    def update_team_params
-      params.require(:team).permit(:name, :description)
-    end
+  def set_team
+    @team = current_employee.company.teams.find(params[:id])
+  end
+  def team_params
+    params.require(:team).permit(:name, :description, :department_id)
+  end
+  def update_team_params
+    params.require(:team).permit(:name, :description)
+  end
+
 end

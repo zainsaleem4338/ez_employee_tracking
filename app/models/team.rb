@@ -1,4 +1,5 @@
 class Team < ActiveRecord::Base
+
   EMPLOYEE_TYPE = { team_member: 'Team Member', team_leader: 'Team Leader' }.freeze
   attr_reader :employee_tokens, :team_lead_id
   belongs_to :department
@@ -6,7 +7,9 @@ class Team < ActiveRecord::Base
   has_many :employee_teams
   has_many :employees, through: :employee_teams, dependent: :destroy
   validates :name, :department_id, presence: true
-
+  has_many :tasks, as: :assignable
+  belongs_to :company
+  
   def create_team(team_lead_id, employee_ids)
     team_members_ids = get_employee_ids(employee_ids)
     begin
