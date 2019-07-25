@@ -14,7 +14,15 @@ class Ability
       can :manage, Project, {company_id: user.company_id}
     
     elsif user.role == Employee::TEAM_LEAD_ROLE
-      
+
+      # can :index, Employee do |employee|
+      #   employee.employee_teams.each do |team|
+      #     user.employee_teams.pluck(:team_id).include?team.team_id
+      #   end
+
+      can :read, Employee, Employee.team_employees(user) do |employee|
+        employee
+      end
     end
     # Define abilities for the passed in user here. For example:
     #

@@ -23,6 +23,7 @@ class Employee < ActiveRecord::Base
   accepts_nested_attributes_for :company
   has_many :tasks, :as => :assignable
   has_many :attendances
+  scope :team_employees, ->(user){Employee.joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).where.not(employee_teams: {employee_id: user.id}).distinct}
 
   def todays_attendance_of_employee(company)
     # one employee should not have multiple attendances for one day
@@ -44,23 +45,23 @@ class Employee < ActiveRecord::Base
     false
   end
 
-  def get_team_members
-  	employees = []
-  	if self.role == Employee::TEAM_LEAD_ROLE
-  		# binding.pry
-  		self.employee_teams.each do |team|
-  			# team_members = []
-  			EmployeeTeam.where(team_id: team.id).each do |team_member|
-  				employees << team_member.employee
-  			end
-  			# p team_members
-  			# employees_json = {team: team.team.name, team_members: team_members}
-  			# employees << e
-  		end
-  	else
-  		p "hell"
-  	end
-  	employees
-  end
+  # def get_team_members
+  # 	employees = []
+  # 	if self.role == Employee::TEAM_LEAD_ROLE
+  # 		# binding.pry
+  # 		self.employee_teams.each do |team|
+  # 			# team_members = []
+  # 			EmployeeTeam.where(team_id: team.id).each do |team_member|
+  # 				employees << team_member.employee
+  # 			end
+  # 			# p team_members
+  # 			# employees_json = {team: team.team.name, team_members: team_members}
+  # 			# employees << e
+  # 		end
+  # 	else
+  # 		p "hell"
+  # 	end
+  # 	employees
+  # end
 
 end
