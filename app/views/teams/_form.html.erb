@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, required: true, class: "form-control" %>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, required: true, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :department_id, "Department" %><br>
-    <%= f.collection_select :department_id, current_employee.company.departments.order(:name),:id,:name, include_blank: true, class: "form-control" %>
+    <%= form.label :department_id, "Department" %><br>
+    <%= form.collection_select :department_id, current_employee.company.departments.order(:name),:id,:name, include_blank: true, class: "form-control" %>
   </div>
   
   <div class="form-group">
@@ -69,10 +69,10 @@
     <%= f.file_field :team_pic, class:"form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, class: "form-control" %>
+    <%= form.label :description %><br>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit class: "btn btn-success" %>
+    <%= form.submit class: "btn btn-success" %>
   </div>
 <% end %>

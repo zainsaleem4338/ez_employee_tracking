@@ -1,0 +1,67 @@
+<!-- Button Group -->
+<div class="col-md-2" style="margin-top: 40px">
+  <div class="btn-group btn-group-vertical" role="group">
+     
+    <button class="btn btn-secondary" type="button">
+      Today
+    </button> 
+    <button class="btn btn-secondary" type="button">
+      Yesterday
+    </button> 
+    <button class="btn btn-secondary" type="button">
+      No Day
+    </button> 
+    <button class="btn btn-secondary" type="button">
+      End Day
+    </button>
+  </div>
+</div>
+
+<!-- Content/ Table-->
+<div class="col-md-10">
+  <h3>
+    Attendance Record
+  </h3>
+  <table class="table table-hover table-sm">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th>
+          Employee
+        </th>
+        <th>
+          Login Time
+        </th>
+        <th>
+          Logout Time
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <% @attendances_list.each do |attendance| %>
+      <% @current_employee = Employee.find(attendance.employee_id) %>
+
+      <tr class="table-success">
+        <td>
+          <%= attendance.employee_id %>
+        </td>
+        <td class="employee-email">
+          <%= @current_employee.email %>
+        </td>
+        <td class="employee-login-time">
+          <%= attendance.login_time.to_formatted_s(:long_ordinal) %>
+        </td>
+        <td class="employee-logout-time">
+          <%= attendance.logout_time %>
+        </td>
+      </tr>
+
+    <% end %>
+
+    </tbody>
+  </table>
+
+</div>
