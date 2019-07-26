@@ -41,8 +41,7 @@ class EmployeesController < ApplicationController
   end
 
   def team_member_render_view
-    team_members_ids = params['employee_ids'].split(',').map(&:to_i)
-    @team_members = Employee.where(id: team_members_ids)
+    @team_members = Employee.where(id: params['employee_ids'])
     @count = params['count']
     respond_to do |format|
       format.js

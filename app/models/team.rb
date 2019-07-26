@@ -10,13 +10,18 @@ class Team < ActiveRecord::Base
   has_attached_file :team_pic, styles: { medium: '300x300>', thumb: '100x100>' }
   validates_attachment_content_type :team_pic, content_type: /\Aimage\/.*\z/
   has_many :tasks, as: :assignable
-  
   def create_team(team_lead_id, employee_ids)
     if employee_ids.nil?
       self.errors.add(:base, 'Team members name required')
       return false
     end
     team_members_ids = employee_ids.map(&:to_i)
+    if team_lead_id.present?
+      if team_members_ids.include? team_lead_id.to_i
+        self.errors.add(:base, "Employee can't be team member & team leader at the same time.")
+        return false
+      end
+    end
     begin
       self.transaction do
         self.save!
@@ -44,6 +49,12 @@ class Team < ActiveRecord::Base
       return false
     end
     team_members_ids = employee_ids.map(&:to_i)
+    if team_lead_id.present?
+      if team_members_ids.include? team_lead_id.to_i
+        self.errors.add(:base, "Employee can't be team member & team leader at the same time.")
+        return false
+      end
+    end
     begin
       if team_members_ids.empty?
         self.errors.add(:base, 'Team members name required')

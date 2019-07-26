@@ -19,8 +19,7 @@ hash_new_team =  {
 
 jQuery ->
     $(document).ready ->
-      $('.js-assign-team').tokenInput('/teamslist.json', hash_new_team);
-      $('.js-assign-employee').tokenInput('/employee_lists.json', hash_new);
+      
 
     
     $('.js-toggle-team-employee-input-token').change ->

@@ -9,13 +9,68 @@ class Task < ActiveRecord::Base
   validates :start_date, :expected_end_date, :name, :company_id, :project_id, presence: :true
   validate :check_start_date, :check_start_and_end_date
 
-
   def check_start_and_end_date
-    errors.add(:expected_end_date,'cannot be before start_time') if (expected_end_date.to_date < start_date.to_date)
+    errors.add(:expected_end_date, 'cannot be before start_time') if expected_end_date.to_date < start_date.to_date
   end
 
   def check_start_date
-    errors.add(:start_date,"should be greater than equal to today's date.") if start_date.to_date < Date.today
+    errors.add(:start_date, "should be greater than equal to today's date.") if start_date.to_date < Date.today
+  end
+
+  def employee(id)
+    Employee.where(id: id)
+  end
+
+  def get_team_employees(id)
+    team = Team.find(id)
+    team.employees
+  end
+
+  def self.add_email_deliver(id)
+    find(id).add_email_deliver
+  end
+
+  def add_email_deliver
+    if self.assignable_type == 'Employee'
+      employees = employee(self.assignable_id)
+    else
+      employees = get_team_employees(self.assignable_id)
+    end
+    employees.each do |employee|
+      TaskMailer.assign_task_notify(employee, self).deliver
+    end
+  end
+
+  def self.update_email_deliver(id, assignable_id, assignable_type)
+    find(id).update_email_deliver(assignable_id, assignable_type)
+  end
+
+  def update_email_deliver(assignable_id, assignable_type)
+    unless assignable_id == self.assignable_id
+      if assignable_type == self.assignable_type
+        if self.assignable_type == 'Employee'
+          employees = employee(self.assignable_id)
+          previous_employees = employee(assignable_id)
+        else
+          employees = get_team_employees(self.assignable_id)
+          previous_employees = get_team_employees(assignable_id)
+        end
+      else
+        if self.assignable_type == 'Employee'
+          employees = employee(self.assignable_id)
+          previous_employees = get_team_employees(assignable_id)
+        else
+          employees = get_team_employees(self.assignable_id)
+          previous_employees = employee(assignable_id)
+        end
+      end
+      employees.each do |employee|
+        TaskMailer.assign_task_notify(employee, self).deliver
+      end
+      previous_employees.each do |previous_employee|
+        TaskMailer.unassign_task_notify(previous_employee, self).deliver
+      end
+    end
   end
 
   def set_status
@@ -24,7 +79,7 @@ class Task < ActiveRecord::Base
     self.assignable_type = nil
   end
 
-  def set_assignable(assignable_team_id, assignable_employee_id,assignable_type)
+  def set_assignable(assignable_team_id, assignable_employee_id, assignable_type)
     unless assignable_team_id.empty?
       self.assignable_id = assignable_team_id
       self.assignable_type = Task::TEAM
@@ -35,11 +90,11 @@ class Task < ActiveRecord::Base
     end
   end
 
-  def update_assignable(assignable_team_id, assignable_employee_id,assignable_type)
+  def update_assignable(assignable_team_id, assignable_employee_id, assignable_type)
     if (self.assignable_type == Task::EMPLOYEE && assignable_type == Task::EMPLOYEE && assignable_employee_id == self.assignable_id) ||
       (self.assignable_type == Task::TEAM && assignable_type == Task::TEAM && assignable_employee_id == self.assignable_id)
       return
-    else 
+    else
       if assignable_type == Task::EMPLOYEE
         self.update(assignable_type: assignable_type, assignable_id: assignable_employee_id, status: Task::ASSIGNED_STATUS) unless assignable_employee_id.empty?
         self.update(assignable_type: nil, assignable_id: nil, status: Task::NEW_STATUS) if assignable_employee_id.empty?
@@ -48,5 +103,4 @@ class Task < ActiveRecord::Base
       end
     end
   end
-
 end

@@ -1,11 +1,15 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :show]
+  before_action :set_task, only: [:edit]
   before_action :set_task_update, only: [:update, :destroy]
 
   def index
     if current_employee.role == Employee::ADMIN_ROLE
       @project = current_employee.company.projects.find(params[:id])
     end
+  end
+
+  def show
+    @task = Task.find(params[:id])
   end
 
   def new
@@ -40,7 +44,6 @@ class TasksController < ApplicationController
     @task.destroy
     redirect_to tasks_page_url(project), notice: "Deleted Successfully"
   end
-
 
 
   private

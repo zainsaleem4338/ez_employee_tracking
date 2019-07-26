@@ -19,11 +19,29 @@ module EzEmployeeTracking
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-
+    config.active_record.observers = :task_observer
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
     config.time_zone = 'Islamabad'
     config.web_console.development_only = false
+
+    config.active_job.queue_adapter = :delayed_job
+    # Setting Email SMTP
+    config.action_mailer.default_options = {
+      from: 'sumbaltariq24@gmail.com'
+    }
+    config.action_mailer.default_url_options = { host: 'localhost:3000' }
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: 'smtp.gmail.com',
+      port: '587',
+      domain: 'localhost',
+      authentication: :plain,
+      enable_starttls_auto: true,
+      user_name: 'sumbaltariq24@gmail.com',
+      password: 'Aadisundi2404'
+    }
   end
 end

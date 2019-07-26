@@ -19,7 +19,7 @@ class Employee < ActiveRecord::Base
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }
   validates :role, presence: true
   accepts_nested_attributes_for :company
-  has_attached_file :avatar, styles: { medium: '300x300>', thumb: '200x200>' }
+  has_attached_file :avatar, styles: { medium: '300x300>', thumb: '120x120>' }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   has_many :tasks, :as => :assignable
   has_many :attendances
