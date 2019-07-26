@@ -17,6 +17,18 @@
       </ul>
 
       <ul class="navbar-nav ml-auto">
+
+        <!-- Attendance Button -->
+        <li class="nav-item">
+          <div class="d-flex align-items-center">
+            <% if present_marked? && !logged_out? %>
+              <%= link_to 'Update Logout', update_attendance_path, class: 'btn btn-sm btn-outline-danger update_attendance', remote: true %>
+            <% elsif !present_marked? %>
+              <%= link_to 'Mark Present', employee_attendance_path, class: 'btn btn-sm btn-regular btn-primary mark_present', remote: true %>
+             <% end %>
+          </div>
+        </li>
+
         <!-- Notifications -->
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

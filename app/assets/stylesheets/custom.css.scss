@@ -152,8 +152,14 @@ span {
 }
 
 .btn-regular {
-  background-color: #a165fc !important;
-  border-color: #a165fc !important;
+  background-color: #9a6dde !important;
+  border-color: #9a6dde !important;
+  color: #fff;
+}
+
+.btn-regular:hover {
+  background-color: #563d7c !important;
+  border-color: #563d7c !important;
   color: #fff;
 }
 
@@ -167,6 +173,8 @@ span {
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
+  overflow-y: scroll;
   height: 100vh;
   z-index: 999;
   background: #563d7c;
@@ -203,7 +211,7 @@ span {
 }
 
 #sidebar.active ul li a {
-  padding: 5px 5px;
+  padding: 10px 10px;
   text-align: center;
   font-size: 0.65rem;
   color: #fff;
@@ -242,7 +250,7 @@ span {
 
 #sidebar .sidebar-header {
   padding: 20px;
-  background: #614094;
+  background: #6f4da3;
 }
 
 #sidebar .sidebar-header i {
@@ -252,6 +260,15 @@ span {
 #sidebar.active .sidebar-header i {
   display: block;
   font-size: 1.5rem;
+}
+
+#sidebar.active ul li a span.sidebar-option {
+  display: none;
+}
+
+#sidebar.active ul li a {
+  margin-left: 15px;
+  padding-right: 10px;
 }
 
 #sidebar ul.components {
@@ -267,7 +284,7 @@ span {
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
   color: #fff;
-  background: #614094;
+  background: #6f4da3;
 }
 
 a[data-toggle="collapse"] {
@@ -284,7 +301,7 @@ a[data-toggle="collapse"] {
 
 #sidebar ul ul a {
   padding-left: 30px !important;
-  background: #614094;
+  background: #6f4da3;
   font-size: 0.85rem;
   color: #fff;
 }
@@ -312,7 +329,7 @@ a[data-toggle="collapse"] {
 }
 
 #content p {
-  color: #614094;
+  color: #6f4da3;
 }
 
 #_navbar {
@@ -372,7 +389,12 @@ a[data-toggle="collapse"] {
 }
 
 .bg-purple {
-  background-color: #614094 !important; 
+  background-color: #6f4da3 !important; 
+}
+
+.mark_present, .update_attendance {
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 
@@ -383,6 +405,7 @@ a[data-toggle="collapse"] {
     text-align: center;
     margin-left: 0px !important;
   }
+
   .dropdown-toggle::after {
     top: auto;
     bottom: 10px;
@@ -393,28 +416,47 @@ a[data-toggle="collapse"] {
   }
   #sidebar.active {
     margin-left: -80 !important;
+    text-align: center;
   }
   #sidebar .sidebar-header h3 {
     display: none;
   }
   #sidebar .sidebar-header strong {
     display: block;
+    font-size: 1.5rem;
   }
+  #sidebar .sidebar-header i {
+    display: block;
+    font-size: 1.5rem;
+  }
+  #sidebar ul li a span.sidebar-option {
+    display: none;
+  }
+
   #sidebar ul li a {
-    padding: 20px 10px;
+    padding: 10px 10px;
+    font-size: 0.65rem;
+    text-align: center;
+    margin-left: 15px;
+    padding-right: 10px;
   }
   #sidebar ul li a span {
-    font-size: 0.85em;
+    font-size: 0.5rem;
+    text-align: center;
+    font-size: 0.65rem;
+    color: #fff;
   }
   #sidebar ul li a i {
     margin-right: 0;
     display: block;
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+    color: inherit;
+    text-align: center;
   }
   #sidebar ul ul a {
-    padding: 10px !important;
-  }
-  #sidebar ul li a i {
-    font-size: 1.3rem;
+    font-size: 0.55rem !important;
+    text-align: center;
   }
   #sidebar {
     margin-left: 0;
@@ -423,7 +465,7 @@ a[data-toggle="collapse"] {
     display: none;
   }
   #content {
-    width: 100%;
+    width: calc(100% - 80px);
   }
   #content.active {
     width: calc(100% - 180px);

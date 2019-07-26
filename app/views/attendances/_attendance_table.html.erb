@@ -1,0 +1,69 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'attendance_table' %>
+<% end %>
+
+<div class="container">
+<table id="attendance_table" class="table table-striped table-bordered" style="width:100%">
+  <thead>
+    <tr>
+      <th>Employee id</th>
+      <th>Name</th>
+      <th>Login Time</th>
+      <th>Logout Time</th>
+      <th>Start date</th>
+      <th>Salary</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attendances_list.each do |attendance| %>
+    <% @current_employee = Employee.find(attendance.employee_id) %>
+
+    <tr>
+      <td>
+        <%= attendance.employee_id %>
+      </td>
+      <td>
+        <%= @current_employee.email %>
+      </td>
+      <td>
+        <%= attendance.login_time.to_formatted_s(:long_ordinal) %>
+      </td>
+      <td>
+        <% if attendance.logout_time.blank? %>
+          nil
+        <% else %>
+          <%= attendance.logout_time.to_formatted_s(:long_ordinal) %>
+        <% end %>
+      </td>
+      <td>
+        2019/06/26
+      </td>
+      <td>
+        $100,000
+      </td>
+    </tr>
+    <% end %>
+
+    <tr>
+      <td>Tiger Nixon</td>
+      <td>System Architect</td>
+      <td>Edinburgh</td>
+      <td>61</td>
+      <td>2011/04/25</td>
+      <td>$320,800</td>
+    </tr>
+  </tbody>
+
+  <tfoot>
+    <tr>
+      <th>Employee id</th>
+      <th>Name</th>
+      <th>Login Time</th>
+      <th>Logout Time</th>
+      <th>Start date</th>
+      <th>Salary</th>
+    </tr>
+  </tfoot>
+</table>
+</div>

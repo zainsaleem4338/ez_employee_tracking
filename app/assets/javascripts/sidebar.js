@@ -6,4 +6,9 @@ $(document).ready(function(){
     });
   });
 
+  $('#sidebar ul li').on('click', function(){
+  	$('#sidebar ul li').removeClass('active');
+  	$(this).addClass('active');
+  });
+
 });

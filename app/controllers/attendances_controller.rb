@@ -31,11 +31,10 @@ class AttendancesController < ApplicationController
   def update
     @company = Company.find(current_employee.company_id)
     @employees_todays_attendance = current_employee.todays_attendance_of_employee(@company)
-    
+
     unless @employees_todays_attendance.blank?
-      @employee_attendance = @company.attendances.find_by(employee_id: @current_employee.id)
-      @employee_attendance.logout_time = DateTime.now
-      @employee_attendance.save!
+      @employees_todays_attendance.logout_time = DateTime.now
+      @result = @employees_todays_attendance.save!
     end
 
     respond_to do |format|

@@ -10,11 +10,11 @@
     <i class="fas fa-user-ninja"></i>
   </div>
 
-  <ul class="list-unstyled components">
-    <li class="active">
-      <a href=<%= show_employee_path %>>
+  <ul class="list-unstyled sidenav-menu components">
+    <li>
+      <a class="d-flex align-items-center" href=<%= show_employee_path %>>
         <i class="fas fa-chart-line"></i>
-        Dashboard
+        <span class="sidebar-option">Dashboard</span>
       </a>
     </li>
 
@@ -22,9 +22,9 @@
     <hr class="sidebar-divider">
 
     <li>
-      <a href="#secondSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+      <a href="#secondSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle d-flex align-items-center">
         <i class="fas fa-user"></i>
-        Employees
+        <span class="sidebar-option">Employees</span>
       </a>
       <ul class="collapse list-unstyled" id=
       "secondSubmenu">
@@ -38,9 +38,9 @@
     </li>
 
     <li>
-      <a href="#deptSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+      <a href="#deptSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle d-flex align-items-center">
         <i class="fas fa-building"></i>
-        Department
+        <span class="sidebar-option">Department</span>
       </a>
       <ul class="collapse list-unstyled" id=
       "deptSubmenu">
@@ -52,17 +52,18 @@
         </li>
       </ul>
     </li>
+
     <li>
-      <a href=<%= teams_path %>>
+      <a class="d-flex align-items-center" href=<%= teams_path %>>
         <i class="fas fa-user-friends"></i>
-        Teams
+        <span class="sidebar-option">Teams</span>
       </a>
     </li>
 
     <li>
-      <a href="#projectsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+      <a href="#projectsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle d-flex align-items-center">
         <i class="fas fa-tasks"></i>
-        Projects
+        <span class="sidebar-option">Projects</span>
       </a>
       <ul class="collapse list-unstyled" id=
       "projectsSubmenu">
@@ -79,27 +80,27 @@
     <hr class="sidebar-divider">
     
     <li>
-      <a href="#">
+      <a class="d-flex align-items-center" href="#">
         <i class="fas fa-calendar"></i>
-        Events
+        <span class="sidebar-option">Events</span>
       </a>
     </li>
     <li>
-      <a href="#">
+      <a class="d-flex align-items-center" href="#">
         <i class="fas fa-comment"></i>
-        Chat
+        <span class="sidebar-option">Chat</span>
       </a>
     </li>
     <li>
-      <a href="#">
+      <a class="d-flex align-items-center" href="#">
         <i class="fas fa-briefcase"></i>
-        About
+        <span class="sidebar-option">About</span>
       </a>
     </li>
     <li>
-      <a href="#">
+      <a class="d-flex align-items-center" href="#">
         <i class="fas fa-phone"></i>
-        Contact
+        <span class="sidebar-option">Contact</span>
       </a>
     </li>
 

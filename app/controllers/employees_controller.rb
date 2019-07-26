@@ -17,6 +17,8 @@ class EmployeesController < ApplicationController
 
   def show
     @employee = Employee.find(current_employee.id)
+    @attendances_list = current_employee.get_attendances_admin
+
   end
 
   def create

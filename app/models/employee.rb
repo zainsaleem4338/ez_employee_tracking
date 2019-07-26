@@ -4,6 +4,7 @@ class Employee < ActiveRecord::Base
   ADMIN_ROLE = 'Admin'.freeze
   EMPLOYEE_ROLE = 'Employee'.freeze
   TEAM_ROLE = 'Team'.freeze
+  STATUS = { 'PRESENT': 1, 'ABSENT': 0 }.freeze
   belongs_to :company, :inverse_of => :employees
   belongs_to :department
   has_many :employee_teams
@@ -25,7 +26,7 @@ class Employee < ActiveRecord::Base
   def todays_attendance_of_employee(company)
     # one employee should not have multiple attendances for one day
     @start_time = DateTime.now.change(hour: 10)
-    @end_time = DateTime.now.change(hour: 18)
+    @end_time = DateTime.now.change(hour: 20)
     company.attendances.find_by(employee_id: id, login_time: (@start_time..@end_time))
   end
 
@@ -40,5 +41,9 @@ class Employee < ActiveRecord::Base
 
   def email_changed?
     false
+  end
+
+  def get_attendances_admin
+      self.company.attendances.where(status: STATUS[:PRESENT]).order(login_time: :desc)
   end
 end

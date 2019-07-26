@@ -29,20 +29,12 @@
 
   <div class="row">
     <div class="col-sm">
-      <p><%= @employee.email%></p>
+      <h3>Welcome <%= @employee.name%></h3>
     </div>
 
     <div class="col-sm">
-      <% if present_marked? && !logged_out? %>
-        <%= link_to 'Update Logout', update_attendance_path, class: 'btn btn-lg btn-regular btn-primary update_attendance', remote: true %>
-      <% elsif !present_marked? %>
-        <%= link_to 'Mark Present', employee_attendance_path, class: 'btn btn-lg btn-regular btn-primary mark_present', remote: true %>
-      <% end %>
-    </div>
-    
-    <div class="col-sm">
       <% if admin? %>
-      <%= link_to 'View Attendance', attendances_path, class: 'btn btn-lg btn-regular btn-primary view_attendance' %>
+        <%= render 'attendances/attendance_table' %>
       <% end %>
     </div>
   </div>
