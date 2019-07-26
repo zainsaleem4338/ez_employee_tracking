@@ -1,7 +1,33 @@
 <div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
   <%= notice %>
 </div>
-<h1>Details of the Project: <b><%= @project.name.capitalize %></b></h1>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Project: <b><%= @project.name.capitalize %></b></h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h4><b>Department: </b><%= @project.department.name %></h4>
+      </div>
+      <div class="col">
+        <h4><b>Status: </b><%= @project.status %></h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h4><b>Start date: </b><%= @project.start_date.to_date %></h4>
+      </div>
+      <div class="col">
+        <h4><b>Expected end date: </b><%= @project.expected_end_date.to_date %></h4>
+      </div>
+
+    </div>
+  </div>
+
 <%= link_to 'Create a Task', new_project_task_path, class: "btn btn-primary" %>
 <%= link_to 'Back', projects_url, class: "btn btn-primary" %>
 <% if !@tasks.empty? %> 

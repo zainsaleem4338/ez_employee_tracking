@@ -24,30 +24,4 @@ class Task < ActiveRecord::Base
     self.assignable_type = nil
   end
 
-  # def set_assignable(assignable_team_id, assignable_employee_id,assignable_type)
-  #   unless assignable_team_id.empty?
-  #     self.assignable_id = assignable_team_id
-  #     self.assignable_type = Task::TEAM
-  #   end
-  #   unless assignable_employee_id.empty?
-  #     self.assignable_id = assignable_employee_id
-  #     self.assignable_type = Task::EMPLOYEE
-  #   end
-  # end
-
-  # def update_assignable(assignable_team_id, assignable_employee_id,assignable_type)
-  #   binding.pry
-  #   if (self.assignable_type == Task::EMPLOYEE && assignable_type == Task::EMPLOYEE && assignable_employee_id == self.assignable_id) ||
-  #     (self.assignable_type == Task::TEAM && assignable_type == Task::TEAM && assignable_employee_id == self.assignable_id)
-  #     return
-  #   else
-  #     if assignable_type == Task::EMPLOYEE
-  #       self.update(assignable_type: assignable_type, assignable_id: assignable_employee_id, status: Task::ASSIGNED_STATUS) unless assignable_employee_id.empty?
-  #       self.update(assignable_type: nil, assignable_id: nil, status: Task::NEW_STATUS) if assignable_employee_id.empty?
-  #     elsif assignable_type == Task::TEAM
-  #       self.update(assignable_type: assignable_type, assignable_id: assignable_team_id, status: Task::TEAM)
-  #     end
-  #   end
-  # end
-
 end
