@@ -1,18 +1,6 @@
 class TasksController < ApplicationController
-  # before_action :set_task, only: [:edit]
-  # before_action :set_task_update, only: [:show, :update, :destroy, :update_status]
   load_and_authorize_resource :project
   load_and_authorize_resource :task, through: :project
-
-
-  def index
-    # binding.pry
-    # binding.pry
-    # # if current_employee.role == Employee::ADMIN_ROLE
-    #   # @project = current_employee.company.projects.find(params[:id])
-    # # end
-  end
-
 
   def create
     @task.set_status
@@ -58,11 +46,4 @@ class TasksController < ApplicationController
       permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id)
   end
 
-  # def set_task
-  #   @task = current_employee.company.projects.find(params[:project_id]).tasks.find(params[:task_id])
-  # end
-
-  # def set_task_update
-  #   @task = Task.find(params[:id])
-  # end
 end
