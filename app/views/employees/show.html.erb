@@ -34,15 +34,15 @@
 
     <div class="col-sm">
       <% if present_marked? && !logged_out? %>
-        <%= link_to 'Update Logout', update_attendance_path, class: 'btn btn-lg btn-primary update_attendance', remote: true %>
+        <%= link_to 'Update Logout', update_attendance_path, class: 'btn btn-lg btn-regular btn-primary update_attendance', remote: true %>
       <% elsif !present_marked? %>
-        <%= link_to 'Mark Present', employee_attendance_path, class: 'btn btn-lg btn-primary mark_present', remote: true %>
+        <%= link_to 'Mark Present', employee_attendance_path, class: 'btn btn-lg btn-regular btn-primary mark_present', remote: true %>
       <% end %>
     </div>
     
     <div class="col-sm">
       <% if admin? %>
-      <%= link_to 'View Attendance', attendances_path, class: 'btn btn-lg btn-primary view_attendance' %>
+      <%= link_to 'View Attendance', attendances_path, class: 'btn btn-lg btn-regular btn-primary view_attendance' %>
       <% end %>
     </div>
   </div>

@@ -4,13 +4,14 @@
 
 <nav id="sidebar">
 
-	<div class="sidebar-header">
-		<h3>EZ Employee</h3>
-		<STRONG>EZ ET</STRONG>
-	</div>
+  <div class="sidebar-header">
+    <h3>EZ Employee</h3>
+    <STRONG>ET</STRONG>
+    <i class="fas fa-user-ninja"></i>
+  </div>
 
-	<ul class="list-unstyled components">
-    <li>
+  <ul class="list-unstyled components">
+    <li class="active">
       <a href=<%= show_employee_path %>>
         <i class="fas fa-chart-line"></i>
         Dashboard
@@ -20,21 +21,37 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-		<li class="active">
-			<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-				<i class="fas fa-building"></i>
-				Department
-			</a>
-			<ul class="collapse list-unstyled" id=
-			"homeSubmenu">
-				<li>
-					<a href=<%= new_department_path %>>Add Department</a>
-				</li>
-				<li>
-					<a href=<%= departments_path %>>View Departments</a>
-				</li>
-			</ul>
-		</li>
+    <li>
+      <a href="#secondSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fas fa-user"></i>
+        Employees
+      </a>
+      <ul class="collapse list-unstyled" id=
+      "secondSubmenu">
+        <li>
+          <a href=<%= new_employee_path %>>Add Employee</a>
+        </li>
+        <li>
+          <a href=<%= employees_path %>>View Employees</a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="#deptSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fas fa-building"></i>
+        Department
+      </a>
+      <ul class="collapse list-unstyled" id=
+      "deptSubmenu">
+        <li>
+          <a href=<%= new_department_path %>>Add Department</a>
+        </li>
+        <li>
+          <a href=<%= departments_path %>>View Departments</a>
+        </li>
+      </ul>
+    </li>
     <li>
       <a href=<%= teams_path %>>
         <i class="fas fa-user-friends"></i>
@@ -42,31 +59,31 @@
       </a>
     </li>
 
-		<li>
-			<a href="#secondSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-				<i class="fas fa-user"></i>
-				Employees
-			</a>
-			<ul class="collapse list-unstyled" id=
-			"secondSubmenu">
-				<li>
-					<a href=<%= new_employee_path %>>Add Employee</a>
-				</li>
-				<li>
-					<a href=<%= employees_path %>>View Employees</a>
-				</li>
-			</ul>
-		</li>
+    <li>
+      <a href="#projectsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fas fa-tasks"></i>
+        Projects
+      </a>
+      <ul class="collapse list-unstyled" id=
+      "projectsSubmenu">
+        <li>
+          <a href=<%= new_project_path %>>Add Project</a>
+        </li>
+        <li>
+          <a href=<%= projects_path %>>View Projects</a>
+        </li>
+      </ul>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
     
-		<li>
-			<a href="#">
-				<i class="fas fa-calendar"></i>
-				Events
-			</a>
-		</li>
+    <li>
+      <a href="#">
+        <i class="fas fa-calendar"></i>
+        Events
+      </a>
+    </li>
     <li>
       <a href="#">
         <i class="fas fa-comment"></i>
@@ -79,13 +96,13 @@
         About
       </a>
     </li>
-		<li>
-			<a href="#">
-				<i class="fas fa-phone"></i>
-				Contact
-			</a>
-		</li>
+    <li>
+      <a href="#">
+        <i class="fas fa-phone"></i>
+        Contact
+      </a>
+    </li>
 
-	</ul>
+  </ul>
 
 </nav>
