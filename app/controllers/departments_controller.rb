@@ -1,4 +1,6 @@
 class DepartmentsController < ApplicationController
+  load_and_authorize_resource through_association: :company
+
   before_action :set_department, only: [:show, :edit, :update, :destroy]
   def index
     @departments = current_employee.company.departments.all

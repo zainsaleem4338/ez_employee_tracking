@@ -1,75 +1,68 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit]
-  before_action :set_task_update, only: [:show, :update, :destroy, :update_status]
+  # before_action :set_task, only: [:edit]
+  # before_action :set_task_update, only: [:show, :update, :destroy, :update_status]
+  load_and_authorize_resource :project
+  load_and_authorize_resource :task, through: :project
+
 
   def index
-    if current_employee.role == Employee::ADMIN_ROLE
-      @project = current_employee.company.projects.find(params[:id])
-    end
+    # binding.pry
+    # binding.pry
+    # # if current_employee.role == Employee::ADMIN_ROLE
+    #   # @project = current_employee.company.projects.find(params[:id])
+    # # end
   end
 
-  def show
-  end
-
-
-  def new
-    @task = current_employee.company.projects.find(params[:id]).tasks.new
-  end
 
   def create
-    @task = Task.new(tasks_create_params)
-    @task.set_assignable(params[:assignable_team_id], params[:assignable_employee_id], params[:task][:assignable_type])
     @task.set_status
     if @task.save
-      redirect_to tasks_page_url(@task.project), notice: "Returing from the create"
+      redirect_to project_tasks_url(@task.project), notice: "Returing from the create"
     else
-      render new_tasks_path(@task.project), notice: "Cannnot enter data due to constraints"
+      render new_project_task_path(@task.project), notice: "Cannnot enter data due to constraints"
     end
-  end
-
-  def edit
   end
 
   def update
-    if @task.update(tasks_create_params)
-      @task.update_assignable(params[:assignable_team_id], params[:assignable_employee_id], params[:task][:assignable_type])
-      redirect_to tasks_page_url(@task.project), notice: "Updated Successfully"
+    if !params[:assignable_employee_id].empty? && !params[:assignable_team_id].empty?
+      render :edit, notice: "Make sure you delete employee field or team field"
     else
-      redirect_to tasks_page_url(@task.project), notice: "Cannot be updated"
+      params[:task][:status] = "new" if params[:task][:assignable_id].empty?
+      params[:task][:status] = "assigned" if !params[:task][:assignable_id].empty?
+      if @task.update(task_params)
+        redirect_to project_tasks_path, notice: "Updated Successfully"
+      else
+        redirect_to project_tasks_path, notice: "Cannot be updated"
+      end
     end
   end
 
   def destroy
-    project = @task.project
     @task.destroy
-    redirect_to tasks_page_url(project), notice: "Deleted Successfully"
+    redirect_to project_tasks_path, notice: "Deleted Successfully"
   end
 
   def update_status
-    if @task.update(tasks_create_params)
-      redirect_to tasks_page_url(@task.project), notice: "Updated Successfully"
+    if @task.update(task_params)
+      redirect_to project_tasks_path, notice: "Updated Successfully"
     else
-      redirect_to tasks_page_url(@task.project), notice: "Cannot be updated!"
+      redirect_to project_tasks_path, notice: "Cannot be updated!"
 
     end
   end
 
-
   private
 
-  def tasks_create_params
+  def task_params
     params.require(:task).
-    permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status)
+      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id)
   end
 
-  def set_task
-    @task = current_employee.company.projects.find(params[:project_id]).tasks.find(params[:task_id])
-  end
+  # def set_task
+  #   @task = current_employee.company.projects.find(params[:project_id]).tasks.find(params[:task_id])
+  # end
 
-  def set_task_update
-    @task = Task.find(params[:id])
-  end
-
-
-
+  # def set_task_update
+  #   @task = Task.find(params[:id])
+  # end
 end

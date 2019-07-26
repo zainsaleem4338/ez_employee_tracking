@@ -3,13 +3,13 @@ class EmployeesController < ApplicationController
 
   def employees_lists
     respond_to do |format|
-      format.json { render json: @employees.order(:name).where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:term]}%") }
+      format.json { render json: @employees.order(:name).where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:q]}%") }
     end
   end
 
-  def show
-    @employee = Employee.find(current_employee.id)
-  end
+  # def show
+  #   @employee = Employee.find(current_employee.id)
+  # end
 
   def create
     if @employee.save
@@ -21,7 +21,8 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    @employee = current_employee.company.employees.find_by(sequence_num: params[:id])
+    @employee = current_employee.company.employees
+                                .find_by(sequence_num: params[:id])
     @employee.active = false
     flash[:danger] = 'Employee is now inactive!'
     if @employee.save
@@ -34,6 +35,7 @@ class EmployeesController < ApplicationController
   private
 
   def employee_params
-    params.require(:employee).permit(:name, :email, :password, :role, :company_id, :department_id)
+    params.require(:employee)
+          .permit(:name, :email, :password, :role, :company_id, :department_id)
   end
 end

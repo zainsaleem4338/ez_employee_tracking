@@ -19,12 +19,26 @@ hash_new_team =  {
 
 jQuery ->
     $(document).ready ->
-      $('.js-assign-team').tokenInput('/teamslist.json', hash_new_team);
-      $('.js-assign-employee').tokenInput('/employee_lists.json', hash_new);
+    if $("#assignable_employee_id").val() == ""
+      $('#assignable_employee_id').tokenInput('/employee_lists.json', hash_new);
+    if $("#assignable_team_id").val() == ""
+      $('#assignable_team_id').tokenInput('/teamslist.json', hash_new_team);
 
-    
     $('.js-toggle-team-employee-input-token').change ->
       $('.js-toggleable-input-token').slideToggle();
-      $('.js-assignable_type').val($(this).data('type'));
-   
-      
+
+    $('.edit_task').submit -> 
+      if $("#assignable_employee_id").val() != ""
+        $('.js-assignable-id').val($("#assignable_employee_id").val());
+        $('.js-assignable-type').val("Employee");
+      else if $("#assignable_team_id").val() != ""
+        $('.js-assignable-id').val($("#assignable_team_id").val());
+        $('.js-assignable-type').val("Team");
+
+    $('.new_task').submit -> 
+      if $("#assignable_employee_id").val() != ""
+        $('.js-assignable-id').val($("#assignable_employee_id").val());
+        $('.js-assignable-type').val("Employee");
+      else if $("#assignable_team_id").val() != ""
+        $('.js-assignable-id').val($("#assignable_team_id").val());
+        $('.js-assignable-type').val("Team");

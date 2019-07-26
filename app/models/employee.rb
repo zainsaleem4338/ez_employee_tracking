@@ -5,7 +5,6 @@ class Employee < ActiveRecord::Base
   EMPLOYEE_ROLE = 'Employee'.freeze
   TEAM_ROLE = 'Team'.freeze
   TEAM_LEAD_ROLE = 'Team Lead'.freeze
-
   belongs_to :company, :inverse_of => :employees
   belongs_to :department
   has_many :employee_teams
@@ -23,7 +22,8 @@ class Employee < ActiveRecord::Base
   accepts_nested_attributes_for :company
   has_many :tasks, :as => :assignable
   has_many :attendances
-  scope :team_employees, ->(user){Employee.joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).where.not(employee_teams: {employee_id: user.id}).distinct}
+  scope :team_employees, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).where.not(employee_teams: {employee_id: user.id}).distinct}
+  scope :team_employees_projects_tasks, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).distinct}
 
   def todays_attendance_of_employee(company)
     # one employee should not have multiple attendances for one day
