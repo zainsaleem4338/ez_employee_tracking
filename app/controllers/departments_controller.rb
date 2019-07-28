@@ -40,12 +40,13 @@ class DepartmentsController < ApplicationController
   end
 
   def destroy
+    @department.destroy
     respond_to do |format|
       if @department.destroyed?
-        format.html { redirect_to @department, notice: 'Department was successfully destroyed.' }
+        format.html { redirect_to departments_path, notice: 'Department was successfully destroyed.' }
         format.json { head :no_content }
       else
-        format.html { render :index, notice: 'Department did not destroyed' }
+        format.html { redirect_to departments_path, notice: 'Unable to delete team' }
       end
     end
   end
