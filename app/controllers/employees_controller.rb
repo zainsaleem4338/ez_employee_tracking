@@ -5,7 +5,6 @@ class EmployeesController < ApplicationController
   end
 
   def employees_list
-    
     if params['department'].nil?
       @employees = current_employee.company.employees.active_members.order(:name)
     else

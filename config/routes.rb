@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   root 'menus#index'
   resources :departments do
     resources :teams
