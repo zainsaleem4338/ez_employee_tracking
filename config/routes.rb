@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
-  
   root 'menus#index'
 
   resources :teams
   resources :departments
-  resources :projects
-  resources :tasks
   resources :attendances
 
+  resources :projects do
+    resources :tasks do
+      member do
+        get 'edit_status'
+        patch 'update_status'
+      end
+    end
+  end
 
   devise_for :employees
 
@@ -24,11 +29,6 @@ Rails.application.routes.draw do
   get 'employee_lists' => 'employees#employees_lists'
 
   get 'teamslist' => 'teams#teams_list'
-
-  get 'project/:id/new_task' => 'tasks#new', as: :new_task_page
-  get 'projects/:id/tasks' => 'tasks#index', as: :tasks_page
-  get 'projects/:id/tasks/:id' => "tasks#edit", as: :edit_a_task_page
-  patch 'projects/:id/tasks/:id' => "tasks#update", as: :update_a_task_page
 
   get 'employees/:id/projects' => 'projects#index', as: :projects_page
 

@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 
 gem 'autoprefixer-rails', '~> 9.6', '>= 9.6.1'
-gem 'bootstrap', '~> 4.0'
-gem 'capybara', '~> 2.5'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise', '3.4.1'
 gem 'devise-bootstrap-views', '~> 1.0'
@@ -25,16 +23,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'select2-rails'
 gem 'sequenceid'
 gem 'uglifier', '>= 1.3.0'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 
 group :development do
   gem 'better_errors'
