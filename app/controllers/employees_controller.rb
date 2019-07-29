@@ -12,7 +12,6 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    @employee = current_employee
     @attendances_list = current_employee.get_attendances_admin
   end
 

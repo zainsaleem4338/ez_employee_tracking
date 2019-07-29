@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get 'employee_lists' => 'employees#employees_lists'
   get '/employees/index' => 'employees#index', :as => :employees
   get '/employees/new' => 'employees#new', :as => :new_employee
-  get '/employees/show' => 'employees#show', :as => :show_employee
+  get '/employees/:id/show' => 'employees#show', :as => :show_employee
   post '/employees/create' => 'employees#create', :as => :create_employee
   delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
 

@@ -14,7 +14,6 @@ class AttendancesController < ApplicationController
 
   def create
     @employees_todays_attendance = current_employee.todays_attendance_of_employee
-    binding.pry
     if @employees_todays_attendance.blank?
       @employee_attendance = current_employee.company.attendances.create(login_time: DateTime.now, status: STATUS[:PRESENT], employee_id: current_employee.id)
       return false unless @employee_attendance.valid?

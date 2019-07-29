@@ -45,7 +45,7 @@ module ApplicationHelper
     @data = []
     @dashboard = {
       name: 'Dashboard',
-      link: show_employee_path,
+      link: show_employee_path(current_employee),
       icon: 'fas fa-chart-line'
     }
     @data.push(@dashboard)
