@@ -2,14 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-hash_new =  {
+employee_options =  {
         preventDuplicates: true,
         hintText: 'Add Employees',
         tokenLimit: 1,
         tokenValue: 'id',
         searchingText: 'searching employees...'}
 
-hash_new_team =  {
+team_options =  {
         preventDuplicates: true,
         hintText: 'Add Team',
         tokenLimit: 1,
@@ -20,9 +20,9 @@ hash_new_team =  {
 jQuery ->
     $(document).ready ->
     if $("#assignable_employee_id").val() == ""
-      $('#assignable_employee_id').tokenInput('/employee_lists.json', hash_new);
+      $('#assignable_employee_id').tokenInput('/employee_lists.json', employee_options);
     if $("#assignable_team_id").val() == ""
-      $('#assignable_team_id').tokenInput('/teamslist.json', hash_new_team);
+      $('#assignable_team_id').tokenInput('/teamslist.json', team_options);
 
     $('.js-toggle-team-employee-input-token').change ->
       $('.js-toggleable-input-token').slideToggle();

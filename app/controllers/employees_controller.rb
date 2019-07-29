@@ -3,13 +3,9 @@ class EmployeesController < ApplicationController
 
   def employees_lists
     respond_to do |format|
-      format.json { render json: @employees.order(:name).where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:q]}%") }
+      format.json { render json: @employees.where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:q]}%") }
     end
   end
-
-  # def show
-  #   @employee = Employee.find(current_employee.id)
-  # end
 
   def create
     if @employee.save
