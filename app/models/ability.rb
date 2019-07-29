@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user)
     if user.role == Employee::ADMIN_ROLE
-      can :manage, Department
+      can :manage, Department, company_id: user.company_id
       can [:read, :employees_lists], Employee, active: true
       can [:new, :create], Employee, company_id: user.company_id
       can :destroy, Employee

@@ -27,7 +27,11 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to project_tasks_path, notice: "Deleted Successfully"
+    if @task.destroyed?
+      redirect_to project_tasks_path, notice: "Deleted Successfully"
+    else
+      redirect_to project_tasks_path, notice: "Cannot be deleted successfully"
+    end
   end
 
   def update_status

@@ -1,5 +1,5 @@
 class DepartmentsController < ApplicationController
-  load_and_authorize_resource through_association: :company
+  load_and_authorize_resource
 
   def create
     respond_to do |format|
