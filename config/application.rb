@@ -24,7 +24,7 @@ module EzEmployeeTracking
     config.active_record.raise_in_transactional_callbacks = true
 
     config.time_zone = 'Islamabad'
-    config.web_console.development_only = false
+    config.web_console.development_only = true
 
     config.active_job.queue_adapter = :delayed_job
     # Setting Email SMTP
@@ -41,7 +41,7 @@ module EzEmployeeTracking
       authentication: :plain,
       enable_starttls_auto: true,
       user_name: 'sumbaltariq24@gmail.com',
-      password: 'Aadisundi2404'
+      password: 'SumbalTariq24041996'
     }
   end
 end

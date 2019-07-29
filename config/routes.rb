@@ -1,16 +1,15 @@
 Rails.application.routes.draw do
   
   root 'menus#index'
-
-  resources :teams
-  resources :departments
+  resources :departments do
+    resources :teams
+  end
   resources :projects
   resources :tasks
   resources :attendances
 
-
   devise_for :employees
-  get 'employee_lists' => 'employees#employees_lists'
+  get 'employee_lists' => 'employees#employees_list'
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
   get '/employees/team_member_render_view' => 'employees#team_member_render_view'
@@ -19,8 +18,6 @@ Rails.application.routes.draw do
   get '/employees/show' => 'employees#show', :as => :show_employee
   post '/employees/create' => 'employees#create', :as => :create_employee
   delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
-
-  get 'employee_lists' => 'employees#employees_lists'
 
   get 'teamslist' => 'teams#teams_list'
 

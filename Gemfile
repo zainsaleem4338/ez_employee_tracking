@@ -33,7 +33,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development do
+group :development, :test do
   gem 'better_errors'
   gem 'capybara', '~> 2.5'
   gem 'database_cleaner'
@@ -49,12 +49,6 @@ group :development do
 end
 
 group :test do
-  gem 'better_errors'
-  gem 'pry', '=0.10.1'
-  gem 'pry-rails', '=0.3.3'
-  gem 'rspec-rails', '~> 3.8'
-  gem 'database_cleaner'
   gem 'faker', '~> 1.6.1'
-  gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
 end

@@ -10,7 +10,8 @@ class Team < ActiveRecord::Base
   has_attached_file :team_pic, styles: { medium: '300x300>', thumb: '100x100>' }
   validates_attachment_content_type :team_pic, content_type: /\Aimage\/.*\z/
   has_many :tasks, as: :assignable
-  def create_team(team_lead_id, employee_ids)
+  def create_team(team_lead_id, employee_ids, department_id)
+    binding.pry
     if employee_ids.nil?
       self.errors.add(:base, 'Team members name required')
       return false
@@ -23,6 +24,7 @@ class Team < ActiveRecord::Base
       end
     end
     begin
+      self.department_id = department_id
       self.transaction do
         self.save!
         self.employee_teams.create!(employee_id: team_lead_id, employee_type: EMPLOYEE_TYPE[:team_leader])

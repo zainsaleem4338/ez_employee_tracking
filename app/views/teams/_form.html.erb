@@ -1,4 +1,4 @@
-<%= form_for(@team, html: { multipart: true }) do |form| %>
+<%= form_for [@department, @team], html: { multipart: true } do |form| %>
   <% if @team.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
@@ -11,13 +11,10 @@
     </div>
   <% end %>
 
+  <input type="hidden" id="department" value='<%= @department.id %>'>
   <div class="form-group">
     <%= form.label :name %><br>
     <%= form.text_field :name, required: true, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= form.label :department_id, "Department" %><br>
-    <%= form.collection_select :department_id, current_employee.company.departments.order(:name),:id,:name, include_blank: true, class: "form-control" %>
   </div>
   
   <div class="form-group">

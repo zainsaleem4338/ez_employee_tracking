@@ -22,9 +22,10 @@
         <td><%= team.employee_lists('Team Leader').pluck(:name)[0] %></td>
         <td><%= team.employee_lists('Team Member').count %></td>
         <td><%= image_tag team.team_pic.url(:thumb), class: "rounded-circle" %></td>
-        <td><%= link_to 'Show', team, class: "btn btn-secondary" %>
-          <%= link_to 'Edit', edit_team_path(team), class: "btn btn-info" %>
-          <%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        <td>
+          <%= link_to 'Show', department_team_path(team.department,team), class: "btn btn-secondary" %>
+          <%= link_to 'Edit', edit_department_team_path(team.department,team), class: "btn btn-info" %>
+          <%= link_to 'Destroy', department_team_path(team.department,team), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
         </td>
       </tr>
     <% end %>
@@ -33,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Team', new_team_path, class: "btn btn-primary" %>
+<%= link_to 'New Team', new_department_team_path, class: "btn btn-primary" %>

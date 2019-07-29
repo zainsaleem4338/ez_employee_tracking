@@ -10,5 +10,5 @@
   <%= @team.description %>
 </p>
 
-<%= link_to 'Edit', edit_team_path(@team), class: "btn btn-info" %>
-<%= link_to 'Back', teams_path, class: "btn btn-dark" %>
+<%= link_to 'Edit', edit_department_team_path(@department,@team), class: "btn btn-info" %>
+<%= link_to 'Back', department_teams_path(@department), class: "btn btn-dark" %>
