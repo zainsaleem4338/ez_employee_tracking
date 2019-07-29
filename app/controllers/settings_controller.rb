@@ -1,6 +1,11 @@
 class SettingsController < ApplicationController
   def index
     @settings = Setting.find_by(company_id: current_company.id)
+    if(@settings.working_days.class == String)
+      @settings.working_days = eval(@settings.working_days)
+      @settings.timings = eval(@settings.timings)
+    end
+    @settings
   end
 
   def new
@@ -17,9 +22,23 @@ class SettingsController < ApplicationController
         on_days[day] = true
       end
     end
+    daily_timings = [:monday_start_time, :monday_end_time, :tuesday_start_time,
+                :tuesday_end_time, :wednesday_start_time, :wednesday_end_time,
+                :thursday_start_time, :thursday_end_time, :friday_start_time,
+                :friday_end_time, :saturday_start_time, :saturday_end_time,
+                :sunday_start_time, :sunday_end_time]
+    timings = {}
+    daily_timings.each do |timing|
+      if params[timing].blank?
+        timings[timing] = '00:00 AM'
+      else
+        timings[timing] = params[timing]
+      end
+    end
     @setting = Setting.new
     @setting.company_id = current_company.id
     @setting.working_days = on_days
+    @setting.timings = timings
     if @setting.save
       redirect_to index_settings_path
     else
@@ -29,6 +48,11 @@ class SettingsController < ApplicationController
 
   def edit
     @settings = Setting.find_by(company_id: current_company.id)
+    if(@settings.working_days.class == String)
+      @settings.working_days = eval(@settings.working_days)
+      @settings.timings = eval(@settings.timings)
+    end
+    @settings
   end
 
   def update
@@ -41,8 +65,22 @@ class SettingsController < ApplicationController
         on_days[day] = true
       end
     end
+    daily_timings = [:monday_start_time, :monday_end_time, :tuesday_start_time,
+                :tuesday_end_time, :wednesday_start_time, :wednesday_end_time,
+                :thursday_start_time, :thursday_end_time, :friday_start_time,
+                :friday_end_time, :saturday_start_time, :saturday_end_time,
+                :sunday_start_time, :sunday_end_time]
+    timings = {}
+    daily_timings.each do |timing|
+      if params[timing].blank?
+        timings[timing] = '00:00 AM'
+      else
+        timings[timing] = params[timing]
+      end
+    end
     @setting = Setting.find_by(company_id: current_company.id)
     @setting.working_days = on_days
+    @setting.timings = timings
     if @setting.save
       redirect_to index_settings_path
     else

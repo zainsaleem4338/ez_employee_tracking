@@ -4,6 +4,8 @@
       <tr>
         <th>Days</th>
         <th>Status</th>
+        <th>Start Time</th>
+        <th>End Time</th>
       </tr>
     </thead>
     <tbody>
@@ -14,6 +16,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>   
+        <td><%= @settings.timings[:monday_start_time] %></td>
+        <td><%= @settings.timings[:monday_end_time] %></td>
       </tr>
       <tr>
         <th>Tuesday</th>
@@ -22,6 +26,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>   
+        <td><%= @settings.timings[:tuesday_start_time] %></td>
+        <td><%= @settings.timings[:tuesday_end_time] %></td>
       </tr>
       <tr>
         <th>Wednesday</th>
@@ -30,6 +36,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>   
+        <td><%= @settings.timings[:wednesday_start_time] %></td>
+        <td><%= @settings.timings[:wednesday_end_time] %></td>
       </tr>
       <tr>
         <th>Thursday</th>
@@ -38,6 +46,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>   
+        <td><%= @settings.timings[:thursday_start_time] %></td>
+        <td><%= @settings.timings[:thursday_end_time] %></td>
       </tr>
       <tr>
         <th>Friday</th>
@@ -45,7 +55,9 @@
           <td><span class="badge badge-success">On</span></td>
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
-        <% end %>   
+        <% end %>  
+        <td><%= @settings.timings[:friday_start_time] %></td>
+        <td><%= @settings.timings[:friday_end_time] %></td> 
       </tr>
       <tr>
         <th>Saturday</th>
@@ -54,6 +66,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>   
+        <td><%= @settings.timings[:saturday_start_time] %></td>
+        <td><%= @settings.timings[:saturday_end_time] %></td>
       </tr>
       <tr>
         <th>Sunday</th>
@@ -61,7 +75,9 @@
           <td><span class="badge badge-success">On</span></td>
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
-        <% end %>   
+        <% end %>  
+        <td><%= @settings.timings[:sunday_start_time] %></td>
+        <td><%= @settings.timings[:sunday_end_time] %></td> 
       </tr>
     </tbody>
   </table>

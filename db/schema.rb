@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190726110532) do
+ActiveRecord::Schema.define(version: 20190729141412) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20190726110532) do
   create_table "settings", force: :cascade do |t|
     t.text    "working_days", limit: 65535
     t.integer "company_id",   limit: 4
+    t.text    "timings",      limit: 65535
   end
 
   create_table "teams", force: :cascade do |t|

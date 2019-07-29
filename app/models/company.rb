@@ -12,4 +12,5 @@ class Company < ActiveRecord::Base
   has_many :attendances
   has_one :setting
   has_many :events
+  accepts_nested_attributes_for :setting
 end

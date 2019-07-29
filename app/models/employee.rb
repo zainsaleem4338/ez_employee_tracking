@@ -31,6 +31,7 @@ class Employee < ActiveRecord::Base
 
   def with_company
     build_company if company.nil?
+    company.build_setting if company.setting.nil?
     self
   end
 

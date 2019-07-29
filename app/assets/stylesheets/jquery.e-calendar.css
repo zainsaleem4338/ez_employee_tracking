@@ -165,7 +165,7 @@
 .c-event-over {
     background-color: #3A3343;
     font-weight: bold;
-    color: black;
+    color: white;
 }
 
 .c-event-over > .description {
