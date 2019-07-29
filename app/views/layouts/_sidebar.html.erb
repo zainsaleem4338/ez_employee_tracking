@@ -2,6 +2,8 @@
   <%= javascript_include_tag 'sidebar' %>
 <% end %>
 
+<% @sidebar_data = generate_sidebar_options %>
+
 <nav id="sidebar">
 
   <div class="sidebar-header">
@@ -11,98 +13,51 @@
   </div>
 
   <ul class="list-unstyled sidenav-menu components">
-    <li>
-      <a class="d-flex align-items-center" href=<%= show_employee_path %>>
-        <i class="fas fa-chart-line"></i>
-        <span class="sidebar-option">Dashboard</span>
-      </a>
-    </li>
+
+    <% @sidebar_data.each do |sidebar_option| %>
+
+      <% if sidebar_option.key?(:suboptions) %>
+        <li>
+          <a data-toggle="collapse" aria-expanded="false" class="dropdown-toggle d-flex align-items-center" href=<%= "#"+sidebar_option[:submenu_id] %>>
+            <i class="<%=sidebar_option[:icon]%>"></i>
+            <span class="sidebar-option"><%= sidebar_option[:name] %></span>
+          </a>
+          <!-- sub - options -->
+          <ul class="collapse list-unstyled" id=<%= sidebar_option[:submenu_id] %>>
+            <% sidebar_option[:suboptions].each do |sub_option|%>
+              <li>
+                <a href=<%= sub_option[:link] %>>
+                  <i class="<%=sub_option[:icon]%>"></i>
+                  <%= sub_option[:name] %>
+                </a>
+              </li>
+            <%end%>
+          </ul>
+        </lti>
+      <% else %>
+        <li>
+          <a class="d-flex align-items-center" href=<%= sidebar_option[:link] %>>
+            <i class="<%= sidebar_option[:icon] %>"></i>
+            <span class="sidebar-option"><%= sidebar_option[:name] %></span>
+          </a>
+        </li>
+      <% end %>
+
+    <% end %>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <li>
-      <a href="#secondSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle d-flex align-items-center">
-        <i class="fas fa-user"></i>
-        <span class="sidebar-option">Employees</span>
-      </a>
-      <ul class="collapse list-unstyled" id=
-      "secondSubmenu">
-        <li>
-          <a href=<%= new_employee_path %>>Add Employee</a>
-        </li>
-        <li>
-          <a href=<%= employees_path %>>View Employees</a>
-        </li>
-      </ul>
-    </li>
+    <% @sidebar_footer_data = generate_sidebar_foot_options %>
 
-    <li>
-      <a href="#deptSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle d-flex align-items-center">
-        <i class="fas fa-building"></i>
-        <span class="sidebar-option">Department</span>
-      </a>
-      <ul class="collapse list-unstyled" id=
-      "deptSubmenu">
-        <li>
-          <a href=<%= new_department_path %>>Add Department</a>
-        </li>
-        <li>
-          <a href=<%= departments_path %>>View Departments</a>
-        </li>
-      </ul>
-    </li>
-
-    <li>
-      <a class="d-flex align-items-center" href=<%= teams_path %>>
-        <i class="fas fa-user-friends"></i>
-        <span class="sidebar-option">Teams</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="#projectsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle d-flex align-items-center">
-        <i class="fas fa-tasks"></i>
-        <span class="sidebar-option">Projects</span>
-      </a>
-      <ul class="collapse list-unstyled" id=
-      "projectsSubmenu">
-        <li>
-          <a href=<%= new_project_path %>>Add Project</a>
-        </li>
-        <li>
-          <a href=<%= projects_path %>>View Projects</a>
-        </li>
-      </ul>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-    
-    <li>
-      <a class="d-flex align-items-center" href="#">
-        <i class="fas fa-calendar"></i>
-        <span class="sidebar-option">Events</span>
-      </a>
-    </li>
-    <li>
-      <a class="d-flex align-items-center" href="#">
-        <i class="fas fa-comment"></i>
-        <span class="sidebar-option">Chat</span>
-      </a>
-    </li>
-    <li>
-      <a class="d-flex align-items-center" href="#">
-        <i class="fas fa-briefcase"></i>
-        <span class="sidebar-option">About</span>
-      </a>
-    </li>
-    <li>
-      <a class="d-flex align-items-center" href="#">
-        <i class="fas fa-phone"></i>
-        <span class="sidebar-option">Contact</span>
-      </a>
-    </li>
+    <% @sidebar_footer_data.each do |sidebar_footer_option| %>
+      <li>
+        <a class="d-flex align-items-center" href=<%= sidebar_footer_option[:link] %>>
+          <i class="<%= sidebar_footer_option[:icon] %>"></i>
+          <span class="sidebar-option"><%= sidebar_footer_option[:name] %></span>
+        </a>
+      </li>
+    <% end %>
 
   </ul>
 
