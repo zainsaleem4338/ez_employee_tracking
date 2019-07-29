@@ -1,86 +1,92 @@
 <center><h3>Company Settings</h3></center><br>
-<h4>Adjust Working Days</h4><br>
+<% if @setting.blank? %>
 
-<%= form_tag( create_settings_path, method: "post") do %>
-  <div class='form-group row'>
-    <div class='col-sm-2'>
-      <label class='control-label'>Monday</label>
-    </div>
+  <h4>Adjust Working Days</h4><br>
+
+  <%= form_tag( create_settings_path, method: "post") do %>
+    <div class='form-group row'>
       <div class='col-sm-2'>
-        <label class="switch">
-          <%= check_box_tag :monday %>
-          <span class="slider round"></span>
-        </label>
+        <label class='control-label'>Monday</label>
       </div>
-    </div>
-    <div class='form-group row'>
-    <div class='col-sm-2'>
-      <label class='control-label'>Tuesday</label>
-    </div>
-      <div class='col-sm-8'>
-        <label class="switch">
-          <%= check_box_tag :tuesday %>
-          <span class="slider round"></span>
-        </label>
+        <div class='col-sm-2'>
+          <label class="switch">
+            <%= check_box_tag :monday %>
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
-    </div>
-    <div class='form-group row'>
-    <div class='col-sm-2'>
-      <label class='control-label'>Wednesday</label>
-    </div>
-      <div class='col-sm-8'>
-        <label class="switch">
-          <%= check_box_tag :wednesday %>
-          <span class="slider round"></span>
-        </label>
+      <div class='form-group row'>
+      <div class='col-sm-2'>
+        <label class='control-label'>Tuesday</label>
       </div>
-    </div>
-    <div class='form-group row'>
-    <div class='col-sm-2'>
-      <label class='control-label'>Thursday</label>
-    </div>
-      <div class='col-sm-8'>
-        <label class="switch">
-          <%= check_box_tag :thursday %>
-          <span class="slider round"></span>
-        </label>
+        <div class='col-sm-8'>
+          <label class="switch">
+            <%= check_box_tag :tuesday %>
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
-    </div>
-    <div class='form-group row'>
-    <div class='col-sm-2'>
-      <label class='control-label'>Friday</label>
-    </div>
-      <div class='col-sm-8'>
-        <label class="switch">
-          <%= check_box_tag :friday %>
-          <span class="slider round"></span>
-        </label>
+      <div class='form-group row'>
+      <div class='col-sm-2'>
+        <label class='control-label'>Wednesday</label>
       </div>
-    </div>
-    <div class='form-group row'>
-    <div class='col-sm-2'>
-      <label class='control-label'>Saturday</label>
-    </div>
-      <div class='col-sm-8'>
-        <label class="switch">
-          <%= check_box_tag :saturday %>
-          <span class="slider round"></span>
-        </label>
+        <div class='col-sm-8'>
+          <label class="switch">
+            <%= check_box_tag :wednesday %>
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
-    </div>
-    <div class='form-group row'>
-    <div class='col-sm-2'>
-      <label class='control-label'>Sunday</label>
-    </div>
-      <div class='col-sm-8'>
-        <label class="switch">
-          <%= check_box_tag :sunday %>
-          <span class="slider round"></span>
-        </label>
+      <div class='form-group row'>
+      <div class='col-sm-2'>
+        <label class='control-label'>Thursday</label>
       </div>
-    </div>
+        <div class='col-sm-8'>
+          <label class="switch">
+            <%= check_box_tag :thursday %>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class='form-group row'>
+      <div class='col-sm-2'>
+        <label class='control-label'>Friday</label>
+      </div>
+        <div class='col-sm-8'>
+          <label class="switch">
+            <%= check_box_tag :friday %>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class='form-group row'>
+      <div class='col-sm-2'>
+        <label class='control-label'>Saturday</label>
+      </div>
+        <div class='col-sm-8'>
+          <label class="switch">
+            <%= check_box_tag :saturday %>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class='form-group row'>
+      <div class='col-sm-2'>
+        <label class='control-label'>Sunday</label>
+      </div>
+        <div class='col-sm-8'>
+          <label class="switch">
+            <%= check_box_tag :sunday %>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
 
-  <div class='form-group'>
-    <%= submit_tag("Save Settings", class:'btn btn-dark btn-block') %>
-  </div>
+    <div class='form-group'>
+      <%= submit_tag("Save Settings", class:'btn btn-dark btn-block') %>
+    </div>
+  <% end %>
+
+<% else %>
+  <center><h3>Settings already exists!</h3></center>
 <% end %>

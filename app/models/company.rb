@@ -10,4 +10,6 @@ class Company < ActiveRecord::Base
   has_many :employees
   has_many :messages
   has_many :attendances
+  has_one :setting
+  has_many :events
 end

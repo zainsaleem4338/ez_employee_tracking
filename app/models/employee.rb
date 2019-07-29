@@ -41,5 +41,4 @@ class Employee < ActiveRecord::Base
   def email_changed?
     false
   end
-
 end

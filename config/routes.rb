@@ -9,6 +9,17 @@ Rails.application.routes.draw do
   get '/settings/new' => 'settings#new'
   post '/settings/create' => 'settings#create', as: :create_settings
   get '/settings/index' => 'settings#index', as: :index_settings
+  get '/settings/edit' => 'settings#edit', as: :edit_settings
+  patch '/settings/update' => 'settings#update', as: :update_settings
+  delete '/settings/destroy' => 'settings#destroy', as: :destroy_settings
+
+  get '/events/index' => 'events#index', as: :index_events
+  get '/events/new' => 'events#new', as: :new_events
+  get '/events/home' => 'events#home', as: :home_events
+  post '/events/create' => 'events#create', as: :create_events
+  get '/events/:id/edit' => 'events#edit', as: :edit_events
+  patch '/events/:id/update' => 'events#update', as: :update_events
+  delete '/events/:id/destroy' => 'events#destroy', as: :destroy_events
 
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'

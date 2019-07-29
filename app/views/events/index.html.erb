@@ -1,0 +1,27 @@
+
+<div id="calendar" class="row"></div>
+
+<script>
+  $(document).ready(function () {
+   var events_arr = [];
+   <% @events.each do |event| %>
+    events_arr.push({
+      title: "<%= event.title %>",
+      description: "<%= event.description %>",
+      datetime: new Date(<%= event.event_date.year%>, <%= event.event_date.month %> -1, <%= event.event_date.day%>, <%= event.event_date.strftime("%H") %>)
+    })
+  <% end %>
+  $('#calendar').eCalendar({
+  weekDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  textArrows: {previous: '<', next: '>'},
+  eventTitle: 'Events',
+  url: '',
+  firstDayOfWeek: 0,
+  events : events_arr
+
+  });
+
+  });
+
+</script>

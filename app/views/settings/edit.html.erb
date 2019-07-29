@@ -1,0 +1,86 @@
+<center><h3>Company Settings</h3></center><br>
+<h4>Adjust Working Days</h4><br>
+
+<%= form_tag( update_settings_path, method: "patch") do %>
+  <div class='form-group row'>
+    <div class='col-sm-2'>
+      <label class='control-label'>Monday</label>
+    </div>
+      <div class='col-sm-2'>
+        <label class="switch">
+          <%= check_box_tag :monday, false , @settings.working_days[:monday] %>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+    <div class='form-group row'>
+    <div class='col-sm-2'>
+      <label class='control-label'>Tuesday</label>
+    </div>
+      <div class='col-sm-8'>
+        <label class="switch">
+          <%= check_box_tag :tuesday, false, @settings.working_days[:tuesday] %>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+    <div class='form-group row'>
+    <div class='col-sm-2'>
+      <label class='control-label'>Wednesday</label>
+    </div>
+      <div class='col-sm-8'>
+        <label class="switch">
+          <%= check_box_tag :wednesday, false, @settings.working_days[:wednesday] %>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+    <div class='form-group row'>
+    <div class='col-sm-2'>
+      <label class='control-label'>Thursday</label>
+    </div>
+      <div class='col-sm-8'>
+        <label class="switch">
+          <%= check_box_tag :thursday, false, @settings.working_days[:thursday] %>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+    <div class='form-group row'>
+    <div class='col-sm-2'>
+      <label class='control-label'>Friday</label>
+    </div>
+      <div class='col-sm-8'>
+        <label class="switch">
+          <%= check_box_tag :friday, false, @settings.working_days[:friday] %>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+    <div class='form-group row'>
+    <div class='col-sm-2'>
+      <label class='control-label'>Saturday</label>
+    </div>
+      <div class='col-sm-8'>
+        <label class="switch">
+          <%= check_box_tag :saturday, false, @settings.working_days[:saturday] %>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+    <div class='form-group row'>
+    <div class='col-sm-2'>
+      <label class='control-label'>Sunday</label>
+    </div>
+      <div class='col-sm-8'>
+        <label class="switch">
+          <%= check_box_tag :sunday, false, @settings.working_days[:sunday] %>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+
+  <div class='form-group'>
+    <%= submit_tag("Save Settings", class:'btn btn-dark btn-block') %>
+  </div>
+<% end %>

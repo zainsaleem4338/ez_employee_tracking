@@ -9,10 +9,12 @@ class SessionsController < Devise::SessionsController
     end
     employee = Employee.find_by(email: params[:employee][:email], company_id: current_company.id)
     if employee != nil
-      if employee.confirmation_token != nil
+      if !employee.active
+        flash[:danger] = "Can not log in, Employee is inactive!"
+      elsif employee.confirmation_token != nil
         flash[:danger] = "Please confirm your email!"
         return redirect_to new_employee_session_path
-      elsif employee == nil || !employee.valid_password?(params[:employee][:password])
+      elsif !employee.valid_password?(params[:employee][:password])
         flash[:danger] = "Invalid password or email!"
         return redirect_to new_employee_session_path
       end
