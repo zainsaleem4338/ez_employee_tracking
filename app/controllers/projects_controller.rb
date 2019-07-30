@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_department, only: [:edit, :index, :new, :create]
   load_and_authorize_resource through_association: :company
- 
+
   def create
     @project.status = Project::NEW_STATUS
     if @project.save

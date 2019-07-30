@@ -14,5 +14,4 @@ class Project < ActiveRecord::Base
   def check_start_date
     errors.add(:start_date,"should be greater than equal to today's date.") if start_date.to_date <= Date.today
   end
-
 end

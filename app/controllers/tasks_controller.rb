@@ -5,9 +5,9 @@ class TasksController < ApplicationController
   def create
     @task.set_status
     if @task.save
-      redirect_to project_tasks_url(@task.project), notice: "Returing from the create"
+      redirect_to project_tasks_url(@task.project), notice: "Task created successfully!"
     else
-      render new_project_task_path(@task.project), notice: "Cannnot enter data due to constraints"
+      render new_project_task_path(@task.project), notice: "Task cannot be created!"
     end
   end
 
@@ -15,12 +15,12 @@ class TasksController < ApplicationController
     if !params[:assignable_employee_id].empty? && !params[:assignable_team_id].empty?
       render :edit, notice: "Make sure you delete employee field or team field"
     else
-      params[:task][:status] = "new" if params[:task][:assignable_id].empty?
-      params[:task][:status] = "assigned" if !params[:task][:assignable_id].empty?
+      params[:task][:status] = Task::NEW_STATUS if params[:task][:assignable_id].empty?
+      params[:task][:status] = Task::ASSIGNED_STATUS if !params[:task][:assignable_id].empty?
       if @task.update(task_params)
-        redirect_to project_tasks_path, notice: "Updated Successfully"
+        redirect_to project_tasks_path, notice: "Task updated successfully!"
       else
-        redirect_to project_tasks_path, notice: "Cannot be updated"
+        redirect_to project_tasks_path, notice: "Task cannot be updated!"
       end
     end
   end
@@ -39,7 +39,6 @@ class TasksController < ApplicationController
       redirect_to project_tasks_path, notice: "Updated Successfully"
     else
       redirect_to project_tasks_path, notice: "Cannot be updated!"
-
     end
   end
 
