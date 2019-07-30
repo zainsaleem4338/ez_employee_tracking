@@ -22,6 +22,7 @@ class Employee < ActiveRecord::Base
   validates :role, presence: true
   accepts_nested_attributes_for :company
   has_many :tasks, :as => :assignable
+  has_many :tasks, foreign_key: :reviewer_id, class_name: 'Task'
   has_many :attendances
   scope :team_employees, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).where.not(employee_teams: {employee_id: user.id}).distinct}
   scope :team_employees_projects_tasks, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).distinct}

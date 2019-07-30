@@ -6,6 +6,7 @@ class Task < ActiveRecord::Base
   belongs_to :company
   belongs_to :project
   belongs_to :assignable, polymorphic: true
+  belongs_to :reviewer, foreign_key: :reviewer_id, class_name: 'Employee'
   validates :start_date, :expected_end_date, :name, :company_id, :project_id, presence: :true
   validate :check_start_date, :check_start_and_end_date
   scope :get_tasks, ->(user){where('(tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?)',Employee.all.team_employees_projects_tasks(user).pluck(:id) , "Employee",user.employee_teams.pluck(:team_id),"Team")}

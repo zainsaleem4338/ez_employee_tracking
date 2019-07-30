@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   load_and_authorize_resource :task, through: :project, except: [:employee_tasks, :update_task_logtime]
  
   def create
+    binding.pry
     @task.set_status
     if @task.save
       redirect_to project_tasks_url(@task.project), notice: 'Returing from the create'
@@ -63,6 +64,6 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).
-      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id)
+      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id, :reviewer_id)
   end
 end

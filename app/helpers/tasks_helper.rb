@@ -8,7 +8,7 @@ module TasksHelper
     task.assignable.name.capitalize
   end
   def get_reviewer_hash(task)
-    return nil if task.reviewer.nil?
+    return nil if task.reviewer_id.nil?
     return [task.reviewer].to_json.html_safe
   end
 end
