@@ -29,7 +29,7 @@ module ApplicationHelper
     }
     @about = {
       name: 'About',
-      link: '#',
+      link: menus_index_path,
       icon: 'fas fa-briefcase'
     }
     @contact = {

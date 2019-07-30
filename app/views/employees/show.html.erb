@@ -1,13 +1,7 @@
-
+<% provide(:title, "Welcome "+ current_employee.name) %>
 
 <div class="conatiner">
   <div class="row">
-    <div class="col-sm">
-      <center>
-        <h3>Welcome <%= @employee.name%></h3>
-      </center>
-    </div>
-
     <div class="col-sm">
       <% if admin? %>
         <%= render 'attendances/attendance_table' %>

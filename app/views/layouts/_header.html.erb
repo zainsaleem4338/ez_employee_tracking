@@ -11,9 +11,9 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item active">
-          <%= link_to "Home", menus_index_path, class: 'nav-link' %>
-        </li>
+        <div class="d-flex align-items-center header_title">
+          <p><%= yield(:title) %></p>
+        </div>
       </ul>
 
       <ul class="navbar-nav ml-auto">

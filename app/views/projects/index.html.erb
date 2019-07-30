@@ -1,8 +1,8 @@
+<% provide(:title, "Listing Projects") %>
 <div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
   <%= notice %>
 </div>
-<h1>Listing Projects</h1>
-<%= link_to 'New Project', new_project_path, class: "btn btn-regular btn-primary" %>
+
 <% if !@projects.nil?%>               
 <div class="row" style="margin-top: 40px;">
   <% @projects.each do |project| %>
@@ -26,4 +26,3 @@
 <p id="notice">No records Found</p>
 <% end %>
 <br>
-

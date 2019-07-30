@@ -1,4 +1,4 @@
-<h1>Add An Employee</h1>
+<% provide(:title, "Add an Employee") %>
 <br>
 <%= render 'shared/errors', obj: @employee %>
 <%= form_for @employee, url: create_employee_path(@employee), method: :post ,:html => {class: "form-horizontal", role: "form"} do |form| %>
