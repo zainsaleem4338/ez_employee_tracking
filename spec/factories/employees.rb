@@ -9,8 +9,8 @@ FactoryGirl.define do
   end
 
     factory :admin, class: 'Employee' do |emp|
-    emp.name "Aghaaa"
-    emp.email "aghaaa@gmail.com"
+    sequence(emp.name) {|n| "Aghaaa#{n}"}
+    sequence(emp.email) {|n| "aghaaa#{n}@gmail.com"} 
     emp.password "netmail123"
     emp.role "Admin"
 
