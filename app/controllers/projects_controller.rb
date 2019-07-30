@@ -1,8 +1,14 @@
 class ProjectsController < ApplicationController
-  before_action :set_department, only: [:edit, :index, :new, :create]
-  load_and_authorize_resource through_association: :company
+  # before_action :set_department, only: [:edit, :index, :new, :create]
+  load_and_authorize_resource :department
+  load_and_authorize_resource through: :department
+
+  def index
+    binding.pry
+  end
 
   def create
+    binding.pry
     @project.status = Project::NEW_STATUS
     if @project.save
       redirect_to projects_path, notice: "Returing from the create"

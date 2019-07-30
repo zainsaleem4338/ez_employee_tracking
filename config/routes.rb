@@ -1,19 +1,20 @@
 Rails.application.routes.draw do
+ 
   root 'menus#index'
 
   resources :teams
-  resources :departments
   resources :attendances
 
-  resources :projects do
-    resources :tasks do
-      member do
-        get 'edit_status'
-        patch 'update_status'
+  resources :departments do
+    resources :projects do
+      resources :tasks do
+        member do
+          get 'edit_status'
+          patch 'update_status'
+        end
       end
     end
   end
-
   devise_for :employees
 
   get 'menus/index' => 'menus#index'

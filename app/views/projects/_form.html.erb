@@ -2,7 +2,7 @@
   <%= notice %>
 </div>
 
-<%= form_for(@project) do |form| %>
+<%= form_for [@department,@project] do |form| %>
 <% if @project.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -23,11 +23,6 @@
   <div class="form-group col-md-6">
     <%= form.label :description %><br>
     <%= form.text_field :description, class: "form-control", placeholder: "Enter description" %>
-  </div>
-</div>
-<div class="row d-flex justify-content-start">
-  <div class="form-group col-md-6">
-  <%= form.select :department_id, options_for_select(@departments.collect { | department | [department.name, department.id] }), {}, {} %>
   </div>
 </div>
 <div class="row d-flex justify-content-start">

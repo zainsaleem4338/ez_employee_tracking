@@ -20,8 +20,12 @@ class Ability
       can [:read, :update_status, :edit_status], Task, Task.get_tasks(user) do |task|
         task
       end
+      can :read, Department, Department.get_departments(user) do |department|
+        department
+      end
+
       can :read, Company
-      can :manage, Department
+      # can :manage, Department
     end
   end
 end
