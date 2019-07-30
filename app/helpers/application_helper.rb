@@ -114,7 +114,17 @@ module ApplicationHelper
       }
       @data.push(@employees).push(@departments).push(@teams).push(@projects)
     else
-      @data
+      @projects = {
+        name: 'Projects',
+        link: projects_path,
+        icon: 'fas fa-tasks'
+      }
+      @my_tasks = {
+        name: 'My Tasks',
+        link: employee_tasks_list_path(current_employee),
+        icon: 'fas fa-tasks'
+      }
+      @data.push(@projects).push(@my_tasks)
     end
   end
 end
