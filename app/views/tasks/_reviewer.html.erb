@@ -1,6 +1,6 @@
-<%= form.label :assignable_id, "Reviewer Email" %><br>
-<% assignable_employee_hash = set_assignable_hash(@task,Employee::EMPLOYEE_ROLE) %>
-<%= text_field_tag :reviewer_id, assignable_employee_hash, class: "js-assign-employee" %>
+<%= form.label :reviwer_id, "Reviewer Email" %><br>
+<% assign_reviewer_hash = set_reviewer_hash(@task) %>
+<%= text_field_tag :reviewer_id, assign_reviewer_hash, class: "js-assign-reviewer" %>
 <%= javascript_tag do %>
-$('.js-assign-employee').tokenInput('/employee_lists.json', { prePopulate: <%= assignable_employee_hash %>, tokenLimit: 1 });
+$('.js-assign-reviewer').tokenInput('/employee_lists.json', { prePopulate: <%= assign_reviewer_hash %>, tokenLimit: 1 });
 <% end %>

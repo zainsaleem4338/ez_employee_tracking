@@ -9,6 +9,13 @@ employee_options =  {
         tokenValue: 'id',
         searchingText: 'searching employees...'}
 
+reviewer_options =  {
+        preventDuplicates: true,
+        hintText: 'Add reviewer',
+        tokenLimit: 1,
+        tokenValue: 'id',
+        searchingText: 'searching reviewers...'}
+
 team_options =  {
         preventDuplicates: true,
         hintText: 'Add Team',
@@ -19,6 +26,7 @@ team_options =  {
 
 jQuery ->
     $(document).ready ->
+    $('.js-assign-reviewer').tokenInput('/employee_lists.json', reviewer_options);
     if $("#assignable_employee_id").val() == ""
       $('#assignable_employee_id').tokenInput('/employee_lists.json', employee_options);
     if $("#assignable_team_id").val() == ""
