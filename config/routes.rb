@@ -15,13 +15,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tasks, only: [:my_tasks, :update_task_logtime]
+  resources :tasks, only: [:employee_tasks, :update_task_logtime]
   devise_for :employees
 
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
 
-  get 'my_tasks' => 'tasks#my_tasks', :as => :employee_tasks_list
+  get 'employee_tasks' => 'tasks#employee_tasks', :as => :employee_tasks_list
   patch 'tasks/:id/update_task_logtime' => 'tasks#update_task_logtime', :as => :update_task_logtime
   get 'employee_lists' => 'employees#employees_lists'
   get '/employees/index' => 'employees#index', :as => :employees

@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
-  load_and_authorize_resource :only => [:my_tasks, :update_task_logtime]
-  load_and_authorize_resource :project, except: [:my_tasks, :update_task_logtime]
-  load_and_authorize_resource :task, through: :project, except: [:my_tasks, :update_task_logtime]
+  load_and_authorize_resource only: [:employee_tasks, :update_task_logtime]
+  load_and_authorize_resource :project, except: [:employee_tasks, :update_task_logtime]
+  load_and_authorize_resource :task, through: :project, except: [:employee_tasks, :update_task_logtime]
  
   def create
     @task.set_status

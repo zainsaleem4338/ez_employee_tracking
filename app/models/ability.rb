@@ -18,7 +18,7 @@ class Ability
       can :read, Project, Project.get_projects(user) do |project|
       	project
       end
-      can [:my_tasks, :update_task_logtime], Task, Task.get_employee_tasks(user) do |employee_task|
+      can [:employee_tasks, :update_task_logtime], Task, Task.get_employee_tasks(user) do |employee_task|
         employee_task
       end
 

@@ -119,12 +119,12 @@ module ApplicationHelper
         link: projects_path,
         icon: 'fas fa-tasks'
       }
-      @my_tasks = {
+      @employee_tasks = {
         name: 'My Tasks',
         link: employee_tasks_list_path(current_employee),
         icon: 'fas fa-tasks'
       }
-      @data.push(@projects).push(@my_tasks)
+      @data.push(@projects).push(@employee_tasks)
     end
   end
 end
