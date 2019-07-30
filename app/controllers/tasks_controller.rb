@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to project_tasks_url(@task.project), notice: "Task created successfully!"
     else
-      render new_project_task_path(@task.project), notice: "Task cannot be created!"
+      redirect_to new_project_task_path(@task.project), notice: "Task cannot be created!"
     end
   end
 

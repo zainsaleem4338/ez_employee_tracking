@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe ProjectsController, type: :controller do
+  before(:all) do
+    @company = FactoryGirl.create(:company)
+    @employee = FactoryGirl.create(:employee, role: "Admin", company_id: @company.id)
+  end
+
   before(:each) do
-    @employee = FactoryGirl.create(:employee, role: 'Admin')
     @department = FactoryGirl.create(:department, company_id: @employee.company_id)
     sign_in @employee
   end
