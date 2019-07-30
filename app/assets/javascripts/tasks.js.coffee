@@ -26,7 +26,8 @@ team_options =  {
 
 jQuery ->
     $(document).ready ->
-    $('.js-assign-reviewer').tokenInput('/employee_lists.json', reviewer_options);
+    if $('.js-assign-reviewer').val() == ""
+      $('.js-assign-reviewer').tokenInput('/employee_lists.json', reviewer_options);
     if $("#assignable_employee_id").val() == ""
       $('#assignable_employee_id').tokenInput('/employee_lists.json', employee_options);
     if $("#assignable_team_id").val() == ""
