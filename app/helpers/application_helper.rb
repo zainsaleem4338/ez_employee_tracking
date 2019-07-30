@@ -41,7 +41,6 @@ module ApplicationHelper
   end
 
   def generate_sidebar_options
-    # returns [{ [{}, {}] }, .. ]
     @data = []
     @dashboard = {
       name: 'Dashboard',
