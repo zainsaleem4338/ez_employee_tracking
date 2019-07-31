@@ -4,6 +4,8 @@ FactoryGirl.define do
     emp.email "agha@gmail.com"
     emp.password "netmail123"
     emp.role "employee"
+    emp.company_id 1
+    emp.confirmation_token true
 
     association :company, factory: :assoc_company
   end
