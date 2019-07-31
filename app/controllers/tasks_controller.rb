@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  load_and_authorize_resource :only => [:my_tasks, :update_task_logtime]
+  load_and_authorize_resource only: [:my_tasks, :update_task_logtime]
   load_and_authorize_resource :project, except: [:my_tasks, :update_task_logtime]
   load_and_authorize_resource :task, through: :project, except: [:my_tasks, :update_task_logtime]
  
@@ -40,20 +40,13 @@ class TasksController < ApplicationController
       redirect_to project_tasks_path, notice: 'Updated Successfully'
     else
       redirect_to project_tasks_path, notice: 'Cannot be updated!'
-
     end
   end
 
   def update_task_logtime
     unless params[:task][:log_time].blank?
-      if @task.log_time.blank?
-        @result = @task.update_attributes(log_time: params[:task][:log_time].to_i)
-      else
-        @task.log_time += params[:task][:log_time].to_i
-        @result = @task.save
-      end
+      @result = @task.update_attribute('log_time', @task.log_time.to_i + params[:task][:log_time].to_i)
     end
-
     respond_to do |format|
       format.js
     end
