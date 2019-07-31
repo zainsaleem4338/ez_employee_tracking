@@ -2,8 +2,7 @@ source 'https://rubygems.org'
 
 
 gem 'autoprefixer-rails', '~> 9.6', '>= 9.6.1'
-gem 'bootstrap', '~> 4.0'
-gem 'capybara', '~> 2.5'
+gem 'cancancan', '~>3.0.1'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise', '3.4.1'
 gem 'devise-bootstrap-views', '~> 1.0'
@@ -26,16 +25,6 @@ gem 'select2-rails'
 gem 'sequenceid'
 gem 'uglifier', '>= 1.3.0'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-
 group :development do
   gem 'better_errors'
   gem 'capybara', '~> 2.5'
@@ -44,7 +33,7 @@ group :development do
   gem 'pry', '=0.10.1'
   gem 'pry-rails', '=0.3.3'
   gem 'rspec-rails', '~> 3.8'
-  gem 'shoulda-matchers', require: false  
+  gem 'shoulda-matchers', require: false
   gem 'spring'
   gem 'web-console', '~> 2.0'
 end

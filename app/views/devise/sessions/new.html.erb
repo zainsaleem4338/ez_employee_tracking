@@ -25,19 +25,19 @@
 
                     <% if devise_mapping.rememberable? %>
                       <div class="form-group">
-                        <div class="custom-control custom-checkbox small">
-                          <div class="form-group form-check">
-                            <%= f.check_box :remember_me, class: 'form-check-input custom-control-input'%>
-                            <%= f.label :remember_me, class: 'form-check-label' do %>
+                        
+                          <div class="custom-control custom-checkbox small">
+                            <%= f.check_box :remember_me, class: 'custom-control-input'%>
+                            <%= f.label :remember_me, class: 'custom-control-label' do %>
                               <%= resource.class.human_attribute_name('remember_me') %>
                             <% end %>
                           </div>
-                        </div>
+                        
                       </div>
                     <% end %>
 
                     <div class="form-group">
-                      <%= f.submit  t('.sign_in'), class: 'btn btn-primary btn-user btn-block' %>
+                      <%= f.submit  t('.sign_in'), class: 'btn btn-primary btn-purple btn-user btn-block' %>
                     </div>
                     
                   <% end %>

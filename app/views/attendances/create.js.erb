@@ -11,5 +11,6 @@
   present_marked_btn[0].style.display = "inline-flex";
 
 <% else %>
-  alert('Error!!');
+  var present_failure_alert = document.getElementById("present_failure_alert");
+  present_failure_alert.style.display = "block";
 <% end %>
