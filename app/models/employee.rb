@@ -4,6 +4,7 @@ class Employee < ActiveRecord::Base
   ADMIN_ROLE = 'Admin'.freeze
   EMPLOYEE_ROLE = 'Employee'.freeze
   TEAM_ROLE = 'Team'.freeze
+  STATUS = { 'PRESENT': 1, 'ABSENT': 0 }.freeze
   TEAM_LEAD_ROLE = 'Team Lead'.freeze
   belongs_to :company, :inverse_of => :employees
   belongs_to :department
@@ -25,11 +26,11 @@ class Employee < ActiveRecord::Base
   scope :team_employees, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).where.not(employee_teams: {employee_id: user.id}).distinct}
   scope :team_employees_projects_tasks, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).distinct}
 
-  def todays_attendance_of_employee(company)
+  def todays_attendance_of_employee
     # one employee should not have multiple attendances for one day
     @start_time = DateTime.now.change(hour: 10)
-    @end_time = DateTime.now.change(hour: 18)
-    company.attendances.find_by(employee_id: id, login_time: (@start_time..@end_time))
+    @end_time = DateTime.now.change(hour: 20)
+    self.company.attendances.find_by(employee_id: id, login_time: (@start_time..@end_time))
   end
 
   def with_company
@@ -45,4 +46,7 @@ class Employee < ActiveRecord::Base
     false
   end
   
+  def get_attendances_admin
+      self.company.attendances.where(status: STATUS[:PRESENT]).order(login_time: :desc)
+  end
 end

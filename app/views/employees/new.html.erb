@@ -1,4 +1,4 @@
-<h1>Add An Employee</h1>
+<% provide(:title, "Add an Employee") %>
 <br>
 <%= render 'shared/errors', obj: @employee %>
 <%= form_for @employee, url: create_employee_path(@employee), method: :post ,:html => {class: "form-horizontal", role: "form"} do |form| %>
@@ -45,7 +45,7 @@
   <%= form.hidden_field :company_id, :value => @employee.company_id %>
   <div class="from-group">
     <div class="col-sm-offset-2 col-sm-8">
-      <%= form.submit class:'btn btn-primary btn-lg btn-block' %>
+      <%= form.submit class:'btn btn-primary btn-lg btn-regular btn-block' %>
     </div>
   </div>
 <% end %>

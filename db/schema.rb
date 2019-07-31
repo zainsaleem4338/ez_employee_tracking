@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190720160841) do
+ActiveRecord::Schema.define(version: 20190731074142) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -113,11 +113,15 @@ ActiveRecord::Schema.define(version: 20190720160841) do
     t.integer  "project_id",        limit: 4
     t.integer  "assignable_id",     limit: 4
     t.string   "assignable_type",   limit: 255
+    t.integer  "log_time",          limit: 4
+    t.integer  "reviewer_id",       limit: 4
+    t.integer  "complexity",        limit: 4
   end
 
   add_index "tasks", ["assignable_type", "assignable_id"], name: "index_tasks_on_assignable_type_and_assignable_id", using: :btree
   add_index "tasks", ["company_id"], name: "index_tasks_on_company_id", using: :btree
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id", using: :btree
+  add_index "tasks", ["reviewer_id"], name: "fk_rails_b4f5174a0a", using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",          limit: 255,   null: false
@@ -138,6 +142,7 @@ ActiveRecord::Schema.define(version: 20190720160841) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "departments"
   add_foreign_key "tasks", "companies"
+  add_foreign_key "tasks", "employees", column: "reviewer_id"
   add_foreign_key "tasks", "projects"
   add_foreign_key "teams", "companies"
   add_foreign_key "teams", "departments"

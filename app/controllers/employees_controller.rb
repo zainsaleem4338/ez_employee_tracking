@@ -7,6 +7,14 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def new
+    @employee = current_employee.company.employees.new
+  end
+
+  def show
+    @attendances_list = current_employee.get_attendances_admin
+  end
+
   def create
     if @employee.save
       flash.now[:success] = 'Employee successfully created!'

@@ -9,16 +9,13 @@ class AttendancesController < ApplicationController
   STATUS = { 'PRESENT': 1, 'ABSENT': 0 }.freeze
 
   def index
-    @company = Company.find(current_employee.company_id)
-    @attendances_list = @company.attendances.where(status: STATUS[:PRESENT]).order(login_time: :desc)
+    @attendances_list = current_employee.company.attendances.where(status: STATUS[:PRESENT]).order(login_time: :desc)
   end
 
   def create
-    @company = Company.find(current_employee.company_id)
-    @employees_todays_attendance = current_employee.todays_attendance_of_employee(@company)
-    
+    @employees_todays_attendance = current_employee.todays_attendance_of_employee
     if @employees_todays_attendance.blank?
-      @employee_attendance = @company.attendances.create(login_time: DateTime.now, status: STATUS[:PRESENT], employee_id: current_employee.id)
+      @employee_attendance = current_employee.company.attendances.create(login_time: DateTime.now, status: STATUS[:PRESENT], employee_id: current_employee.id)
       return false unless @employee_attendance.valid?
     end
 
@@ -29,13 +26,11 @@ class AttendancesController < ApplicationController
   end
 
   def update
-    @company = Company.find(current_employee.company_id)
-    @employees_todays_attendance = current_employee.todays_attendance_of_employee(@company)
-    
+    @employees_todays_attendance = current_employee.todays_attendance_of_employee
+
     unless @employees_todays_attendance.blank?
-      @employee_attendance = @company.attendances.find_by(employee_id: @current_employee.id)
-      @employee_attendance.logout_time = DateTime.now
-      @employee_attendance.save!
+      @employees_todays_attendance.logout_time = DateTime.now
+      @result = @employees_todays_attendance.save!
     end
 
     respond_to do |format|
