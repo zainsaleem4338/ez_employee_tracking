@@ -10,7 +10,6 @@ Rails.application.routes.draw do
       member do
         get 'edit_status'
         patch 'update_status'
-
       end
     end
   end

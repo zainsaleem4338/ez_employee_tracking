@@ -1,29 +1,28 @@
 <div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
-	<%= notice %>
+  <%= notice %>
 </div>
 <h1>Listing Projects</h1>
 <%= link_to 'New Project', new_project_path, class: "btn btn-regular btn-primary" %>
-<% if !@projects.nil?%>								
+<% if !@projects.nil?%>               
 <div class="row" style="margin-top: 40px;">
-	<% @projects.each do |project| %>
-	<tbody>
-		<div class="card col-sm-4">
-			<div class="card-body">
-				<h5 class="card-title"><%= project.name %></h5>
-				<span class="badge badge-primary"><%= project.status %></span>
-				<p class="card-text"><strong>Department: </strong><%= project.department.name %></p>
-				<p class="card-text"><strong>Start Date: </strong><%= project.start_date.to_date %></p>
-				<p class="card-text"><strong>Expected End Date  : </strong><%= project.expected_end_date.to_date %></p>
-				<%= link_to 'Details', project_tasks_url(project), class: "btn btn-regular btn-outline-primary" %>
-				<%= link_to 'Edit', edit_project_path(project), class: "btn btn-outline-secondary" %>
-				<%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>				
-			</div>
-		</div>
-		<% end %>
-	</tbody>
+  <% @projects.each do |project| %>
+  <tbody>
+    <div class="card col-sm-4">
+      <div class="card-body">
+        <h5 class="card-title"><%= project.name %></h5>
+        <span class="badge badge-primary"><%= project.status %></span>
+        <p class="card-text"><strong>Department: </strong><%= project.department.name %></p>
+        <p class="card-text"><strong>Start Date: </strong><%= project.start_date.to_date %></p>
+        <p class="card-text"><strong>Expected End Date  : </strong><%= project.expected_end_date.to_date %></p>
+        <%= link_to 'Details', project_tasks_url(project), class: "btn btn-regular btn-outline-primary" %>
+        <%= link_to 'Edit', edit_project_path(project), class: "btn btn-outline-secondary" %>
+        <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>       
+      </div>
+    </div>
+    <% end %>
+  </tbody>
 </div>
 <% else %>
 <p id="notice">No records Found</p>
 <% end %>
 <br>
-

@@ -18,7 +18,6 @@
 
       <ul class="navbar-nav ml-auto">
 
-        <!-- Attendance Button -->
         <li class="nav-item">
           <div class="d-flex align-items-center">
             <% if present_marked? && !logged_out? %>
@@ -29,14 +28,12 @@
           </div>
         </li>
 
-        <!-- Notifications -->
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell fa-fw"></i>
             <sup>9+</sup>  
           </a>
 
-          <!-- Notification Dropdown-->
           <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
             <h6 class="dropdown-header">Notifications</h6>
             <a class="dropdown-item d-flex align-items-center" href="#">
@@ -51,14 +48,12 @@
 
         </li>
 
-        <!-- Messages -->
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-envelope fa-fw"></i>
             <sup>7</sup>
           </a>
 
-          <!-- Messages Dropdown-->
           <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
             <h6 class="dropdown-header">
               Messages
@@ -76,14 +71,12 @@
 
         <div class="topbar-divider d-none d-sm-block"></div>
 
-        <!-- User -->
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="small-gray"><%= current_employee.name %></span>
             <img src="https://source.unsplash.com/QAB-WJcbgJk/60x60" class="img-profile rounded-circle">
           </a>
 
-          <!-- User option Dropdown -->
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
             <a class="dropdown-item" href="#">
               <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -100,8 +93,6 @@
             </a>
           </div>
         </li>
-
-        
       </ul>
     </div>
   </div>
