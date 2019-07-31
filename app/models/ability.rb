@@ -25,7 +25,6 @@ class Ability
       end
 
       can :read, Company
-      # can :manage, Department
     end
   end
 end

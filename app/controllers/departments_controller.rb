@@ -1,6 +1,16 @@
 class DepartmentsController < ApplicationController
   load_and_authorize_resource
 
+  def index
+    if !params[:checked].nil? && current_employee.role != 'Admin'
+      @departments = Department.employee_departments(current_employee)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def create
     respond_to do |format|
       if @department.save

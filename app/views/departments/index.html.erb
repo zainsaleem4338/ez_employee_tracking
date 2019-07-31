@@ -2,28 +2,14 @@
 
 <h4 class="h4">All Departments</h4>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
+<% if !can? :create, Department%>
+    <%= link_to "All Departments", departments_path(@department), remote: true, class: "btn btn-secondary active"%>
+    <%= link_to "My Departments", departments_path(@department, checked: true), remote: true, class: "btn btn-secondary active" %>
+<% end %>
 
-  <tbody>
-    <% @departments.each do |department| %>
-      <tr>
-        <td><%= department.name %></td>
-        <td><%= department.description %></td>
-        <td><%= link_to 'Show', department, class: "btn btn-secondary" %>
-        <%= link_to 'Edit', edit_department_path(department), class: "btn btn-info" %>
-        <%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="departments_grid" >
+  <%= render partial: 'departmentgrid', locals: {departments: @departments}  %>
+</div>
 
 <br>
 

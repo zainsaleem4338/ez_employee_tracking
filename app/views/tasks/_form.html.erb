@@ -1,11 +1,6 @@
-<div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
-  <%= notice %>
-</div>
-
-<%= form_for [@project, @task] do |form| %>
+<%= form_for [@department, @project, @task] do |form| %>
 
 <%= render partial: 'hidden', locals: { form: form } %>
-
 
 <div class="row d-flex justify-content-start">
   <div class="form-group col-md-6 add_someone">
@@ -37,7 +32,7 @@
 
 <div class="actions">
   <%= form.submit class: "btn btn-primary submit_form"  %>
-  <%= link_to 'Back', project_tasks_url(@project), class: "btn btn-primary" %>
+  <%= link_to 'Back', department_project_tasks_url(@department, @project), class: "btn btn-primary" %>
 </div>
 
 <% end %>
