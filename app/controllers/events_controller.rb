@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    @event = Event.unscoped.new
   end
 
   def home
@@ -12,7 +12,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = Event.unscoped.new(event_params)
     @event.company_id = current_company.id
     if @event.save
       flash[:success] = 'Event has been added!'

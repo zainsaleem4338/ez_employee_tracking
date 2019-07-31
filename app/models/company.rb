@@ -1,4 +1,5 @@
 class Company < ActiveRecord::Base
+	not_multitenant!
   has_many :departments
   has_many :teams
   validates :name, presence: true, uniqueness: true,
@@ -13,4 +14,12 @@ class Company < ActiveRecord::Base
   has_one :setting
   has_many :events
   accepts_nested_attributes_for :setting
+
+  def self.current_id=(id)
+    Thread.current[:company_id] = id
+  end
+
+  def self.current_id
+    Thread.current[:company_id]
+  end
 end

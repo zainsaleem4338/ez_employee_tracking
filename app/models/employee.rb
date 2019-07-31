@@ -1,6 +1,7 @@
 require 'date'
 
 class Employee < ActiveRecord::Base
+	not_multitenant!
   ADMIN_ROLE = 'Admin'.freeze
   belongs_to :company
   belongs_to :department

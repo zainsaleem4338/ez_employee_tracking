@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_employee!
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
   before_filter :set_cache_buster
+  around_filter :scope_current_company
 
   protected
 
@@ -28,4 +29,11 @@ class ApplicationController < ActionController::Base
     Company.find_by_subdomain request.subdomain
   end
   helper_method :current_company
+
+  def scope_current_company
+    Company.current_id = current_company.id unless current_company.nil?
+    yield
+  ensure
+    Company.current_id = nil
+  end
 end
