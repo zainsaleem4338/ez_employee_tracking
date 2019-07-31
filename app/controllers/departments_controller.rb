@@ -1,24 +1,10 @@
 class DepartmentsController < ApplicationController
-  before_action :set_department, only: [:show, :edit, :update, :destroy]
-  def index
-    @departments = current_employee.company.departments.all
-  end
-
-  def show
-  end
-
-  def new
-    @department = Department.new
-  end
-
-  def edit
-  end
+  load_and_authorize_resource
 
   def create
-    @department = current_employee.company.departments.new(department_params)
     respond_to do |format|
       if @department.save
-        format.html { redirect_to @department, notice: 'Department was successfully created.' }
+        format.html { redirect_to departments_path, notice: 'Department was successfully created.' }
         format.json { render :show, status: :created, location: @department }
       else
         format.html { render :new }
@@ -50,12 +36,9 @@ class DepartmentsController < ApplicationController
       end
     end
   end
-  
+
   private
-    def set_department
-      @department = current_employee.company.departments.find(params[:id])
-    end
-    def department_params
-      params.require(:department).permit(:name, :description)
-    end
+  def department_params
+    params.require(:department).permit(:name, :description)
+  end
 end
