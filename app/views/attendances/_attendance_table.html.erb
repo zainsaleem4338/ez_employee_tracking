@@ -15,14 +15,14 @@
 
   <tbody>
     <% @attendances_list.each do |attendance| %>
-    <% @current_employee = Employee.find(attendance.employee_id) %>
+    <% @company_employee = Employee.find(attendance.employee_id) %>
 
     <tr>
       <td>
         <%= attendance.employee_id %>
       </td>
       <td>
-        <%= @current_employee.email %>
+        <%= @company_employee.email %>
       </td>
       <td>
         <%= attendance.login_time.to_formatted_s(:long_ordinal) %>

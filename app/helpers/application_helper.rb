@@ -3,16 +3,16 @@ require 'attendance'
 module ApplicationHelper
   def present_marked?
     @attendance = current_employee.todays_attendance_of_employee
-    !@attendance.blank?
+    @attendance.present?
   end
 
-  def logged_out?
+  def not_logged_out?
     @attendance = current_employee.todays_attendance_of_employee
-    @attendance.logout_time
+    @attendance.logout_empty?
   end
 
   def admin?
-    current_employee.role.eql? 'Admin'
+    current_employee.role.eql? Employee::ADMIN_ROLE
   end
 
   def generate_sidebar_foot_options
