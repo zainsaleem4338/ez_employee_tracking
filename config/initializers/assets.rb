@@ -9,4 +9,4 @@ Rails.application.config.assets.precompile += %w( jquery.tokeninput.js )
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w( sidebar.js attendance_table.js )
+Rails.application.config.assets.precompile += %w( sidebar.js attendance_table.js employee_tasks.js )

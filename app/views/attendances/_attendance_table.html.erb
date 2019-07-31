@@ -16,7 +16,6 @@
   <tbody>
     <% @attendances_list.each do |attendance| %>
     <% @company_employee = Employee.find(attendance.employee_id) %>
-
     <tr>
       <td>
         <%= attendance.employee_id %>
@@ -28,7 +27,7 @@
         <%= attendance.login_time.to_formatted_s(:long_ordinal) %>
       </td>
       <td>
-        <% if attendance.logout_time.blank? %>
+        <% if logout_added?(attendance) %>
           nil
         <% else %>
           <%= attendance.logout_time.to_formatted_s(:long_ordinal) %>

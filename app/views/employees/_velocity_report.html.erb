@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th>Task id</th>
+      <th>Task Name</th>
+      <th>Employee</th>
+      <th>Expected end date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks_of_employee.each do |task|  %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.name %></td>
+        <td><%= '-' %></td>
+        <td><%= task.expected_end_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
