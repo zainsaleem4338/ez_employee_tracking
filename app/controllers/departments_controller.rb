@@ -2,8 +2,8 @@ class DepartmentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if !params[:checked].nil? && current_employee.role != 'Admin'
-      @departments = Department.employee_departments(current_employee)
+    if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
+      @departments = @departments.employee_departments(current_employee)
     end
     respond_to do |format|
       format.html

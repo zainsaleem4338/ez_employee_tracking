@@ -3,8 +3,8 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource through: :department
 
   def index
-    if !params[:checked].nil? && current_employee.role != 'Admin'
-      @projects = Project.employee_projects(current_employee)
+    if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
+      @projects = @projects.employee_projects(current_employee)
     end
     respond_to do |format|
       format.html

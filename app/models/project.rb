@@ -10,10 +10,10 @@ class Project < ActiveRecord::Base
 
 
   def check_start_and_end_date
-    errors.add(:expected_end_date,'cannot be before start_time') if (expected_end_date.to_date <= start_date.to_date)
+    errors.add(:expected_end_date,'cannot be before start_time') if (expected_end_date.to_date < start_date.to_date)
   end
 
   def check_start_date
-    errors.add(:start_date,"should be greater than equal to today's date.") if start_date.to_date <= Date.today
+    errors.add(:start_date,"should be greater than equal to today's date.") if start_date.to_date < Date.today
   end
 end

@@ -4,8 +4,8 @@ class TasksController < ApplicationController
   load_and_authorize_resource :task, through: :project
 
   def index
-    if !params[:checked].nil? && current_employee.role != 'Admin'
-      @tasks = Task.employee_tasks(current_employee)
+    if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
+      @tasks = @tasks.employee_tasks(current_employee)
     end
     respond_to do |format|
       format.html
