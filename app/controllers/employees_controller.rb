@@ -38,6 +38,27 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def attendance_report
+    if current_employee.role == Employee::ADMIN_ROLE
+      @attendances = current_employee.attendance_data.paginate(page: params[:page], per_page: 10)
+    end
+  end
+
+  def attendance_report_pdf
+    if current_employee.role == Employee::ADMIN_ROLE
+      @attendances = current_employee.attendance_data
+      respond_to do |format|
+        format.pdf do
+          render pdf: 'Attendance Report',
+                 template: 'employees/_attendance_report_grid.html.erb',
+                 layout: 'pdf.html',
+                 page_size: 'A4',
+                 dpi: 55
+        end
+      end
+    end
+  end
+
   private
 
   def employee_params

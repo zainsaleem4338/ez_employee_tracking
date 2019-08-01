@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class ApplicationController < ActionController::Base
   alias_method :current_user, :current_employee
   protect_from_forgery with: :exception
