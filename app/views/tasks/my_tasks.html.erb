@@ -2,8 +2,7 @@
   <%= javascript_include_tag 'employee_tasks' %>
 <% end %>
 
-
-<h1>My Tasks</h1>
+<% provide(:title, "My Tasks")%>
 
 <div class="alert alert-success alert-dismissable present" id="logtime_success_alert" style="display: none;">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">

@@ -56,6 +56,6 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).
-      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id)
+      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id, :complexity)
   end
 end

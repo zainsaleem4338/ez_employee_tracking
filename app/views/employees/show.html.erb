@@ -5,6 +5,8 @@
     <div class="col-sm">
       <% if admin? %>
         <%= render 'attendances/attendance_table' %>
+      <% else %>
+      	<%= render 'velocity_report' %>
       <% end %>
     </div>
   </div>

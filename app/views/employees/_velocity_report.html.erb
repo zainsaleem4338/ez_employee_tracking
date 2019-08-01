@@ -1,9 +1,9 @@
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Task id</th>
       <th>Task Name</th>
-      <th>Employee</th>
+      <th>Log time</th>
       <th>Expected end date</th>
     </tr>
   </thead>
@@ -12,9 +12,17 @@
       <tr>
         <td><%= task.id %></td>
         <td><%= task.name %></td>
-        <td><%= '-' %></td>
+        <td><%= task.log_time %></td>
         <td><%= task.expected_end_date %></td>
       </tr>
     <% end %>
   </tbody>
+  <thead>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>Employee Velocity</td>
+      <td><%= @employee_velocity %></td>
+    </tr>
+  </thead>
 </table>
