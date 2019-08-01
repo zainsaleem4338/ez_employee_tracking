@@ -38,22 +38,19 @@
             <%= render 'layouts/header' %>
           </div>
           <div class="yielded-area">
+            <div>
+              <%= render 'shared/notification' %>
+            </div>
             <%= yield %>
           </div>
-          
-          <div>
-            <%= render 'shared/notification' %>
-          </div>
-        
         </div>
       </div>
-      
     <% else %>
       <div class='container'>
         <%= yield %>
       </div>
-    <% end %>
-    
+
+   <% end %>
   </body>
 </html>
 
