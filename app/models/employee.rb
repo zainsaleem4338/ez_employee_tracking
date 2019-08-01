@@ -36,6 +36,39 @@ class Employee < ActiveRecord::Base
     self
   end
 
+  def compute_one_employee_velocity(tasks_list)
+    @total_time_on_tasks = time_spent_on_tasks(tasks_list)
+    @total_task_complexity = compute_total_complexity_of_tasks(tasks_list)
+    (@total_task_complexity.to_f / @total_time_on_tasks)
+  end
+
+  def compute_total_complexity_of_tasks(employee_tasks)
+    @sum_complexity = 0
+    employee_tasks.each do |task|
+      @sum_complexity += task.complexity
+    end
+    @sum_complexity
+  end
+
+  def time_spent_on_tasks(employee_tasks)
+    @time = 0
+    employee_tasks.each do |task|
+      @time += task.log_time.to_i
+    end
+    @time
+  end
+
+  def compute_employees_velocity
+    @employees_list = company.employees
+    @employee_tasks = []
+    @employee_velocity = {}
+    @employees_list.each do |employee|
+      @employee_tasks << employee.company.tasks.get_employee_tasks(employee)#.where(assignable_type: EMPLOYEE_ROLE)
+      @employee_velocity[employee.id] = employee.compute_one_employee_velocity(@employee_tasks.last)
+    end
+    return @employee_tasks, @employee_velocity
+  end
+
   def email_required?
     false
   end

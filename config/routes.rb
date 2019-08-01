@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
 
+  get 'employees/export_report' => 'employees#pdf_velocity_report', as: :pdf_velocity_report
+
   get 'my_tasks' => 'tasks#my_tasks', :as => :employee_tasks_list
   patch 'tasks/:id/update_task_logtime' => 'tasks#update_task_logtime', :as => :update_task_logtime
   get 'employee_lists' => 'employees#employees_lists'

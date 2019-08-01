@@ -72,8 +72,19 @@ a:focus {
   border-top: 1px solid #eaecf4;
 }
 
+.velocity-table {
+	margin-bottom: 50px;
+	margin-top: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
 .small {
   font-size: 80%
+}
+
+.container {
+	font-size: 0.85rem;
 }
 
 .header_title {
@@ -203,6 +214,7 @@ span {
 
 #sidebar .sidebar-header h3 {
   color: #fff !important;
+  font-size: 1.4rem;
 }
 
 #sidebar.active .sidebar-header h3 {
@@ -235,7 +247,7 @@ span {
 
 #sidebar ul li a {
   padding: 10px;
-  font-size: 0.98rem;
+  font-size: 0.88rem;
   display: block;
 }
 

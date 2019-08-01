@@ -5,9 +5,36 @@
     <div class="col-sm">
       <% if admin? %>
         <%= render 'attendances/attendance_table' %>
-      <% else %>
-      	<%= render 'velocity_report' %>
       <% end %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10">
+            <h1>Employee Velocity Report</h1>
+          </div>
+          <div class="col-md-2">
+            <%= link_to 'Export pdf', pdf_velocity_report_path(format: :pdf), class: 'btn btn-regular' %>
+          </div>
+        </div>
+        <div class="row">
+          <%= render 'velocity_report' %>
+        </div>
+      </div>
+      <br>
+      <br>
+      <!--
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10">
+            <h1>Teams Velocity Report</h1>
+          </div>
+          <div class="col-md-2">
+            <%= link_to 'Export pdf', pdf_velocity_report_path(format: :pdf), class: 'btn btn-regular' %>
+          </div>
+        </div>
+        <div class="row">
+          <%= render 'team_velocity_report' %>
+        </div>
+      </div>-->
     </div>
   </div>
 </div>
