@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  STATUS = { 'PRESENT': 1, 'ABSENT': 0 }.freeze
+  
   load_and_authorize_resource :employee, through_association: :company
 
   def employees_lists
@@ -9,7 +9,7 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    @attendances_list = current_employee.company.attendances.where(status: STATUS[:PRESENT]).order(login_time: :desc)
+    @attendances_list = current_employee.company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
   end
 
   def create
