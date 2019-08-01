@@ -5,18 +5,18 @@ class TasksController < ApplicationController
   def create
     @task.set_status
     if @task.save
-      redirect_to project_tasks_url(@task.project), notice: "Task created successfully!"
+      redirect_to project_tasks_path, notice: "Task created successfully!"
     else
-      redirect_to new_project_task_path(@task.project), notice: "Task cannot be created!"
+      redirect_to new_project_task_path, notice: "Task cannot be created!"
     end
   end
 
   def update
-    if !params[:assignable_employee_id].empty? && !params[:assignable_team_id].empty?
+    if params[:assignable_employee_id].present? && params[:assignable_team_id].present?
       render :edit, notice: "Make sure you delete employee field or team field"
     else
-      params[:task][:status] = Task::NEW_STATUS if params[:task][:assignable_id].empty?
-      params[:task][:status] = Task::ASSIGNED_STATUS if !params[:task][:assignable_id].empty?
+      params[:task][:status] = Task::NEW_STATUS if !params[:task][:assignable_id].present?
+      params[:task][:status] = Task::ASSIGNED_STATUS if params[:task][:assignable_id].present?
       if @task.update(task_params)
         redirect_to project_tasks_path, notice: "Task updated successfully!"
       else
