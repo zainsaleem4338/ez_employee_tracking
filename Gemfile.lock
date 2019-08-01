@@ -124,6 +124,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-rails (0.3.3)
+      pry (>= 0.9.10)
     public_suffix (3.1.1)
     rack (1.6.11)
     rack-test (0.6.3)
@@ -262,6 +264,7 @@ DEPENDENCIES
   nested_form
   popper_js (~> 1.14, >= 1.14.5)
   pry (= 0.10.1)
+  pry-rails (= 0.3.3)
   rails (= 4.2.0)
   rails-jquery-tokeninput
   rails4-autocomplete

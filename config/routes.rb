@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
- 
-  root 'menus#index'
+  devise_for :employees, controllers: { sessions: 'sessions' }
 
   resources :teams
   resources :attendances
@@ -15,15 +14,16 @@ Rails.application.routes.draw do
       end
     end
   end
-  devise_for :employees
 
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
+  get 'menus/home' => 'menus#home'
+  root 'menus#home'
 
   get 'employee_lists' => 'employees#employees_lists'
   get '/employees/index' => 'employees#index', :as => :employees
   get '/employees/new' => 'employees#new', :as => :new_employee
-  get '/employees/show' => 'employees#show', :as => :show_employee
+  get '/employees/:id/show' => 'employees#show', :as => :show_employee
   post '/employees/create' => 'employees#create', :as => :create_employee
   delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
 

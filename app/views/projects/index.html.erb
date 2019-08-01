@@ -1,6 +1,4 @@
-<div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
-  <%= notice %>
-</div>
+<% provide(:title, "Listing Projects") %>
 <h1>Listing Projects</h1>
 <% if can? :create, Project%>
 <%= link_to 'New Project', new_department_project_path, class: "btn btn-primary" %>

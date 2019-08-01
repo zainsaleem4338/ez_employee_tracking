@@ -15,26 +15,26 @@ class ProjectsController < ApplicationController
   def create
     @project.status = Project::NEW_STATUS
     if @project.save
-      redirect_to projects_path, notice: 'Returing from the create'
+      redirect_to department_projects_path, notice: 'Returing from the create'
     else
-      render new_project_path, notice: 'Cannnot enter data due to constraints'
+      render new_department_project_path, notice: 'Cannnot enter data due to constraints'
     end
   end
 
   def destroy
     @project.destroy
     if @project.destroyed?
-      redirect_to projects_path, notice: 'Deleted Successfully'
+      redirect_to department_projects_path, notice: 'Deleted Successfully'
     else
-      redirect_to projects_path, notice: 'Cannot be Deleted Successfully'
+      redirect_to department_projects_path, notice: 'Cannot be Deleted Successfully'
     end
   end
 
   def update
     if @project.update(project_params)
-      redirect_to projects_path, notice: 'Updated Successfully'
+      redirect_to department_projects_path, notice: 'Updated Successfully'
     else
-      redirect_to projects_path, notice: 'Cannot be updated'
+      redirect_to department_projects_path, notice: 'Cannot be updated'
     end
   end
 
@@ -43,9 +43,5 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project)
           .permit(:description, :name, :start_date, :expected_end_date, :department_id)
-  end
-
-  def set_department
-    @departments = current_employee.company.departments
   end
 end
