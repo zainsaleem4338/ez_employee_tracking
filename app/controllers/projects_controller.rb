@@ -5,27 +5,31 @@ class ProjectsController < ApplicationController
   def create
     @project.status = Project::NEW_STATUS
     if @project.save
-      redirect_to projects_path, notice: "Returing from the create"
+      flash[:success] = 'Project Created Successfully!'
+      redirect_to projects_path
     else
-      render new_project_path, notice: "Cannnot enter data due to constraints"
+      flash[:danger] = 'Could not create Project!'
+      render new_project_path
     end
   end
 
   def destroy
     @project.destroy
     if @project.destroyed?
-      redirect_to projects_path, notice: "Deleted Successfully"
+      flash[:success] = 'Project Deleted Successfully!'
     else
-      redirect_to projects_path, notice: "Cannot be Deleted Successfully"
+      flash[:danger] = 'Could not delete Project!'
     end
+    redirect_to projects_path
   end
 
   def update
     if @project.update(project_params)
-      redirect_to projects_path, notice: "Updated Successfully"
+      flash[:success] = 'Project Updated Successfully!'
     else
-      redirect_to projects_path, notice: "Cannot be updated"
+      flash[:danger] = 'Could not update Project!'
     end
+    redirect_to projects_path
   end
 
   private

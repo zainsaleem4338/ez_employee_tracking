@@ -3,7 +3,8 @@ require 'attendance'
 module ApplicationHelper
   def present_marked?
     @attendance = current_employee.todays_attendance_of_employee
-    @attendance.present?
+    return false if @attendance.nil?
+    @attendance.attendance_present?
   end
 
   def not_logged_out?

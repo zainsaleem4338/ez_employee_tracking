@@ -8,8 +8,8 @@ class Attendance < ActiveRecord::Base
   validates :employee_id, presence: true
   validates :status, inclusion: { in: ALLOWED_STATUS }, numericality: true
 
-  def present?
-    status.eql? STATUS[1]
+  def attendance_present?
+    status.eql? STATUS[:PRESENT]
   end
   
   def logout_empty?
