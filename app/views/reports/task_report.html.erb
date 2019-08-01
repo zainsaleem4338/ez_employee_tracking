@@ -1,0 +1,74 @@
+
+<div class="container datatable-container">
+  <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col-md-4">
+            <b>Project:</b>
+          </div>
+          <div class="col-md-8">
+            <input id="project" type="text" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col-md-4">
+            <b>Status:</b>
+          </div>
+          <div class="col-md-8">
+            <select id="status" class="form-control">
+              <option value="">--Select Status--</option>
+              <option value="New">New</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Review pending">Review pending</option>
+              <option value="Reviewed">Reviewed</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <center>
+    <div class="row">
+      <div class="col-md-3">
+        <b>Created Range:</b>
+      </div>
+      <div class="col-md-4">
+        <input id="created_start" type="date" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <input id="created_end" type="date" class="form-control" />
+      </div>
+      <span id="created_date_range" style="color: red"></span>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-3">
+        <b>Deadline Range:</b>
+      </div>
+      <div class="col-md-4">
+        <input id="deadline_start" type="date" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <input id="deadline_end" type="date" class="form-control" />
+      </div>
+      <span id="deadline_date_range" style="color: red"></span>
+    </div></center>
+    <br>
+    <div class="row">
+      <div class="col-md-8">
+        <button class="btn btn-primary" type="button" id="update">Update</button>&nbsp;
+        <button class="btn btn-primary" type="button" id="clear">Clear</button>
+      </div>
+      <div class="col-md-4">
+        <%= link_to 'Generate PDF', task_pdf_report_path(format: :pdf), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <br>
+  <div id="tasks_table">
+    <%= render 'shared/tasks_report_list', tasks: @tasks %>
+  </div>
+  
+</div> 

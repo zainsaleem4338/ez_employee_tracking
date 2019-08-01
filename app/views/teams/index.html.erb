@@ -19,8 +19,8 @@
       <tr>
         <td><%= team.name %></td>
         <td><%= team.description %></td>
-        <td><%= team.employee_lists('Team Leader').pluck(:name)[0] %></td>
-        <td><%= team.employee_lists('Team Member').count %></td>
+        <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first %></td>
+        <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
         <td><%= image_tag team.team_pic.url(:thumb), class: "rounded-circle" %></td>
         <td>
           <%= link_to 'Show', department_team_path(team.department,team), class: "btn btn-secondary" %>

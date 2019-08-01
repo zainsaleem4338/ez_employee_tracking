@@ -1,5 +1,4 @@
 class Team < ActiveRecord::Base
-
   EMPLOYEE_TYPE = { team_member: 'Team Member', team_leader: 'Team Leader' }.freeze
   attr_reader :employee_tokens, :team_lead_id
   belongs_to :department
@@ -11,7 +10,6 @@ class Team < ActiveRecord::Base
   validates_attachment_content_type :team_pic, content_type: /\Aimage\/.*\z/
   has_many :tasks, as: :assignable
   def create_team(team_lead_id, employee_ids, department_id)
-    binding.pry
     if employee_ids.nil?
       self.errors.add(:base, 'Team members name required')
       return false

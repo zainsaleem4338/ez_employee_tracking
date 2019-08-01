@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'autoprefixer-rails', '~> 9.6', '>= 9.6.1'
-gem 'bootstrap', '~> 4.0'
+gem 'cancancan'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise', '3.4.1'
 gem 'devise-bootstrap-views', '~> 1.0'
@@ -23,19 +23,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'select2-rails'
 gem 'sequenceid'
 gem 'uglifier', '>= 1.3.0'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap4'
 
 group :development, :test do
   gem 'better_errors'
   gem 'capybara', '~> 2.5'
+  gem 'clockwork'
   gem 'database_cleaner'
   gem 'delayed_job_active_record'
   gem 'factory_girl_rails', '~> 4.5.0'
@@ -46,6 +40,9 @@ group :development, :test do
   gem 'shoulda-matchers', require: false
   gem 'spring'
   gem 'web-console', '~> 2.0'
+  gem 'whenever', require: false
+  gem 'wicked_pdf'
+  gem 'wkhtmltopdf-binary'
 end
 
 group :test do

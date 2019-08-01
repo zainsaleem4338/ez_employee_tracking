@@ -3,12 +3,21 @@ Rails.application.routes.draw do
   resources :departments do
     resources :teams
   end
-  resources :projects
-  resources :tasks
   resources :attendances
 
+  resources :projects do
+    resources :tasks do
+      member do
+        get 'edit_status'
+        patch 'update_status'
+      end
+    end
+  end
   devise_for :employees
-  get 'employee_lists' => 'employees#employees_list'
+  get 'task_report' => 'reports#task_report'
+  get 'task_pdf_report' => 'reports#task_pdf_report'
+  get '/reports/load_task_data_in_report' => 'reports#load_task_data_in_report'
+  get 'employee_lists' => 'employees#employees_lists'
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
   get '/employees/team_member_render_view' => 'employees#team_member_render_view'
@@ -20,13 +29,10 @@ Rails.application.routes.draw do
 
   get 'teamslist' => 'teams#teams_list'
 
-  get 'project/:id/new_task' => 'tasks#new', as: :new_task_page
-  get 'projects/:id/tasks' => 'tasks#index', as: :tasks_page
-  get 'projects/:id/tasks/:id' => "tasks#edit", as: :edit_a_task_page
-  patch 'projects/:id/tasks/:id' => "tasks#update", as: :update_a_task_page
-
   get 'employees/:id/projects' => 'projects#index', as: :projects_page
 
   get 'employee/attendance' => 'attendances#create', as: :employee_attendance
   get 'employee/attendance/update' => 'attendances#update', as: :update_attendance
+
+  resources :reports
 end

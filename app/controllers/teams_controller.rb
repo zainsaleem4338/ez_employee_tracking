@@ -34,7 +34,7 @@ class TeamsController < ApplicationController
       if params[:team].present? &&
         @team.update_team(params[:team][:team_lead_id], params[:employee_tokens], team_params)
         format.html { redirect_to department_teams_path(@department), notice: 'Team was successfully updated.' }
-        format.json { render :show, status: :created, location: @team}
+        format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
         format.json { render json: @team.errors, status: :unprocessable_entity }
@@ -56,11 +56,12 @@ class TeamsController < ApplicationController
 
   def teams_list
     respond_to do |format|
-      format.json { render json: Team.where('name like ?',"%#{params[:q]}%" ) }
+      format.json { render json: Team.where('name like ?', "%#{params[:q]}%") }
     end
   end
-  
+
   private
+
     def set_department
       @department = Department.find(params[:department_id])
     end
