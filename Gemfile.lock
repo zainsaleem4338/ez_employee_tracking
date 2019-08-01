@@ -280,7 +280,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails (~> 9.6, >= 9.6.1)
   better_errors
-  cancancan
+  cancancan (~> 3.0.1)
   capybara (~> 2.5)
   clockwork
   coffee-rails (~> 4.1.0)

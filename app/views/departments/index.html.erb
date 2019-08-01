@@ -1,7 +1,7 @@
+<% provide(:title, "All Departments") %>
 <p id="notice"><%= notice %></p>
 
-<h4 class="h4">All Departments</h4>
-
+<% if @departments.length > 0 %>
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -25,7 +25,8 @@
     <% end %>
   </tbody>
 </table>
+<% end %>
 
 <br>
 
-<%= link_to 'New Department', new_department_path, class: "btn btn-primary"%>
+<%= link_to 'New Department', new_department_path, class: "btn btn-regular btn-primary"%>

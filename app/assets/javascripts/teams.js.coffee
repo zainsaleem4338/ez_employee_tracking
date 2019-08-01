@@ -7,7 +7,6 @@
 jQuery ->
 
   department_id = $('#department').val()
-
   user_hash = {
   theme: 'facebook',
   crossDomain: false,
@@ -59,6 +58,7 @@ jQuery ->
           $('#team_members_view').hide()
           $('#add_team_members').show()
           $('#append_team_members').show()
+          $('#team_member_span').text("");
 
 
   	$("#leader_edit").click ->
@@ -78,6 +78,7 @@ jQuery ->
         $('#team_leader_field').hide()
         $('#leader').show()
         $('#leader_edit').show()
+        $('#team_leader_span').text("");
         
         
 
@@ -88,7 +89,7 @@ jQuery ->
     
     members_array = (employee_arr) ->
       addedd_employee_arr = new Array()
-      $.each employee_arr, (key, emp) ->
-        addedd_employee_arr.push emp.value
+      $.each employee_arr, (key, employee) ->
+        addedd_employee_arr.push employee.value
       return addedd_employee_arr
   

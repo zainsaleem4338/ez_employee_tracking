@@ -4,11 +4,13 @@ class Ability
   def initialize(user)
     if user.role == Employee::ADMIN_ROLE
       can :manage, Department, company_id: user.company_id
-      can [:read, :employees_lists], Employee, active: true
+      can [:read, :employees_lists, :team_member_render_view], Employee, active: true
       can [:new, :create], Employee, company_id: user.company_id
       can :destroy, Employee
       can :manage, Project, company_id: user.company_id
       can :manage, Task, company_id: user.company_id
+      can :manage, Team, company_id: user.company_id
+      can :manage, Report, company_id: user.company_id
 
     else
       can :read, Employee, Employee.team_employees(user) do |employee|

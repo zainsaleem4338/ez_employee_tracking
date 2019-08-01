@@ -9,7 +9,9 @@ class ReportsController < ApplicationController
     task_query_hash = {}
     unless params['project'].empty?
       project = Project.find_by(name: params['project'])
-      task_query_hash.merge!(project_id: project.id)
+      unless project.nil?
+        task_query_hash.merge!(project_id: project.id)
+      end
     end
     unless params['status'].empty?
       task_query_hash.merge!(status: params['status'])

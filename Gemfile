@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'autoprefixer-rails', '~> 9.6', '>= 9.6.1'
-gem 'cancancan'
+gem 'cancancan', '~>3.0.1'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise', '3.4.1'
 gem 'devise-bootstrap-views', '~> 1.0'
