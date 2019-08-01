@@ -10,21 +10,19 @@
       <th>Name</th>
       <th>Login Time</th>
       <th>Logout Time</th>
-      <th>Start date</th>
-      <th>Salary</th>
     </tr>
   </thead>
 
   <tbody>
     <% @attendances_list.each do |attendance| %>
-    <% @employee = Employee.find(attendance.employee_id) %>
+    <% @company_employee = Employee.find(attendance.employee_id) %>
 
     <tr>
       <td>
         <%= attendance.employee_id %>
       </td>
       <td>
-        <%= @employee.name %>
+        <%= @company_employee.email %>
       </td>
       <td>
         <%= attendance.login_time.to_formatted_s(:long_ordinal) %>
@@ -36,12 +34,6 @@
           <%= attendance.logout_time.to_formatted_s(:long_ordinal) %>
         <% end %>
       </td>
-      <td>
-        2019/06/26
-      </td>
-      <td>
-        $100,000
-      </td>
     </tr>
     <% end %>
   </tbody>
@@ -52,8 +44,6 @@
       <th>Name</th>
       <th>Login Time</th>
       <th>Logout Time</th>
-      <th>Start date</th>
-      <th>Salary</th>
     </tr>
   </tfoot>
 </table>

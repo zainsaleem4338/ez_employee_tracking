@@ -1,4 +1,5 @@
-<h1>All Employees List</h1>
+
+<% provide(:title, "All Employees List") %>
 
 <ul class="list-group">
   <% @employees.each do |employee| %>
@@ -7,7 +8,6 @@
         <li><%= employee.name %></li>
         <li><%= employee.email %></li>
         <li><%= employee.role %></li> 
-        
         <% if can? :delete, employee %>
         <li><b><%= link_to "Delete this employee", delete_employee_path(employee), method: :delete, class: 'btn btn-outline-danger', data: { confirm: "Are you sure you want to delete the employee?" } %></b></li> 
         <% end %>

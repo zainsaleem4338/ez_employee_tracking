@@ -11,16 +11,16 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item active">
-          <%= link_to "Home", menus_index_path, class: 'nav-link' %>
-        </li>
+        <div class="d-flex align-items-center header_title">
+          <p><%= yield(:title) %></p>
+        </div>
       </ul>
 
       <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item">
+        <li class="nav-item" id="attendance_button">
           <div class="d-flex align-items-center">
-            <% if present_marked? && !logged_out? %>
+            <% if present_marked? && not_logged_out? %>
               <%= link_to 'Update Logout', update_attendance_path, class: 'btn btn-sm btn-outline-danger update_attendance', remote: true %>
             <% elsif !present_marked? %>
               <%= link_to 'Mark Present', employee_attendance_path, class: 'btn btn-sm btn-regular btn-primary mark_present', remote: true %>
@@ -28,13 +28,12 @@
           </div>
         </li>
 
-        <li class="nav-item dropdown no-arrow">
-          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item dropdown no-arrow" id="notifications">
+          <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell fa-fw"></i>
             <sup>9+</sup>  
           </a>
-
-          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="notificationsDropdown">
             <h6 class="dropdown-header">Notifications</h6>
             <a class="dropdown-item d-flex align-items-center" href="#">
               <div class="mr-3">
@@ -45,15 +44,13 @@
               <span class="small-gray">A new report is here!</span>
             </a>
           </div>
-
         </li>
 
-        <li class="nav-item dropdown no-arrow">
+        <li class="nav-item dropdown no-arrow" id="messages">
           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-envelope fa-fw"></i>
             <sup>7</sup>
           </a>
-
           <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
             <h6 class="dropdown-header">
               Messages
@@ -71,12 +68,11 @@
 
         <div class="topbar-divider d-none d-sm-block"></div>
 
-        <li class="nav-item dropdown no-arrow">
+        <li class="nav-item dropdown no-arrow" id="user_menu">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="small-gray"><%= current_employee.name %></span>
             <img src="https://source.unsplash.com/QAB-WJcbgJk/60x60" class="img-profile rounded-circle">
           </a>
-
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
             <a class="dropdown-item" href="#">
               <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
