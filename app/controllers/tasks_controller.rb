@@ -46,6 +46,11 @@ class TasksController < ApplicationController
   def update_task_logtime
     unless params[:task][:log_time].blank?
       @result = @task.update_attribute('log_time', @task.log_time.to_i + params[:task][:log_time].to_i)
+      if @result
+        flash.now[:success] = 'Updated task log-time Successfully!'
+      else
+        flash.now[:danger] = 'Could not update task log-time!'
+      end
     end
     respond_to do |format|
       format.js
