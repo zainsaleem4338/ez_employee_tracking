@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20190731075944) do
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "subdomain",   limit: 255
   end
 
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree

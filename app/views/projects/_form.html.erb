@@ -4,18 +4,19 @@
 
 <%= form_for(@project) do |form| %>
   <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-      <ul>
-        <% @project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="conatiner">
+      <div id="error_explanation">
+        <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+        <ul>
+          <% @project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
   <div class="row">
-
     <div class="col-md-6">
       <div class="row d-flex">
         <div class="form-group col-md-6">
@@ -37,14 +38,12 @@
     </div>
 
     <div class="col-md-6">
-
       <div class="row d-flex">
         <div class="form-group col-md-6">
           <%= form.label "Start Date" %><br>
           <%= form.date_field :start_date, class: "form-control" %>
         </div>
       </div>
-
       <div class="row d-flex">
         <div class="form-group col-md-6">
          <%= form.label "Expected End Date" %><br>
@@ -55,6 +54,5 @@
         <%= form.submit class: "btn btn-regular btn-primary"  %>
       </div>
     </div>
-
   </div>
 <% end %>

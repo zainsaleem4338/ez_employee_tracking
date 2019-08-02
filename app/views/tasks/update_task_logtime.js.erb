@@ -1,3 +1,4 @@
 <% if @result %>
-  // re-load notificaation.html.erb
+  // re-load notification.html.erb
+  $('#notifications-flash').append("<%= j render(:partial => 'shared/notification') %>");
 <% end %>

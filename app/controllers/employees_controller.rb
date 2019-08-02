@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  STATUS = { 'PRESENT': 1, 'ABSENT': 0 }.freeze
+  
   load_and_authorize_resource :employee, through_association: :company
 
   def employees_lists
@@ -9,15 +9,18 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    @attendances_list = current_employee.company.attendances.where(status: STATUS[:PRESENT]).order(login_time: :desc)
+    @attendances_list = current_employee.company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
     
     @employee_tasks, @employee_velocity = current_employee.compute_employees_velocity
+    binding.pry
   end
 
   def create
+    @employee = Employee.new(employee_params)
+    @employee.password = generate_password
     if @employee.save
-      flash.now[:success] = 'Employee successfully created!'
-      redirect_to root_path
+      flash[:success] = 'Employee successfully created!'
+      redirect_to menus_index_path
     else
       render 'new'
     end
@@ -31,7 +34,7 @@ class EmployeesController < ApplicationController
     if @employee.save
       redirect_to employees_path
     else
-      redirect_to root_path
+      redirect_to menus_index_path
     end
   end
 
@@ -66,5 +69,10 @@ class EmployeesController < ApplicationController
   def employee_params
     params.require(:employee)
           .permit(:name, :email, :password, :role, :company_id, :department_id)
-  end  
+  end
+
+  def generate_password
+    random_password = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+    (0...10).map { random_password[rand(random_password.length)] }.join
+  end
 end

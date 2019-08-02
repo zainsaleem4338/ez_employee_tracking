@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'menus#index'
+
+  devise_for :employees, controllers: { sessions: 'sessions' }
 
   resources :teams
   resources :departments
@@ -13,12 +14,13 @@ Rails.application.routes.draw do
       end
     end
   end
-
+  
   resources :tasks, only: [:my_tasks, :update_task_logtime]
-  devise_for :employees
 
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
+  get 'menus/home' => 'menus#home'
+  root 'menus#home'
 
   get 'employees/export_report' => 'employees#pdf_velocity_report', as: :pdf_velocity_report
 

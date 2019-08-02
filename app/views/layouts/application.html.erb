@@ -34,7 +34,7 @@
             <%= render 'layouts/header' %>
           </div>
           <div class="yielded-area">
-            <div>
+            <div id="notifications-flash">
               <%= render 'shared/notification' %>
             </div>
             <%= yield %>
@@ -42,6 +42,9 @@
         </div>
       </div>
     <% else %>
+      <div class="container">
+        <%= render 'menus/header' %>
+      </div>
       <div class='container'>
         <%= yield %>
       </div>

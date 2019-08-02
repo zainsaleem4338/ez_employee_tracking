@@ -23,7 +23,7 @@
               <td><%= task.log_time %></td>
               <td><%= task.expected_end_date.to_formatted_s(:short) %></td>
             </tr>
-          <% end %>
+        <% end %>
         
       </tbody>
       <thead>
@@ -36,6 +36,7 @@
             <th>-</th>
           <% else %>
             <th><%= @employee_velocity[@curr_task.assignable_id] %></th>
+            <% binding.pry %>
           <% end %>
         </tr>
       </thead>
