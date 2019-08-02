@@ -1,4 +1,5 @@
 <% if @settings.present? %>
+<h2>Working Days</h2>
   <table class="table">
     <thead>
       <tr>
@@ -16,8 +17,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>   
-        <td><%= @settings.timings[:monday_start_time] %></td>
-        <td><%= @settings.timings[:monday_end_time] %></td>
+        <td><%= @settings.timings['monday_start_time'] %></td>
+        <td><%= @settings.timings['monday_end_time'] %></td>
       </tr>
       <tr>
         <th>Tuesday</th>
@@ -26,8 +27,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>   
-        <td><%= @settings.timings[:tuesday_start_time] %></td>
-        <td><%= @settings.timings[:tuesday_end_time] %></td>
+        <td><%= @settings.timings['tuesday_start_time'] %></td>
+        <td><%= @settings.timings['tuesday_end_time'] %></td>
       </tr>
       <tr>
         <th>Wednesday</th>
@@ -36,8 +37,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>   
-        <td><%= @settings.timings[:wednesday_start_time] %></td>
-        <td><%= @settings.timings[:wednesday_end_time] %></td>
+        <td><%= @settings.timings['wednesday_start_time'] %></td>
+        <td><%= @settings.timings['wednesday_end_time'] %></td>
       </tr>
       <tr>
         <th>Thursday</th>
@@ -46,8 +47,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>   
-        <td><%= @settings.timings[:thursday_start_time] %></td>
-        <td><%= @settings.timings[:thursday_end_time] %></td>
+        <td><%= @settings.timings['thursday_start_time'] %></td>
+        <td><%= @settings.timings['thursday_end_time'] %></td>
       </tr>
       <tr>
         <th>Friday</th>
@@ -56,8 +57,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>  
-        <td><%= @settings.timings[:friday_start_time] %></td>
-        <td><%= @settings.timings[:friday_end_time] %></td> 
+        <td><%= @settings.timings['friday_start_time'] %></td>
+        <td><%= @settings.timings['friday_end_time'] %></td> 
       </tr>
       <tr>
         <th>Saturday</th>
@@ -66,8 +67,8 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>   
-        <td><%= @settings.timings[:saturday_start_time] %></td>
-        <td><%= @settings.timings[:saturday_end_time] %></td>
+        <td><%= @settings.timings['saturday_start_time'] %></td>
+        <td><%= @settings.timings['saturday_end_time'] %></td>
       </tr>
       <tr>
         <th>Sunday</th>
@@ -76,11 +77,58 @@
         <% else %>
           <td><span class="badge badge-danger">Off</span></td>
         <% end %>  
-        <td><%= @settings.timings[:sunday_start_time] %></td>
-        <td><%= @settings.timings[:sunday_end_time] %></td> 
+        <td><%= @settings.timings['sunday_start_time'] %></td>
+        <td><%= @settings.timings['sunday_end_time'] %></td> 
       </tr>
     </tbody>
   </table>
+  <% if @settings.holidays.present? %>
+  	<h2>Public Holidays</h2>
+	  <table class="table">
+	  	 <thead>
+	      <tr>
+	        <th>Holiday Date</th>
+	        <th>Every Year</th>
+	      </tr>
+	      <% @settings.holidays.each do |key, val| %>
+	      <tr>
+	      	<td><%= @settings.holidays[key]["holiday_date_#{key}"] %></td>
+	      	<% if @settings.holidays[key]["every_year_#{key}"] %>
+          	<td><span class="badge badge-success">On</span></td>
+        	<% else %>
+          	<td><span class="badge badge-danger">Off</span></td>
+        	<% end %>   
+	      </tr>
+	      <% end %>
+	    </thead>
+	  </table>
+  <% end %>
+  <div class='row'>
+  	<div class='col-md-6'>
+  		<h2>Allocated Leaves</h2>
+  	</div>
+  </div>
+  <table class='table'>
+  	<thead>
+  		<tr>
+        <th>Leaves</th>
+        <% if @settings.allocated_leaves.nil? %>
+	  			<th><h4><span class="badge badge-danger">0</span></h4></th>
+				<% else %>
+					<th><h4><span class="badge badge-success"><%= @settings.allocated_leaves %></span></h4></th>
+			  <% end %>
+      </tr>
+      <tr>
+        <th>Attendance Threshold</th>
+        <% if @settings.attendance_time.nil? %>
+	  			<th><h4><span class="badge badge-danger">Not Set</span></h4></th>
+				<% else %>
+					<th><h4><span class="badge badge-success"><%= (@settings.attendance_time).strftime("%H:%M:%S") %></span></h4></th>
+			  <% end %>
+      </tr>
+  	</thead>
+  </table>
+  <br><br>
 <% else %>
   <center><h3>No Settings Added!</h3></center>
 <% end %>

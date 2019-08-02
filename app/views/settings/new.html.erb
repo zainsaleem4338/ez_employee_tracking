@@ -1,142 +1,158 @@
 <center><h3>Company Settings</h3></center><br>
 <% if @setting.blank? %>
-
-  <h4>Adjust Working Days</h4><br>
-
-  <%= form_tag( create_settings_path, method: "post") do %>
-    <div class='row'>
-      <div class='col-sm-4'></div>
-      <div class='col-sm-4'>
-        Start Time
-      </div>
-      <div class='col-sm-4'>
-        End Time
-      </div>
-    </div>
-    <div class='form-group row'>
-      <div class='col-sm-2'>
-        <label class='control-label'>Monday</label>
-      </div>
-      <div class='col-sm-1'>
-        <label class="switch">
-          <%= check_box_tag :monday %>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:monday_start_time,"", class:'form-control') %>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:monday_end_time, "", class:'form-control') %>
-      </div>
-    </div>
-    <div class='form-group row'>
-      <div class='col-sm-2'>
-        <label class='control-label'>Tuesday</label>
-      </div>
-      <div class='col-sm-1'>
-        <label class="switch">
-          <%= check_box_tag :tuesday %>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:tuesday_start_time,"", class:'form-control') %>
-       </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:tuesday_end_time, "", class:'form-control') %>
-      </div>
-    </div>
-    <div class='form-group row'>
-      <div class='col-sm-2'>
-        <label class='control-label'>Wednesday</label>
-      </div>
-      <div class='col-sm-1'>
-        <label class="switch">
-          <%= check_box_tag :wednesday %>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:wednesday_start_time,"", class:'form-control') %>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:wednesday_end_time, "", class:'form-control') %>
-      </div>
-    </div>
-    <div class='form-group row'>
-      <div class='col-sm-2'>
-        <label class='control-label'>Thursday</label>
-      </div>
-      <div class='col-sm-1'>
-        <label class="switch">
-          <%= check_box_tag :thursday %>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:thursday_start_time,"", class:'form-control') %>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:thursday_end_time, "", class:'form-control') %>
-      </div>
-    </div>
-    <div class='form-group row'>
-      <div class='col-sm-2'>
-        <label class='control-label'>Friday</label>
-      </div>
-      <div class='col-sm-1'>
-        <label class="switch">
-          <%= check_box_tag :friday %>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:friday_start_time,"", class:'form-control') %>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:friday_end_time, "", class:'form-control') %>
-      </div>
-    </div>
-    <div class='form-group row'>
-      <div class='col-sm-2'>
-        <label class='control-label'>Saturday</label>
-      </div>
-      <div class='col-sm-1'>
-        <label class="switch">
-          <%= check_box_tag :saturday %>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:saturday_start_time,"", class:'form-control') %>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:saturday_end_time, "", class:'form-control') %>
-      </div>
-    </div>
-    <div class='form-group row'>
-      <div class='col-sm-2'>
-        <label class='control-label'>Sunday</label>
-      </div>
-      <div class='col-sm-1'>
-        <label class="switch">
-          <%= check_box_tag :sunday %>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:sunday_start_time,"", class:'form-control') %>
-      </div>
-      <div class='col-sm-4'>
-        <%= text_field_tag(:sunday_end_time, "", class:'form-control') %>
-      </div>
-    </div>
-
-    <div class='form-group'>
-      <%= submit_tag("Save Settings", class:'btn btn-dark btn-block') %>
-    </div>
-  <% end %>
+  <h4><span data-toggle="collapse" data-target="#_working_days" style='cursor: pointer'><i class="fas fa-arrow-right"></i> Adjust Working Days</span></h4><br>
+	  <%= form_tag( create_settings_path, method: "post") do %>
+	  <div id="_working_days" class="collapse">
+	    <div class='row'>
+	      <div class='col-sm-4'></div>
+	      <div class='col-sm-4'>
+	        Start Time
+	      </div>
+	      <div class='col-sm-4'>
+	        End Time
+	      </div>
+	    </div>
+	    <div class='form-group row'>
+	      <div class='col-sm-2'>
+	        <label class='control-label'>Monday</label>
+	      </div>
+	      <div class='col-sm-1'>
+	        <label class="switch">
+	          <%= check_box_tag :monday %>
+	          <span class="slider round"></span>
+	        </label>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:monday_start_time,"", class:'form-control') %>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:monday_end_time, "", class:'form-control') %>
+	      </div>
+	    </div>
+	    <div class='form-group row'>
+	      <div class='col-sm-2'>
+	        <label class='control-label'>Tuesday</label>
+	      </div>
+	      <div class='col-sm-1'>
+	        <label class="switch">
+	          <%= check_box_tag :tuesday %>
+	          <span class="slider round"></span>
+	        </label>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:tuesday_start_time,"", class:'form-control') %>
+	       </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:tuesday_end_time, "", class:'form-control') %>
+	      </div>
+	    </div>
+	    <div class='form-group row'>
+	      <div class='col-sm-2'>
+	        <label class='control-label'>Wednesday</label>
+	      </div>
+	      <div class='col-sm-1'>
+	        <label class="switch">
+	          <%= check_box_tag :wednesday %>
+	          <span class="slider round"></span>
+	        </label>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:wednesday_start_time,"", class:'form-control') %>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:wednesday_end_time, "", class:'form-control') %>
+	      </div>
+	    </div>
+	    <div class='form-group row'>
+	      <div class='col-sm-2'>
+	        <label class='control-label'>Thursday</label>
+	      </div>
+	      <div class='col-sm-1'>
+	        <label class="switch">
+	          <%= check_box_tag :thursday %>
+	          <span class="slider round"></span>
+	        </label>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:thursday_start_time,"", class:'form-control') %>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:thursday_end_time, "", class:'form-control') %>
+	      </div>
+	    </div>
+	    <div class='form-group row'>
+	      <div class='col-sm-2'>
+	        <label class='control-label'>Friday</label>
+	      </div>
+	      <div class='col-sm-1'>
+	        <label class="switch">
+	          <%= check_box_tag :friday %>
+	          <span class="slider round"></span>
+	        </label>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:friday_start_time,"", class:'form-control') %>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:friday_end_time, "", class:'form-control') %>
+	      </div>
+	    </div>
+	    <div class='form-group row'>
+	      <div class='col-sm-2'>
+	        <label class='control-label'>Saturday</label>
+	      </div>
+	      <div class='col-sm-1'>
+	        <label class="switch">
+	          <%= check_box_tag :saturday %>
+	          <span class="slider round"></span>
+	        </label>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:saturday_start_time,"", class:'form-control') %>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:saturday_end_time, "", class:'form-control') %>
+	      </div>
+	    </div>
+	    <div class='form-group row'>
+	      <div class='col-sm-2'>
+	        <label class='control-label'>Sunday</label>
+	      </div>
+	      <div class='col-sm-1'>
+	        <label class="switch">
+	          <%= check_box_tag :sunday %>
+	          <span class="slider round"></span>
+	        </label>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:sunday_start_time,"", class:'form-control') %>
+	      </div>
+	      <div class='col-sm-4'>
+	        <%= text_field_tag(:sunday_end_time, "", class:'form-control') %>
+	      </div>
+	    </div>
+	  </div>
+    <h4><span data-toggle="collapse" data-target="#_holidays" style='cursor: pointer'><i class="fas fa-arrow-right"></i> Public holidays</span></h4><br>
+    <div id='_holidays' class='collapse'>
+	    <div class='form-group'>
+	    	<button id='_btn_add' class='btn btn-default btn-lg' type='button'><i class="fas fa-plus-circle"></i> Add</button>
+	    </div>
+	    <div id='_labels'>
+	    	<div class='row'>
+	    		<div class='col-md-6'>
+	    			<center><b>Select Date</b></center>
+	    		</div>
+	    		<div class='col-md-6'>
+	    			<center><b>Every Year</b></center>
+	    		</div>
+	    	</div>
+	    	<br>
+	    </div>
+	  </div> 
+	    <div class='form-group'>
+	      <%= submit_tag("Save Settings", class:'btn btn-dark btn-block') %>
+	    </div>
+	  <% end %>
 
 <% else %>
   <center><h3>Settings already exists!</h3></center>
@@ -158,5 +174,14 @@
     $('#saturday_end_time').timepicki();
     $('#sunday_start_time').timepicki();
     $('#sunday_end_time').timepicki(); 
+
+ 	  $('#_btn_add').click(function() {
+    	$('#_holidays').append("<div class='form-group holidays'><div class='row'><div class='col-md-6'><%= escape_javascript(date_field_tag 'holiday_date', {} ,class:'form-control holiday-date-field') %></div><div class='col-md-6'><center><label class='switch'><%= escape_javascript(check_box_tag 'every_year', false ,false ,class:'every_year-field' ) %><span class='slider round'></span></label></center></div></div></div>");
+	 	  $('.holiday-date-field:last').attr('id', 'holiday_date_' + $('.holidays').length);
+	 	  $('.holiday-date-field:last').attr('name', 'holiday_date_' + $('.holidays').length);
+	 	  $('.every_year-field:last').attr('id', 'every_year_' + $('.holidays').length);
+	 	  $('.every_year-field:last').attr('name', 'every_year_' + $('.holidays').length);
+    });
   });
+
 </script>

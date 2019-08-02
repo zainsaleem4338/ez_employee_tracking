@@ -1,6 +1,11 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all
+    @events = []
+    @event = Event.all
+    @setting = Setting.all.first.holidays
+    @events << @event
+    @events << @setting
+    binding.pry
   end
 
   def new
