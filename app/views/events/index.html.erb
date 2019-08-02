@@ -11,7 +11,6 @@
       datetime: new Date(<%= event.event_date.year%>, <%= event.event_date.month %> -1, <%= event.event_date.day%>, <%= event.event_date.strftime("%H") %>)
     })
   <% end %>
-  <% binding.pry %>
   <% @events.last.each do |key,val| %>
     events_arr.push({
       title: "Public Holiday",

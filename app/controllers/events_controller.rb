@@ -5,7 +5,6 @@ class EventsController < ApplicationController
     @setting = Setting.all.first.holidays
     @events << @event
     @events << @setting
-    binding.pry
   end
 
   def new
