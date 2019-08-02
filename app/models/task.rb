@@ -21,9 +21,18 @@ class Task < ActiveRecord::Base
     errors.add(:start_date,"should be greater than equal to today's date.") if start_date.to_date < Date.today
   end
 
+  def get_employees(assignable_type, assignable_id)
+    if assignable_type == EMPLOYEE
+      company.employees.where(id: assignable_id)
+    else
+      company.teams.find(assignable_id).employees
+    end
+  end
+
   def set_status
-    return self.status = Task::ASSIGNED_STATUS unless self.assignable_id.nil?
-    self.status = Task::NEW_STATUS
-    self.assignable_type = nil
+    return status = Task::ASSIGNED_STATUS unless assignable_id.nil?
+    
+    status = Task::NEW_STATUS
+    assignable_type = nil
   end
 end
