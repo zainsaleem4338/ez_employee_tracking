@@ -29,7 +29,7 @@
       </td>
       <td>
         <% if logout_added?(attendance) %>
-          nil
+          -
         <% else %>
           <%= attendance.logout_time.to_formatted_s(:long_ordinal) %>
         <% end %>

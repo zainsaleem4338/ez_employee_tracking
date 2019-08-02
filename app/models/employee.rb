@@ -43,28 +43,22 @@ class Employee < ActiveRecord::Base
   end
 
   def compute_total_complexity_of_tasks(employee_tasks)
-    @sum_complexity = 0
-    employee_tasks.each do |task|
-      @sum_complexity += task.complexity
-    end
-    @sum_complexity
+    return 0 if employee_tasks.blank?
+    employee_tasks.inject(0) { |sum, task| sum + task.complexity }
   end
 
   def time_spent_on_tasks(employee_tasks)
-    @time = 0
-    employee_tasks.each do |task|
-      @time += task.log_time.to_i
-    end
-    @time
+    return 0 if employee_tasks.blank?
+    employee_tasks.inject(0) { |sum, task| sum + task.log_time.to_i }
   end
 
   def compute_employees_velocity
     @employees_list = company.employees
-    @employee_tasks = []
+    @employee_tasks = {}
     @employee_velocity = {}
     @employees_list.each do |employee|
-      @employee_tasks << employee.company.tasks.get_employee_tasks(employee).where(assignable_type: EMPLOYEE_ROLE)
-      @employee_velocity[employee.id] = employee.compute_one_employee_velocity(@employee_tasks.last)
+      @employee_tasks[employee.id] = employee.company.tasks.get_employee_tasks(employee)
+      @employee_velocity[employee.id] = employee.compute_one_employee_velocity(@employee_tasks[employee.id])
     end
     return @employee_tasks, @employee_velocity
   end

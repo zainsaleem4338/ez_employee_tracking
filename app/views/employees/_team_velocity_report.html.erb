@@ -1,4 +1,4 @@
-<% @employee_tasks.each do |tasks_of_employee| %>
+<% @employee_tasks.each do |employee_id, tasks_of_employee| %>
   <%  @curr_task = -1 %>
   <% unless tasks_of_employee.blank? %>
   <div class="container">
@@ -7,36 +7,47 @@
         <tr>
           <th>Task id</th>
           <th>Task Name</th>
+          <th>Task Complexity</th>
           <th>Assigned to</th>
+          <th>Employee id</th>
           <th>Log time</th>
           <th>Expected end date</th>
         </tr>
       </thead>
       <tbody>
         <% tasks_of_employee.each do |task|  %>
-          <% if team_task?(task) %>
+          
           <%  @curr_task = task %>
             <tr>
               <td><%= task.id %></td>
               <td><%= task.name %></td>
+              <td><%= task.complexity %></td>
               <td><%= task.assignable.name %></td>
-              <td><%= task.log_time %></td>
+              <td><%= employee_id %></td>
+              <% if task.log_time.blank? %>
+                <td>-</td>
+              <% else %>
+                <td><%= task.log_time %></td>
+              <% end %>
               <td><%= task.expected_end_date.to_formatted_s(:short) %></td>
             </tr>
-          <% end %>
         <% end %>
+        
       </tbody>
       <thead>
+        <% @curr_velocity = @employee_velocity[employee_id] %>
         <tr>
           <th></th>
           <th></th>
           <th></th>
+          <th></th>
+          <th></th>
           <th>Employee Velocity</th>
-          <% if no_current_task?(@curr_task) %>
-          	<th>-</th>
+          <% if no_current_task?(@curr_task) || employee_velocity_nan?(@curr_velocity) %>
+            <th>-</th>
           <% else %>
-          	<th><%= @employee_velocity[@curr_task.assignable_id] %></th>
-         	<% end %>
+            <th><%= @curr_velocity %></th>
+          <% end %>
         </tr>
       </thead>
     </table>
