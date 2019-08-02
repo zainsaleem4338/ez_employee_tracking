@@ -51,19 +51,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def pdf_team_velocity_report
-    @employee_tasks, @employee_velocity = current_employee.compute_employees_velocity
-    respond_to do |format|
-      format.pdf do
-        render pdf: 'Team Velocity',
-        template: 'employees/team_velocity_pdf_report.html.erb',
-        layout: 'pdf.html',
-        page_size: 'A4',
-        dpi: 55
-      end
-    end
-  end
-
   private
 
   def employee_params
