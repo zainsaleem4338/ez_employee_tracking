@@ -27,21 +27,5 @@ module EzEmployeeTracking
     config.web_console.development_only = true
 
     config.active_job.queue_adapter = :delayed_job
-    # Setting Email SMTP
-    config.action_mailer.default_options = {
-      from: 'sumbaltariq24@gmail.com'
-    }
-    config.action_mailer.default_url_options = { host: 'localhost:3000' }
-    config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      address: 'smtp.gmail.com',
-      port: '587',
-      domain: 'localhost',
-      authentication: :plain,
-      enable_starttls_auto: true,
-      user_name: 'sumbaltariq24@gmail.com',
-      password: 'SumbalTariq24041996'
-    }
   end
 end

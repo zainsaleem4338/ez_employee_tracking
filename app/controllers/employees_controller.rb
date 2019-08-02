@@ -25,7 +25,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
     @employee.password = generate_password
     if @employee.save
-      flash[:success] = 'Employee successfully created!'
+      flash[:success] = t('.success_notice')
       redirect_to menus_index_path
     else
       render 'new'
@@ -36,7 +36,7 @@ class EmployeesController < ApplicationController
     @employee = current_employee.company.employees
                                 .find_by(sequence_num: params[:id])
     @employee.active = false
-    flash[:danger] = 'Employee is now inactive!'
+    flash[:danger] = t('.inactive_notice')
     if @employee.save
       redirect_to employees_path
     else

@@ -5,22 +5,22 @@ class TasksController < ApplicationController
   def create
     @task.set_status
     if @task.save
-      redirect_to project_tasks_url(@task.project), notice: 'Returing from the create'
+      redirect_to project_tasks_url(@task.project), notice: t('.success_notice')
     else
-      render new_project_task_path(@task.project), notice: 'Cannnot enter data due to constraints'
+      render new_project_task_path(@task.project), notice: t('.error_notice')
     end
   end
 
   def update
     if !params[:assignable_employee_id].empty? && !params[:assignable_team_id].empty?
-      render :edit, notice: 'Make sure you delete employee field or team field'
+      render :edit, notice: t('.error_field_notice')
     else
       params[:task][:status] = 'new' if params[:task][:assignable_id].empty?
       params[:task][:status] = 'assigned' unless params[:task][:assignable_id].empty?
       if @task.update(task_params)
-        redirect_to project_tasks_path, notice: 'Updated Successfully'
+        redirect_to project_tasks_path, notice: t('.success_notice')
       else
-        redirect_to project_tasks_path, notice: 'Cannot be updated'
+        redirect_to project_tasks_path, notice: t('.error_notice')
       end
     end
   end
@@ -28,17 +28,17 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     if @task.destroyed?
-      redirect_to project_tasks_path, notice: 'Deleted Successfully'
+      redirect_to project_tasks_path, notice: t('.success_notice')
     else
-      redirect_to project_tasks_path, notice: 'Cannot be deleted successfully'
+      redirect_to project_tasks_path, notice: t('.error_notice')
     end
   end
 
   def update_status
     if @task.update(task_params)
-      redirect_to project_tasks_path, notice: 'Updated Successfully'
+      redirect_to project_tasks_path, notice: t('.success_notice')
     else
-      redirect_to project_tasks_path, notice: 'Cannot be updated!'
+      redirect_to project_tasks_path, notice: t('.error_notice')
     end
   end
 

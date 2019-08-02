@@ -11,13 +11,13 @@ class Team < ActiveRecord::Base
   has_many :tasks, as: :assignable
   def create_team(team_lead_id, employee_ids, department_id)
     if employee_ids.nil?
-      self.errors.add(:base, 'Team members name required')
+      self.errors.add(:base, I18n.t('models.team.team_members_require_error'))
       return false
     end
     team_members_ids = employee_ids.map(&:to_i)
     if team_lead_id.present?
       if team_members_ids.include? team_lead_id.to_i
-        self.errors.add(:base, "Employee can't be team member & team leader at the same time.")
+        self.errors.add(:base, I18n.t('models.team.team_lead_member_conflict'))
         return false
       end
     end
@@ -27,7 +27,7 @@ class Team < ActiveRecord::Base
         self.save!
         self.employee_teams.create!(employee_id: team_lead_id, employee_type: EMPLOYEE_TYPE[:team_leader])
         if team_members_ids.empty?
-          self.errors.add(:base, 'Team members name required')
+          self.errors.add(:base, I18n.t('models.team.team_members_require_error'))
           return false
         end
         team_members_ids.each do |team_member|
@@ -45,19 +45,19 @@ class Team < ActiveRecord::Base
 
   def update_team(team_lead_id, employee_ids, update_team_params)
     if employee_ids.nil?
-      self.errors.add(:base, 'Team members name required')
+      self.errors.add(:base, I18n.t('models.team.team_members_require_error'))
       return false
     end
     team_members_ids = employee_ids.map(&:to_i)
     if team_lead_id.present?
       if team_members_ids.include? team_lead_id.to_i
-        self.errors.add(:base, "Employee can't be team member & team leader at the same time.")
+        self.errors.add(:base, I18n.t('models.team.team_lead_member_conflict'))
         return false
       end
     end
     begin
       if team_members_ids.empty?
-        self.errors.add(:base, 'Team members name required')
+        self.errors.add(:base, I18n.t('models.team.team_members_require_error'))
         return false
       end
       team_employees = self.employee_teams
@@ -88,10 +88,10 @@ class Team < ActiveRecord::Base
   def add_errors(error)
     if error.record.is_a? EmployeeTeam
       if error.record.employee_id.nil? && error.record.employee_type == EMPLOYEE_TYPE[:team_leader]
-        self.errors.add(:base, 'Team leader name is required')
+        self.errors.add(:base, I18n.t('models.team.leader_name_require'))
       end
       if error.record.employee_id.nil? && error.record.employee_type == EMPLOYEE_TYPE[:team_member]
-        self.errors.add(:base, 'Team member names are required')
+        self.errors.add(:base, I18n.t('models.team.team_members_require_error'))
       end
     end
   end

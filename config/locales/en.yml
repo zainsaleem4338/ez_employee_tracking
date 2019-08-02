@@ -1,23 +1,79 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   hello: "Hello world"
+  departments:
+    create:
+      success_notice: 'Department was successfully created.'
+
+    update:
+      success_notice: 'Department was successfully updated.'
+
+    destroy:
+      success_notice: 'Department was successfully destroyed.'
+      error_notice: 'Unable to delete department'
+
+
+  employees:
+    create:
+      success_notice: 'Employee successfully created!'
+    destroy:
+      inactive_notice: 'Employee is now inactive!'
+
+  projects:
+    create:
+      success_notice: 'Successfully created'
+    destroy:
+      success_notice: 'Deleted Successfully'
+      error_notice: 'Unable to delete'
+    update:
+      success_notice: 'Updated Successfully'
+      error_notice: 'Cannot be updated'
+
+  sessions:
+    create:
+      invalid_company_notice: 'Invalid Company!'
+      invalid_pswd_email_notice: 'Invalid password or email!'
+      success_notice: 'Employee signed in successfully!'
+      not_belongs_to_company: 'Employee does not belong to %{current_company_name}!'
+
+  tasks:
+    create:
+      success_notice: 'Successfully created'
+      error_notice: 'Cannnot enter data due to constraints'
+    update:
+      error_field_notice: 'Make sure you delete employee field or team field'
+      success_notice: 'Updated Successfully'
+      error_notice: 'Cannot be updated'
+    destroy:
+      success_notice: 'Deleted Successfully'
+      error_notice: 'Unable to delete'
+    update_status:
+      success_notice: 'Updated Successfully'
+      error_notice: 'Cannot be updated!'
+
+  teams:
+    create:
+      success_notice: 'Team was successfully created.'
+    update:
+      success_notice: 'Team was successfully updated.'
+    destroy:
+      success_notice: 'Team was successfully destroyed.'
+      error_notice: 'Unable to delete team'
+
+  models:
+    team:
+      team_members_require_error: 'Team members name are required'
+      team_lead_member_conflict: Employee can't be team member & team leader at the same time.
+      leader_name_require: 'Team leader name is required'
+    task_project:
+      end_date_valid: 'cannot be before start date'
+      start_date_valid: "should be greater than equal to today's date."
+
+  task_mailer:
+    assign_task_notify:
+      subject: 'New Task Assigned'
+    unassign_task_notify:
+      subject: 'Un-Assign Task'
+    change_task_status_notify:
+      subject: 'Task Status Change'
+    task_deadline_notify:
+      subject: 'Task Deadline Alert'

@@ -12,11 +12,11 @@ class Task < ActiveRecord::Base
   scope :get_tasks, ->(user) { where('(tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?)', Employee.all.team_employees_projects_tasks(user).pluck(:id), EMPLOYEE, user.employee_teams.pluck(:team_id), TEAM) }
 
   def check_start_and_end_date
-    errors.add(:expected_end_date, 'cannot be before start_time') if expected_end_date.to_date < start_date.to_date
+    errors.add(:expected_end_date, I18n.t('models.task_project.end_date_valid')) if expected_end_date.to_date < start_date.to_date
   end
 
   def check_start_date
-    errors.add(:start_date, "should be greater than equal to today's date.") if start_date.to_date < Date.today
+    errors.add(:start_date, I18n.t('models.task_project.start_date_valid')) if start_date.to_date < Date.today
   end
 
   def get_employees(assignable_type, assignable_id)

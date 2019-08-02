@@ -23,8 +23,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'select2-rails'
 gem 'sequenceid'
 gem 'uglifier', '>= 1.3.0'
+gem 'wicked_pdf'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap4'
+gem 'wkhtmltopdf-binary'
 
 group :development, :test do
   gem 'better_errors'
@@ -40,9 +42,6 @@ group :development, :test do
   gem 'shoulda-matchers', require: false
   gem 'spring'
   gem 'web-console', '~> 2.0'
-  gem 'whenever', require: false
-  gem 'wicked_pdf'
-  gem 'wkhtmltopdf-binary'
 end
 
 group :test do
