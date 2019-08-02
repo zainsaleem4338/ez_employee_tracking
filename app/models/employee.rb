@@ -58,10 +58,10 @@ class Employee < ActiveRecord::Base
       @attendances = employee.attendances.where('status = ?', STATUS[:PRESENT]).order(login_time: :asc).select { |attendance| attendance.login_time.year == Date.today.year }
       expected_working_days = (@attendances.first.login_time.to_date..@attendances.last.login_time.to_date).to_a.select { |k| week_days.include?(k.wday) }.count
       leaves = (end_date.month - @attendances.first.login_time.month + 1) * 2
-      acutal_working_days = @attendances.count
+      actual_working_days = @attendances.count
       half_days = @attendances.select { |attendance| ((attendance.logout_time - attendance.login_time) / 3600) <= 6 }.count
-      full_days = @acutal_working_days - half_days
-      absents = expected_working_days - acutal_working_days - (half_days / 2).floor
+      full_days = actual_working_days - half_days
+      absents = expected_working_days - actual_working_days - (half_days / 2).floor
       attendances_array << {
         employee: employee,
         presents: full_days,
