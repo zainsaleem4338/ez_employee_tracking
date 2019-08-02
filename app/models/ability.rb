@@ -9,7 +9,6 @@ class Ability
       can :destroy, Employee
       can :manage, Project, company_id: user.company_id
       can :manage, Task, company_id: user.company_id
-      # can 
 
     else
       can :read, Employee, Employee.team_employees(user) do |employee|
@@ -28,7 +27,6 @@ class Ability
 
       can :read, Company
       can :manage, Department
-      # can :manage, EmployeeTeam, company_id: user.company_id
     end
   end
 end

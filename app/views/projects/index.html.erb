@@ -2,7 +2,7 @@
 <div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
   <%= notice %>
 </div>
-
+<%= link_to 'New Project', new_project_path, class: "btn btn-regular btn-primary" %>
 <% if !@projects.nil?%>               
 <div class="row" style="margin-top: 40px;">
   <% @projects.each do |project| %>
