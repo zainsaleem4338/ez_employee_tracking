@@ -60,13 +60,14 @@ class Employee < ActiveRecord::Base
       leaves = (end_date.month - @attendances.first.login_time.month + 1) * 2
       acutal_working_days = @attendances.count
       half_days = @attendances.select { |attendance| ((attendance.logout_time - attendance.login_time) / 3600) <= 6 }.count
-      full_days = @attendances.count - half_days
+      full_days = @acutal_working_days - half_days
+      absents = expected_working_days - acutal_working_days - (half_days / 2).floor
       attendances_array << {
         employee: employee,
         presents: full_days,
         half_days: half_days,
-        absents: expected_working_days - acutal_working_days - (half_days / 2).floor,
-        leaves_remaining: leaves - (expected_working_days - acutal_working_days - (half_days / 2).floor)
+        absents: absents,
+        leaves_remaining: leaves - absents
       }
     end
     attendances_array
