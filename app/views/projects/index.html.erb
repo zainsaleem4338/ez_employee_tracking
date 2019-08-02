@@ -3,7 +3,7 @@
   <%= notice %>
 </div>
 <%= link_to 'New Project', new_project_path, class: "btn btn-regular btn-primary" %>
-<% if !@projects.nil?%>               
+<% if @projects.any?%>               
 <div class="row" style="margin-top: 40px;">
   <% @projects.each do |project| %>
   <tbody>

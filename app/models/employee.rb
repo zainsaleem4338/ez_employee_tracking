@@ -32,6 +32,10 @@ class Employee < ActiveRecord::Base
     attendances.find_by(login_time: (@start_time..@end_time))
   end
 
+  def all_attendances
+    company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
+  end
+
   def with_company
     build_company if company.nil?
     self

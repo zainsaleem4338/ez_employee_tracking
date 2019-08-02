@@ -9,7 +9,7 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    @attendances_list = current_employee.company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
+    @attendances_list = current_employee.all_attendances
   end
 
   def create
