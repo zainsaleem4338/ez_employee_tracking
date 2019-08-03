@@ -92,26 +92,7 @@ module ApplicationHelper
           }
         ]
       }
-
-      @projects = {
-        name: 'Projects',
-        link: '#',
-        icon: 'fas fa-tasks',
-        submenu_id: 'projectSubmenu',
-        suboptions: [
-          {
-            name: 'Add Project',
-            link: new_project_path,
-            icon: 'fas fa-plus'
-          },
-          {
-            name: 'View Projects',
-            link: projects_path,
-            icon: 'fas fa-eye'
-          }
-        ]
-      }
-      @data.push(@employees).push(@departments).push(@teams).push(@projects)
+      @data.push(@employees).push(@departments).push(@teams)
     else
       @data
     end

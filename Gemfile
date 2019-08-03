@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'autoprefixer-rails', '~> 9.6', '>= 9.6.1'
 gem 'cancancan', '~>3.0.1'
 gem 'coffee-rails', '~> 4.1.0'
@@ -43,8 +42,10 @@ group :test do
   gem 'pry', '=0.10.1'
   gem 'pry-rails', '=0.3.3'
   gem 'rspec-rails', '~> 3.8'
+  gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'
   gem 'faker', '~> 1.6.1'
-  gem 'shoulda-matchers', require: false  
+  gem 'shoulda-matchers', require: false
+  gem 'web-console', '~> 2.0'
   gem 'simplecov', require: false
 end
