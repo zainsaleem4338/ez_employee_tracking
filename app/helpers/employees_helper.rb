@@ -13,6 +13,10 @@ module EmployeesHelper
   end
 
   def employee_velocity_nan?(employee_velocity)
-    employee_velocity.to_f.nan? || (employee_velocity == (Float::INFINITY))
+    if employee_velocity.to_f.nan? || (employee_velocity == (Float::INFINITY))
+      return '-'
+    else
+      return employee_velocity
+    end
   end
 end

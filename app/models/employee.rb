@@ -36,31 +36,45 @@ class Employee < ActiveRecord::Base
     self
   end
 
-  def compute_one_employee_velocity(tasks_list)
-    @total_time_on_tasks = time_spent_on_tasks(tasks_list)
-    @total_task_complexity = compute_total_complexity_of_tasks(tasks_list)
+  def compute_one_employee_velocity(employee_id, tasks_list)
+    @total_time_on_tasks = time_spent_on_tasks(employee_id, tasks_list).to_i
+    @total_task_complexity = compute_total_complexity_of_tasks(tasks_list).to_i
     (@total_task_complexity.to_f / @total_time_on_tasks)
   end
 
   def compute_total_complexity_of_tasks(employee_tasks)
     return 0 if employee_tasks.blank?
+
     employee_tasks.inject(0) { |sum, task| sum + task.complexity }
   end
 
-  def time_spent_on_tasks(employee_tasks)
+  def time_spent_on_tasks(employee_id, employee_tasks)
     return 0 if employee_tasks.blank?
-    employee_tasks.inject(0) { |sum, task| sum + task.log_time.to_i }
+
+    @sum = 0
+    employee_tasks.each do |task|
+      @task_log = task.task_time_logs.where(employee_id: employee_id)
+      unless @task_log.blank?
+        @sum += @task_log.inject(0) { |log_sum, task_log| log_sum + task_log.hours.to_i }
+      end
+    end
+    @sum
   end
 
   def compute_employees_velocity
-    @employees_list = company.employees
-    @employee_tasks = {}
-    @employee_velocity = {}
+    @employees_list = company.teams.first.employees
+    @employee_tasks_data = {}
     @employees_list.each do |employee|
-      @employee_tasks[employee.id] = employee.company.tasks.get_employee_tasks(employee)
-      @employee_velocity[employee.id] = employee.compute_one_employee_velocity(@employee_tasks[employee.id])
+      @employee_tasks_data[employee.id] = {}
+      @employee_tasks_data[employee.id]['employee_id'] = employee.id
+      @employee_tasks_data[employee.id]['employee_name'] = employee.name
+      @employee_tasks = employee.company.tasks.get_employee_tasks(employee)
+      @employee_tasks_data[employee.id]['velocity'] = employee.compute_one_employee_velocity(employee.id, @employee_tasks)
+      @employee_tasks_data[employee.id]['total_tasks'] = @employee_tasks.count 
+      @employee_tasks_data[employee.id]['total_time'] = time_spent_on_tasks(employee.id, @employee_tasks)
+      @employee_tasks_data[employee.id]['total_complexity'] = compute_total_complexity_of_tasks(@employee_tasks)
     end
-    return @employee_tasks, @employee_velocity
+    @employee_tasks_data
   end
 
   def email_required?

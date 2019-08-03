@@ -11,7 +11,7 @@ class EmployeesController < ApplicationController
   def show
     @attendances_list = current_employee.company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
     
-    @employee_tasks, @employee_velocity = current_employee.compute_employees_velocity
+    @employee_tasks_data = current_employee.compute_employees_velocity
     # binding.pry
   end
 
@@ -39,7 +39,7 @@ class EmployeesController < ApplicationController
   end
 
   def pdf_velocity_report
-    @employee_tasks, @employee_velocity = current_employee.compute_employees_velocity
+    @employee_tasks_data = current_employee.compute_employees_velocity
     respond_to do |format|
       format.pdf do
         render pdf: 'Employees Velocity',
