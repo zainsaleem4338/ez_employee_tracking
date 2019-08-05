@@ -1,4 +1,10 @@
-<div class="container">
+<% @employee_tasks_data.each do |team_id, team_members_data| %>
+<div class="container velocity-report">
+  <div class="col-md-10">
+    <center>
+      <h5><%= team_name(team_id) %></h5>
+    </center>
+  </div>
   <table class="table table-hover table-sm table-bordered velocity-table">
     <thead class="thead-light">
       <tr>
@@ -11,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @employee_tasks_data.each do |employee, employee_velocity_data|  %>
+      <% team_members_data.each do |employee_id, employee_velocity_data|  %>
         <tr>
           <td><%= employee_velocity_data['employee_id'] %></td>
           <td><%= employee_velocity_data['employee_name'] %></td>
@@ -24,3 +30,4 @@
     </tbody>
   </table>
 </div>
+<% end %>

@@ -12,7 +12,6 @@ class EmployeesController < ApplicationController
     @attendances_list = current_employee.company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
     
     @employee_tasks_data = current_employee.compute_employees_velocity
-    # binding.pry
   end
 
   def create

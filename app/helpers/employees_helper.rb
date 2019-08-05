@@ -19,4 +19,8 @@ module EmployeesHelper
       return employee_velocity
     end
   end
+
+  def team_name(team_id)
+    Team.find(team_id).name
+  end
 end
