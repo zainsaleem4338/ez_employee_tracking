@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
+  load_and_authorize_resource only: [:employee_tasks, :update_task_logtime]
   load_and_authorize_resource :department
-  load_and_authorize_resource :project, through: :department
-  load_and_authorize_resource :task, through: :project
+  load_and_authorize_resource :project, through: :department, except: [:employee_tasks, :update_task_logtime]
+  load_and_authorize_resource :task, through: :project, except: [:employee_tasks, :update_task_logtime]
 
   def index
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
@@ -53,10 +54,19 @@ class TasksController < ApplicationController
     end
   end
 
+  def update_task_logtime
+    unless params[:task][:log_time].blank?
+      @result = @task.update_attribute('log_time', @task.log_time.to_i + params[:task][:log_time].to_i)
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def task_params
-    params.require(:task)
-          .permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id)
+    params.require(:task).
+      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id, :reviewer_id)
   end
 end

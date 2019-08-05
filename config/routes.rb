@@ -14,12 +14,16 @@ Rails.application.routes.draw do
       end
     end
   end
+  
+  resources :tasks, only: [:employee_tasks, :update_task_logtime]
 
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
   get 'menus/home' => 'menus#home'
   root 'menus#home'
 
+  get 'employee_tasks' => 'tasks#employee_tasks', :as => :employee_tasks_list
+  patch 'tasks/:id/update_task_logtime' => 'tasks#update_task_logtime', :as => :update_task_logtime
   get 'employee_lists' => 'employees#employees_lists'
   get '/employees/index' => 'employees#index', :as => :employees
   get '/employees/new' => 'employees#new', :as => :new_employee
