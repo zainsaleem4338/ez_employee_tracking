@@ -17,6 +17,13 @@ class TasksController < ApplicationController
   def create
     @task.set_status
     if @task.save
+      if @task.assignable_type == Task::EMPLOYEE
+        @task.task_time_logs.create(employee_id: @task.assignable_id)
+      elsif @task.assignable_type == Task::TEAM
+        @task.assignable.employees.each do |employee|
+          @task.task_time_logs.create(employee_id: employee.id)
+        end
+      end
       flash[:success] = 'Created Task Successfully!'
       redirect_to department_project_tasks_path
     else
@@ -46,26 +53,31 @@ class TasksController < ApplicationController
     @task.destroy
     if @task.destroyed?
       flash[:success] = 'Deleted Task Successfully!'
-      redirect_to department_project_tasks_path
     else
       flash[:danger] = 'Could not delete Task!'
-      redirect_to department_project_tasks_path
     end
+    redirect_to department_project_tasks_path
   end
 
   def update_status
     if @task.update(task_params)
       flash[:success] = 'Updated Task Status Successfully!'
-      redirect_to department_project_tasks_path
     else
       flash[:danger] = 'Could not update Task Status!'
-      redirect_to department_project_tasks_path
     end
+    redirect_to department_project_tasks_path
   end
 
   def update_task_logtime
-    unless params[:task][:log_time].blank?
-      @result = @task.update_attribute('log_time', @task.log_time.to_i + params[:task][:log_time].to_i)
+    unless params[:task_time_log][:hours].blank?
+      @task_log = @task.task_time_logs.find_by(employee_id: current_employee.id, task_id: @task.id)
+      @result = @task_log.
+        update_attribute('hours', @task_log.hours.to_i + params[:task_time_log][:hours].to_i)
+      if @result
+        flash.now[:success] = 'Updated task log-time Successfully!'
+      else
+        flash.now[:danger] = 'Could not update task log-time!'
+      end
     end
     respond_to do |format|
       format.js
@@ -76,6 +88,6 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).
-      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id, :reviewer_id)
+      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id, :complexity, :reviewer_id)
   end
 end

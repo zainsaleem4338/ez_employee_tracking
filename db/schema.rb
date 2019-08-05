@@ -105,6 +105,17 @@ ActiveRecord::Schema.define(version: 20190805111002) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "task_time_logs", force: :cascade do |t|
+    t.integer  "hours",       limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "employee_id", limit: 4
+    t.integer  "task_id",     limit: 4
+  end
+
+  add_index "task_time_logs", ["employee_id"], name: "index_task_time_logs_on_employee_id", using: :btree
+  add_index "task_time_logs", ["task_id"], name: "index_task_time_logs_on_task_id", using: :btree
+
   create_table "tasks", force: :cascade do |t|
     t.string   "name",              limit: 255
     t.string   "description",       limit: 255
@@ -120,7 +131,6 @@ ActiveRecord::Schema.define(version: 20190805111002) do
     t.integer  "assignable_id",     limit: 4
     t.string   "assignable_type",   limit: 255
     t.integer  "complexity",        limit: 4
-    t.integer  "log_time",          limit: 4
     t.integer  "reviewer_id",       limit: 4
   end
 
@@ -147,6 +157,8 @@ ActiveRecord::Schema.define(version: 20190805111002) do
   add_foreign_key "employees", "companies"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "departments"
+  add_foreign_key "task_time_logs", "employees"
+  add_foreign_key "task_time_logs", "tasks"
   add_foreign_key "tasks", "companies"
   add_foreign_key "tasks", "employees", column: "reviewer_id"
   add_foreign_key "tasks", "projects"

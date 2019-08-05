@@ -26,28 +26,8 @@
 
   </head>
   <body>
-    <% if employee_signed_in? %>
-      <div class="wrapper">
-        <%= render 'layouts/sidebar' %>
-        <div id="content">
-          <div id="header_div">
-            <%= render 'layouts/header' %>
-          </div>
-          <div class="yielded-area">
-            <div id="notifications-flash">
-              <%= render 'shared/notification' %>
-            </div>
-            <%= yield %>
-          </div>
-        </div>
-      </div>
-    <% else %>
-      <div class="container">
-        <%= render 'menus/header' %>
-      </div>
-      <div class='container'>
-        <%= yield %>
-      </div>
-    <% end %>
+    <div class='container'>
+      <%= yield %>
+    </div>
   </body>
 </html>
