@@ -22,7 +22,8 @@ class Task < ActiveRecord::Base
   end
 
   def set_status
-    return self.status = Task::ASSIGNED_STATUS unless self.assignable_id.nil?
+    return self.status = Task::ASSIGNED_STATUS unless assignable_id.nil?
+ 
     self.status = Task::NEW_STATUS
     self.assignable_type = nil
   end
