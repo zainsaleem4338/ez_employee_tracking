@@ -27,7 +27,6 @@ class ReportsController < ApplicationController
     if current_employee.role == Employee::ADMIN_ROLE
       @attendances = Report.attendance_data(current_employee)
       Report.upload_worksheet(@attendances, "attendance_data", get_session)
-      binding.pry
       respond_to do |format|
         format.pdf do
           render pdf: 'Attendance Report',
