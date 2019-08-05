@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   before_filter :set_cache_buster
   around_filter :scope_current_company
 
-
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'text/html' }

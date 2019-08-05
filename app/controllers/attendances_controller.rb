@@ -15,7 +15,7 @@ class AttendancesController < ApplicationController
   def create
     @employees_todays_attendance = current_employee.todays_attendance_of_employee
     if @employees_todays_attendance.blank?
-      setting = Setting.all.first
+      setting = current_employee.company.setting
       today_start_time = setting.timings[Time.now.strftime('%A').downcase + '_start_time']
       attendance_thresh = setting.attendance_time
       if get_time_in_seconds(Time.now) > get_time_in_seconds(today_start_time.to_time) + attendance_thresh * 60

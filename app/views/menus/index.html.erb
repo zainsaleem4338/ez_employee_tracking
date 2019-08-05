@@ -1,10 +1,274 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <center><h1>Ez Employee Tracking</h1></center><br>  
-    <center>
-      <p>
-      	<b>Ez Employee Tracking system gives you a platform <br>for managing employee talent and maximising resources <br>throughout your business.</b><br><br>
-    	</p>
-    </center>
-  </div>
-</div>
+<section id="cards" class="pb-5">
+    <div class="container">
+        <div class="row">
+            <!-- Card -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside" id='front-card'>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title"><b>Leaves Remaining</b></h4>
+                                    <p class="card-text"><i class="fas fa-envelope"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside" id='back-card'>
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h2 class="card-title"><span class="badge badge-secondary">6</span></h2>
+                                    <p class="card-text">Leaves left</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Card -->
+            <!-- Card -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside" id='front-card'>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title"><b>Late Attendance</b></h4>
+                                    <p class="card-text"><i class="fas fa-bell"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside" id='back-card'>
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h2 class="card-title"><span class="badge badge-secondary">3</span></h2>
+                                    <p class="card-text">Times</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Card -->
+            <!-- Card -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside" id='front-card'>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title"><b>Allocated Leaves</b></h4>
+                                    <p class="card-text"><i class="fas fa-file-signature"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside" id='back-card'>
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h2 class="card-title"><span class="badge badge-secondary">14</span></h2>
+                                    <p class="card-text">Leaves Allocated</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Card -->
+        </div>
+    </div>
+</section>
+<section id='task_deadline'>
+	<div class='row'>
+		<div class='col-md-6' style='height:280px; overflow-y:scroll'>
+			<h3>On Going Tasks</h3>
+			<table class="table">
+		    <thead>
+		      <tr>
+		        <th>#</th>
+		        <th>Task</th>
+		        <th>Status</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+		        <td>1</td>
+		        <td>Testing</td>
+		        <td><span class="badge badge-warning">In Progress</span></td>
+		      </tr>
+		      <tr>
+		        <td>2</td>
+		        <td>Resolving Issues</td>
+		        <td><span class="badge badge-success">Completed</span></td>
+		      </tr>
+		      <tr>
+		        <td>3</td>
+		        <td>Refactoring</td>
+		        <td><span class="badge badge-danger">Review</span></td>
+		      </tr>
+		    </tbody>
+	  	</table>
+		</div>
+		<div class='col-md-6'>
+			<h3>OverDue Tasks</h3>
+			<div class="background">
+			  <div class="metersWrapper">
+			    <div class="meter">
+			      <div class="insideWrapper">
+			        <div class="insideWrapper__number">5</div>
+			        <div class="insideWrapper__desc">tasks</div>
+			      </div>
+			      <svg>
+			        <circle class="circle" cx="57" cy="57" r="52"/>
+			      <circle class="loader first" cx="57" cy="57" r="52"/></svg>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section>
+	<div class='row'>
+		<div class='col-md-6' style='height:280px; overflow-y:scroll'>
+			<h3>Tasks Reaching Deadline</h3>
+			<div class="building">
+			 	<span><span></span></span>
+			</div>
+			<ul class="list-group">
+			  <li class="list-group-item list-group-item-warning">Task 1</li>
+			  <li class="list-group-item list-group-item-warning">Task 2</li>
+			  <li class="list-group-item list-group-item-warning">Task 3</li>
+			  <li class="list-group-item list-group-item-warning">Task 4</li>
+			</ul> 
+		</div>
+		<div class='col-md-6' style='height:280px; overflow-y:scroll'>
+			<h3><%= current_company.name %> Timings</h3>
+			<table class="table">
+		    <thead>
+		      <tr>
+		        <th>Days</th>
+		        <th>Status</th>
+		        <th>Start Time</th>
+		        <th>End Time</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+		        <th>Monday</th>
+		        <% if @settings.working_days[:monday] %>
+		          <td><span class="badge badge-success">On</span></td>
+		        <% else %>
+		          <td><span class="badge badge-danger">Off</span></td>
+		        <% end %>   
+		        <td><%= @settings.timings['monday_start_time'] %></td>
+		        <td><%= @settings.timings['monday_end_time'] %></td>
+		      </tr>
+		      <tr>
+		        <th>Tuesday</th>
+		        <% if @settings.working_days[:tuesday] %>
+		          <td><span class="badge badge-success">On</span></td>
+		        <% else %>
+		          <td><span class="badge badge-danger">Off</span></td>
+		        <% end %>   
+		        <td><%= @settings.timings['tuesday_start_time'] %></td>
+		        <td><%= @settings.timings['tuesday_end_time'] %></td>
+		      </tr>
+		      <tr>
+		        <th>Wednesday</th>
+		        <% if @settings.working_days[:wednesday] %>
+		          <td><span class="badge badge-success">On</span></td>
+		        <% else %>
+		          <td><span class="badge badge-danger">Off</span></td>
+		        <% end %>   
+		        <td><%= @settings.timings['wednesday_start_time'] %></td>
+		        <td><%= @settings.timings['wednesday_end_time'] %></td>
+		      </tr>
+		      <tr>
+		        <th>Thursday</th>
+		        <% if @settings.working_days[:thursday] %>
+		          <td><span class="badge badge-success">On</span></td>
+		        <% else %>
+		          <td><span class="badge badge-danger">Off</span></td>
+		        <% end %>   
+		        <td><%= @settings.timings['thursday_start_time'] %></td>
+		        <td><%= @settings.timings['thursday_end_time'] %></td>
+		      </tr>
+		      <tr>
+		        <th>Friday</th>
+		        <% if @settings.working_days[:friday] %>
+		          <td><span class="badge badge-success">On</span></td>
+		        <% else %>
+		          <td><span class="badge badge-danger">Off</span></td>
+		        <% end %>  
+		        <td><%= @settings.timings['friday_start_time'] %></td>
+		        <td><%= @settings.timings['friday_end_time'] %></td> 
+		      </tr>
+		      <tr>
+		        <th>Saturday</th>
+		        <% if @settings.working_days[:saturday] %>
+		          <td><span class="badge badge-success">On</span></td>
+		        <% else %>
+		          <td><span class="badge badge-danger">Off</span></td>
+		        <% end %>   
+		        <td><%= @settings.timings['saturday_start_time'] %></td>
+		        <td><%= @settings.timings['saturday_end_time'] %></td>
+		      </tr>
+		      <tr>
+		        <th>Sunday</th>
+		        <% if @settings.working_days[:sunday] %>
+		          <td><span class="badge badge-success">On</span></td>
+		        <% else %>
+		          <td><span class="badge badge-danger">Off</span></td>
+		        <% end %>  
+		        <td><%= @settings.timings['sunday_start_time'] %></td>
+		        <td><%= @settings.timings['sunday_end_time'] %></td> 
+		      </tr>
+		    </tbody>
+  		</table>
+		</div>
+	</div>
+</section>
+
+<section id='calendar'>
+</section>
+
+<script>
+  $(document).ready(function () {
+   var events_arr = [];
+   <% @events.first.each do |event| %>
+    events_arr.push({
+      title: "<%= event.title %>",
+      description: "<%= event.description %>",
+      datetime: new Date(<%= event.event_date.year%>, <%= event.event_date.month %> -1, <%= event.event_date.day%>, <%= event.event_date.strftime("%H") %>)
+    })
+  <% end %>
+  <% @events.last.each do |key,val| %>
+    events_arr.push({
+      title: "Public Holiday",
+      description: "This is a public holiday",
+      datetime: new Date(<%= Date.parse(@events.last[key]["holiday_date_#{key}"]).year %>, <%= Date.parse(@events.last[key]["holiday_date_#{key}"]).month %> -1, <%= Date.parse(@events.last[key]["holiday_date_#{key}"]).day%>, <%= Date.parse(@events.last[key]["holiday_date_#{key}"]).strftime("%H") %>)
+    })
+    <% if @events.last[key]["every_year_#{key}"] %>
+    	<% (1..5).each do |count| %> 
+		    	events_arr.push({
+		      title: "Public Holiday",
+		      description: "This is a public holiday",
+		      datetime: new Date(<%= Date.parse(@events.last[key]["holiday_date_#{key}"]).year + count %>, <%= Date.parse(@events.last[key]["holiday_date_#{key}"]).month %> -1, <%= Date.parse(@events.last[key]["holiday_date_#{key}"]).day%>, <%= Date.parse(@events.last[key]["holiday_date_#{key}"]).strftime("%H") %>)
+		    })
+    	<% end %>
+    <% end %>
+
+  <% end %>
+  $('#calendar').eCalendar({
+  weekDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  textArrows: {previous: '<', next: '>'},
+  eventTitle: 'Events',
+  url: '',
+  firstDayOfWeek: 0,
+  events : events_arr
+
+  });
+
+  });
+
+</script>

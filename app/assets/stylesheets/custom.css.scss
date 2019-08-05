@@ -18,6 +18,7 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   background: #fafafa;
+  overflow-x:hidden;
 }
 
 p {
@@ -643,3 +644,345 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/* DASHBOARD */
+
+section {
+    padding: 10px 0;
+}
+#cards .card {
+    border: none;
+    box-shadow: 2px 2px 4px #000000;
+}
+
+.image-flip:hover .backside,
+.image-flip.hover .backside {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    border-radius: .25rem;
+    backround: white;
+}
+
+.image-flip:hover .frontside,
+.image-flip.hover .frontside {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.mainflip {
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.frontside {
+    position: relative;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+#front-card .card {
+	background-color: #9a6dde;
+	color: white;
+}
+
+.backside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white !important;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+}
+
+.frontside,
+.backside {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: 1s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: 1s;
+    -o-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+}
+
+.frontside .card,
+.backside .card {
+    min-height: 112px;
+    min-width: 300px;
+}
+
+.backside .card .card-text {
+	color: #9a6dde;
+	font-weight: bold;
+}
+.backside .card .card-title {
+    color: #9a6dde;
+}
+.frontside .card .card-text {
+	color: white !important;
+	font-size: 450%;
+	font-weight: bold;
+}
+
+
+/* Meter */
+
+.signature {
+  position: absolute;
+  bottom: -25px;
+  font-style: italic;
+  font-size: 12px;
+  color: #212121;
+  text-transform: none;
+}
+
+.background {
+  position: relative;
+  background: linear-gradient(to bottom, #28404e 0%, #9a6dde 100%);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 200px;
+}
+
+.headerWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: white;
+  font-size: 20px;
+  line-height: 25px;
+
+  &__subtitle {
+    font-weight: bold;
+    font-size: 30px;
+  }
+}
+
+.metersWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+  width: 100%;
+
+  .meter {
+    position: relative;
+
+    .insideWrapper {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      &__number {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 22px;
+      }
+
+      &__desc {
+        font-size: 14px;
+        color: white;
+      }
+    }
+
+    svg {
+      width: 115px;
+      height: 115px;
+      fill: none;
+
+      .loader {
+        fill: none;
+        stroke-linecap: round;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+      }
+
+      .first {
+        stroke-width: 10px;
+        stroke: #6D0606;
+        stroke-dasharray: 330;
+        stroke-dashoffset: 60;
+        animation: firstLine 2s ease-out;
+      }
+
+      .circle {
+        fill: none;
+        stroke: #1b2a33;
+        stroke-width: 10;
+      }
+    }
+  }
+
+  &__secondLine {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding-top: 30px;
+
+    .meter {
+      .insideWrapper {
+        &__number {
+          font-size: 17px;
+        }
+        &__desc {
+          font-size: 12px;
+        }
+      }
+
+      svg {
+        width: 80px;
+        height: 80px;
+        .circle {
+          stroke-width: 5px;
+        }
+
+        .loader {
+          stroke: #5ce1ec;
+          stroke-width: 5px;
+          stroke-dasharray: 230;
+        }
+
+        .second {
+          stroke-dashoffset: 80;
+          animation: secondLine 2s ease-out;
+        }
+
+        .third {
+          stroke-dashoffset: 150;
+          animation: thirdLine 2s ease-out;
+        }
+      }
+    }
+  }
+}
+
+@keyframes firstLine {
+  from {
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dashoffset: 60;
+  }
+}
+
+@keyframes secondLine {
+  from {
+    stroke-dashoffset: 230;
+  }
+  to {
+    stroke-dashoffset: 80;
+  }
+}
+
+@keyframes thirdLine {
+  from {
+    stroke-dashoffset: 230;
+  }
+  to {
+    stroke-dashoffset: 150;
+  }
+}
+
+
+/* Close Deadlines */
+
+.building {
+  padding: 10px;
+  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
+}
+.building > span {
+  display: block;
+  height: 100%;
+  background-color: #E85457;
+  width: 80%;
+  position: relative;
+  overflow: hidden;
+}
+.building > span:after, .building .animate > span > span {
+  -webkit-animation: move 2s linear infinite;
+          animation: move 2s linear infinite;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+  z-index: 1;
+  background-size: 50px 50px;
+  animation: move 2s linear infinite;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  overflow: hidden;
+}
+
+.animate > span:after {
+  display: none;
+}
+
+@-webkit-keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
