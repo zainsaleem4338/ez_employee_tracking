@@ -3,16 +3,15 @@ class SessionsController < Devise::SessionsController
     super
   end
   def create
-
     if(current_company.blank?)
       flash[:danger] = 'Invalid Company!'
       return redirect_to new_employee_session_path
     end
     employee = Employee.find_by(email: params[:employee][:email], company_id: current_company.id)
-    if employee != nil
+    if employee.present?
       if !employee.active
         flash[:danger] = 'Can not log in, Employee is inactive!'
-      elsif employee.confirmation_token != nil
+      elsif employee.confirmation_token.present?
         flash[:danger] = 'Please confirm your email!'
         return redirect_to new_employee_session_path
       elsif !employee.valid_password?(params[:employee][:password])

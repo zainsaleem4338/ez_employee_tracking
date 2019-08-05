@@ -4,13 +4,10 @@ Rails.application.routes.draw do
   resources :teams
   resources :departments
   resources :attendances
-
-  get '/settings/new' => 'settings#new'
+  resources :settings, except: [:create, :edit, :update, :show]
   post '/settings/create' => 'settings#create', as: :create_settings
-  get '/settings/index' => 'settings#index', as: :index_settings
   get '/settings/edit' => 'settings#edit', as: :edit_settings
   patch '/settings/update' => 'settings#update', as: :update_settings
-  delete '/settings/destroy' => 'settings#destroy', as: :destroy_settings
 
   get '/events/index' => 'events#index', as: :index_events
   get '/events/new' => 'events#new', as: :new_events

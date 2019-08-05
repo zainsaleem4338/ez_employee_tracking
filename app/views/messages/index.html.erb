@@ -6,7 +6,7 @@
 </div>
 <div class="container">
   <div class="chatbox">
-    <%= form_for Message.new, remote: true do |msg| %>
+    <%= form_for @message, remote: true do |msg| %>
       <%= msg.text_field :message, id:'chat-input', placeholder:'Type something here...', autocomplete: 'off' %>
       <%= msg.hidden_field :employee_id, value: current_employee.id %>
       <%= msg.hidden_field :company_id, value: current_company.id %>

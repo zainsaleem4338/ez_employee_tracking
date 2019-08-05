@@ -1,18 +1,18 @@
 class EventsController < ApplicationController
   def index
     @events = []
-    @event = Event.all
-    @setting = Setting.all.first.holidays
+    @event = current_employee.company.events
+    @setting = current_employee.company.setting.holidays
     @events << @event
     @events << @setting
   end
 
   def new
-    @event = Event.unscoped.new
+    @event = current_employee.company.events.new
   end
 
   def home
-    @events = Event.all
+    @events = current_employee.company.events
   end
 
   def create

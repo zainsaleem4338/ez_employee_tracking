@@ -9,7 +9,7 @@ class MenusController < ApplicationController
 
   def search_email
     @email = params[:email]
-    if(@email != nil)
+    if(@email.present?)
       employees = Employee.where(email: params[:email])
       @companies = []
       employees.each do |employee|
