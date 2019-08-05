@@ -1,13 +1,9 @@
 <% if @result.blank? %>
-  var update_attendance_failure = document.getElementById("update_attendance_failure_alert");
-  update_attendance_failure.style.display = "block";
+  <% flash[:danger] = 'Check out failed!' %>
 <% else %>
   var present_marked_btn = document.getElementsByClassName("update_attendance");;
   present_marked_btn[0].style.display = "none";
   
   setTimeout(function(){location.reload()}, 3000);
-
-  var update_attendance = document.getElementById("update_attendance_alert");
-  update_attendance.style.display = "block";
 
 <% end %>

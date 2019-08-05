@@ -17,22 +17,27 @@ class TasksController < ApplicationController
   def create
     @task.set_status
     if @task.save
-      redirect_to department_project_tasks_path, notice: 'Task created successfully!'
+      flash[:success] = 'Created Task Successfully!'
+      redirect_to department_project_tasks_path
     else
-      redirect_to new_department_project_task_path, notice: 'Task cannot be created!'
+      flash[:danger] = 'Could not create Task!'
+      render new_department_project_task_path
     end
   end
 
   def update
     if params[:assignable_employee_id].present? && params[:assignable_team_id].present?
-      render :edit, notice: "Make sure you delete employee field or team field"
+      flash[:danger] = 'Make sure you delete employee field or team field'
+      render :edit
     else
       params[:task][:status] = Task::NEW_STATUS if !params[:task][:assignable_id].present?
       params[:task][:status] = Task::ASSIGNED_STATUS if params[:task][:assignable_id].present?
       if @task.update(task_params)
-        redirect_to department_project_tasks_path, notice: 'Task updated successfully!'
+        flash[:success] = 'Updated Task Successfully!'
+        redirect_to department_project_tasks_path
       else
-        redirect_to edit_department_project_task_path, notice: 'Task cannot be updated!'
+        flash[:danger] = 'Could not update Task!'
+        redirect_to edit_department_project_task_path
       end
     end
   end
@@ -40,17 +45,21 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     if @task.destroyed?
-      redirect_to department_project_tasks_path, notice: 'Deleted Successfully'
+      flash[:success] = 'Deleted Task Successfully!'
+      redirect_to department_project_tasks_path
     else
-      redirect_to department_project_tasks_path, notice: 'Cannot be deleted successfully'
+      flash[:danger] = 'Could not delete Task!'
+      redirect_to department_project_tasks_path
     end
   end
 
   def update_status
     if @task.update(task_params)
-      redirect_to department_project_tasks_path, notice: 'Updated Successfully'
+      flash[:success] = 'Updated Task Status Successfully!'
+      redirect_to department_project_tasks_path
     else
-      redirect_to department_project_tasks_path, notice: 'Cannot be updated!'
+      flash[:danger] = 'Could not update Task Status!'
+      redirect_to department_project_tasks_path
     end
   end
 
