@@ -27,7 +27,7 @@ class TasksController < ApplicationController
       render :edit, notice: "Make sure you delete employee field or team field"
     else
       params[:task][:status] = Task::NEW_STATUS if !params[:task][:assignable_id].present?
-      params[:task][:status] = Task::ASSIGNED_STATUS if params[:task][:assignable_id].present
+      params[:task][:status] = Task::ASSIGNED_STATUS if params[:task][:assignable_id].present?
       if @task.update(task_params)
         redirect_to department_project_tasks_path, notice: 'Task updated successfully!'
       else
