@@ -1,4 +1,4 @@
-class Report < ActiveRecord::Base
+class Report
   def self.compute_one_employee_velocity(employee_id, tasks_list)
     @total_time_on_tasks = time_spent_on_tasks(employee_id, tasks_list).to_i
     @total_task_complexity = compute_total_complexity_of_tasks(tasks_list).to_i
