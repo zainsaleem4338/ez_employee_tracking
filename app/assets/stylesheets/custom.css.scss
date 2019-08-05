@@ -18,6 +18,7 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   background: #fafafa;
+  font-size: 0.9rem;
 }
 
 p {
@@ -61,6 +62,10 @@ a:focus {
   margin-right: 0.5rem !important;
 }
 
+.ml-2 {
+	margin-left: 10px !important;
+}
+
 .text-gray-400 {
   color: #d1d3e2 !important;
 }
@@ -83,9 +88,9 @@ a:focus {
   font-size: 80%
 }
 
-.container {
+/*.container {
 	font-size: 0.85rem;
-}
+}*/
 
 .header_title {
 	padding-top: 15px;

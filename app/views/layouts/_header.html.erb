@@ -85,10 +85,12 @@
               <span class="small">Settings</span>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
+
+            
+            <%= link_to  destroy_employee_session_path, class: 'nav-link small text-gray-400 dropdown-item' , method: :delete do %>
               <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              <span><%= link_to "Logout", destroy_employee_session_path, class: 'nav-link small' , method: :delete %> </span>
-            </a>
+              Logout
+            <% end %>
           </div>
         </li>
       </ul>

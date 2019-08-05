@@ -2,5 +2,4 @@
   // re-load notification.html.erb
   $('#notifications-flash').append("<%= j render(:partial => 'shared/notification') %>");
   setTimeout(function(){location.reload()}, 2000);
-  $('#tasks_table_1').html("<%= escape_javascript(render(@my_tasks)) %>");
 <% end %>

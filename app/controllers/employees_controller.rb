@@ -9,7 +9,7 @@ class EmployeesController < ApplicationController
 
   def show
     @attendances_list = current_employee.all_attendances
-    @employee_tasks_data = current_employee.compute_employees_velocity
+    @employee_tasks_data = Report.compute_employees_velocity(current_employee)
   end
 
   def create
@@ -36,7 +36,7 @@ class EmployeesController < ApplicationController
   end
 
   def pdf_velocity_report
-    @employee_tasks_data = current_employee.compute_employees_velocity
+    @employee_tasks_data = Report.compute_employees_velocity(current_employee)
     respond_to do |format|
       format.pdf do
         render pdf: 'Employees Velocity',
