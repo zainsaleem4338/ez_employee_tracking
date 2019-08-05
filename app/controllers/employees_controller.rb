@@ -9,7 +9,6 @@ class EmployeesController < ApplicationController
 
   def show
     @attendances_list = current_employee.all_attendances
-    @employee_tasks_data = Report.compute_employees_velocity(current_employee)
   end
 
   def create
@@ -32,19 +31,6 @@ class EmployeesController < ApplicationController
       redirect_to employees_path
     else
       redirect_to menus_index_path
-    end
-  end
-
-  def pdf_velocity_report
-    @employee_tasks_data = Report.compute_employees_velocity(current_employee)
-    respond_to do |format|
-      format.pdf do
-        render pdf: 'Employees Velocity',
-        template: 'employees/employee_velocity_pdf_report.html.erb',
-        layout: 'pdf.html',
-        page_size: 'A4',
-        dpi: 55
-      end
     end
   end
 
