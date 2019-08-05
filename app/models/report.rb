@@ -1,4 +1,29 @@
-class Report
+class Report < ActiveRecord::Base
+
+  def self.attendance_data(current_employee)
+    end_date = "31-12-#{Date.today.year}".to_date
+    week_days = [1, 2, 3, 4, 5]
+    attendances_array = []
+    current_employee.company.employees.each do |employee|
+      @attendances = employee.attendances.where('status = ?', Attendance::STATUS[:PRESENT]).order(login_time: :asc).select { |attendance| attendance.login_time.year == Date.today.year && attendance.logout_time != nil }
+      expected_working_days = (@attendances.first.login_time.to_date..@attendances.last.login_time.to_date).to_a.select { |k| week_days.include?(k.wday) }.count
+      leaves = (end_date.month - @attendances.first.login_time.month + 1) * 2
+      actual_working_days = @attendances.count
+      half_days = @attendances.select { |attendance| ((attendance.logout_time - attendance.login_time) / 3600) <= 6 }.count
+      full_days = actual_working_days - half_days
+      absents = expected_working_days - actual_working_days
+      attendances_array << {
+        employee: employee,
+        presents: full_days,
+        half_days: half_days,
+        absents: absents,
+        leaves_remaining: leaves - absents - (half_days / 2).floor
+      }
+    end
+    attendances_array
+  end
+
+
   def self.compute_one_employee_velocity(employee_id, tasks_list)
     @total_time_on_tasks = time_spent_on_tasks(employee_id, tasks_list).to_i
     @total_task_complexity = compute_total_complexity_of_tasks(tasks_list).to_i
@@ -30,9 +55,7 @@ class Report
     elsif current_employee.role == Employee::ADMIN_ROLE
       @employee_teams = current_employee.company.teams
     end
-
     @employee_tasks_data = {}
-
     @employee_teams.each do |team|
       @employees_list = team.employees
       @employee_tasks_data[team.id] = {}
@@ -50,4 +73,28 @@ class Report
     end
     @employee_tasks_data
   end
+
+  def self.upload_worksheet(data, type, session)
+    spreadsheet = session.create_spreadsheet(title = "#{DateTime.now}_#{type}")
+    sheet = spreadsheet.worksheets[0]
+    folder = session.root_collection.subcollection_by_title(type)
+    if folder.nil?
+      folder = session.root_collection.create_subcollection(type)
+    end
+    sheet[1,1] = "Name"
+    sheet[1,2] = "Presents"
+    sheet[1,3] = "Half Days"
+    sheet[1,4] = "Absents"
+    sheet[1,5] = "Leaves Remaining"
+    data.each.with_index(1) do |att_data, i|
+      sheet[i+1,1] = att_data[:employee][:name].downcase.capitalize
+      sheet[i+1,2] = att_data[:presents]
+      sheet[i+1,3] = att_data[:half_days]
+      sheet[i+1,4] = att_data[:absents]
+      sheet[i+1,5] = att_data[:leaves_remaining]
+    end
+    sheet.save
+    folder.add(spreadsheet)
+  end
+
 end
