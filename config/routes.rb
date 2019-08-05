@@ -1,20 +1,19 @@
 Rails.application.routes.draw do
-
   devise_for :employees, controllers: { sessions: 'sessions' }
 
   resources :teams
-  resources :departments
   resources :attendances
 
-  resources :projects do
-    resources :tasks do
-      member do
-        get 'edit_status'
-        patch 'update_status'
+  resources :departments do
+    resources :projects do
+      resources :tasks do
+        member do
+          get 'edit_status'
+          patch 'update_status'
+        end
       end
     end
   end
-
 
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'

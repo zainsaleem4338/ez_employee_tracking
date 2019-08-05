@@ -1,31 +1,13 @@
 <% provide(:title, "All Departments") %>
-<p id="notice"><%= notice %></p>
-
-<% if @departments.length > 0 %>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @departments.each do |department| %>
-      <tr>
-        <td><%= department.name %></td>
-        <td><%= department.description %></td>
-        <td><%= link_to 'Show', department, class: "btn btn-regular btn-secondary" %>
-        <%= link_to 'Edit', edit_department_path(department), class: "btn btn-outline-secondary" %>
-        <%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h4 class="h4">All Departments</h4>
+<% if !can? :create, Department%>
+  <%= link_to "All Departments", departments_path, remote: true, class: "btn btn-secondary active"%>
+  <%= link_to "My Departments", departments_path(show_employees_only: true), remote: true, class: "btn btn-secondary active" %>
 <% end %>
-
+<% if @departments.length > 0 %>
+  <div id="departments_grid" >
+    <%= render partial: 'departmentgrid', locals: {departments: @departments}  %>
+  </div>
+<% end %>
 <br>
-
 <%= link_to 'New Department', new_department_path, class: "btn btn-regular btn-primary"%>
