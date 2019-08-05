@@ -3,7 +3,8 @@ class SessionsController < Devise::SessionsController
     super
   end
   def create
-    if(current_company.nil?)
+
+    if(current_company.blank?)
       flash[:danger] = 'Invalid Company!'
       return redirect_to new_employee_session_path
     end
@@ -26,10 +27,10 @@ class SessionsController < Devise::SessionsController
       clean_up_passwords(employee)
       sign_in(resource_name, employee)
       yield employee if block_given?
-      if !flash.key?('alert')
-        flash[:notice] = 'Employee signed in successfully!'
+      if flash[:alert].blank?
+        flash[:notice] = "Employee signed in successfully!"
       end
-      respond_with employee, location: menus_index_path  
+      respond_with employee, location: menus_index_path 
     else
       flash[:danger] = 'Employee does not belong to #{current_company.name}!'
       redirect_to new_employee_session_path

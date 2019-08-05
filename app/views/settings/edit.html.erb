@@ -176,7 +176,7 @@
 					<%= number_field_tag :allocated_leaves, @settings.allocated_leaves, class:'form-control', placeholder:'Enter a number',step: :any %>
 	     	</div>
 	     	<div class='col-md-6'>
-					<%= text_field_tag(:attendance_time, @settings.attendance_time, class:'form-control', placeholder:'Enter Time') %>
+					<%= number_field_tag(:attendance_time, @settings.attendance_time, class:'form-control', placeholder:'Enter Time(minutes)') %>
 	     	</div>
      	</div>
 	  </div><br>
@@ -203,9 +203,7 @@
     $('#saturday_start_time').timepicki();
     $('#saturday_end_time').timepicki();
     $('#sunday_start_time').timepicki();
-    $('#sunday_end_time').timepicki(); 
-
-    $('#attendance_time').timepicki(); 
+    $('#sunday_end_time').timepicki();  
 
     $('#_btn_add').click(function() {
     	$('#_holidays').append("<div class='form-group holidays'><div class='row'><div class='col-md-6'><%= escape_javascript(date_field_tag 'holiday_date', {} ,class:'form-control holiday-date-field') %></div><div class='col-md-6'><center><label class='switch'><%= escape_javascript(check_box_tag 'every_year', false, false ,class:'every_year-field' ) %><span class='slider round'></span></label></center></div></div></div>");

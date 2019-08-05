@@ -123,7 +123,7 @@
         <% if @settings.attendance_time.nil? %>
 	  			<th><h4><span class="badge badge-danger">Not Set</span></h4></th>
 				<% else %>
-					<th><h4><span class="badge badge-success"><%= (@settings.attendance_time).strftime("%H:%M:%S") %></span></h4></th>
+					<th><h4><span class="badge badge-success"><%= @settings.attendance_time %> min</span></h4></th>
 			  <% end %>
       </tr>
   	</thead>

@@ -5,7 +5,6 @@
 user_hash = {
   theme: 'facebook',
   crossDomain: false,
-  queryParam: "term",
   preventDuplicates: true }
 
 jQuery ->

@@ -1,0 +1,44 @@
+<div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
+  <%= notice %>
+</div>
+
+<%= form_for [@project, @task] do |form| %>
+
+<%= render partial: 'hidden', locals: { form: form } %>
+
+
+<div class="row d-flex justify-content-start">
+  <div class="form-group col-md-6 add_someone">
+    <% if @task.assignable_type.nil? || @task.assignable_type == Employee::EMPLOYEE_ROLE %>
+    <label class="col"><input type="radio" name="adding"; value="1" checked="checked" class="js-toggle-team-employee-input-token" data-type="Employee">Add a task for Employee</label>
+    <label class="col"><input type="radio" name="adding"; value="2" class="js-toggle-team-employee-input-token team_radio"  data-type="Team"/>Add a task for Team</label>
+    <div class= "adding_employee_field js-toggleable-input-token">
+       <%= render partial: 'employee', locals: { form: form } %>
+    </div>
+    <div class= "adding_team_field collapse js-toggleable-input-token">
+       <%= render partial: 'team', locals: { form: form } %>
+    </div>
+    <% else %>
+    <label class="col"><input type="radio" name="adding"; value="1" class="js-toggle-team-employee-input-token team_radio" data-type="Employee">Add a task for Employee</label>
+    <label class="col"><input type="radio" name="adding"; value="2" checked="checked" class="js-toggle-team-employee-input-token"  data-type="Team"/>Add a task for Team</label>
+    <div class= "adding_employee_field collapse js-toggleable-input-token">
+       <%= render partial: 'employee', locals: { form: form } %>
+    </div>
+    <div class= "adding_team_field js-toggleable-input-token">
+       <%= render partial: 'team', locals: { form: form } %>
+
+    </div>
+    <% end %>
+    <small id="emailHelp" class="form-text text-muted">You can choose to not assign task right now.</small>
+  </div>
+</div>
+
+
+
+<div class="actions">
+  <%= form.submit class: "btn btn-regular btn-primary submit_form"  %>
+  <%= link_to 'Back', project_tasks_url(@project), class: "btn btn-primary" %>
+</div>
+
+<% end %>
+

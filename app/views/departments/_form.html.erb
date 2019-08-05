@@ -1,4 +1,4 @@
-<%= form_for(@department) do |f|%>
+<%= form_for(@department) do |form|%>
   <% if @department.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@department.errors.count, "error") %> prohibited this department from being saved:</h2>
@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, required: true, class: "form-control" %>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, required: true, class: "form-control" %>
   </div>
   <div class="from-group">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, class: "form-control"%>
+    <%= form.label :description %><br>
+    <%= form.text_area :description, class: "form-control"%>
   </div>
   <br>
   <div class="actions">
-    <%= f.submit class: "btn btn-success" %>
+    <%= form.submit class: "btn btn-regular btn-success" %>
   </div>
 <% end %>

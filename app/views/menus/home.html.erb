@@ -1,13 +1,16 @@
-<%= form_tag( menus_search_email_path(format: :js), method: "post", remote: true) do %>
-  <div class='form-group'>
-    <h3>Enter Email</h3>
-    <%= text_field_tag :email, '' , class:"form-control", placeholder:'Enter your email' %>
-  </div>
-  <div class='form-group'>
-    <%= submit_tag("Search", class:'btn btn-dark btn-block') %>
-  </div>
-<% end %>
+<%= render 'menus/header' %>
+<div class='container'>
+	<%= form_tag( menus_search_email_path(format: :js), method: "post", remote: true) do %>
+	  <div class='form-group'>
+	    <h3>Enter Email</h3>
+	    <%= text_field_tag :email, '' , class:"form-control", placeholder:'Enter your email' %>
+	  </div>
+	  <div class='form-group'>
+	    <%= submit_tag("Search", class:'btn btn-dark btn-block') %>
+	  </div>
+	<% end %>
 
-<div id="_company-list">
-  
+	<div id="_company-list">
+	  
+	</div>
 </div>

@@ -1,7 +1,6 @@
 $(document).ready(function() {
   $('#company-name').on('input',function(e){
-    var data = $(this);
-    $("#company-subdomain").val(data.val().toLowerCase());
+    $("#company-subdomain").val($(this).val().toLowerCase());
 })});
 
 function send(data) {
@@ -27,5 +26,6 @@ function getUrlVars() {
     });
     return vars;
 }
+
 
 

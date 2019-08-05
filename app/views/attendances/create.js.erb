@@ -1,5 +1,5 @@
 <% if @employee_attendance.valid? %>
-  var present_marked_btn = document.getElementsByClassName("mark_present");;
+  var present_marked_btn = document.getElementsByClassName("mark_present");
   present_marked_btn[0].style.display = "none";
   
   setTimeout(function(){location.reload()}, 3000);
@@ -7,9 +7,10 @@
   var present_marked_alert = document.getElementById("present_alert");
   present_marked_alert.style.display = "block";
 
-  var present_marked_btn = document.getElementsByClassName("update_attendance");;
+  var present_marked_btn = document.getElementsByClassName("update_attendance");
   present_marked_btn[0].style.display = "inline-flex";
 
 <% else %>
-  alert('Error!!');
+  var present_failure_alert = document.getElementById("present_failure_alert");
+  present_failure_alert.style.display = "block";
 <% end %>
