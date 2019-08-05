@@ -12,7 +12,6 @@ RSpec.describe TasksController, type: :controller do
   end
   context 'actions for the admin' do
     it 'should create a task' do
-      binding.pry
       task_params = FactoryGirl.attributes_for(:task)
       task_params[:company_id] = @admin.company_id
       task_params[:project_id] = @project.id
@@ -26,7 +25,6 @@ RSpec.describe TasksController, type: :controller do
     end
 
     it 'should not create a task' do
-      binding.pry
       task_params = FactoryGirl.attributes_for(:task)
       task_params[:company_id] = @admin.company_id
       task_params[:project_id] = @project.id

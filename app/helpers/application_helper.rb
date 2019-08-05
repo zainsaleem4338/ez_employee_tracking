@@ -3,7 +3,8 @@ require 'attendance'
 module ApplicationHelper
   def present_marked?
     @attendance = current_employee.todays_attendance_of_employee
-    @attendance.present?
+    return false if @attendance.nil?
+    @attendance.attendance_present?
   end
 
   def not_logged_out?
@@ -99,7 +100,17 @@ module ApplicationHelper
       }
       @data.push(@employees).push(@attendance_report).push(@departments).push(@teams)
     else
-      @data
+      @projects = {
+        name: 'Projects',
+        link: projects_path,
+        icon: 'fas fa-tasks'
+      }
+      @employee_tasks = {
+        name: 'My Tasks',
+        link: employee_tasks_list_path(current_employee),
+        icon: 'fas fa-tasks'
+      }
+      @data.push(@projects).push(@employee_tasks)
     end
   end
 end

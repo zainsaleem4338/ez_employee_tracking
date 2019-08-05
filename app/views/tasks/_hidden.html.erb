@@ -1,38 +1,48 @@
 <% if @task.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-  <ul>
-    <% @task.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
+<div class="container">
+  <div id="error_explanation">
+    <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+    <ul>
+      <% @task.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 <% end %>
 
-<div class="row d-flex justify-content-start">
-  <div class="form-group col-md-6">
-    <%= form.label :name %><br>
-    <%= form.text_field :name, class: "form-control", placeholder: "Enter the task name" %>
-  </div>
-</div>
-<div class="row d-flex justify-content-start">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="d-flex">
+        <div class="form-group">
+          <%= form.label :name %><br>
+          <%= form.text_field :name, class: "form-control", placeholder: "Enter the task name" %>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="form-group">
+          <%= form.label :description %><br>
+          <%= form.text_field :description, class: "form-control", placeholder: "Enter description" %>
+        </div>
+      </div>
+    </div>
 
-  <div class="form-group col-md-6">
-    <%= form.label :description %><br>
-    <%= form.text_field :description, class: "form-control", placeholder: "Enter description" %>
+    <div class="col-md-6">
+      <div class="row d-flex">
+        <div class="form-group">
+          <%= form.label "Start Date" %><br>
+          <%= form.date_field :start_date, class: "form-control" %>
+        </div>
+      </div>
+      <div class="row d-flex">
+        <div class="form-group">
+           <%= form.label "Expected End Date" %><br>
+           <%= form.date_field :expected_end_date, class: "form-control" %>
+         </div>
+       </div>
+    </div>
   </div>
-</div>
-
-
-<div class="row d-flex justify-content-start">
-  <div class="form-group col-md-4">
-    <%= form.label "Start Date" %><br>
-    <%= form.date_field :start_date, class: "form-control" %>
-  </div>
-  <div class="form-group col-md-4">
-   <%= form.label "Expected End Date" %><br>
-   <%= form.date_field :expected_end_date, class: "form-control" %>
- </div>
 </div>
 
   <%= form.hidden_field :company_id, value: @task.project.company_id  %>

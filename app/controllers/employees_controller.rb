@@ -1,4 +1,4 @@
-class EmployeesController < ApplicationController
+class EmployeesController < ApplicationController  
   load_and_authorize_resource :employee, through_association: :company
 
   def employees_lists
@@ -7,12 +7,8 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def new
-    @employee = current_employee.company.employees.new
-  end
-
   def show
-    @attendances_list = current_employee.get_attendances_admin
+    @attendances_list = current_employee.all_attendances
   end
 
   def create
