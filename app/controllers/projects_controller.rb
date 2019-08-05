@@ -1,15 +1,25 @@
 class ProjectsController < ApplicationController
-  before_action :set_department, only: [:edit, :index, :new, :create]
-  load_and_authorize_resource through_association: :company
- 
+  load_and_authorize_resource :department
+  load_and_authorize_resource through: :department
+
+  def index
+    if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
+      @projects = @projects.employee_projects(current_employee)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def create
     @project.status = Project::NEW_STATUS
     if @project.save
       flash[:success] = 'Project Created Successfully!'
-      redirect_to projects_path
+      redirect_to department_projects_path
     else
       flash[:danger] = 'Could not create Project!'
-      render new_project_path
+      render new_department_project_path
     end
   end
 
@@ -20,7 +30,7 @@ class ProjectsController < ApplicationController
     else
       flash[:danger] = 'Could not delete Project!'
     end
-    redirect_to projects_path
+    redirect_to department_projects_path
   end
 
   def update
@@ -29,17 +39,13 @@ class ProjectsController < ApplicationController
     else
       flash[:danger] = 'Could not update Project!'
     end
-    redirect_to projects_path
+    redirect_to department_projects_path
   end
 
   private
 
   def project_params
-    params.require(:project).
-    permit(:description, :name, :start_date, :expected_end_date, :department_id)
-  end
-
-  def set_department
-    @departments = current_employee.company.departments
+    params.require(:project)
+          .permit(:description, :name, :start_date, :expected_end_date, :department_id)
   end
 end

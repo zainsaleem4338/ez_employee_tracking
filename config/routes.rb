@@ -1,28 +1,28 @@
 Rails.application.routes.draw do
-
   devise_for :employees, controllers: { sessions: 'sessions' }
 
   resources :teams
-  resources :departments
   resources :attendances
 
-  resources :projects do
-    resources :tasks do
-      member do
-        get 'edit_status'
-        patch 'update_status'
+  resources :departments do
+    resources :projects do
+      resources :tasks do
+        member do
+          get 'edit_status'
+          patch 'update_status'
+        end
       end
     end
   end
   
-  resources :tasks, only: [:my_tasks, :update_task_logtime]
+  resources :tasks, only: [:employee_tasks, :update_task_logtime]
 
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
   get 'menus/home' => 'menus#home'
   root 'menus#home'
 
-  get 'my_tasks' => 'tasks#my_tasks', :as => :employee_tasks_list
+  get 'employee_tasks' => 'tasks#employee_tasks', :as => :employee_tasks_list
   patch 'tasks/:id/update_task_logtime' => 'tasks#update_task_logtime', :as => :update_task_logtime
   get 'employee_lists' => 'employees#employees_lists'
   get '/employees/index' => 'employees#index', :as => :employees

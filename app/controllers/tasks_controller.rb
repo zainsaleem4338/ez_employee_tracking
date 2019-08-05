@@ -1,32 +1,43 @@
 class TasksController < ApplicationController
-  load_and_authorize_resource only: [:my_tasks, :update_task_logtime]
-  load_and_authorize_resource :project, except: [:my_tasks, :update_task_logtime]
-  load_and_authorize_resource :task, through: :project, except: [:my_tasks, :update_task_logtime]
- 
+  load_and_authorize_resource only: [:employee_tasks, :update_task_logtime]
+  load_and_authorize_resource :department
+  load_and_authorize_resource :project, through: :department, except: [:employee_tasks, :update_task_logtime]
+  load_and_authorize_resource :task, through: :project, except: [:employee_tasks, :update_task_logtime]
+
+  def index
+    if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
+      @tasks = @tasks.employee_tasks(current_employee)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def create
     @task.set_status
     if @task.save
       flash[:success] = 'Created Task Successfully!'
-      redirect_to project_tasks_url(@task.project)
+      redirect_to department_project_tasks_path
     else
       flash[:danger] = 'Could not create Task!'
-      render new_project_task_path(@task.project)
+      render new_department_project_task_path
     end
   end
 
   def update
-    if !params[:assignable_employee_id].empty? && !params[:assignable_team_id].empty?
+    if params[:assignable_employee_id].present? && params[:assignable_team_id].present?
       flash[:danger] = 'Make sure you delete employee field or team field'
       render :edit
     else
-      params[:task][:status] = 'new' if params[:task][:assignable_id].empty?
-      params[:task][:status] = 'assigned' if !params[:task][:assignable_id].empty?
+      params[:task][:status] = Task::NEW_STATUS if !params[:task][:assignable_id].present?
+      params[:task][:status] = Task::ASSIGNED_STATUS if params[:task][:assignable_id].present?
       if @task.update(task_params)
         flash[:success] = 'Updated Task Successfully!'
-        redirect_to project_tasks_path
+        redirect_to department_project_tasks_path
       else
         flash[:danger] = 'Could not update Task!'
-        redirect_to project_tasks_path
+        redirect_to edit_department_project_task_path
       end
     end
   end
@@ -35,20 +46,20 @@ class TasksController < ApplicationController
     @task.destroy
     if @task.destroyed?
       flash[:success] = 'Deleted Task Successfully!'
-      redirect_to project_tasks_path
+      redirect_to department_project_tasks_path
     else
       flash[:danger] = 'Could not delete Task!'
-      redirect_to project_tasks_path
+      redirect_to department_project_tasks_path
     end
   end
 
   def update_status
     if @task.update(task_params)
       flash[:success] = 'Updated Task Status Successfully!'
-      redirect_to project_tasks_path
+      redirect_to department_project_tasks_path
     else
       flash[:danger] = 'Could not update Task Status!'
-      redirect_to project_tasks_path
+      redirect_to department_project_tasks_path
     end
   end
 
@@ -65,6 +76,6 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).
-      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id)
+      permit(:company_id, :start_date, :expected_end_date, :description, :name, :project_id, :status, :assignable_type, :assignable_id, :reviewer_id)
   end
 end

@@ -21,14 +21,19 @@ class Employee < ActiveRecord::Base
   validates :role, presence: true
   accepts_nested_attributes_for :company
   has_many :tasks, :as => :assignable
+  has_many :tasks, foreign_key: :reviewer_id, class_name: 'Task'
   has_many :attendances
   scope :team_employees, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).where.not(employee_teams: {employee_id: user.id}).distinct}
-  scope :team_employees_projects_tasks, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).distinct}
+  scope :team_employees_projects_tasks, ->(user){joins("LEFT JOIN employee_teams ON employees.id = employee_teams.employee_id").where('employee_teams.team_id in (?) OR employees.id = ?',user.employee_teams.pluck(:team_id), user.id)}
 
   def todays_attendance_of_employee
     @start_time = DateTime.now.change(hour: 10)
     @end_time = DateTime.now.change(hour: 20)
     attendances.find_by(login_time: (@start_time..@end_time))
+  end
+
+  def all_attendances
+    company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
   end
 
   def with_company

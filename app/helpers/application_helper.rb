@@ -93,38 +93,19 @@ module ApplicationHelper
           }
         ]
       }
-
-      @projects = {
-        name: 'Projects',
-        link: '#',
-        icon: 'fas fa-tasks',
-        submenu_id: 'projectSubmenu',
-        suboptions: [
-          {
-            name: 'Add Project',
-            link: new_project_path,
-            icon: 'fas fa-plus'
-          },
-          {
-            name: 'View Projects',
-            link: projects_path,
-            icon: 'fas fa-eye'
-          }
-        ]
-      }
-      @data.push(@employees).push(@departments).push(@teams).push(@projects)
+      @data.push(@employees).push(@departments).push(@teams)
     else
       @projects = {
         name: 'Projects',
         link: projects_path,
         icon: 'fas fa-tasks'
       }
-      @my_tasks = {
+      @employee_tasks = {
         name: 'My Tasks',
         link: employee_tasks_list_path(current_employee),
         icon: 'fas fa-tasks'
       }
-      @data.push(@projects).push(@my_tasks)
+      @data.push(@projects).push(@employee_tasks)
     end
   end
 end
