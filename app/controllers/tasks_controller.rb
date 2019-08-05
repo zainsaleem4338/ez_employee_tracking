@@ -23,11 +23,11 @@ class TasksController < ApplicationController
   end
 
   def update
-    if !params[:assignable_employee_id].empty? && !params[:assignable_team_id].empty?
-      render :edit, notice: 'Make sure you delete employee field or team field'
+    if params[:assignable_employee_id].present? && params[:assignable_team_id].present?
+      render :edit, notice: "Make sure you delete employee field or team field"
     else
-      params[:task][:status] = Task::NEW_STATUS if params[:task][:assignable_id].empty?
-      params[:task][:status] = Task::ASSIGNED_STATUS unless params[:task][:assignable_id].empty?
+      params[:task][:status] = Task::NEW_STATUS if !params[:task][:assignable_id].present?
+      params[:task][:status] = Task::ASSIGNED_STATUS if params[:task][:assignable_id].present?
       if @task.update(task_params)
         redirect_to department_project_tasks_path, notice: 'Task updated successfully!'
       else
