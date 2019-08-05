@@ -3,7 +3,7 @@ class EmployeesController < ApplicationController
   load_and_authorize_resource :team, through_association: :company
 
   def employees_lists
-    if params['department'].nil?
+    if params['department'].blank?
       @employees = current_employee.company.employees.active_members.order(:name)
     else
       @employees = current_employee.company.departments.find(params['department'].to_i).employees.active_members.order(:name)

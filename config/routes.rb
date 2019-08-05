@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     collection do
       get 'load_task_data_in_report' => 'reports#load_task_data_in_report'
       get 'task_report' => 'reports#task_report'
-      get 'task_pdf_report' => 'reports#task_pdf_report'
+      get 'task_pdf_csv_report' => 'reports#task_pdf_csv_report'
     end
   end
   get 'teamslist' => 'teams#teams_list'

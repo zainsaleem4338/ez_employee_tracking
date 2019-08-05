@@ -35,7 +35,7 @@ class TasksController < ApplicationController
   end
 
   def update_status
-    if @task.update(task_params)
+    if @task.update_attribute('status', task_params[:status])
       redirect_to project_tasks_path, notice: t('.success_notice')
     else
       redirect_to project_tasks_path, notice: t('.error_notice')

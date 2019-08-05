@@ -19,11 +19,8 @@
   
   <div class="form-group">
     <%= form.label :team_lead_id, "Team Leader" %>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label for="team_leader" id="leader">
-      <% if @team.persisted? %>
-        <%= @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name)[0] %>
-      <% end %>
+    <label for="team_leader" id="leader" class="ml-5">
+      <%= get_team_leader(@team) %>
     </label>
     <button type="button" class="btn-edit" id="leader_edit"><i class="fa fa-edit"></i></button>
     <div class="row" id="team_leader_field">
@@ -31,10 +28,10 @@
         <%= form.text_field :team_lead_id, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]) }, class: "form-control" %>
       </div>
       <div class="col-md-1">
-        <button type="button" class="btn btn-primary" id="ok_leader">Ok</button>
+        <button type="button" class="btn btn-regular" id="ok_leader">Ok</button>
       </div>
     </div>
-    <span id="team_leader_span" style="color: red;font-size: 13px;"></span>
+    <span id="team_leader_span" class="error"></span>
   </div>
   <div class="form-group" id="append_team_members">
     <table class="table">
@@ -48,7 +45,7 @@
     </table>
   </div>
   <div class="form-group">
-    <button type="button" class="btn btn-primary" id="add_team_members">
+    <button type="button" class="btn btn-regular" id="add_team_members">
     Add Team Members</button>
   </div>
   <div class="form-group" id="team_members_view">
@@ -58,10 +55,10 @@
         <%= text_field_tag "team_employee_ids", "", class: "form-control" %>
       </div>
       <div class="col-md-1">
-        <button type="button" class="btn btn-primary" id="ok">Ok</button>
+        <button type="button" class="btn btn-regular" id="ok">Ok</button>
       </div>
     </div>
-    <span id="team_member_span" style="color: red;font-size: 13px;"></span>
+    <span id="team_member_span" class="error"></span>
   </div>  
   <div class="form-group">
     <%= form.label :team_pic, "Team Image" %><br>
@@ -72,6 +69,7 @@
     <%= form.text_area :description, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= form.submit class: "btn btn-regular btn-success" %>
+    <%= form.submit class: "btn btn-regular" %>
   </div>
 <% end %>
+

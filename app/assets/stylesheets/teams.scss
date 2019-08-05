@@ -1,19 +1,15 @@
-// Place all the styles related to the teams controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-.rounded-circle{
+.team-pic{
   width: 50%;
   height: 50%;
 }
 
 .btn-edit {
-  background-color: DodgerBlue;
+  background-color: #9a6dde !important;
   border: none;
   color: white;
   font-size: 16px;
   cursor: pointer;
   &:hover {
-    background-color: RoyalBlue;
+    background-color: #563d7c !important
   }
 }

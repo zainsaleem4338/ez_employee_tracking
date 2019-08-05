@@ -32,7 +32,7 @@ class Employee < ActiveRecord::Base
     # one employee should not have multiple attendances for one day
     @start_time = DateTime.now.change(hour: 10)
     @end_time = DateTime.now.change(hour: 20)
-    self.company.attendances.find_by(employee_id: id, login_time: (@start_time..@end_time))
+    company.attendances.find_by(employee_id: id, login_time: (@start_time..@end_time))
   end
 
   def with_company
@@ -49,6 +49,6 @@ class Employee < ActiveRecord::Base
   end
 
   def get_attendances_admin
-    self.company.attendances.where(status: STATUS[:PRESENT]).order(login_time: :desc)
+    company.attendances.where(status: STATUS[:PRESENT]).order(login_time: :desc)
   end
 end

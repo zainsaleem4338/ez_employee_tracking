@@ -1,74 +1,80 @@
-
-<div class="container datatable-container">
-  <div class="row">
-      <div class="col">
-        <div class="row">
-          <div class="col-md-4">
-            <b>Project:</b>
-          </div>
-          <div class="col-md-8">
-            <input id="project" type="text" class="form-control" />
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="row">
-          <div class="col-md-4">
-            <b>Status:</b>
-          </div>
-          <div class="col-md-8">
-            <select id="status" class="form-control">
-              <option value="">--Select Status--</option>
-              <option value="New">New</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Review pending">Review pending</option>
-              <option value="Reviewed">Reviewed</option>
-              <option value="Completed">Completed</option>
-            </select>
+<div class="container">
+  <%= form_tag(task_pdf_csv_report_reports_path, method: :get) do %>
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-2">
+        <div class="dropdown dropdown-padding">
+          <button type="button" class="btn btn-secondary btn-sm" data-toggle="dropdown">
+            Export To
+          </button>
+          <div class="dropdown-menu">
+             <%= submit_tag "PDF",name: 'pdf', class: "dropdown-item" %>
+             <%= submit_tag "CSV",name: 'csv', class: "dropdown-item" %>
           </div>
         </div>
       </div>
     </div>
-    <br>
-    <center>
-    <div class="row">
-      <div class="col-md-3">
-        <b>Created Range:</b>
+    <button class="btn btn-regular btn-md" type="button" data-toggle="collapse" data-target="#multiCollapseFilter" aria-expanded="false" aria-controls="multiCollapseFilter">Filter By</button>
+    <div class="collapse multi-collapse mt-2" id="multiCollapseFilter">  
+      <div class="row">
+        <div class="col">
+          <b class="filter-text">Start Date Range</b>
+        </div>
+        <div class="col">
+          <b class="filter-text">Expected End Date Range</b>
+        </div>
       </div>
-      <div class="col-md-4">
-        <input id="created_start" type="date" class="form-control" />
+      <div class="row filter-line-height">
+        <div class="col">
+          <div class="row">
+            <div class="col-6">
+              <%= date_field_tag 'created_start', nil, class: 'form-control filters' %>
+            </div>
+            <div class="col-6">
+              <%= date_field_tag 'created_end', nil, class: 'form-control filters' %>
+            </div>
+          </div>
+          <div id="created_date_range error"></div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col-6">
+              <%= date_field_tag 'deadline_start', nil, class: 'form-control filters' %> 
+            </div>
+            <div class="col-6">
+              <%= date_field_tag 'deadline_end', nil, class: 'form-control filters' %>
+            </div>
+          </div>
+           <span id="deadline_date_range error"></span>
+        </div>
       </div>
-      <div class="col-md-4">
-        <input id="created_end" type="date" class="form-control" />
+      <div class="row mt-0">
+        <div class="col-3">
+          <b class="filter-text">Project</b>
+        </div>
+        <div class="col-3">
+          <b class="filter-text">Status</b>
+        </div>
       </div>
-      <span id="created_date_range" style="color: red"></span>
+      <div class="row">
+        <div class="col-3">
+          <%= text_field_tag 'project', nil, class: 'form-control filters' %>
+        </div>
+        <div class="col-3">
+          <%= select_tag(:status, options_for_select([["--Choose Status--", ''], ["New", "New"], ["In Progress", "In Progress"], ["Review pending", "Review pending"], ["Reviewed", "Reviewed"], ["Completed", "Completed"]]),class: 'form-control filters') %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 btn-padding">
+          <button class="btn btn-regular filters" type="button" id="update">Filter</button>&nbsp;
+          <button class="btn btn-outline-danger filters" type="button" id="clear">Clear</button>
+        </div>
+      </div>
     </div>
-    <br>
-    <div class="row">
-      <div class="col-md-3">
-        <b>Deadline Range:</b>
-      </div>
-      <div class="col-md-4">
-        <input id="deadline_start" type="date" class="form-control" />
-      </div>
-      <div class="col-md-4">
-        <input id="deadline_end" type="date" class="form-control" />
-      </div>
-      <span id="deadline_date_range" style="color: red"></span>
-    </div></center>
-    <br>
-    <div class="row">
-      <div class="col-md-8">
-        <button class="btn btn-primary" type="button" id="update">Update</button>&nbsp;
-        <button class="btn btn-primary" type="button" id="clear">Clear</button>
-      </div>
-      <div class="col-md-4">
-        <%= link_to 'Generate PDF', task_pdf_report_reports_path(format: :pdf), class: 'btn btn-primary' %>
-      </div>
-    </div>
+  <% end %>
   <br>
   <div id="tasks_table">
     <%= render 'shared/tasks_report_list', tasks: @tasks %>
   </div>
-  
 </div> 

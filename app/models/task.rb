@@ -21,9 +21,9 @@ class Task < ActiveRecord::Base
 
   def get_employees(assignable_type, assignable_id)
     if assignable_type == EMPLOYEE
-      self.company.employees.where(id: assignable_id)
+      company.employees.where(id: assignable_id)
     else
-      self.company.teams.find(assignable_id).employees
+      company.teams.find(assignable_id).employees
     end
   end
 
@@ -62,7 +62,7 @@ class Task < ActiveRecord::Base
   end
 
   def set_status
-    return self.status = Task::ASSIGNED_STATUS unless self.assignable_id.nil?
+    return self.status = Task::ASSIGNED_STATUS unless self.assignable_id.blank?
     self.status = Task::NEW_STATUS
     self.assignable_type = nil
   end

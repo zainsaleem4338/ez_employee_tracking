@@ -106,7 +106,12 @@ module ApplicationHelper
           }
         ]
       }
-      @data.push(@employees).push(@departments).push(@projects)
+      @reports = {
+        name: 'Reports',
+        link: reports_path,
+        icon: 'fas fa-file'
+      }
+      @data.push(@employees).push(@departments).push(@projects).push(@reports)
     else
       @data
     end

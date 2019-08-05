@@ -7,4 +7,8 @@ module TasksHelper
     return "unassigned" if task.assignable.nil?
     task.assignable.name.capitalize
   end
+  def get_assignable_type(task)
+    return "unassigned" if task.assignable.nil?
+    task.assignable_type.capitalize
+  end
 end

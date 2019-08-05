@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   def index
-    @teams = current_employee.company.departments.find(params[:department_id]).teams
+    @teams = Team.deparment_teams(current_employee, params[:department_id])
   end
 
   def show

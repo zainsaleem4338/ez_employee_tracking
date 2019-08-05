@@ -6,14 +6,14 @@
     <li class="list-group-item list-group-item-info">
       <ul>
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-8">
             <li><%= employee.name %></li>
             <li><%= employee.email %></li>
             <li><%= employee.role %></li> 
             <li><b><%= link_to "Delete this employee", delete_employee_path(employee), method: :delete, data: { confirm: "Are you sure you want to delete the employee?" } %></b></li> 
           </div>
-          <div class="col-md-5">
-            <%= image_tag employee.avatar.url(:thumb), class: "rounded" %>
+          <div class="col-md-4">
+            <%= image_tag employee.avatar.url(:thumb), class: "rounded employee-avatar" %>
           </div>
         </div>
       </ul>

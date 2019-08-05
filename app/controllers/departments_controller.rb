@@ -4,7 +4,7 @@ class DepartmentsController < ApplicationController
   def create
     respond_to do |format|
       if @department.save
-        format.html { redirect_to departments_path, notice: t('.success_notice')}
+        format.html { redirect_to departments_path, notice: t('.success_notice') }
         format.json { render :show, status: :created, location: @department }
       else
         format.html { render :new }
@@ -29,7 +29,7 @@ class DepartmentsController < ApplicationController
     @department.destroy
     respond_to do |format|
       if @department.destroyed?
-        format.html { redirect_to departments_path, notice: t('.success_notice')}
+        format.html { redirect_to departments_path, notice: t('.success_notice') }
         format.json { head :no_content }
       else
         format.html { redirect_to departments_path, notice: t('.error_notice') }

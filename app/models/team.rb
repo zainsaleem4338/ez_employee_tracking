@@ -10,7 +10,7 @@ class Team < ActiveRecord::Base
   validates_attachment_content_type :team_pic, content_type: /\Aimage\/.*\z/
   has_many :tasks, as: :assignable
   def create_team(team_lead_id, employee_ids, department_id)
-    if employee_ids.nil?
+    if employee_ids.blank?
       self.errors.add(:base, I18n.t('models.team.team_members_require_error'))
       return false
     end
@@ -44,7 +44,7 @@ class Team < ActiveRecord::Base
   end
 
   def update_team(team_lead_id, employee_ids, update_team_params)
-    if employee_ids.nil?
+    if employee_ids.blank?
       self.errors.add(:base, I18n.t('models.team.team_members_require_error'))
       return false
     end
@@ -87,10 +87,10 @@ class Team < ActiveRecord::Base
 
   def add_errors(error)
     if error.record.is_a? EmployeeTeam
-      if error.record.employee_id.nil? && error.record.employee_type == EMPLOYEE_TYPE[:team_leader]
+      if error.record.employee_id.balnk? && error.record.employee_type == EMPLOYEE_TYPE[:team_leader]
         self.errors.add(:base, I18n.t('models.team.leader_name_require'))
       end
-      if error.record.employee_id.nil? && error.record.employee_type == EMPLOYEE_TYPE[:team_member]
+      if error.record.employee_id.balnk? && error.record.employee_type == EMPLOYEE_TYPE[:team_member]
         self.errors.add(:base, I18n.t('models.team.team_members_require_error'))
       end
     end
@@ -98,5 +98,9 @@ class Team < ActiveRecord::Base
 
   def employee_lists(employee_type)
     self.employees.where(employee_teams: { employee_type: employee_type })
+  end
+
+  def self.deparment_teams(current_employee, department_id)
+    current_employee.company.departments.find(department_id).teams
   end
 end
