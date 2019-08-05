@@ -114,9 +114,9 @@ ActiveRecord::Schema.define(version: 20190731074142) do
     t.integer  "project_id",        limit: 4
     t.integer  "assignable_id",     limit: 4
     t.string   "assignable_type",   limit: 255
+    t.integer  "complexity",        limit: 4
     t.integer  "log_time",          limit: 4
     t.integer  "reviewer_id",       limit: 4
-    t.integer  "complexity",        limit: 4
   end
 
   add_index "tasks", ["assignable_type", "assignable_id"], name: "index_tasks_on_assignable_type_and_assignable_id", using: :btree
