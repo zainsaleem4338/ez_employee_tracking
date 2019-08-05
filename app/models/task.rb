@@ -3,6 +3,7 @@ class Task < ActiveRecord::Base
   TEAM     = 'Team'.freeze
   NEW_STATUS = 'new'.freeze
   ASSIGNED_STATUS = 'assigned'.freeze
+  UNASSIGNED_STATUS = 'unassigned'.freeze
   STATUS = [1..10].freeze
   belongs_to :company
   belongs_to :project

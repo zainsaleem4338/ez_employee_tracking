@@ -4,11 +4,11 @@ module TasksHelper
     return [task.assignable].to_json.html_safe if task.assignable_type == assignable_type
   end
   def get_assignable_name(task)
-    return "unassigned" if task.assignable.nil?
+    return Task::UNASSIGNED_STATUS if task.assignable.nil?
     task.assignable.name.capitalize
   end
   def get_assignable_type(task)
-    return "unassigned" if task.assignable.nil?
+    return Task::UNASSIGNED_STATUS if task.assignable.nil?
     task.assignable_type.capitalize
   end
 end
