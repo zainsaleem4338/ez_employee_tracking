@@ -23,10 +23,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'select2-rails'
 gem 'sequenceid'
 gem 'uglifier', '>= 1.3.0'
-gem 'wicked_pdf'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap4'
-gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf', '~>1.4.0'
+gem 'wkhtmltopdf-binary', '~>0.12.4'
 
 group :development, :test do
   gem 'better_errors'

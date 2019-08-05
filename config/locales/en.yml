@@ -2,13 +2,13 @@ en:
   hello: "Hello world"
   departments:
     create:
-      success_notice: 'Department was successfully created.'
+      success_notice: 'Department Created Successfully.'
 
     update:
-      success_notice: 'Department was successfully updated.'
+      success_notice: 'Department Updated Successfully.'
 
     destroy:
-      success_notice: 'Department was successfully destroyed.'
+      success_notice: 'Department Deleted Successfully.'
       error_notice: 'Unable to delete department'
 
 
@@ -20,13 +20,13 @@ en:
 
   projects:
     create:
-      success_notice: 'Successfully created'
+      success_notice: 'Project Created Successfully'
     destroy:
-      success_notice: 'Deleted Successfully'
+      success_notice: 'Project Deleted Successfully'
       error_notice: 'Unable to delete'
     update:
-      success_notice: 'Updated Successfully'
-      error_notice: 'Cannot be updated'
+      success_notice: 'Project Updated Successfully'
+      error_notice: 'Project cannot be updated'
 
   sessions:
     create:
@@ -37,18 +37,21 @@ en:
 
   tasks:
     create:
-      success_notice: 'Successfully created'
-      error_notice: 'Cannnot enter data due to constraints'
+      success_notice: 'Task Created Successfully'
+      error_notice: 'Could not create task'
     update:
       error_field_notice: 'Make sure you delete employee field or team field'
-      success_notice: 'Updated Successfully'
-      error_notice: 'Cannot be updated'
+      success_notice: 'Task Updated Successfully'
+      error_notice: 'Task cannot be updated'
     destroy:
-      success_notice: 'Deleted Successfully'
+      success_notice: 'Task Deleted Successfully'
       error_notice: 'Unable to delete'
     update_status:
-      success_notice: 'Updated Successfully'
-      error_notice: 'Cannot be updated!'
+      success_notice: 'Task Updated Successfully'
+      error_notice: 'Task cannot be updated!'
+    update_task_logtime:
+      success_notice: 'Updated task log-time Successfully!'
+      error_notice: 'Could not update task log-time!'
 
   teams:
     create:

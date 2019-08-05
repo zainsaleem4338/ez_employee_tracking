@@ -1,13 +1,10 @@
 FactoryGirl.define do
   factory :employee, class: 'Employee' do |emp|
-    emp.name "Agha"
-    emp.email "agha@gmail.com"
+    sequence(:name) {|n| "Aghaaa#{n}"}
+    sequence(:email) {|n| "aghaaa#{n}@gmail.com"}
     emp.password "netmail123"
-    emp.role "employee"
+    emp.role "Employee"
+    emp.company_id 1
 
-    association :company, factory: :assoc_company
-  end
-  factory :assoc_company, class: 'Company' do |comp|
-    comp.name "PkEnvisage"
   end
 end

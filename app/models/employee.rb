@@ -4,7 +4,6 @@ class Employee < ActiveRecord::Base
   ADMIN_ROLE = 'Admin'.freeze
   EMPLOYEE_ROLE = 'Employee'.freeze
   TEAM_ROLE = 'Team'.freeze
-  STATUS = { 'PRESENT': 1, 'ABSENT': 0 }.freeze
   TEAM_LEAD_ROLE = 'Team Lead'.freeze
   belongs_to :company, inverse_of: :employees
   belongs_to :department
@@ -25,14 +24,18 @@ class Employee < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   has_many :tasks, as: :assignable
   has_many :attendances
-  scope :team_employees, ->(user) { joins(employee_teams: :employee).where(employee_teams: { team_id: user.employee_teams.pluck(:team_id) }).where.not(employee_teams: { employee_id: user.id }).distinct }
-  scope :team_employees_projects_tasks, ->(user) { joins(employee_teams: :employee).where(employee_teams: { team_id: user.employee_teams.pluck(:team_id) }).distinct }
+  has_many :tasks, foreign_key: :reviewer_id, class_name: 'Task'
+  scope :team_employees, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).where.not(employee_teams: {employee_id: user.id}).distinct}
+  scope :team_employees_projects_tasks, ->(user){joins("LEFT JOIN employee_teams ON employees.id = employee_teams.employee_id").where('employee_teams.team_id in (?) OR employees.id = ?',user.employee_teams.pluck(:team_id), user.id)}
 
   def todays_attendance_of_employee
-    # one employee should not have multiple attendances for one day
     @start_time = DateTime.now.change(hour: 10)
     @end_time = DateTime.now.change(hour: 20)
     company.attendances.find_by(employee_id: id, login_time: (@start_time..@end_time))
+  end
+
+  def all_attendances
+    company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
   end
 
   def with_company
@@ -46,9 +49,5 @@ class Employee < ActiveRecord::Base
 
   def email_changed?
     false
-  end
-
-  def get_attendances_admin
-    company.attendances.where(status: STATUS[:PRESENT]).order(login_time: :desc)
   end
 end
