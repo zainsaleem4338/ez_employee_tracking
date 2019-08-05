@@ -1,5 +1,4 @@
-class EmployeesController < ApplicationController
-  
+class EmployeesController < ApplicationController  
   load_and_authorize_resource :employee, through_association: :company
 
   def employees_lists

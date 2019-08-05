@@ -17,7 +17,6 @@ class TasksController < ApplicationController
   def create
     @task.set_status
     if @task.save
-      flash[:success] = 'Created Task Successfully!'
       if @task.assignable_type == Task::EMPLOYEE
         @task.task_time_logs.create(employee_id: @task.assignable_id)
       elsif @task.assignable_type == Task::TEAM
@@ -25,6 +24,7 @@ class TasksController < ApplicationController
           @task.task_time_logs.create(employee_id: employee.id)
         end
       end
+      flash[:success] = 'Created Task Successfully!'
       redirect_to department_project_tasks_path
     else
       flash[:danger] = 'Could not create Task!'
