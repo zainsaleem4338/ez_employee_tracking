@@ -23,6 +23,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'select2-rails'
 gem 'sequenceid'
 gem 'uglifier', '>= 1.3.0'
+gem 'wicked_pdf', '~>1.4.0'
+gem 'wkhtmltopdf-binary', '~>0.12.4'
 
 group :development do
   gem 'better_errors'

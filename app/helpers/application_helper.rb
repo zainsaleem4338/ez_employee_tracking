@@ -48,7 +48,13 @@ module ApplicationHelper
       link: show_employee_path(current_employee),
       icon: 'fas fa-chart-line'
     }
-    @data.push(@dashboard)
+    @velocity_report = {
+      name: 'Velocity Report',
+      link: show_employee_velocity_report_path,
+      icon: 'fas fa-file'
+    }
+    
+    @data.push(@dashboard).push(@velocity_report)
 
     if admin?
       @teams = {
@@ -95,17 +101,12 @@ module ApplicationHelper
       }
       @data.push(@employees).push(@departments).push(@teams)
     else
-      @projects = {
-        name: 'Projects',
-        link: projects_path,
-        icon: 'fas fa-tasks'
-      }
       @employee_tasks = {
         name: 'My Tasks',
         link: employee_tasks_list_path(current_employee),
         icon: 'fas fa-tasks'
       }
-      @data.push(@projects).push(@employee_tasks)
+      @data.push(@employee_tasks)
     end
   end
 end
