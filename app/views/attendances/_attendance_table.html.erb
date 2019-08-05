@@ -28,11 +28,7 @@
         <%= attendance.login_time.to_formatted_s(:long_ordinal) %>
       </td>
       <td>
-        <% if logout_added?(attendance) %>
-          -
-        <% else %>
-          <%= attendance.logout_time.to_formatted_s(:long_ordinal) %>
-        <% end %>
+        <%= attendance_logout(attendance)%>
       </td>
     </tr>
     <% end %>

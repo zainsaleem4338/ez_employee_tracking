@@ -12,4 +12,9 @@ module TasksHelper
   def task_logtime(task)
     task.task_time_logs.inject(0) { |sum, task_log| sum + task_log.hours.to_i }
   end
+
+  def get_reviewer_hash(task)
+    return nil if task.reviewer_id.nil?
+    return [task.reviewer].to_json.html_safe
+  end
 end
