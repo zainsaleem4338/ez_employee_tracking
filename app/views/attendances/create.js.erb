@@ -8,5 +8,5 @@
   present_marked_btn[0].style.display = "inline-flex";
 
 <% else %>
-	<% flash[:danger] = 'Check in failed!' %>
+	$('#notifications-flash').append("<%= j render(:partial => 'shared/notification') %>");
 <% end %>

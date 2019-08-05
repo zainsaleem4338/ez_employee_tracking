@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get 'menus/home' => 'menus#home'
   root 'menus#home'
 
+  get 'reports/velocity' => 'reports#show', as: :show_employee_velocity_report
+  get 'reports/export_report' => 'reports#pdf_velocity_report', as: :pdf_velocity_report
   get 'employee_tasks' => 'tasks#employee_tasks', :as => :employee_tasks_list
   patch 'tasks/:id/update_task_logtime' => 'tasks#update_task_logtime', :as => :update_task_logtime
   get 'employee_lists' => 'employees#employees_lists'
@@ -30,8 +32,8 @@ Rails.application.routes.draw do
   get '/employees/:id/show' => 'employees#show', :as => :show_employee
   post '/employees/create' => 'employees#create', :as => :create_employee
   delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
-  get 'employees_attendance_report' => 'employees#attendance_report'
-  get 'employees_report_pdf' => 'employees#attendance_report_pdf'
+  get 'employees_attendance_report' => 'reports#attendance_report'
+  get 'employees_report_pdf' => 'reports#attendance_report_pdf'
   get 'employee_lists' => 'employees#employees_lists'
 
   get 'teamslist' => 'teams#teams_list'

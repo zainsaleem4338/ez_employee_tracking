@@ -1,4 +1,5 @@
 require 'will_paginate/array'
+require 'google_drive'
 
 class ApplicationController < ActionController::Base
   alias_method :current_user, :current_employee
@@ -7,6 +8,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
   before_filter :set_cache_buster
 
+  def get_session
+    GoogleDrive::Session.from_config("config/credentials.json")
+  end
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
