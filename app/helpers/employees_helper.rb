@@ -21,6 +21,6 @@ module EmployeesHelper
   end
 
   def team_name(team_id)
-    Team.find(team_id).name
+    current_employee.company.teams.find(team_id).name
   end
 end

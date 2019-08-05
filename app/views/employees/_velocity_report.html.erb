@@ -19,12 +19,12 @@
     <tbody>
       <% team_members_data.each do |employee_id, employee_velocity_data|  %>
         <tr>
-          <td><%= employee_velocity_data['employee_id'] %></td>
-          <td><%= employee_velocity_data['employee_name'] %></td>
-          <td><%= employee_velocity_data['total_tasks'] %></td>
-          <td><%= employee_velocity_data['total_complexity'] %></td>
-          <td><%= employee_velocity_data['total_time'] %></td>
-          <td><%= employee_velocity_nan?(employee_velocity_data['velocity']) %></td>
+          <td><%= employee_velocity_data[:employee_id] %></td>
+          <td><%= employee_velocity_data[:employee_name] %></td>
+          <td><%= employee_velocity_data[:total_tasks] %></td>
+          <td><%= employee_velocity_data[:total_complexity] %></td>
+          <td><%= employee_velocity_data[:total_time] %></td>
+          <td><%= employee_velocity_nan?(employee_velocity_data[:velocity]) %></td>
         </tr> 
       <% end %>     
     </tbody>
