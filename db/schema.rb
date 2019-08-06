@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190805111002) do
+ActiveRecord::Schema.define(version: 20190804171819) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -135,11 +135,6 @@ ActiveRecord::Schema.define(version: 20190805111002) do
   add_index "projects", ["company_id"], name: "index_projects_on_company_id", using: :btree
   add_index "projects", ["department_id"], name: "index_projects_on_department_id", using: :btree
 
-  create_table "reports", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "settings", force: :cascade do |t|
     t.text    "working_days",     limit: 65535
     t.integer "company_id",       limit: 4
@@ -174,8 +169,8 @@ ActiveRecord::Schema.define(version: 20190805111002) do
     t.integer  "project_id",        limit: 4
     t.integer  "assignable_id",     limit: 4
     t.string   "assignable_type",   limit: 255
-    t.integer  "complexity",        limit: 4
     t.integer  "reviewer_id",       limit: 4
+    t.integer  "complexity",        limit: 4
   end
 
   add_index "tasks", ["assignable_type", "assignable_id"], name: "index_tasks_on_assignable_type_and_assignable_id", using: :btree
