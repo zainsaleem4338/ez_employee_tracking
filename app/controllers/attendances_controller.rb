@@ -1,9 +1,4 @@
 require 'date'
-# Public
-# Controls the attendance of employees
-# It does the following tasks:
-#   - Mark attendance of a employee/ Employee
-#   - Let admin see who is present today
 class AttendancesController < ApplicationController
   def index
     @attendances_list = current_employee.all_attendances
