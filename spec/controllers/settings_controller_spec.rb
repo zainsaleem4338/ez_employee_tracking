@@ -57,12 +57,12 @@ RSpec.describe SettingsController, type: :controller do
   context 'Update Event' do
     let(:update_params) { { id: 1, working_days: @setting.working_days, timings: @setting.timings, company_id: @setting.company_id } }
     it 'should update the settings' do
-      expect(put :update, id: @setting.id, event: update_params).to redirect_to index_settings_path
+      expect(put :update, id: @setting.id, event: update_params).to redirect_to settings_path
     end
   end
   context 'Delete Event' do
     it 'should delete the event' do
-      expect(delete :destroy, id: @setting.id).to redirect_to index_settings_path
+      expect(delete :destroy, id: @setting.id).to redirect_to settings_path
     end
   end
 end

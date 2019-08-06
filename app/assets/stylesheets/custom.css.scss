@@ -19,6 +19,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #fafafa;
   overflow-x:hidden;
+  font-size: 0.9rem;
 }
 
 p {
@@ -27,6 +28,10 @@ p {
   font-weight: 300;
   line-height: 1.7rem;
   color: #999;
+}
+
+#content h1, h2, h3 {
+  color: #563d7c;
 }
 
 a,
@@ -58,12 +63,24 @@ a:focus {
   display: inline !important;
 }
 
+.hidden {
+	display: none;
+}
+
 .mr-2 {
   margin-right: 0.5rem !important;
 }
 
+.ml-2 {
+  margin-left: 10px !important;
+}
+
 .text-gray-400 {
   color: #d1d3e2 !important;
+}
+
+.text-gray-dark {
+	color: #818391 !important;
 }
 
 .dropdown-divider {
@@ -73,12 +90,32 @@ a:focus {
   border-top: 1px solid #eaecf4;
 }
 
+.velocity-table {
+  margin-bottom: 50px;
+  margin-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .small {
   font-size: 80%
 }
 
+.sign-up-form {
+	padding-top: 20px;
+}
+
+.sign-up-form h3 {
+	color: #563d7c;
+	padding-bottom: 20px;
+}
+
+/*.container {
+  font-size: 0.85rem;
+}*/
+
 .header_title {
-	padding-top: 15px;
+  padding-top: 15px;
 }
 
 .nav-item .nav-link .img-profile {
@@ -145,6 +182,10 @@ a:focus {
   margin-top: 0 !important;
 }
 
+.velocity-report h5 {
+  font-style: italic;
+}
+
 i,
 span {
   display: inline-block;
@@ -204,6 +245,7 @@ span {
 
 #sidebar .sidebar-header h3 {
   color: #fff !important;
+  font-size: 1.4rem;
 }
 
 #sidebar.active .sidebar-header h3 {
@@ -236,7 +278,7 @@ span {
 
 #sidebar ul li a {
   padding: 10px;
-  font-size: 0.98rem;
+  font-size: 0.88rem;
   display: block;
 }
 
@@ -329,10 +371,6 @@ a[data-toggle="collapse"] {
     width: calc(100% - 80px);
 }
 
-#content h1, h2, h3 {
-  color: #563d7c;
-}
-
 #content p {
   color: #6f4da3;
 }
@@ -351,6 +389,246 @@ a[data-toggle="collapse"] {
   padding-right: 20px;
 }
 
+.text-purple {
+	color: #6f4da3;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e3e6f0;
+  border-radius: 0.35rem;
+}
+
+.d-lg-block {
+	display: block !important;
+}
+
+.d-none {
+	display: none !important;
+}
+
+.o-hidden {
+  overflow: hidden !important;
+}
+
+.card-body {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.my-5 {
+  margin-top: 3rem !important;
+}
+
+.border-0 {
+  border: 0 !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.mx-auto {
+  margin-right: auto !important;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.text-gray-800 {
+  color: #5a5c69 !important;
+}
+
+.text-gray-500 {
+  color: #b7b9cc !important;
+}
+
+.mb-5,
+.my-5 {
+  margin-bottom: 3rem !important;
+}
+
+.mb-0,
+.my-0 {
+  margin-bottom: 0 !important;
+}
+
+.error {
+  color: #5a5c69;
+  font-size: 7rem;
+  position: relative;
+  line-height: 1;
+  width: 12.5rem;
+}
+
+.error:before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  text-shadow: 1px 0 #4e73df;
+  top: 0;
+  color: #5a5c69;
+  background: #f8f9fc;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+.error:after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -1px 0 #e74a3b;
+  top: 0;
+  color: #5a5c69;
+  background: #f8f9fc;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim-2 {
+  0% {
+    clip: rect(69px, 9999px, 53px, 0);
+  }
+  5% {
+    clip: rect(37px, 9999px, 82px, 0);
+  }
+  10% {
+    clip: rect(35px, 9999px, 22px, 0);
+  }
+  15% {
+    clip: rect(97px, 9999px, 91px, 0);
+  }
+  20% {
+    clip: rect(45px, 9999px, 56px, 0);
+  }
+  25% {
+    clip: rect(82px, 9999px, 3px, 0);
+  }
+  30% {
+    clip: rect(73px, 9999px, 70px, 0);
+  }
+  35% {
+    clip: rect(70px, 9999px, 50px, 0);
+  }
+  40% {
+    clip: rect(15px, 9999px, 87px, 0);
+  }
+  45% {
+    clip: rect(78px, 9999px, 34px, 0);
+  }
+  50% {
+    clip: rect(95px, 9999px, 21px, 0);
+  }
+  55% {
+    clip: rect(82px, 9999px, 35px, 0);
+  }
+  60% {
+    clip: rect(57px, 9999px, 30px, 0);
+  }
+  65% {
+    clip: rect(21px, 9999px, 71px, 0);
+  }
+  70% {
+    clip: rect(17px, 9999px, 42px, 0);
+  }
+  75% {
+    clip: rect(69px, 9999px, 9px, 0);
+  }
+  80% {
+    clip: rect(43px, 9999px, 54px, 0);
+  }
+  85% {
+    clip: rect(39px, 9999px, 12px, 0);
+  }
+  90% {
+    clip: rect(83px, 9999px, 34px, 0);
+  }
+  95% {
+    clip: rect(57px, 9999px, 71px, 0);
+  }
+  100% {
+    clip: rect(81px, 9999px, 41px, 0);
+  }
+}
+
+@keyframes noise-anim-2 {
+  0% {
+    clip: rect(69px, 9999px, 53px, 0);
+  }
+  5% {
+    clip: rect(37px, 9999px, 82px, 0);
+  }
+  10% {
+    clip: rect(35px, 9999px, 22px, 0);
+  }
+  15% {
+    clip: rect(97px, 9999px, 91px, 0);
+  }
+  20% {
+    clip: rect(45px, 9999px, 56px, 0);
+  }
+  25% {
+    clip: rect(82px, 9999px, 3px, 0);
+  }
+  30% {
+    clip: rect(73px, 9999px, 70px, 0);
+  }
+  35% {
+    clip: rect(70px, 9999px, 50px, 0);
+  }
+  40% {
+    clip: rect(15px, 9999px, 87px, 0);
+  }
+  45% {
+    clip: rect(78px, 9999px, 34px, 0);
+  }
+  50% {
+    clip: rect(95px, 9999px, 21px, 0);
+  }
+  55% {
+    clip: rect(82px, 9999px, 35px, 0);
+  }
+  60% {
+    clip: rect(57px, 9999px, 30px, 0);
+  }
+  65% {
+    clip: rect(21px, 9999px, 71px, 0);
+  }
+  70% {
+    clip: rect(17px, 9999px, 42px, 0);
+  }
+  75% {
+    clip: rect(69px, 9999px, 9px, 0);
+  }
+  80% {
+    clip: rect(43px, 9999px, 54px, 0);
+  }
+  85% {
+    clip: rect(39px, 9999px, 12px, 0);
+  }
+  90% {
+    clip: rect(83px, 9999px, 34px, 0);
+  }
+  95% {
+    clip: rect(57px, 9999px, 71px, 0);
+  }
+  100% {
+    clip: rect(81px, 9999px, 41px, 0);
+  }
+}
+
 .bg-login-image {
   background: url("https://www.boomr.com/assets/homepage/header/hp-hero-f7001bc5c5fcf304b22d6f0684dc12c76dfc245a4c507a4282fa39cff834718b.svg");
   background-position: center;
@@ -362,9 +640,11 @@ a[data-toggle="collapse"] {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #563d7c), to(#8b52e3));
   background-image: linear-gradient(180deg, #563d7c 10%, #a165fc 100%);
   background-size: cover;
-  padding-bottom:3%;
-  padding-right:2%;
-  overflow: none;
+  padding-bottom: 3.6%;
+  padding-right: 10%;
+  padding-left: 10%;
+  padding-top: 0.1%;
+  overflow-y: none;
 }
 
 .icon-circle {

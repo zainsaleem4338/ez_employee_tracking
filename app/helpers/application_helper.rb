@@ -11,7 +11,7 @@ module ApplicationHelper
     setting = current_employee.company.setting
     today_start_time = setting.timings[Time.now.strftime('%A').downcase + '_start_time']
     today_end_time = setting.timings[Time.now.strftime('%A').downcase + '_end_time']
-    if (setting.working_days[Time.now.strftime('%A').downcase.to_sym] && (get_time_in_seconds(Time.now) >= get_time_in_seconds(today_start_time.to_time)) && (get_time_in_seconds(Time.now) <= get_time_in_seconds(today_end_time.to_time)))
+    if (setting.working_days[Time.now.strftime('%A').downcase] && (get_time_in_seconds(Time.now) >= get_time_in_seconds(today_start_time.to_time)) && (get_time_in_seconds(Time.now) <= get_time_in_seconds(today_end_time.to_time)))
       return true
     end
     false
@@ -25,7 +25,8 @@ module ApplicationHelper
 
   def present_marked?
     @attendance = current_employee.todays_attendance_of_employee
-    @attendance.present?
+    return false if @attendance.nil?
+    @attendance.attendance_present?
   end
 
   def not_logged_out?
@@ -56,7 +57,7 @@ module ApplicationHelper
     }
     @settings = {
         name: 'Settings',
-        link: index_settings_path,
+        link: settings_path,
         icon: 'fas fa-cog'
      }
     @data.push(@events).push(@chat).push(@calendar).push(@settings)
@@ -69,17 +70,13 @@ module ApplicationHelper
       link: menus_index_path,
       icon: 'fas fa-chart-line'
     }
+
     @data.push(@dashboard)
 
     if admin?
-      @teams = {
-        name: 'Teams',
-        link: teams_path,
-        icon: 'fas fa-user-friends'
-      }
       @attendance = {
         name: 'Attendance',
-        link: show_employee_path(current_employee),
+        link: attendances_path,
         icon: 'fas fa-journal-whills'
       }
       @employees = {
@@ -119,33 +116,29 @@ module ApplicationHelper
           }
         ]
       }
-
-      @projects = {
-        name: 'Projects',
-        link: '#',
-        icon: 'fas fa-tasks',
-        submenu_id: 'projectSubmenu',
-        suboptions: [
-          {
-            name: 'Add Project',
-            link: new_project_path,
-            icon: 'fas fa-plus'
-          },
-          {
-            name: 'View Projects',
-            link: projects_path,
-            icon: 'fas fa-eye'
-          }
-        ]
+      @reports = {
+        name: 'Reports',
+        link: reports_path,
+        icon: 'fas fa-file'
+      }
+      @add_events = {
+        name: 'Add Event',
+        link: new_events_path,
+        icon: 'fas fa-calendar-week'
       }
       @edit_settings = {
         name: 'Edit Settings',
         link: edit_settings_path,
         icon: 'fas fa-cogs'
       }
-      @data.push(@employees).push(@departments).push(@teams).push(@projects).push(@attendance).push(@edit_settings)
+      @data.push(@employees).push(@departments).push(@attendance).push(@add_events).push(@edit_settings)
     else
-      @data
+      @employee_tasks = {
+        name: 'My Tasks',
+        link: employee_tasks_list_path(current_employee),
+        icon: 'fas fa-tasks'
+      }
+      @data.push(@employee_tasks)
     end
   end
 end

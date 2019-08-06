@@ -1,0 +1,10 @@
+<tr id="team_member_<%= @count.to_i %>" >
+  	<td><%= image_tag member.avatar.url(:thumb) %></td>
+    <td><%= member.name %>
+    <%= hidden_field :employee_tokens, "", value: member.id %></td>
+    <td>
+      <button type="button" class="btn btn-outline-danger js-remove"
+          data-member-id="team_member_<%= @count.to_i %>">Remove</button>
+    </td>
+    <% @count = @count.to_i + 1 %>
+</tr>

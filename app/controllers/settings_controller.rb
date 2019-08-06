@@ -1,6 +1,8 @@
 class SettingsController < ApplicationController
+  load_and_authorize_resource
+
   def index
-    @settings = Setting.find_by(company_id: current_company.id)
+    @settings = @settings.first
     if @settings.present?
       if(@settings.working_days.class == String)
         @settings.working_days = JSON.parse(@settings.working_days.gsub("'",'"').gsub('=>',':'))
@@ -11,8 +13,8 @@ class SettingsController < ApplicationController
   end
 
   def edit
-    @settings = Setting.find_by(company_id: current_company.id)
-    if @settings != nil
+    @settings = @settings.first
+    if @settings.present?
       if(@settings.working_days.class == String)
         @settings.working_days = JSON.parse(@settings.working_days.gsub("'",'"').gsub('=>',':'))
         @settings.timings = JSON.parse(@settings.timings.gsub("'",'"').gsub('=>',':'))
@@ -22,7 +24,7 @@ class SettingsController < ApplicationController
   end
 
   def update
-    days = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
+    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
     on_days = {}
     days.each do |day|
       if params[day].blank?
@@ -44,26 +46,16 @@ class SettingsController < ApplicationController
         timings[timing] = params[timing]
       end
     end
-    @setting = Setting.find_by(company_id: current_company.id)
-    @setting.working_days = on_days
-    @setting.timings = timings
-    @setting.holidays = JSON.parse(params[:holidays].gsub("'",'"').gsub('=>',':'))
-    @setting.allocated_leaves = params[:allocated_leaves]
-    @setting.attendance_time = params[:attendance_time]
-    if @setting.save
-      redirect_to index_settings_path
+    @settings = @settings.first
+    @settings.working_days = on_days
+    @settings.timings = timings
+    @settings.holidays = JSON.parse(params[:holidays].gsub("'",'"').gsub('=>',':'))
+    @settings.allocated_leaves = params[:allocated_leaves]
+    @settings.attendance_time = params[:attendance_time]
+    if @settings.save
+      redirect_to settings_path
     else
       redirect_to menus_index_path
-    end
-  end
-
-  def destroy
-    @settings = Setting.find_by(company_id: current_company.id)
-    if @settings.destroy
-      redirect_to index_settings_path
-    else
-      flash[:danger] = 'Settings have not been delete!'
-      redirect_to index_settings_path
     end
   end
 end
