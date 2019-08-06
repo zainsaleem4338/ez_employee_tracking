@@ -11,7 +11,7 @@ class Attendance < ActiveRecord::Base
   def attendance_present?
     status.eql? STATUS[:PRESENT]
   end
-  
+
   def logout_empty?
     logout_time.blank?
   end

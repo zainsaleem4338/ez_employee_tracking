@@ -8,5 +8,4 @@ class Company < ActiveRecord::Base
   has_many :tasks
   has_many :teams
   has_many :attendances
-
 end
