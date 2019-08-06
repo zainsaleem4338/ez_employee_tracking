@@ -6,6 +6,11 @@ class MenusController < ApplicationController
     @settings = current_employee.company.setting
     @setting = @settings.holidays
     @working_days = @settings.working_days
+    if current_employee.late_count.nil?
+      @late_count = nil
+    else
+      @late_count = current_employee.late_count 
+    end
   end
 
   def home
