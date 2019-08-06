@@ -6,6 +6,8 @@ class MenusController < ApplicationController
     @settings = current_employee.company.setting
     @setting = @settings.holidays
     @working_days = @settings.working_days
+    full_days, half_days, absents, leaves_remaining = Report.attendance_data(current_employee, false)
+    @leaves_remaining = leaves_remaining
   end
 
   def home
@@ -13,7 +15,7 @@ class MenusController < ApplicationController
       redirect_to menus_index_path
     end
   end
-  
+
   def search_email
     @email = params[:email]
     if(@email.present?)
