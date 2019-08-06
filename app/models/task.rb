@@ -18,11 +18,11 @@ class Task < ActiveRecord::Base
   scope :get_employee_tasks, ->(user) { where('(tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?)', user.id, EMPLOYEE, user.employee_teams.pluck(:team_id), TEAM) }
 
   def check_start_and_end_date
-    errors.add(:expected_end_date, I18n.t('models.task_project.end_date_valid')) if expected_end_date.to_date < start_date.to_date
+    errors.add(:expected_end_date, I18n.t('models.task_project.end_date_valid')) if expected_end_date.present? && start_date.present? && expected_end_date.to_date < start_date.to_date
   end
 
   def check_start_date
-    errors.add(:start_date, I18n.t('models.task_project.start_date_valid')) if start_date.to_date < Date.today
+    errors.add(:start_date, I18n.t('models.task_project.start_date_valid')) if start_date.present? && start_date.to_date < Date.today
   end
 
   def get_employees(assignable_type, assignable_id)
@@ -67,8 +67,8 @@ class Task < ActiveRecord::Base
     end
   end
   def set_status
-    return status = Task::ASSIGNED_STATUS unless assignable_id.nil?
-    status = Task::NEW_STATUS
-    assignable_type = nil
+    return self.status = Task::ASSIGNED_STATUS unless assignable_id.nil?
+    self.status = Task::NEW_STATUS
+    self.assignable_type = nil
   end
 end
