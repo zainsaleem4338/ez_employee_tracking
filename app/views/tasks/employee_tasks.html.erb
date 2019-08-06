@@ -36,7 +36,7 @@
         <%= task_logtime(task) %>
       </td>
       <td>
-        <%= form_for task.task_time_logs.where(employee_id: current_employee.id).first, url: update_task_logtime_path(task), remote: true, html: { method: :patch } do |form|%>
+        <%= form_for task_time_logs(task), url: update_task_logtime_path(task), remote: true, html: { method: :patch } do |form|%>
         <div class="row">
           <div class="col-md">
             <%= form.text_field :hours , class: 'form-control' %>
