@@ -40,6 +40,7 @@
             <div id="notifications-flash">
               <%= render 'shared/notification' %>
             </div>
+            <br>
             <%= yield %>
           </div>
         </div>
@@ -47,5 +48,6 @@
     <% else %>
       <%= yield %>
     <% end %>
+    <br><br>
   </body>
 </html>

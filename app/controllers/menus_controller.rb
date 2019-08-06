@@ -2,9 +2,16 @@ class MenusController < ApplicationController
   skip_before_action :authenticate_employee!, only: [:home, :search_email]
 
   def index
+    @events = current_employee.company.events
+    @settings = current_employee.company.setting
+    @setting = @settings.holidays
+    @working_days = @settings.working_days
   end
 
-  def home   
+  def home
+    if current_employee.present?
+      redirect_to menus_index_path
+    end
   end
   
   def search_email
