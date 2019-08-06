@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  not_multitenant!
   EMPLOYEE = 'Employee'.freeze
   TEAM     = 'Team'.freeze
   NEW_STATUS = 'new'.freeze
@@ -11,11 +12,11 @@ class Task < ActiveRecord::Base
   belongs_to :assignable, polymorphic: true
   validates :start_date, :expected_end_date, :name, :company_id, :project_id, presence: :true
   validate :check_start_date, :check_start_and_end_date
-  scope :get_tasks, ->(user) { where('(tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?)', Employee.all.team_employees_projects_tasks(user).pluck(:id), EMPLOYEE, user.employee_teams.pluck(:team_id), TEAM) }
   has_many :task_time_logs, dependent: :destroy
   validates :complexity, inclusion: { in: COMPLEXITY }, numericality: true
   belongs_to :reviewer, foreign_key: :reviewer_id, class_name: EMPLOYEE
-  scope :get_employee_tasks, ->(user) { where('(tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?)', user.id, EMPLOYEE, user.employee_teams.pluck(:team_id), TEAM) }
+  scope :get_tasks, ->(user) { where('company_id = ? AND ((tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?))', user.company_id, Employee.all.team_employees_projects_tasks(user).pluck(:id), EMPLOYEE, user.employee_teams.pluck(:team_id), TEAM) }
+  scope :get_employee_tasks, ->(user) { where('company_id = ? AND ((tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?))', user.company_id, user.id, EMPLOYEE, user.employee_teams.pluck(:team_id), TEAM) }
 
   def check_start_and_end_date
     errors.add(:expected_end_date, I18n.t('models.task_project.end_date_valid')) if expected_end_date.present? && start_date.present? && expected_end_date.to_date < start_date.to_date
