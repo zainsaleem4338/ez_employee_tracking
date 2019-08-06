@@ -19,7 +19,7 @@
     <% @company_employee = Employee.find(attendance.employee_id) %>
     <tr>
       <td>
-        <%= attendance.employee_id %>
+        <%= attendance.employee.sequence_num %>
       </td>
       <td>
         <%= @company_employee.email %>

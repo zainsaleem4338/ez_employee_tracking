@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190805111002) do
+ActiveRecord::Schema.define(version: 20190802141047) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -35,6 +35,22 @@ ActiveRecord::Schema.define(version: 20190805111002) do
   end
 
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   limit: 4,     default: 0, null: false
+    t.integer  "attempts",   limit: 4,     default: 0, null: false
+    t.text     "handler",    limit: 65535,             null: false
+    t.text     "last_error", limit: 65535
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by",  limit: 255
+    t.string   "queue",      limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",        limit: 255,   null: false
@@ -77,6 +93,10 @@ ActiveRecord::Schema.define(version: 20190805111002) do
     t.integer  "sequence_num",           limit: 4,                  null: false
     t.integer  "department_id",          limit: 4
     t.boolean  "active",                 limit: 1,   default: true
+    t.string   "avatar_file_name",       limit: 255
+    t.string   "avatar_content_type",    limit: 255
+    t.integer  "avatar_file_size",       limit: 8
+    t.datetime "avatar_updated_at"
   end
 
   add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
@@ -99,11 +119,6 @@ ActiveRecord::Schema.define(version: 20190805111002) do
 
   add_index "projects", ["company_id"], name: "index_projects_on_company_id", using: :btree
   add_index "projects", ["department_id"], name: "index_projects_on_department_id", using: :btree
-
-  create_table "reports", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "task_time_logs", force: :cascade do |t|
     t.integer  "hours",       limit: 4
@@ -130,8 +145,8 @@ ActiveRecord::Schema.define(version: 20190805111002) do
     t.integer  "project_id",        limit: 4
     t.integer  "assignable_id",     limit: 4
     t.string   "assignable_type",   limit: 255
-    t.integer  "complexity",        limit: 4
     t.integer  "reviewer_id",       limit: 4
+    t.integer  "complexity",        limit: 4
   end
 
   add_index "tasks", ["assignable_type", "assignable_id"], name: "index_tasks_on_assignable_type_and_assignable_id", using: :btree
@@ -140,12 +155,16 @@ ActiveRecord::Schema.define(version: 20190805111002) do
   add_index "tasks", ["reviewer_id"], name: "index_tasks_on_reviewer_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name",          limit: 255,   null: false
-    t.text     "description",   limit: 65535
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "department_id", limit: 4,     null: false
-    t.integer  "company_id",    limit: 4
+    t.string   "name",                  limit: 255,   null: false
+    t.text     "description",           limit: 65535
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "department_id",         limit: 4,     null: false
+    t.integer  "company_id",            limit: 4
+    t.string   "team_pic_file_name",    limit: 255
+    t.string   "team_pic_content_type", limit: 255
+    t.integer  "team_pic_file_size",    limit: 8
+    t.datetime "team_pic_updated_at"
   end
 
   add_index "teams", ["company_id"], name: "index_teams_on_company_id", using: :btree

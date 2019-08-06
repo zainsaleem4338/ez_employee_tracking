@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'date'
 
 RSpec.describe Task, type: :model do
-
   before(:each) do
     @company = Company.create(name: '7Vals', description: 'A Saas company')
     @department = @company.departments.create(name: "UX dept")

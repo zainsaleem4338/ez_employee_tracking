@@ -1,8 +1,9 @@
 class TeamsController < ApplicationController
+  before_action :set_department, only: [:show, :edit, :update, :destroy, :create, :new]
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   def index
-    @teams = current_employee.company.teams.all
+    @teams = Team.deparment_teams(current_employee, params[:department_id])
   end
 
   def show
@@ -18,8 +19,8 @@ class TeamsController < ApplicationController
   def create
     @team = current_employee.company.teams.new(team_params)
     respond_to do |format|
-      if @team.create_team(params[:team][:team_lead_id], params[:team][:employee_tokens])
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+      if @team.create_team(params[:team][:team_lead_id], params[:employee_tokens], params[:department_id])
+        format.html { redirect_to department_teams_path(@department), notice: t('.success_notice') }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
@@ -31,8 +32,8 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if params[:team].present? &&
-        @team.update_team(params[:team][:team_lead_id], params[:team][:employee_tokens], update_team_params)
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
+        @team.update_team(params[:team][:team_lead_id], params[:employee_tokens], team_params)
+        format.html { redirect_to department_teams_path(@department), notice: t('.success_notice') }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
@@ -45,29 +46,29 @@ class TeamsController < ApplicationController
     @team.destroy
     respond_to do |format|
       if @team.destroyed?
-        format.html { redirect_to teams_path, notice: 'Team was successfully destroyed.' }
+        format.html { redirect_to department_teams_path(@department), notice: t('.success_notice') }
         format.json { head :no_content }
       else
-        format.html { redirect_to teams_path, notice: 'Unable to delete team' }
+        format.html { redirect_to department_teams_path(@department), notice: t('.error_notice') }
       end
     end
   end
 
   def teams_list
     respond_to do |format|
-      format.json { render json: Team.where('name like ?',"%#{params[:q]}%" ) }
+      format.json { render json: Team.where('name like ?', "%#{params[:q]}%") }
     end
   end
 
   private
-  def set_team
-    @team = current_employee.company.teams.find(params[:id])
-  end
-  def team_params
-    params.require(:team).permit(:name, :description, :department_id)
-  end
-  def update_team_params
-    params.require(:team).permit(:name, :description)
-  end
 
+    def set_department
+      @department = Department.find(params[:department_id])
+    end
+    def set_team
+      @team = current_employee.company.departments.find(@department.id).teams.find(params[:id])
+    end
+    def team_params
+      params.require(:team).permit(:name, :description, :team_pic)
+    end
 end

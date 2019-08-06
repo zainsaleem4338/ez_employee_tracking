@@ -5,8 +5,8 @@ FactoryGirl.define do
     expected_end_date '29-11-2019'
     project_id 1
     company_id 1
-    assignable_type ""
-    assignable_id ""
+    assignable_type ''
+    assignable_id ''
 
     trait :task_update_invalid_date do
       start_date '25-09-2019'
