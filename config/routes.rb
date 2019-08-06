@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   resources :attendances
   resources :settings, except: [:create, :edit, :update, :show, :destroy]
-  post '/settings/create' => 'settings#create', as: :create_settings
   get '/settings/edit' => 'settings#edit', as: :edit_settings
   patch '/settings/update' => 'settings#update', as: :update_settings
 
@@ -30,7 +29,6 @@ Rails.application.routes.draw do
   resources :tasks, only: [:employee_tasks, :update_task_logtime]
 
   get 'menus/index' => 'menus#index'
-  get 'menus/new' => 'menus#new'
   get 'menus/home' => 'menus#home'
   post 'menus/home' => 'menus#home'
   post 'menus/search_email' => 'menus#search_email'
