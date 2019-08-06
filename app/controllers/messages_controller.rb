@@ -1,8 +1,6 @@
-class MessagesController < ApplicationController
-  
+class MessagesController < ApplicationController  
   def index
     @messages = current_company.messages
-    
   end
 
   def create

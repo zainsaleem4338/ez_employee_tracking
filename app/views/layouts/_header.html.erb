@@ -28,44 +28,6 @@
 	          </div>
 	        </li>
       	<%	end %>
- 
-        <li class="nav-item dropdown no-arrow" id="notifications">
-          <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bell fa-fw"></i>
-            <sup>9+</sup>  
-          </a>
-          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="notificationsDropdown">
-            <h6 class="dropdown-header">Notifications</h6>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-              <div class="mr-3">
-                <div class="icon-circle bg-purple">
-                  <i class="fas fa-file-alt text-white"></i>
-                </div>
-              </div>
-              <span class="small-gray">A new report is here!</span>
-            </a>
-          </div>
-        </li>
-
-        <li class="nav-item dropdown no-arrow" id="messages">
-          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-envelope fa-fw"></i>
-            <sup>7</sup>
-          </a>
-          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-            <h6 class="dropdown-header">
-              Messages
-            </h6>
-            <a class="dropdown-item  d-flex align-items-center" href="#">
-              <div class="mr-3">
-                <div class="icon-circle bg-purple">
-                  <i class="fas fa-comment-alt text-white"></i>
-                </div>
-              </div>
-              <span class="small-gray">New Message!</span>
-            </a>
-          </div>
-        </li>
 
         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -84,10 +46,10 @@
               <span class="small">Settings</span>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              <span><%= link_to "Logout", destroy_employee_session_path, class: 'nav-link small' , method: :delete %> </span>
-            </a>
+	            <div class='dropdown-item'>
+	              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+	              <span><%= link_to "Logout", destroy_employee_session_path, class: 'nav-link small' , method: :delete %> </span>
+	            </div>
           </div>
         </li>
 
