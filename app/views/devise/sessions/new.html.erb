@@ -5,19 +5,18 @@
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
             <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6 d-lg-block bg-login-image"></div>
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4"><%= t('.sign_in') %></h1>
+                    <h1 class="h3 text-purple mb-4"><%= t('.sign_in') %></h3>
                   </div>
                   <%= render 'layouts/errors'%>
                   <%= form_for(resource, as: resource_name, url: session_path(resource_name, html: {class: "user"})) do |f| %>
                     <div class="form-group">
                       <%= f.label :email %>
-                      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control form-control-user' %>
+                      <%= f.email_field :email, autofocus: true, autocomplete: 'email', id: '_session-email',class: 'form-control form-control-user' %>
                     </div>
-
                     <div class="form-group">
                       <%= f.label :password %>
                       <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control form-control-user' %>
@@ -48,3 +47,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    var email = getUrlVars()["email"];
+    if (email !== undefined) {
+      document.getElementById('_session-email').value = email;
+    }
+  });
+</script>

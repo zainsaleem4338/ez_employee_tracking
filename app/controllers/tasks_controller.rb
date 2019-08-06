@@ -28,7 +28,7 @@ class TasksController < ApplicationController
       redirect_to department_project_tasks_path
     else
       flash[:danger] = t('.error_notice')
-      render new_department_project_task_path
+      redirect_to new_department_project_task_path
     end
   end
 

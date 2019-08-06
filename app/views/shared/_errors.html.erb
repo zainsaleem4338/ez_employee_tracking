@@ -1,13 +1,14 @@
 <% if obj.errors.any? %>
+<div class="container">
   <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">×</span>
     </button>
     <div class="panel-heading">
-      <h2 class="alert-heading"><%= pluralize(obj.errors.count, "error") %>
-        prohibited this article from being saved:</h2>
+      <h4 class="small alert-heading"><%= pluralize(obj.errors.count, "error") %>
+        prohibited this article from being saved:</h4>
       <div class="panel-body">
-        <ul class="mb-0">
+        <ul class="mb-0 small text-gray-dark">
           <% obj.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>
@@ -15,4 +16,5 @@
       </div>
     </div>
   </div>
+</div>
 <% end %>

@@ -9,6 +9,9 @@ class Ability
       can :destroy, Employee
       can :manage, Project, company_id: user.company_id
       can :manage, Task, company_id: user.company_id
+      can :manage, Event, company_id: user.company_id
+      can :manage, Setting, company_id: user.company_id
+      can :manage, Message, company_id: user.company_id
       can :manage, Team, company_id: user.company_id
       can :manage, Report, company_id: user.company_id
 
@@ -26,11 +29,14 @@ class Ability
       can [:read, :update_status, :edit_status], Task, Task.get_tasks(user) do |task|
         task
       end
+
       can :read, Department, Department.get_departments(user) do |department|
         department
       end
 
       can :read, Company
+      can :read, Event, company_id: user.company_id
+      can :read, Setting, company_id: user.company_id
     end
   end
 end

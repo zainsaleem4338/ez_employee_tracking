@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Attendance, type: :model do
-
   before(:each) do
     @company = Company.create(name: '7Vals', description: 'A Saas company')
     @employee = @company.employees.create(email: 'zainsaleem@gmail.com', password: 'password')
@@ -18,7 +17,7 @@ RSpec.describe Attendance, type: :model do
       expect(result).to be_valid
     end
   end
-  
+
   context 'with invalid attributes' do
     it 'should not be valid attendance' do
       result = @company.attendances.create(login_time: DateTime.now, status: 'present', employee_id: @employee.id)

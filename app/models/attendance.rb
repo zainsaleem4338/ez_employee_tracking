@@ -15,4 +15,5 @@ class Attendance < ActiveRecord::Base
   def logout_empty?
     logout_time.blank?
   end
+
 end

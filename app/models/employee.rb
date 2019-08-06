@@ -1,6 +1,6 @@
 require 'date'
-
 class Employee < ActiveRecord::Base
+  not_multitenant!
   ADMIN_ROLE = 'Admin'.freeze
   EMPLOYEE_ROLE = 'Employee'.freeze
   TEAM_ROLE = 'Team'.freeze
@@ -19,6 +19,8 @@ class Employee < ActiveRecord::Base
             uniqueness: { scope: :company_id }
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }
   validates :role, presence: true
+  belongs_to :company
+  has_many :messages
   accepts_nested_attributes_for :company
   has_attached_file :avatar, styles: { medium: '300x300>', thumb: '120x120>' }, default_url: "/assets/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
@@ -40,6 +42,7 @@ class Employee < ActiveRecord::Base
 
   def with_company
     build_company if company.nil?
+    company.build_setting if company.setting.nil?
     self
   end
 

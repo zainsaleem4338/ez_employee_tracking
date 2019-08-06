@@ -64,4 +64,3 @@ class Report
     @employee_tasks_data
   end
 end
-

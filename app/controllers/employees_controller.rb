@@ -13,10 +13,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def show
-    @attendances_list = current_employee.all_attendances
-  end
-
   def create
     @employee = Employee.new(employee_params)
     @employee.password = generate_password

@@ -1,6 +1,28 @@
 require 'attendance'
 
 module ApplicationHelper
+  def broadcast(channel, &block)
+    message = { channel: channel, data: capture(&block) }
+    uri = URI.parse('http://localhost:9292/faye')
+    Net::HTTP.post_form(uri, message: message.to_json)
+  end
+
+  def check_today_timings?
+    setting = current_employee.company.setting
+    today_start_time = setting.timings[Time.now.strftime('%A').downcase + '_start_time']
+    today_end_time = setting.timings[Time.now.strftime('%A').downcase + '_end_time']
+    if (get_time_in_seconds(Time.now) > get_time_in_seconds(today_start_time.to_time) && get_time_in_seconds(Time.now) < get_time_in_seconds(today_end_time.to_time))
+      return true
+    end
+    false
+  end
+
+  def get_time_in_seconds(time)
+    hours_in_seconds = time.strftime('%H').to_i * 3600
+    minutes_in_seconds = time.strftime('%H').to_i * 60
+    hours_in_seconds + minutes_in_seconds
+  end
+
   def present_marked?
     @attendance = current_employee.todays_attendance_of_employee
     return false if @attendance.nil?
@@ -45,13 +67,18 @@ module ApplicationHelper
     @data = []
     @dashboard = {
       name: 'Dashboard',
-      link: show_employee_path(current_employee),
+      link: '#',
       icon: 'fas fa-chart-line'
     }
 
     @data.push(@dashboard)
 
     if admin?
+      @attendance = {
+        name: 'Attendance',
+        link: attendances_path,
+        icon: 'fas fa-address-book'
+      }
       @employees = {
         name: 'Employees',
         link: '#',
@@ -94,7 +121,8 @@ module ApplicationHelper
         link: reports_path,
         icon: 'fas fa-file'
       }
-      @data.push(@employees).push(@departments).push(@reports)
+      @data.push(@attendance).push(@employees).push(@departments)
+      @data.push(@reports)
     else
       @employee_tasks = {
         name: 'My Tasks',

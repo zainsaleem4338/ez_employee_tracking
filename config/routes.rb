@@ -2,6 +2,18 @@ Rails.application.routes.draw do
   devise_for :employees, controllers: { sessions: 'sessions' }
 
   resources :attendances
+  resources :settings, except: [:create, :edit, :update, :show, :destroy]
+  post '/settings/create' => 'settings#create', as: :create_settings
+  get '/settings/edit' => 'settings#edit', as: :edit_settings
+  patch '/settings/update' => 'settings#update', as: :update_settings
+
+  get '/events/index' => 'events#index', as: :index_events
+  get '/events/new' => 'events#new', as: :new_events
+  get '/events/home' => 'events#home', as: :home_events
+  post '/events/create' => 'events#create', as: :create_events
+  get '/events/:id/edit' => 'events#edit', as: :edit_events
+  patch '/events/:id/update' => 'events#update', as: :update_events
+  delete '/events/:id/destroy' => 'events#destroy', as: :destroy_events
 
   resources :departments do
     resources :teams
@@ -19,6 +31,8 @@ Rails.application.routes.draw do
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
   get 'menus/home' => 'menus#home'
+  post 'menus/home' => 'menus#home'
+  post 'menus/search_email' => 'menus#search_email'
   root 'menus#home'
 
   get 'reports/velocity' => 'reports#show', as: :show_employee_velocity_report
@@ -31,6 +45,13 @@ Rails.application.routes.draw do
   get '/employees/:sequence_num/show' => 'employees#show', :as => :show_employee
   post '/employees/create' => 'employees#create', :as => :create_employee
   delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
+
+  get '/messages/index' => 'messages#index'
+  post '/messages/' => 'messages#create'
+
+  get 'employees_attendance_report' => 'reports#attendance_report'
+  get 'employees_report_pdf' => 'reports#attendance_report_pdf'
+
   get 'employee_lists' => 'employees#employees_lists'
   get '/employees/team_member_render_view' => 'employees#team_member_render_view'
 

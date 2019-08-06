@@ -8,7 +8,17 @@ class SessionsController < Devise::SessionsController
       return redirect_to new_employee_session_path
     end
     employee = Employee.find_by(email: params[:employee][:email], company_id: current_company.id)
-    if employee.blank? || !employee.valid_password?(params[:employee][:password])
+    if employee.present?
+      if !employee.active
+        flash[:danger] = t('.inactive_employee')
+      elsif employee.confirmation_token.present?
+        flash[:danger] = t('.confirm_email')
+        return redirect_to new_employee_session_path
+      elsif !employee.valid_password?(params[:employee][:password])
+        flash[:danger] = t('.invalid_pswd_email_notice')
+        return redirect_to new_employee_session_path
+      end
+    else
       flash[:danger] = t('.invalid_pswd_email_notice')
       return redirect_to new_employee_session_path
     end
