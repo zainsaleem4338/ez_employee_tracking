@@ -1,33 +1,42 @@
 require 'rails_helper'
+require 'date'
 
 RSpec.describe Task, type: :model do
+  before(:each) do
+    @company = Company.create(name: '7Vals', description: 'A Saas company')
+    @department = @company.departments.create(name: "UX dept")
+    @project = @company.projects.create(name: "CS proj", start_date: "2019-09-09", expected_end_date: "2019-09-10", department_id: @department.id)
+    @employee = @company.employees.create(name: "Qasim", email: "qasim@qasim.com", password: "helloworld", role: "Employee")
+  end
 
-  context 'with valid ' do
-    let(:task1) {FactoryGirl.create(:task)}
-    let(:task2) {FactoryGirl.create(:task,:task_update_invalid_date)}
-    let(:task3) {FactoryGirl.create(:task,:task_update_invalid_date_2)}
-    let(:task4) {FactoryGirl.create(:task,:task_status_new)}
-    let(:task5) {FactoryGirl.create(:task,:task_status_assigned)}
-
-    it "should raise an error" do
-      expect{task1}.to raise_error(ActiveRecord::RecordInvalid)
-    end
-    
-    it "should raise error of invalid date start date cannot be later than end date" do 
-      expect{task2}.to raise_error(ActiveRecord::RecordInvalid)
-    end
-    
-    it "should raise error of invalid date start date should be greater than today's date" do 
-      expect{task3}.to raise_error(ActiveRecord::RecordInvalid)
+  context 'validations' do
+    it "should not raise an error: Task created successfully" do
+      @task = @project.tasks.create(name: "Task 1", start_date: "2019-09-09", expected_end_date: "2019-10-08", company_id: @company.id)
+      expect(@task).to be_valid
     end
 
-    it "should set the status equal to new" do 
-      expect(task4.status).to eq(Task::NEW_STATUS)
+    it "should raise an error: Start Date cannot be before than today" do
+      @task = @project.tasks.create(name: "Task 1", start_date: "2019-07-09", expected_end_date: "2019-10-08", company_id: @company.id)
+      expect(@task).not_to be_valid
     end
 
-    it "should set the status equal to assigned" do 
+    it "should raise an error: End date cannot be before start date" do
+      @task = @project.tasks.create(name: "Task 1", start_date: "2019-09-09", expected_end_date: "2019-09-08", company_id: @company.id)
+      expect(@task).not_to be_valid
+    end
+  end
+
+  context 'checking the status' do
+    it "should set the status equal to new" do
+      @task = @project.tasks.create(name: "Task 1", start_date: "2019-09-09", expected_end_date: "2019-10-08", company_id: @company.id)
+      @task.set_status
+      expect(@task.status).to eq(Task::NEW_STATUS)
+    end
+
+    it "should set the status equal to assigned" do
+      @task = @project.tasks.create(name: "Task 1", start_date: "2019-09-09", expected_end_date: "2019-10-08", company_id: @company.id, assignable: @employee)
+      @task.set_status
       expect(task5.status).to eq(Task::ASSIGNED_STATUS)
     end
-
   end
 end

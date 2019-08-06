@@ -1,14 +1,30 @@
 class DepartmentsController < ApplicationController
   load_and_authorize_resource
 
+  def index
+    if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
+      @departments = @departments.employee_departments(current_employee)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def create
     respond_to do |format|
       if @department.save
-        format.html { redirect_to departments_path, notice: 'Department was successfully created.' }
+        format.html do
+          flash[:success] = t('.success_notice')
+          redirect_to departments_path
+        end
         format.json { render :show, status: :created, location: @department }
       else
         format.html { render :new }
-        format.json { render json: @department.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @department.errors,
+          status: :unprocessable_entity
+        end
       end
     end
   end
@@ -16,11 +32,17 @@ class DepartmentsController < ApplicationController
   def update
     respond_to do |format|
       if @department.update(department_params)
-        format.html { redirect_to @department, notice: 'Department was successfully updated.' }
+        format.html do
+          flash[:success] = t('.success_notice')
+          redirect_to @department
+        end
         format.json { render :show, status: :ok, location: @department }
       else
         format.html { render :edit }
-        format.json { render json: @department.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @department.errors,
+          status: :unprocessable_entity
+        end
       end
     end
   end
@@ -29,10 +51,16 @@ class DepartmentsController < ApplicationController
     @department.destroy
     respond_to do |format|
       if @department.destroyed?
-        format.html { redirect_to departments_path, notice: 'Department was successfully destroyed.' }
+        format.html do
+          flash[:success] = t('.success_notice')
+          redirect_to departments_path
+        end
         format.json { head :no_content }
       else
-        format.html { redirect_to departments_path, notice: 'Unable to delete team' }
+        format.html do
+          flash[:danger] = t('.error_notice')
+          redirect_to departments_path
+        end
       end
     end
   end

@@ -1,0 +1,6 @@
+<%= form.label :reviwer_id, "Reviewer Email" %><br>
+<% assign_reviewer_hash = get_reviewer_hash(@task) %>
+<%= form.text_field :reviewer_id, value: assign_reviewer_hash, class: "js-assign-reviewer" %>
+<%= javascript_tag do %>
+$('.js-assign-reviewer').tokenInput('/employee_lists.json', { prePopulate: <%= assign_reviewer_hash %>, tokenLimit: 1 });
+<% end %>

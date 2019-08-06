@@ -9,7 +9,7 @@ default: &default
   encoding: utf8
   database: ez_employee_tracking_development
   username: root
-  password: test
+  password: root
   socket: /var/run/mysqld/mysqld.sock
 
 development:

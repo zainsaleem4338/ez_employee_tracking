@@ -15,7 +15,6 @@
   <ul class="list-unstyled sidenav-menu components">
 
     <% @sidebar_data.each do |sidebar_option| %>
-
       <% if sidebar_option.key?(:suboptions) %>
         <li>
           <a data-toggle="collapse" aria-expanded="false" class="dropdown-toggle d-flex align-items-center" href=<%= "#"+sidebar_option[:submenu_id] %>>

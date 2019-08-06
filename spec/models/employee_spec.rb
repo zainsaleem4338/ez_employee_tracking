@@ -20,8 +20,7 @@ RSpec.describe Employee, type: :model do
       invalid_employee = Employee.create(email: 'tehreem@7vals.com', password: '12')
       expect(invalid_employee).not_to be_valid
     end
-  end
-  
+  end 
   context 'with valid attributes' do
     it 'create new employee' do
       expect(@employee).to be_valid

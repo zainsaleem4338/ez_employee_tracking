@@ -14,12 +14,12 @@
   </thead>
 
   <tbody>
+    <% if @attendances_list.any? %>
     <% @attendances_list.each do |attendance| %>
     <% @company_employee = Employee.find(attendance.employee_id) %>
-
     <tr>
       <td>
-        <%= attendance.employee_id %>
+        <%= attendance.employee.sequence_num %>
       </td>
       <td>
         <%= @company_employee.email %>
@@ -28,13 +28,10 @@
         <%= attendance.login_time.to_formatted_s(:long_ordinal) %>
       </td>
       <td>
-        <% if attendance.logout_time.blank? %>
-          nil
-        <% else %>
-          <%= attendance.logout_time.to_formatted_s(:long_ordinal) %>
-        <% end %>
+        <%= attendance_logout(attendance)%>
       </td>
     </tr>
+    <% end %>
     <% end %>
   </tbody>
 
