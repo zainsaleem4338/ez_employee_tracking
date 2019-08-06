@@ -10,16 +10,16 @@ class SessionsController < Devise::SessionsController
     employee = Employee.find_by(email: params[:employee][:email], company_id: current_company.id)
     if employee.present?
       if !employee.active
-        flash[:danger] = 'Can not log in, Employee is inactive!'
+        flash[:danger] = t('.inactive_employee')
       elsif employee.confirmation_token.present?
-        flash[:danger] = 'Please confirm your email!'
+        flash[:danger] = t('.confirm_email')
         return redirect_to new_employee_session_path
       elsif !employee.valid_password?(params[:employee][:password])
-        flash[:danger] = 'Invalid password or email!'
+        flash[:danger] = t('.invalid_pswd_email_notice')
         return redirect_to new_employee_session_path
       end
     else
-      flash[:danger] = 'Invalid password or email!'
+      flash[:danger] = t('.invalid_pswd_email_notice')
       return redirect_to new_employee_session_path
     end
     if current_company.subdomain == employee.company.subdomain

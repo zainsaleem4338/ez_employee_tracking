@@ -5,6 +5,6 @@
 <p><b>End Time: </b><%= @task.expected_end_date.to_date %></p>
 <p><b>Description: </b><%= @task.description %></p>
 <p><b>Please see task at: </b></p>
-<a href="http://localhost:3000/tasks/<%= @task.id %>">
-  http://localhost:3000/tasks/<%= @task.id %> 
+<a href="<%= @employee.company.subdomain %>://localhost:3000/tasks/<%= @task.id %>">
+  <%= @employee.company.subdomain %>://localhost:3000/tasks/<%= @task.id %> 
 </a>

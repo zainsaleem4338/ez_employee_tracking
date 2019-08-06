@@ -1,15 +1,26 @@
 <% provide(:title, "Team Details") %>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-header"><h4 class="card-title mb-0"><b>Team Name: </b><%= @team.name %></h4></div>
+      <div class="card-body">
+        <b class="head-color">Department: </b><span class="card-text"><%= @team.department.name %></span><br>
+        <b class="head-color">Team Leader: </b><span class="card-text"><%= @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first %></span>
+        <br><b class="head-color">Team Members: </b>
+          <% @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).each do |member| %>
+            <br><span class="ml-5"><%= member.name %></span>
+          <% end %>
+        <br><b class="head-color">Description: </b>
+        <p class="card-text"><%= @team.description %></p>
+        <%= link_to 'Edit', edit_department_team_path(@department,@team), class: "btn btn-secondary" %>
+        <%= link_to 'Back', department_teams_path(@department), class: "btn btn-regular" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @team.description %>
-</p>
 
-<%= link_to 'Edit', edit_department_team_path(@department,@team), class: "btn btn-secondary" %>
-<%= link_to 'Back', department_teams_path(@department), class: "btn btn-regular" %>

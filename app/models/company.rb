@@ -21,5 +21,4 @@ class Company < ActiveRecord::Base
   def self.current_id
     Thread.current[:company_id]
   end
-
 end
