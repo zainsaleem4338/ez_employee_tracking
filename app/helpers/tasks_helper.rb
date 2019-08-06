@@ -22,4 +22,9 @@ module TasksHelper
     return nil if task.reviewer_id.nil?
     return [task.reviewer].to_json.html_safe
   end
+
+
+  def task_time_logs_form(task)
+    task.task_time_logs.where(employee_id: current_employee.id).first
+  end
 end
