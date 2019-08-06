@@ -11,8 +11,8 @@
         <br><b class="head-color">No of projects: </b><span class="card-text"><%= @department.projects.count %></span><br>
         <b class="head-color">Description: </b>
         <p class="card-text"><%= @department.description %></p>
-        <%= link_to 'Edit', edit_department_path(@department), class: "btn btn-secondary" %>
-        <%= link_to 'Back', departments_path, class: "btn btn-regular" %>
+        <%= link_to 'Edit', edit_department_path(@department), class: "btn btn-regular" %>
+        <%= link_to 'Back', departments_path, class: "btn btn-secondary" %>
       </div>
     </div>
   </div>

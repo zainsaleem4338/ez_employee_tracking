@@ -48,13 +48,8 @@ module ApplicationHelper
       link: show_employee_path(current_employee),
       icon: 'fas fa-chart-line'
     }
-    @velocity_report = {
-      name: 'Velocity Report',
-      link: show_employee_velocity_report_path,
-      icon: 'fas fa-file'
-    }
 
-    @data.push(@dashboard).push(@velocity_report)
+    @data.push(@dashboard)
 
     if admin?
       @employees = {
