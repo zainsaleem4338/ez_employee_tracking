@@ -1,6 +1,9 @@
-class EmployeesController < ApplicationController  
+class EmployeesController < ApplicationController
   load_and_authorize_resource :employee, through_association: :company
   load_and_authorize_resource :team, through_association: :company
+  def index
+    @employees = current_employee.company.employees.active_members
+  end
 
   def employees_lists
     if params['department'].blank?
