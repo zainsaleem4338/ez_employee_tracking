@@ -5,7 +5,7 @@
       <span aria-hidden="true">×</span>
     </button>
     <h4 class="small alert-heading"><strong><%= pluralize(flash.keys.count, "error") %> errors prohibited this employee from being saved:</strong></h4>
-    <ul class="mb-0 small text-gray-400">
+    <ul class="mb-0 small text-gray-dark">
        <% flash.each do |name, msg| %>
           <li><%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %></li>
         <% end %>
