@@ -1,5 +1,8 @@
 <%= render 'attendance_report_grid'%>
 <div>
-  <%= will_paginate @attendances, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
+<%= will_paginate @attendances, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
 </div>
-<%= link_to "Print Attendance Report", employees_report_pdf_path(format: :pdf), class: "btn btn-regular active"%>
+<%= link_to employees_report_pdf_path(format: :pdf), class: 'btn btn-regular', target: :_blank do %>
+Export pdf
+<i class="fas fa-file-pdf ml-2"></i>
+<% end %>

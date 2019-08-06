@@ -73,4 +73,28 @@ class Report < ActiveRecord::Base
     end
     @employee_tasks_data
   end
+
+  def self.upload_worksheet(data, type, session)
+    spreadsheet = session.create_spreadsheet(title = "#{DateTime.now}_#{type}")
+    sheet = spreadsheet.worksheets[0]
+    folder = session.root_collection.subcollection_by_title(type)
+    if folder.nil?
+      folder = session.root_collection.create_subcollection(type)
+    end
+    sheet[1,1] = "Name"
+    sheet[1,2] = "Presents"
+    sheet[1,3] = "Half Days"
+    sheet[1,4] = "Absents"
+    sheet[1,5] = "Leaves Remaining"
+    data.each.with_index(1) do |att_data, i|
+      sheet[i+1,1] = att_data[:employee][:name].downcase.capitalize
+      sheet[i+1,2] = att_data[:presents]
+      sheet[i+1,3] = att_data[:half_days]
+      sheet[i+1,4] = att_data[:absents]
+      sheet[i+1,5] = att_data[:leaves_remaining]
+    end
+    sheet.save
+    folder.add(spreadsheet)
+  end
+
 end
