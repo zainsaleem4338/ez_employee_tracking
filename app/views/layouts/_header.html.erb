@@ -17,17 +17,18 @@
       </ul>
 
       <ul class="navbar-nav ml-auto">
-
-        <li class="nav-item" id="attendance_button">
-          <div class="d-flex align-items-center">
-            <% if present_marked? && not_logged_out? %>
-              <%= link_to 'Check-out', update_attendance_path, class: 'btn btn-sm btn-outline-danger update_attendance', remote: true %>
-            <% elsif !present_marked? %>
-              <%= link_to 'Check-in', employee_attendance_path, class: 'btn btn-sm btn-regular btn-primary mark_present', remote: true %>
-             <% end %>
-          </div>
-        </li>
-
+      	<% if check_today_timings? %>		
+	      	<li class="nav-item" id="attendance_button">
+	          <div class="d-flex align-items-center">
+	            <% if present_marked? && not_logged_out? %>
+	              <%= link_to 'Update Logout', update_attendance_path, class: 'btn btn-sm btn-outline-danger update_attendance', remote: true %>
+	            <% elsif !present_marked? %>
+	              <%= link_to 'Mark Present', employee_attendance_path, class: 'btn btn-sm btn-regular btn-primary mark_present', remote: true %>
+	             <% end %>
+	          </div>
+	        </li>
+      	<%	end %>
+ 
         <li class="nav-item dropdown no-arrow" id="notifications">
           <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell fa-fw"></i>

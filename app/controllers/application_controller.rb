@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_employee!
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
   before_filter :set_cache_buster
+  around_filter :scope_current_company
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -22,7 +23,9 @@ class ApplicationController < ActionController::Base
 
   CONST_CREATE = 'create'.freeze
   def configure_devise_permitted_parameters
-    registration_params = [:name, :email, :password, :password_confirmation, :role, :department_id, company_attributes: [:name, :description, :subdomain]]
+    registration_params = [:name, :email, :password, :password_confirmation, :role, :department_id,
+    company_attributes: [:name, :description, :subdomain, setting_attributes: [:working_days, :timings, :holidays]],
+   ]
     if params[:action] == CONST_CREATE
       devise_parameter_sanitizer.for(:sign_up) do |parameters|
         parameters.permit(registration_params)
@@ -40,4 +43,11 @@ class ApplicationController < ActionController::Base
     Company.find_by_subdomain request.subdomain
   end
   helper_method :current_company
+
+  def scope_current_company
+    Company.current_id = current_company.id unless current_company.nil?
+    yield
+  ensure
+    Company.current_id = nil
+  end
 end

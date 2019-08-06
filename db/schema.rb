@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190805111002) do
+ActiveRecord::Schema.define(version: 20190804171819) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 20190805111002) do
     t.integer  "sequence_num",           limit: 4,                  null: false
     t.integer  "department_id",          limit: 4
     t.boolean  "active",                 limit: 1,   default: true
+    t.integer  "leaves",                 limit: 4
+    t.integer  "late_count",             limit: 4
     t.string   "avatar_file_name",       limit: 255
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size",       limit: 8
@@ -103,6 +105,19 @@ ActiveRecord::Schema.define(version: 20190805111002) do
   add_index "employees", ["email", "company_id"], name: "index_employees_on_email_and_company_id", unique: true, using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
   add_index "employees", ["sequence_num", "company_id"], name: "index_employees_on_sequence_num_and_company_id", unique: true, using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.string   "description", limit: 255
+    t.integer  "company_id",  limit: 4
+    t.datetime "event_date",              null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string  "message",     limit: 255
+    t.integer "employee_id", limit: 4
+    t.integer "company_id",  limit: 4
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",              limit: 255
@@ -120,9 +135,13 @@ ActiveRecord::Schema.define(version: 20190805111002) do
   add_index "projects", ["company_id"], name: "index_projects_on_company_id", using: :btree
   add_index "projects", ["department_id"], name: "index_projects_on_department_id", using: :btree
 
-  create_table "reports", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "settings", force: :cascade do |t|
+    t.text    "working_days",     limit: 65535
+    t.integer "company_id",       limit: 4
+    t.text    "timings",          limit: 65535
+    t.text    "holidays",         limit: 65535
+    t.integer "allocated_leaves", limit: 4
+    t.integer "attendance_time",  limit: 4
   end
 
   create_table "task_time_logs", force: :cascade do |t|
