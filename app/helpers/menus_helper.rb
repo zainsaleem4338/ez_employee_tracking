@@ -1,18 +1,34 @@
 module MenusHelper
   def get_on_going_tasks
-    current_employee.company.tasks.where('status in (?)', [Task::NEW_STATUS, Task::IN_PROGRESS, Task::ASSIGNED_STATUS, Task::READY_TO_REVIEW])
+    if current_employee.role == Employee::ADMIN_ROLE
+      current_employee.company.tasks.where('status in (?)', [Task::NEW_STATUS, Task::IN_PROGRESS, Task::ASSIGNED_STATUS, Task::READY_TO_REVIEW])
+    elsif current_employee.role == Employee::EMPLOYEE_ROLE
+      current_employee.company.tasks.where(employee_id: current_employee.id)
+    end
   end
 
   def get_overdue_tasks_count
-    current_employee.company.tasks.where('expected_end_date < (?)', Date.today).count
+    if current_employee.role == Employee::ADMIN_ROLE
+      current_employee.company.tasks.where('expected_end_date < (?)', Date.today).count
+    elsif current_employee.role == Employee::EMPLOYEE_ROLE
+      current_employee.company.tasks.where('employee_id = ? expected_end_date < (?)',current_employee.id, Date.today)
+    end
   end
 
   def get_overdue_tasks
-    current_employee.company.tasks.where('expected_end_date < (?)', Date.today)
+    if current_employee.role == Employee::ADMIN_ROLE
+      current_employee.company.tasks.where('expected_end_date < (?)', Date.today)
+    elsif current_employee.role == Employee::EMPLOYEE_ROLE
+      current_employee.company.tasks.where('employee_id = ? expected_end_date < (?)',current_employee.id, Date.today)
+    end
   end
 
   def get_tasks_reaching_deadline
-    current_employee.company.tasks.where('expected_end_date < (?)', Date.today+(3.day))
+    if current_employee.role == Employee::ADMIN_ROLE
+      current_employee.company.tasks.where('expected_end_date < (?)', Date.today+(3.day))
+    elsif current_employee.role == Employee::EMPLOYEE_ROLE
+      current_employee.company.tasks.where('employee_id = ? expected_end_date < (?)',current_employee.id, Date.today+3.day)
+    end
   end
 
   def get_task_badge_class(task_status)
