@@ -5,12 +5,17 @@ class Task < ActiveRecord::Base
   ASSIGNED_STATUS = 'assigned'.freeze
   UNASSIGNED_STATUS = 'unassigned'.freeze
   STATUS = [1..10].freeze
+  COMPLEXITY = (1..10).freeze
   belongs_to :company
   belongs_to :project
   belongs_to :assignable, polymorphic: true
   validates :start_date, :expected_end_date, :name, :company_id, :project_id, presence: :true
   validate :check_start_date, :check_start_and_end_date
   scope :get_tasks, ->(user) { where('(tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?)', Employee.all.team_employees_projects_tasks(user).pluck(:id), EMPLOYEE, user.employee_teams.pluck(:team_id), TEAM) }
+  has_many :task_time_logs
+  validates :complexity, inclusion: { in: COMPLEXITY }, numericality: true
+  belongs_to :reviewer, foreign_key: :reviewer_id, class_name: EMPLOYEE
+  scope :get_employee_tasks, ->(user) { where('(tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?)', user.id, EMPLOYEE, user.employee_teams.pluck(:team_id), TEAM) }
 
   def check_start_and_end_date
     errors.add(:expected_end_date, I18n.t('models.task_project.end_date_valid')) if expected_end_date.to_date < start_date.to_date
@@ -61,10 +66,9 @@ class Task < ActiveRecord::Base
       end
     end
   end
-
   def set_status
-    return self.status = Task::ASSIGNED_STATUS unless self.assignable_id.blank?
-    self.status = Task::NEW_STATUS
-    self.assignable_type = nil
+    return status = Task::ASSIGNED_STATUS unless assignable_id.nil?
+    status = Task::NEW_STATUS
+    assignable_type = nil
   end
 end

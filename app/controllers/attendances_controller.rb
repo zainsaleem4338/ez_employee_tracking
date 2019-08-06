@@ -5,18 +5,21 @@ require 'date'
 #   - Mark attendance of a employee/ Employee
 #   - Let admin see who is present today
 class AttendancesController < ApplicationController
-  include EmployeesHelper
-  STATUS = { 'PRESENT': 1, 'ABSENT': 0 }.freeze
 
   def index
-    @attendances_list = current_employee.company.attendances.where(status: STATUS[:PRESENT]).order(login_time: :desc)
+    @attendances_list = current_employee.company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
   end
 
   def create
     @employees_todays_attendance = current_employee.todays_attendance_of_employee
     if @employees_todays_attendance.blank?
-      @employee_attendance = current_employee.company.attendances.create(login_time: DateTime.now, status: STATUS[:PRESENT], employee_id: current_employee.id)
-      return false unless @employee_attendance.valid?
+      @employee_attendance = current_employee.company.attendances.create(login_time: DateTime.now, status: Attendance::STATUS[:PRESENT], employee_id: current_employee.id)
+      if @employee_attendance.valid?
+        flash[:success] = 'Checked in successfully!'
+      else
+        flash[:danger] = 'Check in failed!'
+        return false
+      end
     end
 
     respond_to do |format|
@@ -31,6 +34,11 @@ class AttendancesController < ApplicationController
     unless @employees_todays_attendance.blank?
       @employees_todays_attendance.logout_time = DateTime.now
       @result = @employees_todays_attendance.save!
+      if @result
+        flash[:success] = 'Checked out successfully!'
+      else
+        flash[:danger] = 'Check out failed!'
+      end
     end
 
     respond_to do |format|
