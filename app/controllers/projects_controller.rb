@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
       redirect_to department_projects_path
     else
       flash[:danger] = @project.errors
-      render new_department_project_path
+      redirect_to new_department_project_path
     end
   end
 
