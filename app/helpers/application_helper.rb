@@ -57,11 +57,6 @@ module ApplicationHelper
         link: attendances_path,
         icon: 'fas fa-address-book'
       }
-      @attendance_report = {
-        name: 'Attendance Report',
-        link: employees_attendance_report_path,
-        icon: 'fas fa-chart-line'
-      }
       @employees = {
         name: 'Employees',
         link: '#',
@@ -105,7 +100,7 @@ module ApplicationHelper
         icon: 'fas fa-file'
       }
       @data.push(@attendance).push(@employees).push(@departments)
-      @data.push(@reports).push(@attendance_report)
+      @data.push(@reports)
     else
       @employee_tasks = {
         name: 'My Tasks',
