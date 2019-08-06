@@ -1,41 +1,51 @@
 class ProjectsController < ApplicationController
-  before_action :set_department, only: [:edit, :index, :new, :create]
-  load_and_authorize_resource through_association: :company
- 
+  load_and_authorize_resource :department
+  load_and_authorize_resource through: :department
+
+  def index
+    if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
+      @projects = @projects.employee_projects(current_employee)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def create
     @project.status = Project::NEW_STATUS
     if @project.save
-      redirect_to projects_path, notice: "Returing from the create"
+      flash[:success] = 'Project Created Successfully!'
+      redirect_to department_projects_path
     else
-      render new_project_path, notice: "Cannnot enter data due to constraints"
+      flash[:danger] = 'Could not create Project!'
+      render new_department_project_path
     end
   end
 
   def destroy
     @project.destroy
     if @project.destroyed?
-      redirect_to projects_path, notice: "Deleted Successfully"
+      flash[:success] = 'Project Deleted Successfully!'
     else
-      redirect_to projects_path, notice: "Cannot be Deleted Successfully"
+      flash[:danger] = 'Could not delete Project!'
     end
+    redirect_to department_projects_path
   end
 
   def update
     if @project.update(project_params)
-      redirect_to projects_path, notice: "Updated Successfully"
+      flash[:success] = 'Project Updated Successfully!'
     else
-      redirect_to projects_path, notice: "Cannot be updated"
+      flash[:danger] = 'Could not update Project!'
     end
+    redirect_to department_projects_path
   end
 
   private
 
   def project_params
-    params.require(:project).
-    permit(:description, :name, :start_date, :expected_end_date, :department_id)
-  end
-
-  def set_department
-    @departments = current_employee.company.departments
+    params.require(:project)
+          .permit(:description, :name, :start_date, :expected_end_date, :department_id)
   end
 end

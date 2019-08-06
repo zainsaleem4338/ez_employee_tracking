@@ -2,9 +2,8 @@ Rails.application.routes.draw do
   devise_for :employees, controllers: { sessions: 'sessions' }
 
   resources :teams
-  resources :departments
   resources :attendances
-  resources :settings, except: [:create, :edit, :update, :show]
+  resources :settings, except: [:create, :edit, :update, :show, :destroy]
   post '/settings/create' => 'settings#create', as: :create_settings
   get '/settings/edit' => 'settings#edit', as: :edit_settings
   patch '/settings/update' => 'settings#update', as: :update_settings
@@ -17,14 +16,18 @@ Rails.application.routes.draw do
   patch '/events/:id/update' => 'events#update', as: :update_events
   delete '/events/:id/destroy' => 'events#destroy', as: :destroy_events
 
-  resources :projects do
-    resources :tasks do
-      member do
-        get 'edit_status'
-        patch 'update_status'
+  resources :departments do
+    resources :projects do
+      resources :tasks do
+        member do
+          get 'edit_status'
+          patch 'update_status'
+        end
       end
     end
   end
+
+  resources :tasks, only: [:employee_tasks, :update_task_logtime]
 
   get 'menus/index' => 'menus#index'
   get 'menus/new' => 'menus#new'
@@ -33,6 +36,10 @@ Rails.application.routes.draw do
   post 'menus/search_email' => 'menus#search_email'
   root 'menus#home'
 
+  get 'reports/velocity' => 'reports#show', as: :show_employee_velocity_report
+  get 'reports/export_report' => 'reports#pdf_velocity_report', as: :pdf_velocity_report
+  get 'employee_tasks' => 'tasks#employee_tasks', :as => :employee_tasks_list
+  patch 'tasks/:id/update_task_logtime' => 'tasks#update_task_logtime', :as => :update_task_logtime
   get 'employee_lists' => 'employees#employees_lists'
   get '/employees/index' => 'employees#index', :as => :employees
   get '/employees/new' => 'employees#new', :as => :new_employee
@@ -43,6 +50,8 @@ Rails.application.routes.draw do
   get '/messages/index' => 'messages#index'
   post '/messages/' => 'messages#create'
 
+  get 'employees_attendance_report' => 'reports#attendance_report'
+  get 'employees_report_pdf' => 'reports#attendance_report_pdf'
   get 'employee_lists' => 'employees#employees_lists'
 
   get 'teamslist' => 'teams#teams_list'

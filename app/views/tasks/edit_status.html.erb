@@ -1,15 +1,12 @@
 <% provide(:title, "Edit Task Status") %>
-<div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
-	<%= notice %>
-</div>
 <p>
-	<strong>Task Title:</strong>
-	<%= @task.name %>
-	<%= form_for @task, url: {action: "update_status"} do |form| %>
-	<%= form.select :status, ["In Progress","Ready to Review", "Review Completed"] %>
-	<%= form.submit class: "btn btn-primary" %> 
-	<%= link_to 'Back', project_tasks_url(@task.project), class: "btn btn-primary" %>
-	<% end %>
+  <strong>Task Title:</strong>
+  <%= @task.name %>
+  <%= form_for @task, url: {action: "update_status"} do |form| %>
+  <%= form.select :status, ["In Progress","Ready to Review", "Review Completed"] %>
+  <%= form.submit class: "btn btn-primary" %> 
+  <%= link_to 'Back', department_project_tasks_url(@department, @task.project), class: "btn btn-primary" %>
+  <% end %>
 </p>
 
 

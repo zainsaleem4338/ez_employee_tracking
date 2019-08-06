@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class ApplicationController < ActionController::Base
   alias_method :current_user, :current_employee
   protect_from_forgery with: :exception
@@ -10,7 +12,10 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'text/html' }
-      format.html { redirect_to main_app.root_url, notice: "You are not authorized to perform such action" }
+      format.html {
+        flash[:danger] = 'You are not authorized to perform such action'
+        redirect_to main_app.root_url
+      }
       format.js   { head :forbidden, content_type: 'text/html' }
     end
   end

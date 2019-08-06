@@ -25,7 +25,8 @@ module ApplicationHelper
 
   def present_marked?
     @attendance = current_employee.todays_attendance_of_employee
-    @attendance.present?
+    return false if @attendance.nil?
+    @attendance.attendance_present?
   end
 
   def not_logged_out?
@@ -69,13 +70,24 @@ module ApplicationHelper
       link: show_employee_path(current_employee),
       icon: 'fas fa-chart-line'
     }
-    @data.push(@dashboard)
+    @velocity_report = {
+      name: 'Velocity Report',
+      link: show_employee_velocity_report_path,
+      icon: 'fas fa-file'
+    }
+    
+    @data.push(@dashboard).push(@velocity_report)
 
     if admin?
       @teams = {
         name: 'Teams',
         link: teams_path,
         icon: 'fas fa-user-friends'
+      }
+      @attendance_report = {
+        name: 'Attendance Report',
+        link: employees_attendance_report_path,
+        icon: 'fas fa-chart-line'
       }
       @employees = {
         name: 'Employees',
@@ -114,28 +126,14 @@ module ApplicationHelper
           }
         ]
       }
-
-      @projects = {
-        name: 'Projects',
-        link: '#',
-        icon: 'fas fa-tasks',
-        submenu_id: 'projectSubmenu',
-        suboptions: [
-          {
-            name: 'Add Project',
-            link: new_project_path,
-            icon: 'fas fa-plus'
-          },
-          {
-            name: 'View Projects',
-            link: projects_path,
-            icon: 'fas fa-eye'
-          }
-        ]
-      }
-      @data.push(@employees).push(@departments).push(@teams).push(@projects)
+      @data.push(@employees).push(@attendance_report).push(@departments).push(@teams)
     else
-      @data
+      @employee_tasks = {
+        name: 'My Tasks',
+        link: employee_tasks_list_path(current_employee),
+        icon: 'fas fa-tasks'
+      }
+      @data.push(@employee_tasks)
     end
   end
 end

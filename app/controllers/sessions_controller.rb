@@ -27,7 +27,7 @@ class SessionsController < Devise::SessionsController
       sign_in(resource_name, employee)
       yield employee if block_given?
       if flash[:alert].blank?
-        flash[:notice] = "Employee signed in successfully!"
+        flash[:success] = 'Employee signed in successfully!'
       end
       respond_with employee, location: menus_index_path 
     else

@@ -52,6 +52,7 @@
             <i class="fas fa-envelope fa-fw"></i>
             <sup>7</sup>
           </a>
+
           <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
             <h6 class="dropdown-header">
               Messages
@@ -74,6 +75,7 @@
             <span class="small-gray"><%= current_employee.name %></span>
             <img src="https://source.unsplash.com/QAB-WJcbgJk/60x60" class="img-profile rounded-circle">
           </a>
+
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
             <a class="dropdown-item" href="#">
               <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -84,14 +86,14 @@
               <span class="small">Settings</span>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
+
+            
+            <%= link_to  destroy_employee_session_path, class: 'nav-link small text-gray-400 dropdown-item' , method: :delete do %>
               <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              <span><%= link_to "Logout", destroy_employee_session_path, class: 'nav-link small' , method: :delete %> </span>
-            </a>
+              Logout
+            <% end %>
           </div>
         </li>
-
-        
       </ul>
     </div>
   </div>

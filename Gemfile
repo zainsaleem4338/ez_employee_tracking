@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'autoprefixer-rails', '~> 9.6', '>= 9.6.1'
 gem 'cancancan', '~>3.0.1'
 gem 'coffee-rails', '~> 4.1.0'
@@ -24,8 +23,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'select2-rails'
 gem 'sequenceid'
 gem 'uglifier', '>= 1.3.0'
-gem 'faye'
-gem 'thin'
+gem 'faye', '~> 1.2.2'
+gem 'thin', '~> 1.7.0'
+gem 'wicked_pdf', '~>1.4.0'
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap4', '0.2.2'
+gem 'wkhtmltopdf-binary', '~>0.12.4'
 
 group :development do
   gem 'better_errors'
@@ -45,8 +48,10 @@ group :test do
   gem 'pry', '=0.10.1'
   gem 'pry-rails', '=0.3.3'
   gem 'rspec-rails', '~> 3.8'
+  gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'
   gem 'faker', '~> 1.6.1'
-  gem 'shoulda-matchers', require: false  
+  gem 'shoulda-matchers', require: false
+  gem 'web-console', '~> 2.0'
   gem 'simplecov', require: false
 end
