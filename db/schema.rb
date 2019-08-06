@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190804171819) do
+ActiveRecord::Schema.define(version: 20190805111002) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -93,12 +93,12 @@ ActiveRecord::Schema.define(version: 20190804171819) do
     t.integer  "sequence_num",           limit: 4,                  null: false
     t.integer  "department_id",          limit: 4
     t.boolean  "active",                 limit: 1,   default: true
-    t.integer  "leaves",                 limit: 4
-    t.integer  "late_count",             limit: 4
     t.string   "avatar_file_name",       limit: 255
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size",       limit: 8
     t.datetime "avatar_updated_at"
+    t.integer  "leaves",                 limit: 4
+    t.integer  "late_count",             limit: 4
   end
 
   add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
@@ -134,6 +134,11 @@ ActiveRecord::Schema.define(version: 20190804171819) do
 
   add_index "projects", ["company_id"], name: "index_projects_on_company_id", using: :btree
   add_index "projects", ["department_id"], name: "index_projects_on_department_id", using: :btree
+
+  create_table "reports", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "settings", force: :cascade do |t|
     t.text    "working_days",     limit: 65535
