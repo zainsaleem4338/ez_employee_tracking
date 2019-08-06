@@ -11,7 +11,7 @@ module ApplicationHelper
     setting = current_employee.company.setting
     today_start_time = setting.timings[Time.now.strftime('%A').downcase + '_start_time']
     today_end_time = setting.timings[Time.now.strftime('%A').downcase + '_end_time']
-    if (get_time_in_seconds(Time.now) > get_time_in_seconds(today_start_time.to_time) && get_time_in_seconds(Time.now) < get_time_in_seconds(today_end_time.to_time))
+    if (setting.working_days[Time.now.strftime('%A').downcase] && (get_time_in_seconds(Time.now) >= get_time_in_seconds(today_start_time.to_time)) && (get_time_in_seconds(Time.now) <= get_time_in_seconds(today_end_time.to_time)))
       return true
     end
     false
@@ -42,32 +42,32 @@ module ApplicationHelper
     @data = []
     @events = {
       name: 'Events',
-      link: '#',
+      link: home_events_path,
       icon: 'fas fa-calendar'
     }
     @chat = {
-      name: 'Chat',
-      link: '#',
+      name: 'Messenger',
+      link: messages_index_path,
       icon: 'fas fa-comment'
     }
-    @about = {
-      name: 'About',
-      link: menus_index_path,
-      icon: 'fas fa-briefcase'
+    @calendar = {
+      name: 'Calendar',
+      link: index_events_path,
+      icon: 'far fa-calendar-minus'
     }
-    @contact = {
-      name: 'Contact',
-      link: '#',
-      icon: 'fas fa-phone'
-    }
-    @data.push(@events).push(@chat).push(@about).push(@contact)
+    @settings = {
+        name: 'Settings',
+        link: settings_path,
+        icon: 'fas fa-cog'
+     }
+    @data.push(@events).push(@chat).push(@calendar).push(@settings)
   end
 
   def generate_sidebar_options
     @data = []
     @dashboard = {
       name: 'Dashboard',
-      link: '#',
+      link: menus_index_path,
       icon: 'fas fa-chart-line'
     }
 
@@ -77,7 +77,7 @@ module ApplicationHelper
       @attendance = {
         name: 'Attendance',
         link: attendances_path,
-        icon: 'fas fa-address-book'
+        icon: 'fas fa-journal-whills'
       }
       @employees = {
         name: 'Employees',
@@ -121,8 +121,17 @@ module ApplicationHelper
         link: reports_path,
         icon: 'fas fa-file'
       }
-      @data.push(@attendance).push(@employees).push(@departments)
-      @data.push(@reports)
+      @add_events = {
+        name: 'Add Event',
+        link: new_events_path,
+        icon: 'fas fa-calendar-week'
+      }
+      @edit_settings = {
+        name: 'Edit Settings',
+        link: edit_settings_path,
+        icon: 'fas fa-cogs'
+      }
+      @data.push(@employees).push(@departments).push(@attendance).push(@add_events).push(@edit_settings)
     else
       @employee_tasks = {
         name: 'My Tasks',

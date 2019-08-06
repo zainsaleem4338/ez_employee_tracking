@@ -37,6 +37,9 @@ Rails.application.routes.draw do
 
   get 'reports/velocity' => 'reports#show', as: :show_employee_velocity_report
   get 'reports/export_report' => 'reports#pdf_velocity_report', as: :pdf_velocity_report
+  get 'employees_attendance_report' => 'reports#attendance_report'
+  get 'employees_report_pdf' => 'reports#attendance_report_pdf'
+
   get 'employee_tasks' => 'tasks#employee_tasks', :as => :employee_tasks_list
   patch 'tasks/:id/update_task_logtime' => 'tasks#update_task_logtime', :as => :update_task_logtime
   get 'employee_lists' => 'employees#employees_lists'

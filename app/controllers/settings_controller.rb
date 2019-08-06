@@ -24,7 +24,7 @@ class SettingsController < ApplicationController
   end
 
   def update
-    days = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
+    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
     on_days = {}
     days.each do |day|
       if params[day].blank?
