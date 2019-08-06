@@ -32,10 +32,6 @@
             <% end %>
           <% end %>
           <div class="form-group">
-            <%= f.label :department_id %>
-            <%= f.select(:department_id, options_for_select([['Development', 1],['Product', 2]]), {}, {class: "form-control"}) %>
-          </div>
-          <div class="form-group">
             <%= f.label :role %>
             <%= f.select(:role, options_for_select([['Admin']]), {}, {class: "form-control"}) %>
           </div>
