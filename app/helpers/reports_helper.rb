@@ -1,4 +1,5 @@
 module ReportsHelper
+
   def employee_velocity_nan?(employee_velocity)
     if employee_velocity.to_f.nan? || (employee_velocity == (Float::INFINITY))
       return '-'

@@ -32,7 +32,8 @@ Rails.application.routes.draw do
   get '/employees/:id/show' => 'employees#show', :as => :show_employee
   post '/employees/create' => 'employees#create', :as => :create_employee
   delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
-
+  get 'employees_attendance_report' => 'reports#attendance_report'
+  get 'employees_report_pdf' => 'reports#attendance_report_pdf'
   get 'employee_lists' => 'employees#employees_lists'
 
   get 'teamslist' => 'teams#teams_list'

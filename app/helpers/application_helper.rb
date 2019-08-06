@@ -62,6 +62,11 @@ module ApplicationHelper
         link: teams_path,
         icon: 'fas fa-user-friends'
       }
+      @attendance_report = {
+        name: 'Attendance Report',
+        link: employees_attendance_report_path,
+        icon: 'fas fa-chart-line'
+      }
       @employees = {
         name: 'Employees',
         link: '#',
@@ -99,7 +104,7 @@ module ApplicationHelper
           }
         ]
       }
-      @data.push(@employees).push(@departments).push(@teams)
+      @data.push(@employees).push(@attendance_report).push(@departments).push(@teams)
     else
       @employee_tasks = {
         name: 'My Tasks',
