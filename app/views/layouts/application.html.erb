@@ -3,8 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <title>EzEmployeeTracking</title>
+    <!-- Latest compiled and minified CSS -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <%= javascript_include_tag "https://code.jquery.com/jquery-3.2.1.slim.min.js" %>
     <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.js' %>
@@ -21,7 +25,6 @@
     <%= stylesheet_link_tag href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" %>
     <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" %>
     <%= javascript_include_tag 'https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js' %>
- 
     <%= csrf_meta_tags %>
 
   </head>
@@ -42,7 +45,7 @@
         </div>
       </div>
     <% else %>
-       <%= yield %>
-   <% end %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>

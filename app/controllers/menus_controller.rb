@@ -6,7 +6,7 @@ class MenusController < ApplicationController
 
   def home   
   end
-
+  
   def search_email
     @email = params[:email]
     if(@email.present?)

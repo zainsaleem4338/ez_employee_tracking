@@ -17,5 +17,4 @@ FactoryGirl.define do
 
     association :department, factory: :department
   end
-
 end

@@ -1,0 +1,2 @@
+/home/sumbal/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.0/lib/action_dispatch/http/mime_type.rb:163: warning: already initialized constant Mime::PDF
+/home/sumbal/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.0/lib/action_dispatch/http/mime_type.rb:163: warning: previous definition of PDF was here

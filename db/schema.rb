@@ -36,6 +36,22 @@ ActiveRecord::Schema.define(version: 20190804171819) do
 
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   limit: 4,     default: 0, null: false
+    t.integer  "attempts",   limit: 4,     default: 0, null: false
+    t.text     "handler",    limit: 65535,             null: false
+    t.text     "last_error", limit: 65535
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by",  limit: 255
+    t.string   "queue",      limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
   create_table "departments", force: :cascade do |t|
     t.string   "name",        limit: 255,   null: false
     t.text     "description", limit: 65535
@@ -79,6 +95,10 @@ ActiveRecord::Schema.define(version: 20190804171819) do
     t.boolean  "active",                 limit: 1,   default: true
     t.integer  "leaves",                 limit: 4
     t.integer  "late_count",             limit: 4
+    t.string   "avatar_file_name",       limit: 255
+    t.string   "avatar_content_type",    limit: 255
+    t.integer  "avatar_file_size",       limit: 8
+    t.datetime "avatar_updated_at"
   end
 
   add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
@@ -159,12 +179,16 @@ ActiveRecord::Schema.define(version: 20190804171819) do
   add_index "tasks", ["reviewer_id"], name: "index_tasks_on_reviewer_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name",          limit: 255,   null: false
-    t.text     "description",   limit: 65535
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "department_id", limit: 4,     null: false
-    t.integer  "company_id",    limit: 4
+    t.string   "name",                  limit: 255,   null: false
+    t.text     "description",           limit: 65535
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "department_id",         limit: 4,     null: false
+    t.integer  "company_id",            limit: 4
+    t.string   "team_pic_file_name",    limit: 255
+    t.string   "team_pic_content_type", limit: 255
+    t.integer  "team_pic_file_size",    limit: 8
+    t.datetime "team_pic_updated_at"
   end
 
   add_index "teams", ["company_id"], name: "index_teams_on_company_id", using: :btree

@@ -24,26 +24,26 @@ class TasksController < ApplicationController
           @task.task_time_logs.create(employee_id: employee.id)
         end
       end
-      flash[:success] = 'Created Task Successfully!'
+      flash[:success] = t('.success_notice')
       redirect_to department_project_tasks_path
     else
-      flash[:danger] = 'Could not create Task!'
-      render new_department_project_task_path
+      flash[:danger] = t('.error_notice')
+      redirect_to new_department_project_task_path
     end
   end
 
   def update
     if params[:assignable_employee_id].present? && params[:assignable_team_id].present?
-      flash[:danger] = 'Make sure you delete employee field or team field'
+      flash[:danger] = t('.error_field_notice')
       render :edit
     else
       params[:task][:status] = Task::NEW_STATUS if !params[:task][:assignable_id].present?
       params[:task][:status] = Task::ASSIGNED_STATUS if params[:task][:assignable_id].present?
       if @task.update(task_params)
-        flash[:success] = 'Updated Task Successfully!'
+        flash[:success] = t('.success_notice')
         redirect_to department_project_tasks_path
       else
-        flash[:danger] = 'Could not update Task!'
+        flash[:danger] = t('.error_notice')
         redirect_to edit_department_project_task_path
       end
     end
@@ -52,18 +52,18 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     if @task.destroyed?
-      flash[:success] = 'Deleted Task Successfully!'
+      flash[:success] = t('.success_notice')
     else
-      flash[:danger] = 'Could not delete Task!'
+      flash[:danger] = t('.error_notice')
     end
     redirect_to department_project_tasks_path
   end
 
   def update_status
-    if @task.update(task_params)
-      flash[:success] = 'Updated Task Status Successfully!'
+    if @task.update_attribute('status', task_params[:status])
+      flash[:success] = t('.success_notice')
     else
-      flash[:danger] = 'Could not update Task Status!'
+      flash[:danger] = t('.error_notice')
     end
     redirect_to department_project_tasks_path
   end
@@ -74,9 +74,9 @@ class TasksController < ApplicationController
       @result = @task_log.
         update_attribute('hours', @task_log.hours.to_i + params[:task_time_log][:hours].to_i)
       if @result
-        flash.now[:success] = 'Updated task log-time Successfully!'
+        flash.now[:success] = t('.success_notice')
       else
-        flash.now[:danger] = 'Could not update task log-time!'
+        flash.now[:danger] = t('.error_notice')
       end
     end
     respond_to do |format|
