@@ -9,12 +9,7 @@ jQuery ->
   $('#team_leader_field').hide()
   $('#team_employee_ids').tokenInput '/employee_lists.json?department='+department_id, Object.assign({ prePopulate: $('#team_employee_ids').data('load') }, user_hash)
   $('#team_team_lead_id').tokenInput '/employee_lists.json?department='+department_id, Object.assign({ tokenLimit: 1, prePopulate: $('#team_team_lead_id').data('load') }, user_hash)
-
-  $('select#team_department_id').select2({
-    placeholder: "Choose a department",
-    allowClear: true
-  });
-
+  
   Array::diff = (a) ->
     @filter (i) ->
       a.indexOf(i) < 0

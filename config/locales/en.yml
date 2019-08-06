@@ -34,6 +34,8 @@ en:
       invalid_pswd_email_notice: 'Invalid password or email!'
       success_notice: 'Employee signed in successfully!'
       not_belongs_to_company: 'Employee does not belong to %{current_company_name}!'
+      confirm_email: 'Please confirm your email!'
+      inactive_employee: 'Can not log in, Employee is inactive!'
 
   tasks:
     create:

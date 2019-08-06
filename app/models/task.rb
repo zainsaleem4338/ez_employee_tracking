@@ -12,7 +12,7 @@ class Task < ActiveRecord::Base
   validates :start_date, :expected_end_date, :name, :company_id, :project_id, presence: :true
   validate :check_start_date, :check_start_and_end_date
   scope :get_tasks, ->(user) { where('(tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?)', Employee.all.team_employees_projects_tasks(user).pluck(:id), EMPLOYEE, user.employee_teams.pluck(:team_id), TEAM) }
-  has_many :task_time_logs
+  has_many :task_time_logs, dependent: :destroy
   validates :complexity, inclusion: { in: COMPLEXITY }, numericality: true
   belongs_to :reviewer, foreign_key: :reviewer_id, class_name: EMPLOYEE
   scope :get_employee_tasks, ->(user) { where('(tasks.assignable_id in (?) AND tasks.assignable_type = ?) OR (tasks.assignable_id in (?) AND tasks.assignable_type = ?)', user.id, EMPLOYEE, user.employee_teams.pluck(:team_id), TEAM) }
@@ -67,7 +67,7 @@ class Task < ActiveRecord::Base
     end
   end
   def set_status
-    return self.status = Task::ASSIGNED_STATUS unless assignable_id.nil?
+    return self.status = Task::ASSIGNED_STATUS unless assignable_id.blank?
     self.status = Task::NEW_STATUS
     self.assignable_type = nil
   end

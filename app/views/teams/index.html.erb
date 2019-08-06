@@ -3,7 +3,7 @@
 
 <% if @teams.length > 0%>
 <table class="table">
-  <thead class="thead-dark">
+  <thead class="thead-light">
     <tr>
       <th>Name</th>
       <th>Description</th>
@@ -33,5 +33,5 @@
 </table>
 <% end %>
 <br>
-
 <%= link_to 'New Team', new_department_team_path, class: "btn btn-regular" %>
+<%= link_to 'Back', departments_url, class: "btn btn-secondary" %>

@@ -26,7 +26,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
   resources :tasks, only: [:employee_tasks, :update_task_logtime]
 
   get 'menus/index' => 'menus#index'
