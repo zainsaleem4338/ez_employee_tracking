@@ -5,9 +5,8 @@ require 'date'
 #   - Mark attendance of a employee/ Employee
 #   - Let admin see who is present today
 class AttendancesController < ApplicationController
-
   def index
-    @attendances_list = current_employee.company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
+    @attendances_list = current_employee.all_attendances
   end
 
   def create

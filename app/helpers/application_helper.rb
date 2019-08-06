@@ -45,7 +45,7 @@ module ApplicationHelper
     @data = []
     @dashboard = {
       name: 'Dashboard',
-      link: show_employee_path(current_employee),
+      link: '#',
       icon: 'fas fa-chart-line'
     }
     @velocity_report = {
@@ -57,6 +57,11 @@ module ApplicationHelper
     @data.push(@dashboard).push(@velocity_report)
 
     if admin?
+      @attendance = {
+        name: 'Attendance',
+        link: attendances_path,
+        icon: 'fas fa-address-book'
+      }
       @teams = {
         name: 'Teams',
         link: teams_path,
@@ -104,7 +109,7 @@ module ApplicationHelper
           }
         ]
       }
-      @data.push(@employees).push(@attendance_report).push(@departments).push(@teams)
+      @data.push(@attendance).push(@employees).push(@attendance_report).push(@departments).push(@teams)
     else
       @employee_tasks = {
         name: 'My Tasks',
