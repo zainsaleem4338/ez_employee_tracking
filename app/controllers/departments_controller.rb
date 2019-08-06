@@ -15,7 +15,7 @@ class DepartmentsController < ApplicationController
     respond_to do |format|
       if @department.save
         format.html do
-          flash[:success] = 'Department created Successfully!'
+          flash[:success] = t('.success_notice')
           redirect_to departments_path
         end
         format.json { render :show, status: :created, location: @department }
@@ -33,7 +33,7 @@ class DepartmentsController < ApplicationController
     respond_to do |format|
       if @department.update(department_params)
         format.html do
-          flash[:success] = 'Department updated Successfully!'
+          flash[:success] = t('.success_notice')
           redirect_to @department
         end
         format.json { render :show, status: :ok, location: @department }
@@ -52,13 +52,13 @@ class DepartmentsController < ApplicationController
     respond_to do |format|
       if @department.destroyed?
         format.html do
-          flash[:success] = 'Department deleted Successfully!'
+          flash[:success] = t('.success_notice')
           redirect_to departments_path
         end
         format.json { head :no_content }
       else
         format.html do
-          flash[:danger] = 'Could not delete Department!'
+          flash[:danger] = t('.error_notice')
           redirect_to departments_path
         end
       end

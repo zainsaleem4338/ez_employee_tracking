@@ -1,7 +1,13 @@
 class EmployeesController < ApplicationController  
   load_and_authorize_resource :employee, through_association: :company
+  load_and_authorize_resource :team, through_association: :company
 
   def employees_lists
+    if params['department'].blank?
+      @employees = current_employee.company.employees.active_members.order(:name)
+    else
+      @employees = current_employee.company.departments.find(params['department'].to_i).employees.active_members.order(:name)
+    end
     respond_to do |format|
       format.json { render json: @employees.where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:q]}%") }
     end
@@ -11,7 +17,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
     @employee.password = generate_password
     if @employee.save
-      flash[:success] = 'Employee successfully created!'
+      flash[:success] = t('.success_notice')
       redirect_to menus_index_path
     else
       render 'new'
@@ -22,7 +28,7 @@ class EmployeesController < ApplicationController
     @employee = current_employee.company.employees
                                 .find_by(sequence_num: params[:id])
     @employee.active = false
-    flash[:danger] = 'Employee is now inactive!'
+    flash[:danger] = t('.inactive_notice')
     if @employee.save
       redirect_to employees_path
     else
@@ -30,11 +36,18 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def team_member_render_view
+    @team_members = Employee.where(id: params['employee_ids'])
+    @count = params['count']
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def employee_params
-    params.require(:employee)
-          .permit(:name, :email, :password, :role, :company_id, :department_id)
+    params.require(:employee).permit(:name, :email, :password, :role, :company_id, :department_id, :avatar)
   end
 
   def generate_password

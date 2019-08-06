@@ -15,10 +15,10 @@ class ProjectsController < ApplicationController
   def create
     @project.status = Project::NEW_STATUS
     if @project.save
-      flash[:success] = 'Project Created Successfully!'
+      flash[:success] = t('.success_notice')
       redirect_to department_projects_path
     else
-      flash[:danger] = 'Could not create Project!'
+      flash[:danger] = @project.errors
       render new_department_project_path
     end
   end
@@ -26,9 +26,9 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     if @project.destroyed?
-      flash[:success] = 'Project Deleted Successfully!'
+      flash[:success] = t('.success_notice')
     else
-      flash[:danger] = 'Could not delete Project!'
+      flash[:danger] = t('.error_notice')
     end
     redirect_to department_projects_path
   end
@@ -45,7 +45,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project)
-          .permit(:description, :name, :start_date, :expected_end_date, :department_id)
+    params.require(:project).permit(:description, :name, :start_date, :expected_end_date, :department_id)
   end
 end

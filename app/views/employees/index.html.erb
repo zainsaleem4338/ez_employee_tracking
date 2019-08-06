@@ -1,17 +1,17 @@
 
 <% provide(:title, "All Employees List") %>
-
-<ul class="list-group">
+<div class="row" style="margin-top: 40px;">
   <% @employees.each do |employee| %>
-    <li class="list-group-item list-group-item-info">
-      <ul>
-        <li><%= employee.name %></li>
-        <li><%= employee.email %></li>
-        <li><%= employee.role %></li> 
-        <% if can? :delete, employee %>
-        <li><b><%= link_to "Delete this employee", delete_employee_path(employee), method: :delete, class: 'btn btn-outline-danger', data: { confirm: "Are you sure you want to delete the employee?" } %></b></li> 
-        <% end %>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+    <div class="card col-sm-4 shadow mb-2 bg-white card-width">
+      <div class="card-body">
+        <center>
+          <%= image_tag employee.avatar.url(:thumb), class: "rounded-circle employee-avatar mb-2" %>
+          <h6 class="card-title"><b><%= employee.name %></b></h6>
+          <p class="card-text mb-1"><strong class="head-color">Email: </strong><%= employee.email %></p>
+          <p class="card-text"><strong class="head-color">Role: </strong><%= employee.role %></p>
+          <%= link_to "Delete this employee", delete_employee_path(employee), method: :delete, data: { confirm: "Are you sure you want to delete the employee?" }, class: "btn btn-outline-danger" %>
+        </center>
+      </div>
+    </div>
+    <% end %>
+</div>

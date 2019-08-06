@@ -2,7 +2,6 @@
   <% if @department.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@department.errors.count, "error") %> prohibited this department from being saved:</h2>
-
       <ul>
       <% @department.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,7 +9,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="form-group">
     <%= form.label :name %><br>
     <%= form.text_field :name, required: true, class: "form-control" %>
@@ -21,6 +19,6 @@
   </div>
   <br>
   <div class="actions">
-    <%= form.submit class: "btn btn-regular btn-success" %>
+    <%= form.submit class: "btn btn-regular" %>
   </div>
 <% end %>
