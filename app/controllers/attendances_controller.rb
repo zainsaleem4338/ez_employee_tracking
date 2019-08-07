@@ -1,6 +1,6 @@
 require 'date'
 class AttendancesController < ApplicationController
-  # /attendances
+  # get /attendances
   def index
     @attendances_list = current_employee.all_attendances
     respond_to do |format|
@@ -8,13 +8,14 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # /attendances
+  # post /attendances
   def create
     @employees_todays_attendance = current_employee.todays_attendance_of_employee
     if @employees_todays_attendance.blank?
       setting = current_employee.company.setting
       today_start_time = setting.timings[Time.now.strftime('%A').downcase + '_start_time']
       attendance_thresh = setting.attendance_time
+      attendance_thresh = 0 if attendance_thresh.nil?
       if get_time_in_seconds(Time.now) > get_time_in_seconds(today_start_time.to_time) + attendance_thresh * 60
         if current_employee.late_count.nil?
           current_employee.late_count = 0
@@ -31,12 +32,11 @@ class AttendancesController < ApplicationController
       end
     end
     respond_to do |format|
-      format.html
       format.js
     end
   end
 
-  # /attendances/:id
+  # patch /attendances/:id
   def update
     @employees_todays_attendance = current_employee.todays_attendance_of_employee
 
@@ -62,9 +62,5 @@ class AttendancesController < ApplicationController
     hours_in_seconds = time.strftime('%H').to_i * 3600
     minutes_in_seconds = time.strftime('%H').to_i * 60
     hours_in_seconds + minutes_in_seconds
-
-    respond_to do |format|
-      format.html
-    end
   end
 end
