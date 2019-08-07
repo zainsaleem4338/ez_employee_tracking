@@ -1,4 +1,4 @@
-<center><h3>Add an Event</h3></center><br>
+<% provide(:title, "Add an Event") %>
 
 <%= form_for @event, url: create_events_path(@employee), method: :post ,:html => {class: "form-horizontal", role: "form"} do |form| %>
   <div class="form-group">

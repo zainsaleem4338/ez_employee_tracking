@@ -1,4 +1,4 @@
-<h1>All Events of <%= current_company.name %></h1>
+<% provide(:title, "All Events of "+current_company.name) %>
 
 <ul class="list-group">
   <% @events.each do |event| %>
