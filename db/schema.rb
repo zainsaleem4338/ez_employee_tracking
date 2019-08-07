@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190804171819) do
+ActiveRecord::Schema.define(version: 20190806115916) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -68,7 +68,10 @@ ActiveRecord::Schema.define(version: 20190804171819) do
     t.string   "employee_type", limit: 255, null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "company_id",    limit: 4
   end
+
+  add_index "employee_teams", ["company_id"], name: "index_employee_teams_on_company_id", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",   null: false
@@ -135,6 +138,11 @@ ActiveRecord::Schema.define(version: 20190804171819) do
   add_index "projects", ["company_id"], name: "index_projects_on_company_id", using: :btree
   add_index "projects", ["department_id"], name: "index_projects_on_department_id", using: :btree
 
+  create_table "reports", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "settings", force: :cascade do |t|
     t.text    "working_days",     limit: 65535
     t.integer "company_id",       limit: 4
@@ -151,8 +159,10 @@ ActiveRecord::Schema.define(version: 20190804171819) do
     t.datetime "updated_at",            null: false
     t.integer  "employee_id", limit: 4
     t.integer  "task_id",     limit: 4
+    t.integer  "company_id",  limit: 4
   end
 
+  add_index "task_time_logs", ["company_id"], name: "index_task_time_logs_on_company_id", using: :btree
   add_index "task_time_logs", ["employee_id"], name: "index_task_time_logs_on_employee_id", using: :btree
   add_index "task_time_logs", ["task_id"], name: "index_task_time_logs_on_task_id", using: :btree
 
@@ -170,8 +180,8 @@ ActiveRecord::Schema.define(version: 20190804171819) do
     t.integer  "project_id",        limit: 4
     t.integer  "assignable_id",     limit: 4
     t.string   "assignable_type",   limit: 255
-    t.integer  "reviewer_id",       limit: 4
     t.integer  "complexity",        limit: 4
+    t.integer  "reviewer_id",       limit: 4
   end
 
   add_index "tasks", ["assignable_type", "assignable_id"], name: "index_tasks_on_assignable_type_and_assignable_id", using: :btree
@@ -198,9 +208,11 @@ ActiveRecord::Schema.define(version: 20190804171819) do
   add_foreign_key "attendances", "companies"
   add_foreign_key "attendances", "employees"
   add_foreign_key "departments", "companies"
+  add_foreign_key "employee_teams", "companies"
   add_foreign_key "employees", "companies"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "departments"
+  add_foreign_key "task_time_logs", "companies"
   add_foreign_key "task_time_logs", "employees"
   add_foreign_key "task_time_logs", "tasks"
   add_foreign_key "tasks", "companies"
