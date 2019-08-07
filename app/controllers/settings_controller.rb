@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
   load_and_authorize_resource
-
+#get '/settings/index'
   def index
     @settings = @settings.first
     if @settings.present?
@@ -10,8 +10,11 @@ class SettingsController < ApplicationController
       end
       @settings
     end
+    respond_to do |format|
+      format.html
+    end
   end
-
+# patch '/settings/edit'
   def edit
     @settings = @settings.first
     if @settings.present?
@@ -21,8 +24,11 @@ class SettingsController < ApplicationController
       end
       @settings
     end
+    respond_to do |format|
+      format.html
+    end
   end
-
+# get '/settings/update'
   def update
     days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
     on_days = {}
