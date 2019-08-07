@@ -3,7 +3,7 @@ module MenusHelper
     if current_employee.role == Employee::ADMIN_ROLE
       current_employee.company.tasks.where('status in (?)', [Task::NEW_STATUS, Task::IN_PROGRESS, Task::ASSIGNED_STATUS, Task::READY_TO_REVIEW])
     elsif current_employee.role == Employee::EMPLOYEE_ROLE
-      current_employee.company.tasks.where(employee_id: current_employee.id)
+      current_employee.company.tasks.where('assignable_id = ? and assignable_type = ?', current_employee.id, Employee::EMPLOYEE_ROLE)
     end
   end
 
@@ -11,7 +11,7 @@ module MenusHelper
     if current_employee.role == Employee::ADMIN_ROLE
       current_employee.company.tasks.where('expected_end_date < (?)', Date.today).count
     elsif current_employee.role == Employee::EMPLOYEE_ROLE
-      current_employee.company.tasks.where('employee_id = ? expected_end_date < (?)',current_employee.id, Date.today)
+      current_employee.company.tasks.where('assignable_id = ? and assignable_type = ? and expected_end_date < (?)',current_employee.id, Employee::EMPLOYEE_ROLE, Date.today).count
     end
   end
 
@@ -19,7 +19,7 @@ module MenusHelper
     if current_employee.role == Employee::ADMIN_ROLE
       current_employee.company.tasks.where('expected_end_date < (?)', Date.today)
     elsif current_employee.role == Employee::EMPLOYEE_ROLE
-      current_employee.company.tasks.where('employee_id = ? expected_end_date < (?)',current_employee.id, Date.today)
+      current_employee.company.tasks.where('assignable_id = ? and assignable_type = ? and expected_end_date < (?)',current_employee.id, Employee::EMPLOYEE_ROLE, Date.today)
     end
   end
 
@@ -27,7 +27,7 @@ module MenusHelper
     if current_employee.role == Employee::ADMIN_ROLE
       current_employee.company.tasks.where('expected_end_date < (?)', Date.today+(3.day))
     elsif current_employee.role == Employee::EMPLOYEE_ROLE
-      current_employee.company.tasks.where('employee_id = ? expected_end_date < (?)',current_employee.id, Date.today+3.day)
+      current_employee.company.tasks.where('assignable_id = ? and assignable_type = ? and expected_end_date < (?)',current_employee.id, Employee::EMPLOYEE_ROLE, Date.today+3.day)
     end
   end
 

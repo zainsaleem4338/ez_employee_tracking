@@ -99,7 +99,7 @@ module ApplicationHelper
       }
 
       @departments = {
-        name: 'Department',
+        name: 'Departments',
         link: '#',
         icon: 'fas fa-building',
         submenu_id: 'deptSubmenu',
@@ -133,12 +133,22 @@ module ApplicationHelper
       }
       @data.push(@employees).push(@departments).push(@attendance).push(@add_events).push(@edit_settings).push(@reports)
     else
+      @departments = {
+        name: 'Departments',
+        link: departments_path,
+        icon: 'fas fa-building',
+      }
       @employee_tasks = {
         name: 'My Tasks',
         link: employee_tasks_list_path(current_employee),
         icon: 'fas fa-tasks'
       }
-      @data.push(@employee_tasks)
+      @reports = {
+        name: 'Velocity Report',
+        link: show_employee_velocity_report_path,
+        icon: 'fas fa-file'
+      }
+      @data.push(@employee_tasks).push(@departments).push(@reports)
     end
   end
 end
