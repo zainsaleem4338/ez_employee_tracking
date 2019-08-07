@@ -4,6 +4,10 @@ module TasksHelper
     return [task.assignable].to_json.html_safe if task.assignable_type == assignable_type
   end
 
+  def task_time_logs_form(task)
+    task.task_time_logs.where(employee_id: current_employee.id).first
+  end
+
   def get_assignable_name(task)
     return Task::UNASSIGNED_STATUS if task.assignable.nil?
     task.assignable.name.capitalize

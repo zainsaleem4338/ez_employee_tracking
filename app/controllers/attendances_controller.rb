@@ -1,9 +1,14 @@
 require 'date'
 class AttendancesController < ApplicationController
+  # /attendances
   def index
     @attendances_list = current_employee.all_attendances
+    respond_to do |format|
+      format.html
+    end
   end
 
+  # /attendances
   def create
     @employees_todays_attendance = current_employee.todays_attendance_of_employee
     if @employees_todays_attendance.blank?
@@ -31,6 +36,7 @@ class AttendancesController < ApplicationController
     end
   end
 
+  # /attendances/:id
   def update
     @employees_todays_attendance = current_employee.todays_attendance_of_employee
 
@@ -56,5 +62,9 @@ class AttendancesController < ApplicationController
     hours_in_seconds = time.strftime('%H').to_i * 3600
     minutes_in_seconds = time.strftime('%H').to_i * 60
     hours_in_seconds + minutes_in_seconds
+
+    respond_to do |format|
+      format.html
+    end
   end
 end
