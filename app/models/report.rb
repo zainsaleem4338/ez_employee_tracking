@@ -88,7 +88,11 @@ class Report
       return attendances_array
     else
       @attendances = current_employee.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :asc).select { |attendance| attendance.login_time.year == Date.today.year && attendance.logout_time != nil }
-      return attendance_details(@attendances, holidays, current_employee)
+      if !@attendances.empty?
+        full_days, half_days, absents, leaves_remaining = attendance_details(@attendances, holidays, current_employee)
+        return leaves_remaining
+      end
+      return 0
     end
   end
 
