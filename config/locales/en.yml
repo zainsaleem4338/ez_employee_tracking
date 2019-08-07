@@ -21,6 +21,7 @@ en:
   projects:
     create:
       success_notice: 'Project Created Successfully'
+      error_notice: 'Project could not be created'
     destroy:
       success_notice: 'Project Deleted Successfully'
       error_notice: 'Unable to delete'

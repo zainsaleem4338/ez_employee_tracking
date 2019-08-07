@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
       flash[:success] = t('.success_notice')
       redirect_to department_projects_path
     else
-      flash[:danger] = @project.errors
+      flash[:danger] = t('.error_notice')
       redirect_to new_department_project_path
     end
   end
