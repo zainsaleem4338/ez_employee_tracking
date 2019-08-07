@@ -1,29 +1,11 @@
-<h1>Admin Panel - Attendance and Calendar</h1>
+<% provide(:title, "Attendance Record ") %>
 
-<div class="container-fluid" style="margin-top: 60px">
+<div class="conatiner">
   <div class="row">
-    <div class="col-md-12">
-
-      <!-- Badges -->
-      <ul class="nav nav-pills">
-        <li class="nav-item">
-           <a class="nav-link btn btn-success" id="attendance_id">Attendance </a>
-        </li>
-        <li class="nav-item">
-           <a class="nav-link" id="calendar_id">Events <span class="badge badge-secondary">16</span></a>
-        </li>
-      </ul>
-
-      <div class="row" id="admin_attendance" style="margin-top: 20px">
-        <%= render 'attendances/show_attendance' %>
-
-      </div>
-
-      <div class="row" id="admin_calendar" style="margin-top: 20px; display: none">
-        <div class="col-md-12" style="margin-top: 20px;">
-          <%= render 'attendances/calendar' %>
-        </div>
-      </div>
+    <div class="col-sm">
+      <% if admin? %>
+        <%= render 'attendances/attendance_table' %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,0 +1,44 @@
+<%= form_for [@department,@project] do |form| %>
+<% if @project.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+    <ul>
+      <% @project.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="row d-flex justify-content-start">
+      <div class="form-group col-md-12">
+        <%= form.label :name %><br>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-start">
+      <div class="form-group col-md-12">
+        <%= form.label :description %><br>
+        <%= form.text_area :description, class: "form-control", placeholder: "Enter description" %>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-start">
+      <div class="form-group col-md-6">
+        <%= form.label "Start Date" %><br>
+        <%= form.date_field :start_date, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-6">
+       <%= form.label "Expected End Date" %><br>
+       <%= form.date_field :expected_end_date, class: "form-control" %>
+     </div>
+    </div>
+    <div class="actions mt-2">
+      <%= form.submit class: "btn btn-regular"  %>
+      <%= link_to 'Back', department_projects_path(@department), class: "btn btn-secondary" %>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+<% end %>

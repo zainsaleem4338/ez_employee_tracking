@@ -1,0 +1,18 @@
+<% provide(:title, "Listing Projects") %>
+<div class="container">
+<% if can? :create, Project%>
+  <%= link_to 'New Project', new_department_project_path, class: "btn btn-regular" %>
+<% else %>
+    <%= link_to "All Projects", department_projects_path, remote: true, class: "btn btn-secondary active"%>
+    <%= link_to "My Projects", department_projects_path(show_employees_only: true), remote: true, class: "btn btn-secondary active" %>
+<% end %>
+<%= link_to 'Back', departments_url, class: "btn btn-secondary" %>
+<% if @projects.present? %>
+  <div id="projects_grid" class="mt-3">
+    <%= render partial: 'projectsgrid', locals: {projects: @projects}  %>
+  </div>
+<% else %>
+  <p id="notice">No records Found</p>
+<% end %>
+</div>
+<br>

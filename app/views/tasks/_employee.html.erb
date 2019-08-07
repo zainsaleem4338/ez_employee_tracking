@@ -1,0 +1,6 @@
+<%= form.label :assignable_id, "Employee Email" %><br>
+<% assignable_employee_hash = set_assignable_hash(@task,Employee::EMPLOYEE_ROLE) %>
+<%= text_field_tag :assignable_employee_id, assignable_employee_hash, class: "js-assign-employee" %>
+<%= javascript_tag do %>
+$('.js-assign-employee').tokenInput('/employee_lists.json', { prePopulate: <%= assignable_employee_hash %>, tokenLimit: 1 });
+<% end %>

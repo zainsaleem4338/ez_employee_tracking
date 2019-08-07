@@ -1,0 +1,14 @@
+<% provide(:title, "Edit Task Status") %>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h5><strong>Task Title:</strong>
+    <%= @task.name %></h5>
+    <%= form_for @task, url: {action: "update_status"} do |form| %>
+      <%= form.select(:status, %w(New In\ Progress Review\ pending Reviewed Completed), {}, {class: "form-control"}) %><br>
+      <%= form.submit class: "btn btn-regular" %>
+      <%= link_to 'Back', department_project_tasks_url(@department, @task.project), class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+  <div class="col-md-3"></div>
+</div>

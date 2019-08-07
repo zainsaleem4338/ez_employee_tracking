@@ -1,0 +1,54 @@
+<% if @task.errors.any? %>
+<div class="container">
+  <div id="error_explanation">
+    <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+    <ul>
+      <% @task.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :name %><br>
+        <%= form.text_field :name, class: "form-control", placeholder: "Enter the task name" %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :complexity %><br>
+        <%= form.select(:complexity, %w(1 2 3 4 5 6 7 8 9 10), {}, {class: "form-control"}) %>
+      </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label "Start Date" %><br>
+        <%= form.date_field :start_date, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label "Expected End Date" %><br>
+        <%= form.date_field :expected_end_date, class: "form-control" %>
+       </div>
+     </div>
+     <div class="col-md-12">
+      <div class="form-group">
+        <%= form.label :description %><br>
+        <%= form.text_area :description, class: "form-control", placeholder: "Enter description" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <%= form.hidden_field :company_id, value: @task.project.company_id  %>
+  <%= form.hidden_field :project_id, value: @task.project.id  %>
+  <%= form.hidden_field :assignable_id, value: "", class: "js-assignable-id" %>
+  <%= form.hidden_field :assignable_type, value: "", class: "js-assignable-type" %>

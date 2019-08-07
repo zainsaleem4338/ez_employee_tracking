@@ -1,30 +1,315 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <center><h1>Ez Employee Tracking</h1></center><br>  
-    <center>
-      <b>Ez Employee Tracking system gives you a platform <br>for managing employee talent and maximising resources <br>throughout your business.</b><br><br>
-      <%= link_to "Employees List", employees_path, class: 'btn btn-primary btn-lg' %>
-      <%= link_to "Location", '#', class: 'btn btn-primary btn-lg', id: 'location-button' %>
-
-    </center>
+<section id="cards" class="pb-5">
+    <div class="container">
+        <div class="row">
+            <!-- Card -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside" id='front-card'>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title"><b>Leaves Remaining</b></h4>
+                                    <p class="card-text"><i class="fas fa-envelope"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside" id='back-card'>
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h2 class="card-title"><span class="badge badge-secondary">6</span></h2>
+                                    <p class="card-text">Leaves left</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Card -->
+            <!-- Card -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside" id='front-card'>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title"><b>Late Attendance</b></h4>
+                                    <p class="card-text"><i class="fas fa-bell"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside" id='back-card'>
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h2 class="card-title"><span class="badge badge-secondary">3</span></h2>
+                                    <p class="card-text">Times</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Card -->
+            <!-- Card -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside" id='front-card'>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title"><b>Allocated Leaves</b></h4>
+                                    <p class="card-text"><i class="fas fa-file-signature"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside" id='back-card'>
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h2 class="card-title"><span class="badge badge-secondary">14</span></h2>
+                                    <p class="card-text">Leaves Allocated</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Card -->
+        </div>
+    </div>
+</section>
+<section id='task_deadline'>
+  <div class='row'>
+    <div class='col-md-6' style='height:280px; overflow-y:scroll'>
+      <h3>On Going Tasks</h3>
+      <% @on_going_tasks = get_on_going_tasks %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Task</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @on_going_tasks.each do |task| %>
+          <tr>
+            <td><%= task.id %></td>
+            <td><%= task.name %></td>
+            <td><span class="badge badge-<%=get_task_badge_class(task.status)%>">
+              <%=task.status%>
+              </span>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class='col-md-6'>
+      <h3>OverDue Tasks</h3>
+      <div class="background">
+        <div class="metersWrapper">
+          <div class="meter" data-toggle="modal" data-target="#overdueTasksModal">
+            <div class="insideWrapper">
+              <div class="insideWrapper__number"><%= get_overdue_tasks_count %></div>
+              <div class="insideWrapper__desc">tasks</div>
+            </div>
+            <svg>
+              <circle class="circle" cx="57" cy="57" r="52"/>
+            <circle class="loader first" cx="57" cy="57" r="52"/></svg>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="overdueTasksModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">OverDue Tasks</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <% @overdue_tasks = get_overdue_tasks %>
+                  <% if @overdue_tasks.any? %>
+                  <table class="table table-light">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Task</th>
+                        <th>Expected End Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @overdue_tasks.each do |task|%>
+                        <tr>
+                          <td><%= task.id %></td>
+                          <td><%= task.name %></td>
+                          <td><%= task.expected_end_date.to_formatted_s(:short) %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                  <% else %>
+                    <div>No Overdue Tasks</div>
+                  <% end %>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div id="output"></div>
+</section>
 
-<script type="text/javascript">
-	$('#location-button').click(function(){
-        
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position){
-        console.log(position);
-        $.get( "http://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false", function(data) {
-          console.log(data);
-        })
-        var img = new Image();
-        img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensor=false";
-        $('#output').html(img);
-      });
-        
-    }
+<section>
+  <div class='row'>
+    <div class='col-md-6' style='height:280px; overflow-y:scroll'>
+      <h3>Tasks Reaching Deadline</h3>
+      <% @tasks_reaching_deadline = get_tasks_reaching_deadline %>
+      <div class="building">
+        <span><span></span></span>
+      </div>
+      <ul class="list-group">
+        <% if @tasks_reaching_deadline.any? %>
+          <% @tasks_reaching_deadline.each do |task| %>
+            <li class="list-group-item list-group-item-warning"><%= task.name %></li>
+          <% end %>
+        <% else %>
+          <li class="list-group-item list-group-item-warning">No Tasks Reaching Deadline</li>
+        <% end %>
+      </ul> 
+    </div>
+    <div class='col-md-6' style='height:280px; overflow-y:scroll'>
+      <h3><%= current_company.name %> Timings</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Days</th>
+            <th>Status</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Monday</th>
+            <% if @settings.working_days['monday'] %>
+              <td><span class="badge badge-success">On</span></td>
+            <% else %>
+              <td><span class="badge badge-danger">Off</span></td>
+            <% end %>   
+            <td><%= @settings.timings['monday_start_time'] %></td>
+            <td><%= @settings.timings['monday_end_time'] %></td>
+          </tr>
+          <tr>
+            <th>Tuesday</th>
+            <% if @settings.working_days['tuesday'] %>
+              <td><span class="badge badge-success">On</span></td>
+            <% else %>
+              <td><span class="badge badge-danger">Off</span></td>
+            <% end %>   
+            <td><%= @settings.timings['tuesday_start_time'] %></td>
+            <td><%= @settings.timings['tuesday_end_time'] %></td>
+          </tr>
+          <tr>
+            <th>Wednesday</th>
+            <% if @settings.working_days['wednesday'] %>
+              <td><span class="badge badge-success">On</span></td>
+            <% else %>
+              <td><span class="badge badge-danger">Off</span></td>
+            <% end %>   
+            <td><%= @settings.timings['wednesday_start_time'] %></td>
+            <td><%= @settings.timings['wednesday_end_time'] %></td>
+          </tr>
+          <tr>
+            <th>Thursday</th>
+            <% if @settings.working_days['thursday'] %>
+              <td><span class="badge badge-success">On</span></td>
+            <% else %>
+              <td><span class="badge badge-danger">Off</span></td>
+            <% end %>   
+            <td><%= @settings.timings['thursday_start_time'] %></td>
+            <td><%= @settings.timings['thursday_end_time'] %></td>
+          </tr>
+          <tr>
+            <th>Friday</th>
+            <% if @settings.working_days['friday'] %>
+              <td><span class="badge badge-success">On</span></td>
+            <% else %>
+              <td><span class="badge badge-danger">Off</span></td>
+            <% end %>  
+            <td><%= @settings.timings['friday_start_time'] %></td>
+            <td><%= @settings.timings['friday_end_time'] %></td> 
+          </tr>
+          <tr>
+            <th>Saturday</th>
+            <% if @settings.working_days['saturday'] %>
+              <td><span class="badge badge-success">On</span></td>
+            <% else %>
+              <td><span class="badge badge-danger">Off</span></td>
+            <% end %>   
+            <td><%= @settings.timings['saturday_start_time'] %></td>
+            <td><%= @settings.timings['saturday_end_time'] %></td>
+          </tr>
+          <tr>
+            <th>Sunday</th>
+            <% if @settings.working_days['sunday'] %>
+              <td><span class="badge badge-success">On</span></td>
+            <% else %>
+              <td><span class="badge badge-danger">Off</span></td>
+            <% end %>  
+            <td><%= @settings.timings['sunday_start_time'] %></td>
+            <td><%= @settings.timings['sunday_end_time'] %></td> 
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id='calendar'>
+</section>
+
+<script>
+  $(document).ready(function () {
+   var events_arr = [];
+   <% @events.each do |event| %>
+    events_arr.push({
+      title: "<%= event.title %>",
+      description: "<%= event.description %>",
+      datetime: new Date(<%= event.event_date.year%>, <%= event.event_date.month %> -1, <%= event.event_date.day%>, <%= event.event_date.strftime("%H") %>)
+    })
+  <% end %>
+  <% if @setting.present? %>
+    <% @setting.each do |key,val| %>
+      events_arr.push({
+        title: "Public Holiday",
+        description: "This is a public holiday",
+        datetime: new Date(<%= Date.parse(@setting[key]["holiday_date_#{key}"]).year %>, <%= Date.parse(@setting[key]["holiday_date_#{key}"]).month %> -1, <%= Date.parse(@setting[key]["holiday_date_#{key}"]).day%>, <%= Date.parse(@setting[key]["holiday_date_#{key}"]).strftime("%H") %>)
+      })
+      <% if @setting[key]["every_year_#{key}"] %>
+        <% (1..5).each do |count| %> 
+            events_arr.push({
+            title: "Public Holiday",
+            description: "This is a public holiday",
+            datetime: new Date(<%= Date.parse(@setting[key]["holiday_date_#{key}"]).year + count %>, <%= Date.parse(@setting[key]["holiday_date_#{key}"]).month %> -1, <%= Date.parse(@setting[key]["holiday_date_#{key}"]).day%>, <%= Date.parse(@setting[key]["holiday_date_#{key}"]).strftime("%H") %>)
+          })
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  $('#calendar').eCalendar({
+  weekDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  textArrows: {previous: '<', next: '>'},
+  eventTitle: 'Events',
+  url: '',
+  firstDayOfWeek: 0,
+  events : events_arr
+
+  });
+
   });
 </script>

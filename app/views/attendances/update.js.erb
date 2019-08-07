@@ -1,13 +1,9 @@
-<% if @employees_todays_attendance.blank? %>
-  alert('Error in update!');
+<% if @result.blank? %>
+  $('#notifications-flash').append("<%= j render(:partial => 'shared/notification') %>");
 <% else %>
   var present_marked_btn = document.getElementsByClassName("update_attendance");;
   present_marked_btn[0].style.display = "none";
-
-  //location.reload();
+  
   setTimeout(function(){location.reload()}, 3000);
-
-  var update_attendance = document.getElementById("update_attendance_alert");
-  update_attendance.style.display = "block";
 
 <% end %>

@@ -1,0 +1,6 @@
+<%= form.label :assignable_id, "Team Name" %><br>
+<% assignable_team_hash = set_assignable_hash(@task,Employee::TEAM_ROLE) %>
+<%= text_field_tag :assignable_team_id, assignable_team_hash, class: "js-assign-team" %>
+<%= javascript_tag do %>
+$('.js-assign-team').tokenInput('/teamslist.json', { prePopulate: <%= assignable_team_hash %>, tokenLimit: 1 });
+<% end %>

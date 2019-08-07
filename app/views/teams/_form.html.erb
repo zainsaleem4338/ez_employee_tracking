@@ -1,4 +1,4 @@
-<%= form_for(@team) do |f| %>
+<%= form_for [@department, @team], html: { multipart: true } do |form| %>
   <% if @team.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
@@ -10,29 +10,72 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, required: true, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :department_id, "Department" %><br>
-    <%= f.collection_select :department_id, current_employee.company.departments.order(:name),:id,:name, include_blank: true, class: "form-control" %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :team_lead_id, "Team Leader" %><br>
-    <%= f.text_field :team_lead_id, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]) }, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :employee_tokens, "Team Members" %><br>
-    <%= f.text_field :employee_tokens, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]) }, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, class: "form-control" %>
-  </div>
-  <div class="actions">
-    <%= f.submit class: "btn btn-success" %>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <input type="hidden" id="department" value='<%= @department.id %>' >
+      <div class="form-group">
+        <%= form.label :name %><br>
+        <%= form.text_field :name, required: true, class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= form.label :team_lead_id, "Team Leader" %>
+        <label for="team_leader" id="leader" class="ml-5">
+          <%= get_team_leader(@team) %>
+        </label>
+        <button type="button" class="btn-edit" id="leader_edit"><i class="fa fa-edit"></i></button>
+        <div class="row" id="team_leader_field">
+          <div class="col-md-11">
+            <%= form.text_field :team_lead_id, data: { load: @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]) }%>
+          </div>
+          <div class="col-md-1 p-0">
+            <button type="button" class="btn btn-regular" id="ok_leader">Ok</button>
+          </div>
+        </div>
+        <span id="team_leader_span" class="error"></span>
+      </div>
+      <div class="form-group" id="append_team_members">
+        <table class="table">
+          <tbody id="member_table">
+            <% if @team.persisted? %>
+              <% @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).each do |member|%>
+                <%= render 'shared/employees_list', member: member %>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-regular" id="add_team_members">
+        Add Team Members</button>
+      </div>
+      <div class="form-group" id="team_members_view">
+        <%= label_tag "Team Members" %><br>
+        <div class="row">
+          <div class="col-md-11">
+            <%= text_field_tag "team_employee_ids", "" %>
+          </div>
+          <div class="col-md-1 p-0">
+            <button type="button" class="btn btn-regular" id="ok">Ok</button>
+          </div>
+        </div>
+        <span id="team_member_span" class="error"></span>
+      </div>  
+      <div class="form-group">
+        <%= form.label :team_pic, "Team Image" %><br>
+        <%= form.file_field :team_pic, class:"form-control" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :description %><br>
+        <%= form.text_area :description, class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= form.submit class: "btn btn-regular" %>
+        <%= link_to 'Back', department_teams_path(@department), class: "btn btn-secondary" %>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
   </div>
 <% end %>
+
