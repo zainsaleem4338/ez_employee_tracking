@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
-  load_and_authorize_resource :department
-  load_and_authorize_resource through: :department
+  load_and_authorize_resource :department, except: :teams_list
+  load_and_authorize_resource through: :department, except: :teams_list
+  load_and_authorize_resource :team, through_association: :company, only: :teams_list
 
   def create
     respond_to do |format|
@@ -41,7 +42,7 @@ class TeamsController < ApplicationController
 
   def teams_list
     respond_to do |format|
-      format.json { render json: Team.where('name like ?', "%#{params[:q]}%") }
+      format.json { render json: current_employee.company.teams.where('name like ?', "%#{params[:q]}%") }
     end
   end
 
