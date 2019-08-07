@@ -10,6 +10,8 @@ class Company < ActiveRecord::Base
   has_many :messages
   has_one :setting
   has_many :events
+  has_many :employee_teams
+  has_many :task_time_logs
   accepts_nested_attributes_for :setting
 
   def self.current_id=(id)

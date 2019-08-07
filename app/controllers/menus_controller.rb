@@ -11,6 +11,8 @@ class MenusController < ApplicationController
     end
     @setting = @settings.holidays
     @working_days = @settings.working_days
+    leaves_remaining = Report.attendance_data(current_employee, false)
+    @leaves_remaining = leaves_remaining
     if current_employee.late_count.nil?
       @late_count = nil
     else
