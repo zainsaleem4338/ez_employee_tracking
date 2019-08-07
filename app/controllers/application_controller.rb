@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
         flash[:danger] = 'You are not authorized to perform such action'
         redirect_to main_app.root_url
       }
-      format.js   { head :forbidden, content_type: 'text/html' }
+      format.js { head :forbidden, content_type: 'text/html' }
     end
   end
 

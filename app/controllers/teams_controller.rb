@@ -3,6 +3,7 @@ class TeamsController < ApplicationController
   load_and_authorize_resource through: :department, except: :teams_list
   load_and_authorize_resource :team, through_association: :company, only: :teams_list
 
+  # post /departments/:department_id/teams
   def create
     respond_to do |format|
       if @team.create_team(params[:team][:team_lead_id], params[:employee_tokens], params[:department_id])
@@ -18,6 +19,7 @@ class TeamsController < ApplicationController
     end
   end
 
+  # patch /departments/:department_id/teams/:id
   def update
     respond_to do |format|
       if params[:team].present? &&
@@ -34,6 +36,7 @@ class TeamsController < ApplicationController
     end
   end
 
+  # delete /departments/:department_id/teams/:id
   def destroy
     @team.destroy
     respond_to do |format|
@@ -52,6 +55,7 @@ class TeamsController < ApplicationController
     end
   end
 
+  # get /teamslist
   def teams_list
     respond_to do |format|
       format.json { render json: current_employee.company.teams.where('name like ?', "%#{params[:q]}%") }

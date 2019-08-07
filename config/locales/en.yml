@@ -1,5 +1,13 @@
 en:
   hello: "Hello world"
+  attendances:
+    create:
+      success_notice: 'Checked in successfully!'
+      error_notice: 'Check in failed!'
+    update:
+      success_notice: 'Checked out successfully!'
+      error_notice: 'Check out failed!'
+      
   departments:
     create:
       success_notice: 'Department Created Successfully.'
@@ -11,6 +19,16 @@ en:
       success_notice: 'Department Deleted Successfully.'
       error_notice: 'Unable to delete department'
 
+  events:
+    create:
+      success_notice: 'Event has been added!'
+      error_notice: 'Event has not been added!'
+    update:
+      success_notice: 'Event has been updated!'
+      error_notice: 'Event has not been updated!'
+    destroy:
+      success_notice: 'Event has been deleted!'
+      error_notice: 'Event has not been delete!'
 
   employees:
     create:

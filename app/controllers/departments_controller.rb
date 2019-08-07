@@ -1,6 +1,6 @@
 class DepartmentsController < ApplicationController
   load_and_authorize_resource
-
+  # get /departments
   def index
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
       @departments = @departments.employee_departments(current_employee)
@@ -11,6 +11,7 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  # post /departments
   def create
     respond_to do |format|
       if @department.save
@@ -29,6 +30,7 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  # patch /departments/:id
   def update
     respond_to do |format|
       if @department.update(department_params)
@@ -47,6 +49,7 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  # delete /departments/:id
   def destroy
     @department.destroy
     respond_to do |format|

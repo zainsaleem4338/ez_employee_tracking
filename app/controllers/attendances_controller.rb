@@ -25,9 +25,9 @@ class AttendancesController < ApplicationController
       end
       @employee_attendance = current_employee.company.attendances.create(login_time: DateTime.now, status: Attendance::STATUS[:PRESENT], employee_id: current_employee.id)
       if @employee_attendance.valid?
-        flash[:success] = 'Checked in successfully!'
+        flash[:success] = t('.success_notice')
       else
-        flash[:danger] = 'Check in failed!'
+        flash[:danger] = t('.error_notice')
         return false
       end
     end
@@ -44,9 +44,9 @@ class AttendancesController < ApplicationController
       @employees_todays_attendance.logout_time = DateTime.now
       @result = @employees_todays_attendance.save!
       if @result
-        flash[:success] = 'Checked out successfully!'
+        flash[:success] = t('.success_notice')
       else
-        flash[:danger] = 'Check out failed!'
+        flash[:danger] = t('.error_notice')
       end
     end
 

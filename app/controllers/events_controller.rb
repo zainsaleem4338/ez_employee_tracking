@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
 
-# get '/events/index'
+  # get '/events/index'
   def index
     @settings = current_employee.company.setting.holidays
     respond_to do |format|
@@ -9,36 +9,36 @@ class EventsController < ApplicationController
     end
   end
 
-# post '/events/create'
+  # post '/events/create'
   def create
     @event.company_id = current_company.id
     if @event.save
-      flash[:success] = 'Event has been added!'
+      flash[:success] = t('.success_notice')
       redirect_to index_events_path
     else
-      flash[:danger] = 'Event has not been added!'
+      flash[:danger] = t('.error_notice')
       redirect_to menus_index_path
     end
   end
 
-# patch '/events/:id/update'
+  # patch '/events/:id/update'
   def update
     if @event.update(event_params)
-      flash[:success] = 'Event has been updated!'
+      flash[:success] = t('.success_notice')
       redirect_to index_events_path
     else
-      flash[:danger] = 'Event has not been updated!'
+      flash[:danger] = t('.error_notice')
       redirect_to menus_index_path
     end
   end
 
-# delete '/events/:id/destroy'
+  # delete '/events/:id/destroy'
   def destroy
     if @event.destroy
-      flash[:success] = 'Event has been updated!'
+      flash[:success] = t('.success_notice')
       redirect_to index_events_path
     else
-      flash[:danger] = 'Event has not been delete!'
+      flash[:danger] = t('.error_notice')
       redirect_to menus_index_path
     end
   end

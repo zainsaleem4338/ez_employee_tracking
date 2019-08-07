@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
   load_and_authorize_resource :employee, through_association: :company
   load_and_authorize_resource :team, through_association: :company
-  
+
   # get /employee_lists
   def employees_lists
     if params['department'].blank?
@@ -13,7 +13,8 @@ class EmployeesController < ApplicationController
       format.json { render json: @employees.where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:q]}%") }
     end
   end
-# post /employees/create
+
+  # post /employees/create
   def create
     @employee = Employee.new(employee_params)
     @employee.password = generate_password
@@ -24,7 +25,8 @@ class EmployeesController < ApplicationController
       render 'new'
     end
   end
-# DELETE /employees/:id
+
+  # DELETE /employees/:id
   def destroy
     @employee.active = false
     flash[:danger] = t('.inactive_notice')
@@ -34,7 +36,8 @@ class EmployeesController < ApplicationController
       redirect_to menus_index_path
     end
   end
-# get '/employees/team_member_render_view'
+
+  # get '/employees/team_member_render_view'
   def team_member_render_view
     @team_members = Employee.where(id: params['employee_ids'])
     @count = params['count']
