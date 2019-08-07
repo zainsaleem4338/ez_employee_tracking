@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   CONST_CREATE = 'create'.freeze
   def configure_devise_permitted_parameters
     registration_params = [:name, :email, :password, :password_confirmation, :role, :department_id,
-    company_attributes: [:name, :description, :subdomain, setting_attributes: [:working_days, :timings, :holidays]],
+    company_attributes: [:name, :description, :subdomain, setting_attributes: [:working_days, :timings, :holidays, :task_alert]],
    ]
     if params[:action] == CONST_CREATE
       devise_parameter_sanitizer.for(:sign_up) do |parameters|

@@ -2,7 +2,7 @@
 <% if @delay_state == 'Coming time' %>
   Your assigned task deadline today <%= @task.expected_end_date.to_date %>. Please meet the deadline as soon as possible.
 <% elsif @delay_state == 'Remaining time' %>
-  Your assigned task deadline is <%= @task.expected_end_date.to_date %>. Only 1 day is remaining. Please meet the deadline.
+  Your assigned task deadline is <%= @task.expected_end_date.to_date %>. Only <%= @task %> <%if @task == 1 %>day<% else %>days<% end %> is remaining. Please meet the deadline.
 <% else %>
   Your assigned task deadline is <%= @task.expected_end_date.to_date %>. You missed the deadline. It will affect your performance.
 <% end %>

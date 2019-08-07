@@ -28,10 +28,10 @@
         <div class="col">
           <div class="row">
             <div class="col-6">
-              <%= date_field_tag 'created_start', nil, class: 'form-control filters' %>
+              <%= date_field_tag 'created_start', nil, class: 'form-control' %>
             </div>
             <div class="col-6">
-              <%= date_field_tag 'created_end', nil, class: 'form-control filters' %>
+              <%= date_field_tag 'created_end', nil, class: 'form-control' %>
             </div>
           </div>
           <div id="created_date_range error"></div>
@@ -39,10 +39,10 @@
         <div class="col">
           <div class="row">
             <div class="col-6">
-              <%= date_field_tag 'deadline_start', nil, class: 'form-control filters' %> 
+              <%= date_field_tag 'deadline_start', nil, class: 'form-control' %> 
             </div>
             <div class="col-6">
-              <%= date_field_tag 'deadline_end', nil, class: 'form-control filters' %>
+              <%= date_field_tag 'deadline_end', nil, class: 'form-control' %>
             </div>
           </div>
            <span id="deadline_date_range error"></span>
@@ -58,17 +58,17 @@
       </div>
       <div class="row">
         <div class="col-3">
-          <%= text_field_tag 'project', nil, class: 'form-control filters' %>
+          <%= text_field_tag 'project', nil, class: 'form-control' %>
         </div>
         <div class="col-3">
-          <%= select_tag(:status, options_for_select([["--Choose Status--", ''], ["New", "New"], ["In Progress", "In Progress"], ["Review pending", "Review pending"], ["Reviewed", "Reviewed"], ["Completed", "Completed"]]),class: 'form-control filters') %>
+          <%= select_tag(:status, options_for_select([["--Choose Status--", ''], ["New", "New"], ["In Progress", "In Progress"], ["Review pending", "Review pending"], ["Reviewed", "Reviewed"], ["Completed", "Completed"]]),class: 'form-control') %>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6"></div>
         <div class="col-md-6 btn-padding">
-          <button class="btn btn-regular filters" type="button" id="update">Filter</button>&nbsp;
-          <button class="btn btn-outline-danger filters" type="button" id="clear">Clear</button>
+          <button class="btn btn-regular" type="button" id="update">Filter</button>&nbsp;
+          <button class="btn btn-outline-danger" type="button" id="clear">Clear</button>
         </div>
       </div>
     </div>

@@ -18,6 +18,7 @@ class TaskObserver < ActiveRecord::Observer
   end
 
   def self.task_deadlines_alert
+    @task_alert = current_employee.company.setting.task_alert
     employee_tasks = Task.all
     employee_tasks.each do |task|
       employees = task.get_employees(task.assignable_type, task.assignable_id)
@@ -26,7 +27,7 @@ class TaskObserver < ActiveRecord::Observer
           TaskMailer.task_deadline_notify(employee, task, TASK_DELAY_STATE[:coming_time]).deliver
         end
       end
-      if task.expected_end_date.to_date == DateTime.now.to_date + 1 && task.status != TASK_STATUS
+      if task.expected_end_date.to_date == DateTime.now.to_date + @task_alert && task.status != TASK_STATUS
         employees.each do |employee|
           TaskMailer.task_deadline_notify(employee, task, TASK_DELAY_STATE[:remaining_time]).deliver
         end
