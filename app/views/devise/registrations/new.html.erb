@@ -29,6 +29,7 @@
             <%= company_form.fields_for :setting do |setting_form| %>
             <%= setting_form.hidden_field :timings, :value => ('{ "monday_start_time" => "00:00 AM", "monday_end_time" => "00:00 AM", "tuesday_start_time" => "00:00 AM", "tuesday_end_time" => "00:00 AM", "wednesday_start_time" => "00:00 AM", "wednesday_end_time" => "00:00 AM", "thursday_start_time" => "00:00 AM", "thursday_end_time" => "00:00 AM", "friday_start_time" => "00:00 AM", "friday_end_time" => "00:00 AM", "saturday_start_time" => "00:00 AM", "saturday_end_time" => "00:00 AM", "sunday_start_time" => "00:00 AM", "sunday_end_time" => "00:00 AM" }') %>
             <%= setting_form.hidden_field :working_days, :value => ('{ "monday" => true, "tuesday" => true, "wednesday" => true, "thursday" => true, "friday" => true, "saturday" => true, "sunday" => true}') %>
+            <%= setting_form.hidden_field :task_alert, :value => (1) %>
             <% end %>
           <% end %>
           <div class="form-group">
