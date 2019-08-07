@@ -49,9 +49,10 @@
               </div>
             </div>
           </div>
-
-          <%= link_to 'Edit or Assign the task', edit_department_project_task_path(@department, @project, task), class: "btn btn-secondary" %>
-          <%= link_to 'Destroy', department_project_task_path(@department, @project,task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>  
+          <% if can? :create, Task %>
+            <%= link_to 'Edit or Assign the task', edit_department_project_task_path(@department, @project, task), class: "btn btn-secondary" %>
+            <%= link_to 'Destroy', department_project_task_path(@department, @project,task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>  
+          <% end%>
         </td>
       </tr>
       <% end %>
