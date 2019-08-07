@@ -36,20 +36,20 @@
       </div>
     </div>
     <div class="row">
-      <div class="control-label col-sm-6">
+      <div class="col-sm-6">
         <%= form.label :avatar, "Profile Picture" %> 
-      </div>
-    </div>
-    <div class="row  mb-5">
-      <div class="col-sm-6">
-        <%= form.password_field :password, class:"form-control", placeholder:"Password of Employee" %>
-      </div>
-      <div class="col-sm-6">
         <%= form.file_field :avatar, class:"form-control" %>
       </div>
     </div>
-    <%= form.hidden_field :company_id, :value => @employee.company_id %>
-    <%= form.submit class:'btn btn-regular' %>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <%= form.hidden_field :company_id, :value => @employee.company_id %>
+        <%= form.submit class:'btn btn-regular btn-block' %>
+      </div>
+    </div>
+
+    
   </div>
   
 <% end %>

@@ -21,7 +21,7 @@
         <td><%= team.description %></td>
         <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first %></td>
         <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
-        <td><%= image_tag team.team_pic.url(:thumb), class: "rounded-circle team-pic" %></td>
+        <td><%= image_tag team.team_pic.url(:thumb),class: "rounded-circle team-pic",style:'width:90px; height:50px' %></td>
         <td>
           <%= link_to 'Show', department_team_path(team.department,team), class: "btn btn-regular" %>
           <%= link_to 'Edit', edit_department_team_path(team.department,team), class: "btn btn-secondary" %>

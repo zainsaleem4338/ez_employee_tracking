@@ -134,7 +134,7 @@ module ApplicationHelper
         link: edit_settings_path,
         icon: 'fas fa-cogs'
       }
-      @data.push(@employees).push(@departments).push(@attendance).push(@add_events).push(@edit_settings).push(@reports)
+      @data.push(@employees).push(@departments).push(@reports).push(@attendance).push(@add_events).push(@edit_settings)
     else
       @departments = {
         name: 'Departments',

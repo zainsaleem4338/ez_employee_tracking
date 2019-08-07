@@ -1,4 +1,4 @@
-<center><h3>Company Settings</h3></center><br>
+<% provide(:title, "Company Settings") %>
 
 <% if @settings.present? %>
 	<h4><span data-toggle="collapse" data-target="#_working_days" style='cursor: pointer'><i class="fas fa-arrow-right"></i> Adjust Working Days</span></h4><br>
@@ -169,7 +169,7 @@
 			    </div>
 				<% end %>
 			<% end %>
-	  </div> 
+	  </div>
 	  <h4><span data-toggle="collapse" data-target="#allocated_leaves" style='cursor: pointer'><i class="fas fa-arrow-right"></i> Allocated Leaves & Attendance Threshold</span></h4><br>
 	  <div id='allocated_leaves' class='collapse'>
 	  	<div class='row'>
@@ -180,6 +180,7 @@
 					<%= number_field_tag(:attendance_time, @settings.attendance_time, class:'form-control', placeholder:'Enter Time(minutes)') %>
 	     	</div>
      	</div>
+      <br>
 	  </div>
     <h4><span data-toggle="collapse" data-target="#task_alert" style='cursor: pointer'><i class="fas fa-arrow-right"></i> Alerts Critical Deadlines</span></h4><br>
     <div id='task_alert' class='collapse'>
