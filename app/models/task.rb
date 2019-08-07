@@ -1,8 +1,11 @@
 class Task < ActiveRecord::Base
   EMPLOYEE = 'Employee'.freeze
   TEAM     = 'Team'.freeze
-  NEW_STATUS = 'new'.freeze
-  ASSIGNED_STATUS = 'assigned'.freeze
+  NEW_STATUS = 'New'.freeze
+  ASSIGNED_STATUS = 'Assigned'.freeze
+  IN_PROGRESS = 'In Progress'.freeze
+  READY_TO_REVIEW = 'Ready to Review'.freeze
+  REVIEW_COMPLETED = 'Review Completed'.freeze
   UNASSIGNED_STATUS = 'unassigned'.freeze
   STATUS = [1..10].freeze
   COMPLEXITY = (1..10).freeze

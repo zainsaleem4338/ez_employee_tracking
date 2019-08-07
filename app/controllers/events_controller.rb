@@ -1,10 +1,15 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
 
+# get '/events/index'
   def index
     @settings = current_employee.company.setting.holidays
+    respond_to do |format|
+      format.html
+    end
   end
 
+# post '/events/create'
   def create
     @event.company_id = current_company.id
     if @event.save
@@ -16,6 +21,7 @@ class EventsController < ApplicationController
     end
   end
 
+# patch '/events/:id/update'
   def update
     if @event.update(event_params)
       flash[:success] = 'Event has been updated!'
@@ -26,6 +32,7 @@ class EventsController < ApplicationController
     end
   end
 
+# delete '/events/:id/destroy'
   def destroy
     if @event.destroy
       flash[:success] = 'Event has been updated!'
