@@ -6,7 +6,10 @@ class TeamsController < ApplicationController
   def create
     respond_to do |format|
       if @team.create_team(params[:team][:team_lead_id], params[:employee_tokens], params[:department_id])
-        format.html { redirect_to department_teams_path(@department), notice: t('.success_notice') }
+        format.html do
+          flash[:success] = t('.success_notice')
+          redirect_to department_teams_path(@department)
+        end
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
@@ -19,7 +22,10 @@ class TeamsController < ApplicationController
     respond_to do |format|
       if params[:team].present? &&
           @team.update_team(params[:team][:team_lead_id], params[:employee_tokens], team_params)
-        format.html { redirect_to department_teams_path(@department), notice: t('.success_notice') }
+        format.html do
+          flash[:success] = t('.success_notice')
+          redirect_to department_teams_path(@department)
+        end
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
@@ -32,10 +38,16 @@ class TeamsController < ApplicationController
     @team.destroy
     respond_to do |format|
       if @team.destroyed?
-        format.html { redirect_to department_teams_path(@department), notice: t('.success_notice') }
+        format.html do
+          flash[:success] = t('.success_notice')
+          redirect_to department_teams_path(@department)
+        end
         format.json { head :no_content }
       else
-        format.html { redirect_to department_teams_path(@department), notice: t('.error_notice') }
+        format.html do
+          flash[:danger] = t('.error_notice')
+          redirect_to department_teams_path(@department)
+        end
       end
     end
   end

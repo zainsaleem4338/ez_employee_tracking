@@ -57,12 +57,12 @@ en:
 
   teams:
     create:
-      success_notice: 'Team was successfully created.'
+      success_notice: 'Team created Successfully!'
     update:
-      success_notice: 'Team was successfully updated.'
+      success_notice: 'Team updated Successfully!'
     destroy:
-      success_notice: 'Team was successfully destroyed.'
-      error_notice: 'Unable to delete team'
+      success_notice: 'Team destroyed Successfully!'
+      error_notice: 'Team could not be deleted!'
 
   models:
     team:
@@ -77,7 +77,7 @@ en:
     assign_task_notify:
       subject: 'New Task Assigned'
     unassign_task_notify:
-      subject: 'Un-Assign Task'
+      subject: 'Task Unassigned'
     change_task_status_notify:
       subject: 'Task Status Change'
     task_deadline_notify:
