@@ -1,3 +1,13 @@
+<div class='row'>
+	<div class='col-lg-8'>
+		<center><h3>Company Settings</h3></center><br>
+	</div>
+	<% if can? :create, Setting%>
+	<div class='col-lg-4'>
+		<%= link_to 'Edit Settings', edit_settings_path, class: 'btn btn-primary' %>
+	</div>
+	<% end %>
+</div>
 <% if @settings.present? %>
 <h2>Working Days</h2>
   <table class="table">
