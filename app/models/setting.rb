@@ -3,5 +3,4 @@ class Setting < ActiveRecord::Base
   serialize :timings
   serialize :holidays
   belongs_to :company
-
 end

@@ -179,7 +179,18 @@
 					<%= number_field_tag(:attendance_time, @settings.attendance_time, class:'form-control', placeholder:'Enter Time(minutes)') %>
 	     	</div>
      	</div>
-	  </div><br>
+	  </div>
+    <h4><span data-toggle="collapse" data-target="#task_alert" style='cursor: pointer'><i class="fas fa-arrow-right"></i> Alerts Critical Deadlines</span></h4><br>
+    <div id='task_alert' class='collapse'>
+      <div class='row'>
+        <div class='col-md-6'>
+          <%= number_field_tag :task_alert, @settings.task_alert, class:'form-control', placeholder:'Enter a number',step: :any %>
+        </div>
+        <div class='col-md-6'>
+          <span><b>Days</b></span>
+        </div>
+      </div>
+    </div><br>
 	  <div class='form-group'>
 	    <%= submit_tag("Save Settings", id:'save_btn',class:'btn btn-dark btn-block') %>
 	  </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190805111002) do
+ActiveRecord::Schema.define(version: 20190806131942) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -121,24 +121,19 @@ ActiveRecord::Schema.define(version: 20190805111002) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",              limit: 255
-    t.string   "description",       limit: 255
+    t.text     "description",       limit: 65535
     t.string   "status",            limit: 255
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "expected_end_date"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "company_id",        limit: 4
     t.integer  "department_id",     limit: 4
   end
 
   add_index "projects", ["company_id"], name: "index_projects_on_company_id", using: :btree
   add_index "projects", ["department_id"], name: "index_projects_on_department_id", using: :btree
-
-  create_table "reports", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "settings", force: :cascade do |t|
     t.text    "working_days",     limit: 65535
@@ -147,6 +142,7 @@ ActiveRecord::Schema.define(version: 20190805111002) do
     t.text    "holidays",         limit: 65535
     t.integer "allocated_leaves", limit: 4
     t.integer "attendance_time",  limit: 4
+    t.integer "task_alert",       limit: 4
   end
 
   create_table "task_time_logs", force: :cascade do |t|
@@ -162,14 +158,14 @@ ActiveRecord::Schema.define(version: 20190805111002) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name",              limit: 255
-    t.string   "description",       limit: 255
+    t.text     "description",       limit: 65535
     t.string   "status",            limit: 255
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "expected_end_date"
     t.datetime "assigned_date"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "company_id",        limit: 4
     t.integer  "project_id",        limit: 4
     t.integer  "assignable_id",     limit: 4

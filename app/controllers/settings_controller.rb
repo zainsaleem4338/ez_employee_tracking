@@ -49,6 +49,7 @@ class SettingsController < ApplicationController
     @settings = @settings.first
     @settings.working_days = on_days
     @settings.timings = timings
+    @settings.task_alert = params[:task_alert]
     @settings.holidays = JSON.parse(params[:holidays].gsub("'",'"').gsub('=>',':'))
     @settings.allocated_leaves = params[:allocated_leaves]
     @settings.attendance_time = params[:attendance_time]

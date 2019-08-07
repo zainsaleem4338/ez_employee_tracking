@@ -128,6 +128,23 @@
       </tr>
   	</thead>
   </table>
+  <div class='row'>
+    <div class='col-md-6'>
+      <h2>Critical Task Deadline Alerts</h2>
+    </div>
+  </div>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Alert in Days</th>
+        <% if @settings.task_alert.nil? %>
+          <th><h4><span class="badge badge-danger">Not Set</span></h4></th>
+        <% else %>
+          <th><h4><span class="badge badge-success"><%= @settings.task_alert %></span></h4></th>
+        <% end %>
+      </tr>
+    </thead>
+  </table>
   <br><br>
 <% else %>
   <center><h3>No Settings Added!</h3></center>

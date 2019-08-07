@@ -13,7 +13,7 @@ class MenusController < ApplicationController
       redirect_to menus_index_path
     end
   end
-  
+
   def search_email
     @email = params[:email]
     if(@email.present?)
