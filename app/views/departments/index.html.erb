@@ -9,5 +9,6 @@
   </div>
 <% end %>
 <br>
-<%= link_to 'New Department', new_department_path, class: "btn btn-regular" %>
-
+<% if can? :create, Department %>
+  <%= link_to 'New Department', new_department_path, class: "btn btn-regular" %>
+<% end %>

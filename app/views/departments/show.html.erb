@@ -14,7 +14,9 @@
         <%= link_to 'Show projects', department_projects_path(@department), class: "btn btn-info" %>
         <%= link_to 'See Teams', department_teams_path(@department), class: "btn btn-dark" %>
         <br><br>
+        <% if can? :create, Department%>
         <%= link_to 'Edit', edit_department_path(@department), class: "btn btn-regular" %>
+        <% end %>
         <%= link_to 'Back', departments_path, class: "btn btn-secondary" %>
       </div>
     </div>

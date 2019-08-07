@@ -9,6 +9,7 @@ class Team < ActiveRecord::Base
   has_attached_file :team_pic, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: "/assets/team.png"
   validates_attachment_content_type :team_pic, content_type: /\Aimage\/.*\z/
   has_many :tasks, as: :assignable, dependent: :destroy
+  scope :show_teams_employee, ->(user){ where(id: user.teams.pluck(:id)) }
   def create_team(team_lead_id, employee_ids, department_id)
     if employee_ids.blank?
       self.errors.add(:base, I18n.t('models.team.team_members_require_error'))

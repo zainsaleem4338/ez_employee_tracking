@@ -6,7 +6,7 @@ class TasksController < ApplicationController
 
   def index
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
-      @tasks = @tasks.employee_tasks(current_employee)
+      @tasks = @tasks.get_employee_tasks(current_employee)
     end
     respond_to do |format|
       format.html

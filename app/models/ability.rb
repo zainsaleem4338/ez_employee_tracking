@@ -4,9 +4,9 @@ class Ability
   def initialize(user)
     if user.role == Employee::ADMIN_ROLE
       can :manage, Department, company_id: user.company_id
-      can [:read, :employees_lists, :team_member_render_view, :pdf_velocity_report], Employee, active: true
+      can [:read, :employees_lists, :team_member_render_view, :pdf_velocity_report], Employee, active: true, company_id: user.company_id
       can [:new, :create], Employee, company_id: user.company_id
-      can :destroy, Employee
+      can :destroy, Employee, company_id: user.company_id
       can :manage, Project, company_id: user.company_id
       can :manage, Task, company_id: user.company_id
       can :manage, Event, company_id: user.company_id
@@ -32,6 +32,10 @@ class Ability
 
       can :read, Department, Department.get_departments(user) do |department|
         department
+      end
+
+      can :read, Team, Team.show_teams_employee(user) do |team|
+        team
       end
 
       can :read, Company

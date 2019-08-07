@@ -40,11 +40,14 @@ module ApplicationHelper
 
   def generate_sidebar_foot_options
     @data = []
-    @events = {
-      name: 'Events',
-      link: home_events_path,
-      icon: 'fas fa-calendar'
-    }
+    if admin?
+      @events = {
+        name: 'Events',
+        link: home_events_path,
+        icon: 'fas fa-calendar'
+      }
+      @data.push(@events)
+    end
     @chat = {
       name: 'Messenger',
       link: messages_index_path,
@@ -56,11 +59,11 @@ module ApplicationHelper
       icon: 'far fa-calendar-minus'
     }
     @settings = {
-        name: 'Settings',
-        link: settings_path,
-        icon: 'fas fa-cog'
-     }
-    @data.push(@events).push(@chat).push(@calendar).push(@settings)
+      name: 'Settings',
+      link: settings_path,
+      icon: 'fas fa-cog'
+    }
+    @data.push(@chat).push(@calendar).push(@settings)
   end
 
   def generate_sidebar_options
