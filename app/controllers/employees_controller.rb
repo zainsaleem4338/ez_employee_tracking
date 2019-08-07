@@ -26,8 +26,6 @@ class EmployeesController < ApplicationController
   end
 # DELETE /employees/:id
   def destroy
-    @employee = current_employee.company.employees
-                                .find_by(sequence_num: params[:id])
     @employee.active = false
     flash[:danger] = t('.inactive_notice')
     if @employee.save

@@ -1,5 +1,5 @@
 <tr id="team_member_<%= @count.to_i %>" >
-  	<td class="pb-0"><%= image_tag member.avatar.url(:thumb), class: "rounded-circle employee-avatar mb-2" %></td>
+  	<td class="pb-0"><%= image_tag member.avatar.url(:thumb), class: "rounded-circle employee-avatar mb-2", style:'width:60px; height:60px' %></td>
     <td><%= member.name %>
     <%= hidden_field :employee_tokens, "", value: member.id %></td>
     <td>
