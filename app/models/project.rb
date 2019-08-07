@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   NEW_STATUS = 'new'.freeze
   belongs_to :department
   belongs_to :company
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   validates :start_date, :expected_end_date, :name, :department_id, presence: :true
   validate :check_start_date, :check_start_and_end_date
   scope :get_projects, ->(user) { joins(tasks: :project).where(tasks: { id: Task.all.get_tasks(user) }).distinct }

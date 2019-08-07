@@ -48,7 +48,8 @@
         <%= form.file_field :avatar, class:"form-control" %>
       </div>
     </div>
+    <%= form.hidden_field :company_id, :value => @employee.company_id %>
+    <%= form.submit class:'btn btn-regular' %>
   </div>
-  <%= form.hidden_field :company_id, :value => @employee.company_id %>
-  <center><%= form.submit class:'btn btn-regular' %></center>
+  
 <% end %>

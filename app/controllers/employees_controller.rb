@@ -1,6 +1,7 @@
-class EmployeesController < ApplicationController  
+class EmployeesController < ApplicationController
   load_and_authorize_resource :employee, through_association: :company
   load_and_authorize_resource :team, through_association: :company
+  
 # get /employee_lists
   def employees_lists
     if params['department'].blank?
