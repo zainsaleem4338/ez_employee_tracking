@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :employees, controllers: { sessions: 'sessions' }
 
   resources :attendances
-  resources :settings, except: [:create, :edit, :update, :show, :destroy]
+  resources :settings, except: [:new, :create, :edit, :update, :show, :destroy]
   get '/settings/edit' => 'settings#edit', as: :edit_settings
   patch '/settings/update' => 'settings#update', as: :update_settings
 
