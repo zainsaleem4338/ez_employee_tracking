@@ -9,7 +9,9 @@
           <h6 class="card-title"><b><%= employee.name %></b></h6>
           <p class="card-text mb-1"><strong class="head-color">Email: </strong><%= employee.email %></p>
           <p class="card-text"><strong class="head-color">Role: </strong><%= employee.role %></p>
-          <p class="card-text"><strong class="head-color">Department: </strong><%= employee.department.name %></p>
+          <% unless employee.role == Employee::ADMIN_ROLE %>
+            <p class="card-text"><strong class="head-color">Department: </strong><%= employee.department.name %></p>
+          <% end %>
           <%= link_to "Delete", delete_employee_path(employee), method: :delete, data: { confirm: "Are you sure you want to delete the employee?" }, class: "btn btn-outline-danger" %>
         </center>
       </div>
