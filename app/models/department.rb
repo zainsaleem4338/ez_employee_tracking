@@ -4,7 +4,7 @@ class Department < ActiveRecord::Base
   has_many :projects, dependent: :destroy
   has_many :teams, dependent: :destroy
   has_many :employees, dependent: :destroy
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   scope :get_departments, ->(user) { joins(projects: :department).where(projects: { id: Project.get_projects(user), company_id: user.company_id  }).distinct }
   scope :employee_departments, ->(user) { joins(projects: :department).where(projects: { id: Project.employee_projects(user), company_id: user.company_id }).distinct }
 end
