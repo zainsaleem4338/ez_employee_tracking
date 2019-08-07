@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource :department
   load_and_authorize_resource through: :department
 
+  # get /departments/:department_id/projects
   def index
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
       @projects = @projects.employee_projects(current_employee)
@@ -12,6 +13,7 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # post /departments/:department_id/projects
   def create
     @project.status = Project::NEW_STATUS
     if @project.save
@@ -23,6 +25,7 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # delete /departments/:department_id/projects/:id
   def destroy
     @project.destroy
     if @project.destroyed?
@@ -33,11 +36,12 @@ class ProjectsController < ApplicationController
     redirect_to department_projects_path
   end
 
+  # patch /departments/:department_id/projects/:id
   def update
     if @project.update(project_params)
-      flash[:success] = 'Project Updated Successfully!'
+      flash[:success] = t('.success_notice')
     else
-      flash[:danger] = 'Could not update Project!'
+      flash[:danger] = t('.error_notice')
     end
     redirect_to department_projects_path
   end

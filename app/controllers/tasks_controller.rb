@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   load_and_authorize_resource :project, through: :department, except: [:employee_tasks, :update_task_logtime]
   load_and_authorize_resource :task, through: :project, except: [:employee_tasks, :update_task_logtime]
 
+  # get /departments/:department_id/projects/:project_id/tasks
   def index
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
       @tasks = @tasks.get_employee_tasks(current_employee)
@@ -14,6 +15,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # post /departments/:department_id/projects/:project_id/tasks
   def create
     @task.set_status
     if @task.save
@@ -32,6 +34,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # patch /departments/:department_id/projects/:project_id/tasks/:id
   def update
     if params[:assignable_employee_id].present? && params[:assignable_team_id].present?
       flash[:danger] = t('.error_field_notice')
@@ -49,6 +52,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # delete /departments/:department_id/projects/:project_id/tasks/:id
   def destroy
     @task.destroy
     if @task.destroyed?
@@ -59,6 +63,7 @@ class TasksController < ApplicationController
     redirect_to department_project_tasks_path
   end
 
+  # patch /departments/:department_id/projects/:project_id/tasks/:id/update_status
   def update_status
     if @task.update_attribute('status', task_params[:status])
       flash[:success] = t('.success_notice')
@@ -68,6 +73,7 @@ class TasksController < ApplicationController
     redirect_to department_project_tasks_path
   end
 
+  # patch /tasks/:id/update_task_logtime
   def update_task_logtime
     unless params[:task_time_log][:hours].blank?
       @task_log = @task.task_time_logs.find_by(employee_id: current_employee.id, task_id: @task.id)

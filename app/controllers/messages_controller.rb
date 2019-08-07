@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   load_and_authorize_resource
 
-# get '/messages/index'  
+  # get '/messages/index'
   def index
     @message = current_company.messages.new
     respond_to do |format|
@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
     end
   end
 
-# post '/messages/'
+  # post '/messages/'
   def create
     @message = Message.create!(create_params)
   end

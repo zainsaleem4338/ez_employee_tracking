@@ -1,7 +1,7 @@
 class MenusController < ApplicationController
   skip_before_action :authenticate_employee!, only: [:home, :search_email]
 
-# get 'menus/index'
+  # get 'menus/index'
   def index
     @events = current_employee.company.events
     @settings = current_employee.company.setting
@@ -23,14 +23,14 @@ class MenusController < ApplicationController
     end
   end
 
-# get 'menus/home'
+  # get 'menus/home'
   def home
     if current_employee.present?
       redirect_to menus_index_path
     end
   end
 
-# post 'menus/search_email'
+  # post 'menus/search_email'
   def search_email
     @email = params[:email]
     if(@email.present?)

@@ -1,7 +1,11 @@
 class SessionsController < Devise::SessionsController
+
+  # get /employees/sign_in
   def new
     super
   end
+
+  # post /employees/sign_in
   def create
     if(current_company.blank?)
       flash[:danger] = t('.invalid_company_notice')
