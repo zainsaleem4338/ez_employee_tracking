@@ -1,7 +1,7 @@
 <h1>Ez-Employee-Tracking</h1>
 
 <p>Welcome <%= @email %>!</p>
-<% if @resource.role != 'Admin' %>
+<% if @resource.department.present? %>
   <p>Your default password is <b><%= @resource.password %></b></p>
 <% end %>
 
