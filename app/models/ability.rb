@@ -21,7 +21,12 @@ class Ability
         project.company_id    == user.company_id
       end
 
-      can :manage, Department do |department|
+      can :manage, Team do |team|
+        team.department_id == user.department_id
+        team.company_id    == user.company_id
+      end
+
+      can :read, Department do |department|
         department.id            == user.department_id
         department.company_id    == user.company_id
       end
@@ -36,6 +41,7 @@ class Ability
       can [:read, :pdf_velocity_report], Employee, Employee.team_employees(user) do |employee|
         employee
       end
+
       can :read, Project, Project.get_projects(user) do |project|
         project
       end
