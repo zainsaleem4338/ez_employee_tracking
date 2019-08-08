@@ -39,26 +39,26 @@ class Ability
 
     else
       can [:read, :pdf_velocity_report], Employee, Employee.team_employees(user) do |employee|
-        employee
+        employee.company_id == user.company_id
       end
 
       can :read, Project, Project.get_projects(user) do |project|
-        project
+        project.company_id == user.company_id
       end
       can [:employee_tasks, :update_task_logtime], Task, Task.get_employee_tasks(user) do |employee_task|
-        employee_task
+        employee_task.company_id == user.company_id
       end
 
       can [:read, :update_status, :edit_status], Task, Task.get_tasks(user) do |task|
-        task
+        task.company_id == user.company_id
       end
 
       can :read, Department, Department.get_departments(user) do |department|
-        department
+        department.company_id == user.company_id
       end
 
       can :read, Team, Team.show_teams_employee(user) do |team|
-        team
+        team.company_id == user.company_id
       end
 
       can :read, Company
