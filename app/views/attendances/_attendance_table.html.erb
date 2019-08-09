@@ -22,7 +22,7 @@
         <%= attendance.employee.sequence_num %>
       </td>
       <td>
-        <%= @company_employee.email %>
+        <%= @company_employee.name.downcase.capitalize %>
       </td>
       <td>
         <%= attendance.login_time.to_formatted_s(:long_ordinal) %>

@@ -73,12 +73,17 @@ module ApplicationHelper
       link: menus_index_path,
       icon: 'fas fa-chart-line'
     }
+    @employee_attendance = {
+      name: 'My attendance',
+      link: attendance_path(current_employee),
+      icon: 'fas fa-journal-whills'
+    }
 
-    @data.push(@dashboard)
+    @data.push(@dashboard).push(@employee_attendance)
 
     if admin?
       @attendance = {
-        name: 'Attendance',
+        name: 'Company Attendance',
         link: attendances_path,
         icon: 'fas fa-journal-whills'
       }
