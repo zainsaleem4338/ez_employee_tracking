@@ -30,6 +30,9 @@
 	              <%= link_to 'Check out', update_attendance_path, class: 'btn btn-sm btn-outline-danger update_attendance', remote: true %>
 	            <% elsif !present_marked? %>
 	              <%= link_to 'Check in', employee_attendance_path, class: 'btn btn-sm btn-regular btn-primary mark_present', remote: true %>
+              <%elsif logged_out? %>
+                <p class="checked-out-status" data-toggle="tooltip" data-placement="bottom" title="You have checked out!">Checked out</p>
+                <!-- <button class="btn-regular" disabled="true">Checked Out</button> -->
 	             <% end %>
 	          </div>
 	        </li>

@@ -31,7 +31,12 @@ module ApplicationHelper
 
   def not_logged_out?
     @attendance = current_employee.todays_attendance_of_employee
-    @attendance.logout_empty?
+    @attendance.logout_time.blank?
+  end
+
+  def logged_out?
+    @attendance = current_employee.todays_attendance_of_employee
+    @attendance.logout_time.present?
   end
 
   def admin?
