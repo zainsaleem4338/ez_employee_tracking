@@ -57,6 +57,24 @@ a:focus {
   border: none;
 }
 
+#_navbar .navbar-header {
+  margin-left: 10px;
+  padding-top: 10px;
+  color: #563d7c;
+}
+
+#_navbar.active .navbar-header {
+  margin-left: 10px;
+}
+
+#_navbar .header-divider {
+  margin-left: 110px;
+}
+
+#_navbar.active .header-divider {
+  margin-left: 10px;
+}
+
 .small-gray {
   font-size: 80%;
   color: #858796 !important;
@@ -64,7 +82,7 @@ a:focus {
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
 
 .mr-2 {
@@ -80,7 +98,7 @@ a:focus {
 }
 
 .text-gray-dark {
-	color: #818391 !important;
+  color: #818391 !important;
 }
 
 .dropdown-divider {
@@ -102,12 +120,12 @@ a:focus {
 }
 
 .sign-up-form {
-	padding-top: 20px;
+  padding-top: 20px;
 }
 
 .sign-up-form h3 {
-	color: #563d7c;
-	padding-bottom: 20px;
+  color: #563d7c;
+  padding-bottom: 20px;
 }
 
 /*.container {
@@ -217,10 +235,11 @@ span {
 #sidebar {
   width: 180px;
   position: fixed;
+  margin-top: 60px;
   top: 0;
   left: 0;
   bottom: 0;
-  overflow-y: scroll;
+  overflow-y: hidden;
   height: 100vh;
   z-index: 999;
   background: #563d7c;
@@ -282,8 +301,14 @@ span {
   display: block;
 }
 
+#sidebar.active ul li a {
+  margin-left: 15px;
+  margin-right: 20px;
+  padding: 15px;
+}
+
 #sidebar.active ul ul a {
-  padding: 10px !important;
+  padding: 15px !important;
 }
 
 #sidebar.active .dropdown-toggle::after {
@@ -311,11 +336,6 @@ span {
 
 #sidebar.active ul li a span.sidebar-option {
   display: none;
-}
-
-#sidebar.active ul li a {
-  margin-left: 15px;
-  padding-right: 10px;
 }
 
 #sidebar ul.components {
@@ -357,6 +377,31 @@ a[data-toggle="collapse"] {
   font-size: 0.55rem !important;
 }
 
+/* Sidebar options disapper on close */
+#sidebar.active ul li#edit_settings_option {
+  display: none;
+}
+
+#sidebar.active ul li#add_events_option {
+  display: none;
+}
+
+#sidebar.active ul li#my_attendance_option {
+  display: none;
+}
+
+#sidebar.active ul li#attendance_option {
+  display: none;
+}
+
+#sidebar.active ul li#events_option {
+  display: none;
+}
+
+#sidebar.active ul li#employee_reports_option {
+  display: none;
+}
+
 #content {
   width: calc(100% - 180px);
   padding: 0px;
@@ -376,11 +421,19 @@ a[data-toggle="collapse"] {
 }
 
 #_navbar {
-  margin-left: 180px;
+  min-height: 60px;
+  max-height: 60px;
+  /*margin-left: 180px;*/
+}
+
+.header-container {
+  margin-left: 0px;
 }
 
 #_navbar.active {
-  margin-left: 80px;
+  min-height: 60px;
+  max-height: 60px;
+  /*margin-left: 80px;*/
 }
 
 .yielded-area {
@@ -390,7 +443,7 @@ a[data-toggle="collapse"] {
 }
 
 .text-purple {
-	color: #6f4da3;
+  color: #6f4da3;
 }
 
 .card {
@@ -406,11 +459,11 @@ a[data-toggle="collapse"] {
 }
 
 .d-lg-block {
-	display: block !important;
+  display: block !important;
 }
 
 .d-none {
-	display: none !important;
+  display: none !important;
 }
 
 .o-hidden {
@@ -463,172 +516,6 @@ a[data-toggle="collapse"] {
   margin-bottom: 0 !important;
 }
 
-.error {
-  color: #5a5c69;
-  font-size: 7rem;
-  position: relative;
-  line-height: 1;
-  width: 12.5rem;
-}
-
-.error:before {
-  content: attr(data-text);
-  position: absolute;
-  left: -2px;
-  text-shadow: 1px 0 #4e73df;
-  top: 0;
-  color: #5a5c69;
-  background: #f8f9fc;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim-2 3s infinite linear alternate-reverse;
-}
-
-.error:after {
-  content: attr(data-text);
-  position: absolute;
-  left: 2px;
-  text-shadow: -1px 0 #e74a3b;
-  top: 0;
-  color: #5a5c69;
-  background: #f8f9fc;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim 2s infinite linear alternate-reverse;
-}
-
-@keyframes noise-anim-2 {
-  0% {
-    clip: rect(69px, 9999px, 53px, 0);
-  }
-  5% {
-    clip: rect(37px, 9999px, 82px, 0);
-  }
-  10% {
-    clip: rect(35px, 9999px, 22px, 0);
-  }
-  15% {
-    clip: rect(97px, 9999px, 91px, 0);
-  }
-  20% {
-    clip: rect(45px, 9999px, 56px, 0);
-  }
-  25% {
-    clip: rect(82px, 9999px, 3px, 0);
-  }
-  30% {
-    clip: rect(73px, 9999px, 70px, 0);
-  }
-  35% {
-    clip: rect(70px, 9999px, 50px, 0);
-  }
-  40% {
-    clip: rect(15px, 9999px, 87px, 0);
-  }
-  45% {
-    clip: rect(78px, 9999px, 34px, 0);
-  }
-  50% {
-    clip: rect(95px, 9999px, 21px, 0);
-  }
-  55% {
-    clip: rect(82px, 9999px, 35px, 0);
-  }
-  60% {
-    clip: rect(57px, 9999px, 30px, 0);
-  }
-  65% {
-    clip: rect(21px, 9999px, 71px, 0);
-  }
-  70% {
-    clip: rect(17px, 9999px, 42px, 0);
-  }
-  75% {
-    clip: rect(69px, 9999px, 9px, 0);
-  }
-  80% {
-    clip: rect(43px, 9999px, 54px, 0);
-  }
-  85% {
-    clip: rect(39px, 9999px, 12px, 0);
-  }
-  90% {
-    clip: rect(83px, 9999px, 34px, 0);
-  }
-  95% {
-    clip: rect(57px, 9999px, 71px, 0);
-  }
-  100% {
-    clip: rect(81px, 9999px, 41px, 0);
-  }
-}
-
-@keyframes noise-anim-2 {
-  0% {
-    clip: rect(69px, 9999px, 53px, 0);
-  }
-  5% {
-    clip: rect(37px, 9999px, 82px, 0);
-  }
-  10% {
-    clip: rect(35px, 9999px, 22px, 0);
-  }
-  15% {
-    clip: rect(97px, 9999px, 91px, 0);
-  }
-  20% {
-    clip: rect(45px, 9999px, 56px, 0);
-  }
-  25% {
-    clip: rect(82px, 9999px, 3px, 0);
-  }
-  30% {
-    clip: rect(73px, 9999px, 70px, 0);
-  }
-  35% {
-    clip: rect(70px, 9999px, 50px, 0);
-  }
-  40% {
-    clip: rect(15px, 9999px, 87px, 0);
-  }
-  45% {
-    clip: rect(78px, 9999px, 34px, 0);
-  }
-  50% {
-    clip: rect(95px, 9999px, 21px, 0);
-  }
-  55% {
-    clip: rect(82px, 9999px, 35px, 0);
-  }
-  60% {
-    clip: rect(57px, 9999px, 30px, 0);
-  }
-  65% {
-    clip: rect(21px, 9999px, 71px, 0);
-  }
-  70% {
-    clip: rect(17px, 9999px, 42px, 0);
-  }
-  75% {
-    clip: rect(69px, 9999px, 9px, 0);
-  }
-  80% {
-    clip: rect(43px, 9999px, 54px, 0);
-  }
-  85% {
-    clip: rect(39px, 9999px, 12px, 0);
-  }
-  90% {
-    clip: rect(83px, 9999px, 34px, 0);
-  }
-  95% {
-    clip: rect(57px, 9999px, 71px, 0);
-  }
-  100% {
-    clip: rect(81px, 9999px, 41px, 0);
-  }
-}
-
 .bg-login-image {
   background: url("https://www.boomr.com/assets/homepage/header/hp-hero-f7001bc5c5fcf304b22d6f0684dc12c76dfc245a4c507a4282fa39cff834718b.svg");
   background-position: center;
@@ -660,6 +547,10 @@ a[data-toggle="collapse"] {
   margin-right: 3px;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .d-flex {
   display: -webkit-box !important;
   display: -ms-flexbox !important;
@@ -685,6 +576,21 @@ a[data-toggle="collapse"] {
   margin-right: 10px;
 }
 
+#_navbar .navbar-toggler {
+  margin-right: 30px;
+}
+
+@media (max-width: 992px) {
+  #_navbar .navbar-header {
+    margin-left: 10px;
+  }
+  #_navbar .header-divider {
+    margin-left: 123px;
+  }
+  #_navbar.active .header-divider {
+    margin-left: 24px;
+  }
+}
 
 @media (max-width: 768px) {
   #sidebar {
@@ -693,7 +599,9 @@ a[data-toggle="collapse"] {
     text-align: center;
     margin-left: 0px !important;
   }
-
+  .sidebarCollapseButton {
+    visibility: hidden;
+  }
   .dropdown-toggle::after {
     top: auto;
     bottom: 10px;
@@ -756,10 +664,48 @@ a[data-toggle="collapse"] {
     width: calc(100% - 80px);
   }
   #content.active {
-    width: calc(100% - 180px);
+    width: calc(100% - 80px);
   }
-  #_navbar {
-    margin-left: 80px;
+  #_navbar .navbar-toggler {
+    margin-right: 30px;
+  }
+  #_navbar .navbar-header {
+    margin-left: 10px;
+  }
+  #_navbar .header-divider {
+    margin-left: 23px;
+  }
+  #_navbar.active .header-divider {
+    margin-left: 40px;
+  }
+  /* Sidebar options disapper on close */
+  #sidebar ul li#edit_settings_option {
+    display: none;
+  }
+
+  #sidebar ul li#add_events_option {
+    display: none;
+  }
+
+  #sidebar ul li#my_attendance_option {
+    display: none;
+  }
+
+  #sidebar ul li#attendance_option {
+    display: none;
+  }
+
+  #sidebar ul li#events_option {
+    display: none;
+  }
+}
+
+@media (max-width: 574px) {
+  #_navbar .navbar-header {
+    margin-left: 10px;
+  }
+  #_navbar .header-divider {
+    margin-left: 23px;
   }
 }
 
@@ -975,8 +921,8 @@ section {
 }
 
 #front-card .card {
-	background-color: #9a6dde;
-	color: white;
+  background-color: #9a6dde;
+  color: white;
 }
 
 .backside {
@@ -1019,16 +965,16 @@ section {
 }
 
 .backside .card .card-text {
-	color: #9a6dde;
-	font-weight: bold;
+  color: #9a6dde;
+  font-weight: bold;
 }
 .backside .card .card-title {
     color: #9a6dde;
 }
 .frontside .card .card-text {
-	color: white !important;
-	font-size: 450%;
-	font-weight: bold;
+  color: white !important;
+  font-size: 450%;
+  font-weight: bold;
 }
 
 
