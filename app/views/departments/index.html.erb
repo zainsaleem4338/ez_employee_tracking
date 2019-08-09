@@ -1,4 +1,3 @@
-<% provide(:title, "All Departments") %>
 <% if !can? :create, Department%>
   <%= link_to "All Departments", departments_path, remote: true, class: "btn btn-secondary active"%>
   <%= link_to "My Departments", departments_path(show_employees_only: true), remote: true, class: "btn btn-secondary active" %>
