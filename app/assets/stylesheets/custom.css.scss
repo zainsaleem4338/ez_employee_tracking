@@ -154,28 +154,28 @@ select[type=text]:focus, textarea:focus {
 }
 
 .employee-info {
-	padding: 5px;
-	padding-top: 0;
-	-ms-flex-align: right !important;
-	align-items: right;
+  padding: 5px;
+  padding-top: 0;
+  -ms-flex-align: right !important;
+  align-items: right;
 }
 
 .table-details {
-	border-radius: 1px solid $light_gray;
+  border-radius: 1px solid $light_gray;
 }
 
 .employee-show {
-	min-height: 200px;
-	max-height:200px;
-	padding: 20px;
-	/*border-radius: 5px 5px 5px 5px;
-	box-shadow: 1px 2px 5px $peach;*/
+  min-height: 200px;
+  max-height:200px;
+  padding: 20px;
+  /*border-radius: 5px 5px 5px 5px;
+  box-shadow: 1px 2px 5px $peach;*/
 }
 
 .employee-details {
-	margin-top: 40px;
-	margin-right: 20px;
-	margin-left: 10px !important;
+  margin-top: 40px;
+  margin-right: 20px;
+  margin-left: 10px !important;
 }
 
 /*.container {
@@ -183,10 +183,10 @@ select[type=text]:focus, textarea:focus {
 }*/
 
 .checked-out-status {
-	padding-top: 10px;
-	font-size: 0.8rem;
-	font-family: "Courier New", Courier, monospace;
-	cursor: pointer;
+  padding-top: 10px;
+  font-size: 0.8rem;
+  font-family: "Courier New", Courier, monospace;
+  cursor: pointer;
 }
 
 .header_title {
@@ -267,7 +267,7 @@ span {
 }
 
 .count {
-	color: $peach;
+  color: $peach;
 }
 
 table.dataTable thead th, table.dataTable thead td {
@@ -558,10 +558,10 @@ a[data-toggle="collapse"] {
 }
 
 .detail-head {
-	min-height: 5px;
-	max-height: 5px;
-	width: inherit;
-	background-color: $secondary;
+  min-height: 5px;
+  max-height: 5px;
+  width: inherit;
+  background-color: $secondary;
 }
 
 .card {
@@ -574,7 +574,7 @@ a[data-toggle="collapse"] {
   background-clip: border-box;
   border: 1px solid $light_gray;
   border-radius: 0.35rem;
-	border-top: 3px solid $peach;
+  border-top: 3px solid $peach;
 }
 
 .d-lg-block {
