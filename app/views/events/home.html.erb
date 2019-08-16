@@ -8,8 +8,8 @@
         <li><%= event.description %></li>
         <li><%= event.event_date %></li> 
         <% if can? :create, Event %>
-	        <li><b><%= link_to "Edit this event", edit_events_path(event) %></b></li>
-	        <li><b><%= link_to "Delete this event", destroy_events_path(event), method: :delete, data: { confirm: "Are you sure you want to delete this event?" } %></b></li> 
+	        <li><b><%= link_to "Edit this event", edit_event_path(event) %></b></li>
+	        <li><b><%= link_to "Delete this event", event_path(event), method: :delete, data: { confirm: "Are you sure you want to delete this event?" } %></b></li> 
 	      <% end %>
       </ul>
     </li>

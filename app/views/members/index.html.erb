@@ -1,6 +1,6 @@
 <% provide(:title, "All Employees List") %>
 <div class="row" style="margin-top: 40px;">
-  <% @employees.each do |employee| %>
+  <% @members.each do |employee| %>
     <% if employee.active == true %>
     <div class="card col-sm-4 shadow mb-2 bg-white card-width">
       <div class="card-body">
@@ -12,7 +12,7 @@
           <% unless employee.role == Employee::ADMIN_ROLE %>
             <p class="card-text"><strong class="head-color">Department: </strong><%= employee.department.name %></p>
           <% end %>
-          <%= link_to "Delete", delete_employee_path(employee), method: :delete, data: { confirm: "Are you sure you want to delete the employee?" }, class: "btn btn-outline-danger" %>
+          <%= link_to "Delete", member_path(employee), method: :delete, data: { confirm: "Are you sure you want to delete the employee?" }, class: "btn btn-outline-danger" %>
         </center>
       </div>
     </div>

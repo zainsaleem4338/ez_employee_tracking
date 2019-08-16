@@ -1,5 +1,5 @@
-class EmployeesController < ApplicationController
-  load_and_authorize_resource :employee, through_association: :company
+class MembersController < ApplicationController
+  load_and_authorize_resource :member, through_association: :company, class: 'Employee'
   load_and_authorize_resource :team, through_association: :company
 
   # get /employee_lists
@@ -16,9 +16,8 @@ class EmployeesController < ApplicationController
 
   # post /employees/create
   def create
-    @employee = Employee.new(employee_params)
-    @employee.password = generate_password
-    if @employee.save
+    @member.password = generate_password
+    if @member.save
       flash[:success] = t('.success_notice')
       redirect_to menus_index_path
     else
@@ -28,10 +27,10 @@ class EmployeesController < ApplicationController
 
   # DELETE /employees/:id
   def destroy
-    @employee.active = false
+    @member.active = false
     flash[:danger] = t('.inactive_notice')
-    if @employee.save
-      redirect_to employees_path
+    if @member.save
+      redirect_to members_path
     else
       redirect_to menus_index_path
     end
@@ -48,7 +47,7 @@ class EmployeesController < ApplicationController
 
   private
 
-  def employee_params
+  def member_params
     params.require(:employee).permit(:name, :email, :password, :role, :company_id, :department_id, :avatar)
   end
 
