@@ -6,6 +6,7 @@ $secondary: #943855;
 $peach: #e16363;
 $skin: #ffd692;
 $white: #fff;
+$light_gray: #e3e6f0;
 
 *,
 *::before,
@@ -37,7 +38,7 @@ p {
   color: #999;
 }
 
-#content h1, h2, h3 {
+#content h1, h2, h3, h4 {
   color: $primary;
 }
 
@@ -152,6 +153,31 @@ select[type=text]:focus, textarea:focus {
   padding-bottom: 20px;
 }
 
+.employee-info {
+	padding: 5px;
+	padding-top: 0;
+	-ms-flex-align: right !important;
+	align-items: right;
+}
+
+.table-details {
+	border-radius: 1px solid $light_gray;
+}
+
+.employee-show {
+	min-height: 200px;
+	max-height:200px;
+	padding: 20px;
+	/*border-radius: 5px 5px 5px 5px;
+	box-shadow: 1px 2px 5px $peach;*/
+}
+
+.employee-details {
+	margin-top: 40px;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
 /*.container {
   font-size: 0.85rem;
 }*/
@@ -178,7 +204,7 @@ select[type=text]:focus, textarea:focus {
 
 .topbar-divider {
   width: 0;
-  border-right: 1px solid #e3e6f0;
+  border-right: 1px solid $light_gray;
   height: calc(4.375rem - 2rem);
   margin: auto 1rem;
 }
@@ -240,10 +266,18 @@ span {
   display: inline-block;
 }
 
-.btn-purple {
-  background-color: $primary !important;
-  border-color: $primary !important;
-  color: #fff;
+.count {
+	color: $peach;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+  border: 1px solid #E16363 !important;
+}
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border: 1px solid #E16363 !important;
+}
+.table-bordered {
+  border: 1px solid #E16363 !important;
 }
 
 .btn-regular {
@@ -256,6 +290,41 @@ span {
   background-color: $primary !important;
   border-color: $primary !important;
   color: #fff;
+}
+
+.btn-peach {
+  background-color: transparent !important;
+  border-color: $peach !important;
+  color: $peach !important;
+}
+
+.btn-peach:hover {
+  background-color: $peach !important;
+  border-color: $peach !important;
+  color: #fff !important;
+}
+
+.btn-circle.btn-lg {
+  width: 35px;
+  height: 35px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 6px;
+  padding-left: 6px;
+  font-size: 16px;
+  line-height: 1.33;
+  border-radius: 30px;
+}
+
+.btn-circle.btn-md {
+  width: 20px;
+  height: 20px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-right: 1px;
+  padding-left: 2px;
+  font-size: 0.65rem;
+  border-radius: 30px;
 }
 
 .wrapper {
@@ -380,7 +449,7 @@ span {
 }
 
 #sidebar ul li.active>a,
-a[aria-expanded="true"] {
+#sidebar ul li > a[aria-expanded="true"] {
   color: #fff;
   background: $secondary;
 }
@@ -454,7 +523,6 @@ a[data-toggle="collapse"] {
 #_navbar {
   min-height: 60px;
   max-height: 60px;
-  /*margin-left: 180px;*/
 }
 
 .header-container {
@@ -473,8 +541,27 @@ a[data-toggle="collapse"] {
   padding-right: 20px;
 }
 
-.text-purple {
+.text-second {
   color: $secondary;
+}
+
+.text-peach {
+  color: $peach;
+}
+
+.text-skin {
+  color: $skin;
+}
+
+.text-prim {
+  color: $primary !important;
+}
+
+.detail-head {
+	min-height: 5px;
+	max-height: 5px;
+	width: inherit;
+	background-color: $secondary;
 }
 
 .card {
@@ -485,8 +572,9 @@ a[data-toggle="collapse"] {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid #e3e6f0;
+  border: 1px solid $light_gray;
   border-radius: 0.35rem;
+	border-top: 3px solid $peach;
 }
 
 .d-lg-block {

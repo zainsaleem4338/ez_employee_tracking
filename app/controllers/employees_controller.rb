@@ -37,6 +37,11 @@ class EmployeesController < ApplicationController
     end
   end
 
+  # get /employees/:sequence_num/show
+  def show
+    @employee = Employee.find_by_sequence_num(params[:sequence_num])
+  end
+
   # get '/employees/team_member_render_view'
   def team_member_render_view
     @team_members = Employee.where(id: params['employee_ids'])
