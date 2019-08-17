@@ -5,7 +5,7 @@
 <div class="container task-show-div">
   <div class="row d-flex">
     <div class="col-8">
-        <h2 class="text-prim"><b><%= @task.name %></b></h2>
+        <h2 class="text-prim"><b><%= @task.name.downcase.titleize %></b></h2>
       <br>
       <div class="row d-flex">
         <div class="col-12">
