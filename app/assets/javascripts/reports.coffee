@@ -40,7 +40,7 @@ jQuery ->
       $('#created_date_range').remove()
 
     $('#attendancereport_table').DataTable 
-      'scrollX': true,
+      'responsive': true,
       'orderClasses': false,
       'paging': false,
       'info': false,
@@ -55,7 +55,7 @@ jQuery ->
       ]
 
     $('#velocityreport_table').DataTable 
-      'scrollX': true,
+      'responsive': true,
       'orderClasses': false,
       'paging': false,
       'info': false,
@@ -68,7 +68,7 @@ jQuery ->
         {'width': '17%',"className": "text-center"}
       ]
   $('#taskdetails_table').DataTable 
-    'scrollX': true,
+    'responsive': true,
     'orderClasses': false,
     'paging': false,
     'info': false,

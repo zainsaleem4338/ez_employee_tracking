@@ -1,4 +1,3 @@
-<% provide(:title, "Add an Employee") %>
 <br>
 <%= render 'shared/errors', obj: @employee %>
 <%= form_for @employee, url: create_employee_path(@employee), html: { multipart: true }, method: :post ,:html => {class: "form-horizontal", role: "form"} do |form| %>

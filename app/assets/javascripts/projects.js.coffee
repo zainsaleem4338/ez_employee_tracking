@@ -1,7 +1,7 @@
 jQuery ->
   $(document).ready ->
     $('#project_table').DataTable 
-      'scrollX': true,
+      'responsive': true,
       'orderClasses': false,
       'paging': false,
       'info': false,
@@ -10,5 +10,5 @@ jQuery ->
       	{'width': '16%',"className": "text-center"}
       	{'width': '20%',"className": "text-center"}
       	{'width': '16%',"className": "text-center"}
-      	{'width': '16%', 'orderable': false}
+      	{'width': '16%', 'orderable': false, "className": "text-center"}
       ]

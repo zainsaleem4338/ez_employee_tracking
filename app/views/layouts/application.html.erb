@@ -27,9 +27,9 @@
   </head>
   <body>
     <% if employee_signed_in? %>
-      <div class="wrapper">
+      <div class="wrapper" style='font-family: Roboto, sans-serif'>
         <%= render 'layouts/sidebar' %>
-        <div id="content">
+        <div id="content" style='font-family: Roboto, sans-serif'>
           <div id="header_div">
             <%= render 'layouts/header' %>
           </div>
@@ -45,6 +45,6 @@
     <% else %>
       <%= yield %>
     <% end %>
-    <br><br>
+    
   </body>
 </html>

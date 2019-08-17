@@ -75,7 +75,7 @@ jQuery ->
       return added_employee_new_arr
 
     $('#teams_table').DataTable 
-      'scrollX': true,
+      'responsive': true,
       'orderClasses': false,
       'paging': false,
       'info': false,

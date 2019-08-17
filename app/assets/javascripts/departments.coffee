@@ -1,11 +1,11 @@
 jQuery ->
   $(document).ready ->
     $('#department_table').DataTable 
-      'scrollX': true,
+      'responsive': true,
       'orderClasses': false,
       'paging': false,
       'info': false,
       'columns': [
       	{'width': '70%'}
-      	{'width': '30%', 'orderable': false}
+      	{'width': '30%', 'orderable': false, "className": "text-center"}
       ]

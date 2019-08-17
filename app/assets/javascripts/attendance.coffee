@@ -17,7 +17,7 @@ jQuery ->
 
   $(document).ready ->
     $('#attendanceslist_table').DataTable 
-      'scrollX': true,
+      'responsive': true,
       'orderClasses': false,
       'paging': false,
       'info': false,

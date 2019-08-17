@@ -1,8 +1,8 @@
-<table id="department_table" style="width:100%" class="table data table-hover dt-responsive">
-  <thead>
+<table id="department_table" style="width:100%" class="table data table-hover dt-responsive" >
+  <thead >
     <tr>
       <th >NAME</th>
-      <th ></th>
+      <th >ACTIONS</th>
     </tr>
   </thead>
   <tbody>
@@ -13,14 +13,14 @@
         <div class="row no-gutters justify-content-between">
           <div class="actions">
             <%= link_to department do %>
-            <i title="Show Tasks" class="table-options action-show fas fa-eye"></i>
+            <i title="Show Department" class="table-options action-show fas fa-eye"></i>
             <% end %>
             <% if can? :create, department %>
             <%= link_to edit_department_path(department) do %>
-            <i title="Edit Project" class="table-options action-edit fas fa-edit"></i>
+            <i title="Edit Department" class="table-options action-edit fas fa-edit"></i>
             <% end %>
             <%= link_to department, method: :delete, data: { confirm: 'Are you sure?' } do %>  
-            <i title="Delete Project" class="table-options action-delete fas fa-trash"></i>
+            <i title="Delete Department" class="table-options action-delete fas fa-trash"></i>
             <% end %>
             <% end %>
           </div>
