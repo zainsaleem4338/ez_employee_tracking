@@ -26,6 +26,19 @@ team_options =  {
 
 jQuery ->
     $(document).ready ->
+    $('#taskgrid_table').DataTable 
+      'scrollX': true,
+      'orderClasses': false,
+      'paging': false,
+      'info': false,
+      'columns': [
+        {'width': '24%'}
+        {'width': '16%',"className": "text-center"}
+        {'width': '16%',"className": "text-center"}
+        {'width': '16%',"className": "text-center"}
+        {'width': '16%',"className": "text-center"}
+        {'width': '12%', 'orderable': false}
+      ]
     if $('.js-assign-reviewer').val() == ""
       $('.js-assign-reviewer').tokenInput('/employee_lists.json', reviewer_options);
     if $("#assignable_employee_id").val() == ""

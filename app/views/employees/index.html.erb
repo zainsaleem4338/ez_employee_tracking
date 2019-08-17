@@ -1,21 +1,32 @@
 <% provide(:title, "All Employees List") %>
-<div class="row" style="margin-top: 40px;">
-  <% @employees.each do |employee| %>
+<table id="employeeslist_table" style="width:100%" class="table data table-hover dt-responsive">
+  <thead>
+    <tr>
+      <th >ID</th>
+      <th >PICTURE</th>
+      <th >NAME</th>
+      <th >EMAIL</th>
+      <th >ROLE</th>
+      <th >DEPARTMENT</th>
+      <th ></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employees.each do |employee| %>
     <% if employee.active == true %>
-    <div class="card col-sm-4 shadow mb-2 bg-white card-width">
-      <div class="card-body">
-        <center>
-          <%= image_tag employee.avatar.url(:thumb), class: "rounded-circle employee-avatar mb-2", style:'width:60px; height:60px' %>
-          <h6 class="card-title"><b><%= employee.name %></b></h6>
-          <p class="card-text mb-1"><strong class="head-color">Email: </strong><%= employee.email %></p>
-          <p class="card-text"><strong class="head-color">Role: </strong><%= employee.role %></p>
-          <% unless employee.role == Employee::ADMIN_ROLE %>
-            <p class="card-text"><strong class="head-color">Department: </strong><%= employee.department.name %></p>
-          <% end %>
-          <%= link_to "Delete", delete_employee_path(employee), method: :delete, data: { confirm: "Are you sure you want to delete the employee?" }, class: "btn btn-outline-danger" %>
-        </center>
-      </div>
-    </div>
+      <tr>
+        <td><%= employee.sequence_num %></td>
+        <td><%= image_tag employee.avatar.url(:thumb), class: "rounded-circle employee-avatar mb-2", style:'width:60px; height:60px'%></td>
+        <td><%= employee.name.downcase.titleize %></td>
+        <td><%= employee.email.downcase %></td>
+        <td><%= employee.role.downcase %></td>
+        <td> <%= employee.department.name.downcase.titleize if employee.department.present? %></td>
+        <td> <%= link_to delete_employee_path(employee), method: :delete, data: { confirm: 'Are you sure?' } do %>  
+            <i title="Delete Employee" class="table-options action-delete fas fa-trash"></i>
+            <% end %>
+        </td>
+      </tr>
+      <% end %>
     <% end %>
-    <% end %>
-</div>
+  </tbody>
+</table>

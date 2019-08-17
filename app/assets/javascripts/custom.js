@@ -3,6 +3,7 @@ $(document).ready(function() {
     $("#company-subdomain").val($(this).val().toLowerCase());
 })});
 
+
 function send(data) {
   var chatinput = document.getElementById("chat-input");
   var chatoutput = document.getElementById("chat-output");

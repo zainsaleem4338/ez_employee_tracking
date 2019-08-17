@@ -1,27 +1,40 @@
-<table class="table">
-  <thead class="thead-light">
+<table id="department_table" style="width:100%" class="table data table-hover dt-responsive">
+  <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Actions</th>
+      <th >NAME</th>
+      <th ></th>
     </tr>
   </thead>
-
   <tbody>
     <% @departments.each do |department| %>
-      <tr>
-        <td><%= department.name %></td>
-        <td><%= h truncate(department.description, :length => 21) %></td>
-        <td>
-          <%= link_to 'Show', department, class: "btn btn-regular" %>
-          <% if can? :create, Department%>
-            <%= link_to 'Edit', edit_department_path(department), class: "btn btn-secondary" %>
-            <%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
-          <% end %>
-          <%= link_to 'Show projects', department_projects_path(department), class: "btn btn-info" %>
-          <%= link_to 'See Teams', department_teams_path(department), class: "btn btn-dark" %>
-        </td>
-      </tr>
+    <tr>
+      <td ><%= department.name.downcase.titleize %></td>
+      <td  class="d-table-cell align-middle vertical-align">
+        <div class="row no-gutters justify-content-between">
+          <div class="actions">
+            <%= link_to department do %>
+            <i title="Show Tasks" class="table-options action-show fas fa-eye"></i>
+            <% end %>
+            <% if can? :create, department %>
+            <%= link_to edit_department_path(department) do %>
+            <i title="Edit Project" class="table-options action-edit fas fa-edit"></i>
+            <% end %>
+            <%= link_to department, method: :delete, data: { confirm: 'Are you sure?' } do %>  
+            <i title="Delete Project" class="table-options action-delete fas fa-trash"></i>
+            <% end %>
+            <% end %>
+          </div>
+          <div class="btn-group dropleft">
+            <i class="fas fa-ellipsis-v" title="More..." style="cursor:pointer;font-size:16px" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+            <div class="dropdown-menu">
+                  <%= link_to "Show Projects",department_projects_path(department), class:"dropdown-item" %>
+                  <%= link_to "Show Teams",department_teams_path(department), class:"dropdown-item" %>
+            </div>
+          </div>
+
+        </div>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
