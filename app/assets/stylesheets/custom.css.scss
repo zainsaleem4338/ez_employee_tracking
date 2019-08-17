@@ -1386,7 +1386,12 @@ section {
 }
 .inner_setting {
   padding:2%;
-  overflow: auto;
+  
+}
+.in_setting {
+  min-height:448px;
+  max-height:448px;
+  overflow-y: auto;
 }
 
 @media (max-width: 768px) {
