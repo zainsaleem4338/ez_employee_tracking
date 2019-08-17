@@ -30,7 +30,7 @@
   <%= link_to "All Tasks", department_project_tasks_path(@department, @project), remote: true, class: "btn btn-secondary active"%>
   <%= link_to "My Tasks", department_project_tasks_path(@department, @project, show_employees_only: true), remote: true, class: "btn btn-secondary active" %>
 <% end %>
-<%= link_to 'Back', department_projects_url, class: "btn btn-secondary" %>
+<%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>
 <div id="tasks_grid" class="mt-3">
   <%= render partial: 'taskgrid', locals: {tasks: @tasks}  %>
 </div>

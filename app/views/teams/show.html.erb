@@ -15,7 +15,7 @@
         <% if can? :create, Team%>
           <%= link_to 'Edit', edit_department_team_path(@department,@team), class: "btn btn-secondary" %>
         <% end %>
-        <%= link_to 'Back', department_teams_path(@department), class: "btn btn-regular" %>
+        <%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>
       </div>
     </div>
   </div>

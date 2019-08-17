@@ -6,7 +6,7 @@
     <%= form_for @task, url: {action: "update_status"} do |form| %>
       <%= form.select(:status, %w(New In\ Progress Review\ pending Reviewed Completed), {}, {class: "form-control"}) %><br>
       <%= form.submit class: "btn btn-regular" %>
-      <%= link_to 'Back', department_project_tasks_url(@department, @task.project), class: "btn btn-secondary" %>
+      <%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>
     <% end %>
   </div>
   <div class="col-md-3"></div>

@@ -1,24 +1,25 @@
 <% if @teams.length > 0%>
-<table id="teams_table" style="width:100%" class="table data table-hover dt-responsive">
-  <thead>
-    <tr>
-      <th>TEAM PICTURE</th>
-      <th>NAME</th>
-      <th>TEAM LEADER</th>
-      <th>TEAM MEMBERS</th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="container table-responsive">
+  <table id="teams_table" style="width:100%" class="table data table-hover dt-responsive">
+    <thead>
+      <tr>
+        <th>TEAM PICTURE</th>
+        <th>NAME</th>
+        <th>TEAM LEADER</th>
+        <th>TEAM MEMBERS</th>
+        <th>ACTIONS</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% @teams.each do |team| %>
+    <tbody>
+      <% @teams.each do |team| %>
       <tr>
         <td><%= image_tag team.team_pic.url(:thumb),class: "rounded-circle team-pic",style:'width:90px; height:50px' %></td>
         <td><%= team.name.downcase.titleize %></td>
         <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize %></td>
         <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
         <td>
-                    <div class="actions">
+          <div class="actions">
             <%= link_to department_team_path(team.department,team) do %>
             <i title="Show Team" class="table-options action-show fas fa-eye"></i>
             <% end %>
@@ -33,10 +34,11 @@
           </div>
         </td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <% end %>
 <br>
 <%= link_to 'New Team', new_department_team_path, class: "btn btn-regular" %>
-<%= link_to 'Back', departments_url, class: "btn btn-secondary" %>
+<%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>
