@@ -33,13 +33,19 @@
     <div class="col-4">
       <center>
         <%= image_tag('work-secondary.svg', size: "80x80")%><br>
-        <span class="text-peach"><%= @task.assignable.name %> is working on this task.</span>
+        <span class="text-peach">
+          <% if @task.assignable_type == Task::TEAM %>
+          <%= link_to @task.assignable.name, department_team_path(@department, @task.assignable) , class: 'text-peach no-decoration' %>
+          <% elsif @task.assignable_type == Task::EMPLOYEE %>
+          <%= link_to @task.assignable.name, show_employee_path(@task.assignable), class: 'text-peach no-decoration' %>
+          <% end %>
+           is working on this task.</span>
       </center>
     </div>
     <div class="col-4">
       <center>
         <%= image_tag('customer-review-secondary.svg', size: "80x80")%><br>
-        <span class="text-peach"><%= @task.reviewer.name %> is reviewing this task.</span>
+        <span class="text-peach"><%= link_to @task.reviewer.name, show_employee_path(@task.reviewer), class: 'text-peach no-decoration' %> is reviewing this task.</span>
       </center>
     </div>
     <div class="col-4">
@@ -85,7 +91,7 @@
                       <% end %>
                     </td>
                     <% if @task.assignable_type == Task::TEAM %>
-                      <th><%= log.employee.name %></th>
+                      <th><%= link_to log.employee.name, show_employee_path(log.employee), class: 'text-peach no-decoration' %></th>
                     <% end %>
                   </tr>
                 <% end %>
