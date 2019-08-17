@@ -1,7 +1,8 @@
 <% provide(:title, "Add an Employee") %>
 <br>
-<%= render 'shared/errors', obj: @employee %>
-<%= form_for @employee, url: create_employee_path(@employee), html: { multipart: true }, method: :post ,:html => {class: "form-horizontal", role: "form"} do |form| %>
+<%= render 'shared/errors', obj: @member %>
+
+<%= form_for @member, url: members_path(@method), method: :post ,html: { multipart: true }, :html => {class: "form-horizontal", role: "form"} do |form| %>
   <div class="form-group pr-5 pl-5">
     <div class="row">
       <div class="control-label col-sm-6">
@@ -44,7 +45,7 @@
     <br>
     <div class="row">
       <div class="col-sm-6">
-        <%= form.hidden_field :company_id, :value => @employee.company_id %>
+        <%= form.hidden_field :company_id, :value => @member.company_id %>
         <%= form.submit class:'btn btn-regular btn-block' %>
       </div>
     </div>

@@ -55,7 +55,7 @@ module ApplicationHelper
     }
     @calendar = {
       name: 'Calendar',
-      link: index_events_path,
+      link: events_path,
       icon: 'far fa-calendar-minus'
     }
     @settings = {
@@ -90,12 +90,12 @@ module ApplicationHelper
         suboptions: [
           {
             name: 'Add Employee',
-            link: new_employee_path,
+            link: new_member_path,
             icon: 'fas fa-plus'
           },
           {
             name: 'View Employees',
-            link: employees_path,
+            link: members_path,
             icon: 'fas fa-eye'
           }
         ]
@@ -124,17 +124,7 @@ module ApplicationHelper
         link: reports_path,
         icon: 'fas fa-file'
       }
-      @add_events = {
-        name: 'Add Event',
-        link: new_events_path,
-        icon: 'fas fa-calendar-week'
-      }
-      @edit_settings = {
-        name: 'Edit Settings',
-        link: edit_settings_path,
-        icon: 'fas fa-cogs'
-      }
-      @data.push(@employees).push(@departments).push(@reports).push(@attendance).push(@add_events).push(@edit_settings)
+      @data.push(@employees).push(@departments).push(@reports).push(@attendance)
     else
       @departments = {
         name: 'Departments',

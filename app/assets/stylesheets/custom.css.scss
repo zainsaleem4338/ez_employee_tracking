@@ -1,6 +1,13 @@
 @import "bootstrap";
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
+
+$primary: #6e2142;
+$secondary: #943855;
+$peach: #e16363;
+$skin: #ffd692;
+$white: #fff;
+
 *,
 *::before,
 *::after {
@@ -198,14 +205,14 @@ span {
 }
 
 .btn-regular {
-  background-color: #9a6dde !important;
-  border-color: #9a6dde !important;
+  background-color: $secondary !important;
+  border-color: $secondary !important;
   color: #fff;
 }
 
 .btn-regular:hover {
-  background-color: #563d7c !important;
-  border-color: #563d7c !important;
+  background-color: $primary !important;
+  border-color: $primary !important;
   color: #fff;
 }
 
@@ -217,17 +224,17 @@ span {
 #sidebar {
   width: 180px;
   position: fixed;
+  margin-top: 60px;
   top: 0;
   left: 0;
   bottom: 0;
-  overflow-y: scroll;
+  overflow-y: hidden;
   height: 100vh;
   z-index: 999;
-  background: #563d7c;
+  background: $primary;
   color: #fff;
   transition: all 0.3s;
 }
-
 #sidebar.active {
   min-width: 80px;
   max-width: 80px;
@@ -297,7 +304,7 @@ span {
 
 #sidebar .sidebar-header {
   padding: 20px;
-  background: #6f4da3;
+  background: $secondary;
 }
 
 #sidebar .sidebar-header i {
@@ -324,14 +331,14 @@ span {
 }
 
 #sidebar ul li a:hover {
-  color: #563d7c;
+  color: $primary;
   background: #fff;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
   color: #fff;
-  background: #6f4da3;
+  background: $secondary;
 }
 
 a[data-toggle="collapse"] {
@@ -348,7 +355,7 @@ a[data-toggle="collapse"] {
 
 #sidebar ul ul a {
   padding-left: 20px !important;
-  background: #6f4da3;
+  background: $secondary;
   font-size: 0.7rem;
   color: #fff;
 }
@@ -782,7 +789,7 @@ a[data-toggle="collapse"] {
   color: #4CAF50;
 }
 .text-transition:hover {
-  background-color: #4CAF50;
+  background-color: $primary;
   transition: 1s;
 }
 
@@ -804,27 +811,27 @@ a[data-toggle="collapse"] {
   font-size: 24px;
   text-align: center;
   width: 90%;
-  height: 75px;
-  line-height: 75px;
+  height: 50px;
+  line-height: 50px;
   margin: 0 auto;
-  margin-top: 75px;
-  background-color: #222;
+  margin-top: 30px;
+  background-color: $primary;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 10px;
-  border: 3px solid #222;
+  border: 3px solid $primary;
 }
 
 .window {
   margin: 0 auto;
   width: 90%;
-  height: 450px;
+  height: 400px;
   background-color: #fff;
   overflow-x: hidden;
   overflow-y: auto;
-  border-left: 3px solid #222;
-  border-bottom: 3px solid #222;
-  border-right: 3px solid #222;
+  border-left: 3px solid $primary;
+  border-bottom: 3px solid $primary;
+  border-right: 3px solid $primary;
   z-index: 1;
 }
 
@@ -847,17 +854,17 @@ a[data-toggle="collapse"] {
   height: 100px;
   text-align: center;
   background-color: #fff;
-  border-left: 3px solid #222;
-  border-right: 3px solid #222;
+  border-left: 3px solid $primary;
+  border-right: 3px solid $primary;
   outline: none;
   margin: 25px auto;
   line-height: 100px;
   overflow: hidden;
-  color: #222;
+  color: $primary;
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
   letter-spacing: 2.5px;
-  border-top: 3px solid #222;
+  border-top: 3px solid $primary;
   z-index: 2;
   position: relative;
 }
@@ -902,11 +909,11 @@ a[data-toggle="collapse"] {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: $primary;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px $primary;
 }
 
 input:checked + .slider:before {
@@ -1022,8 +1029,11 @@ section {
 	color: #9a6dde;
 	font-weight: bold;
 }
+.card-title {
+  color: $primary;
+}
 .backside .card .card-title {
-    color: #9a6dde;
+    color: white;
 }
 .frontside .card .card-text {
 	color: white !important;
@@ -1265,3 +1275,127 @@ section {
   }
 }
 
+/* Company List Via Email  */
+.div_email {
+  width: 50%;
+  border: 1px #ced4da solid;
+  border-radius: 5px;
+  margin:0 auto;
+  padding: 5%;
+  color: $primary;
+}
+.border-success:hover {
+  background-color:  $primary !important;
+  border-color: $primary !important;
+}
+.border-success {
+  border-color: $primary !important;
+}
+
+.custom-card > .border-success {
+  background-color:  $primary !important;
+  border-color: $primary !important;
+}
+.custom-card > .border-success:hover {
+  background-color:  white !important;
+  border-color: white !important;
+}
+.custom-card > .border-success > .card-body > .card-title {
+  color:white;
+}
+.custom-card > .border-success:hover > .card-body > .card-title {
+  color:$primary;
+}
+.custom-card > .border-success > .text-success {
+  color:white !important;
+}
+.custom-card > .border-success:hover > .text-success {
+  color:$primary !important;
+}
+
+.dashboard_card {
+  border: 1px #ced4da solid;
+  padding: 2%;
+}
+
+
+/* Settings Index */
+.custom-pills {
+  border: 1px $primary solid;
+  padding: 2%;
+  padding-bottom: 0%;
+  background-color: $primary;
+  margin-bottom: 0px;
+  min-height: 450px !important;
+  max-height: 450px;
+}
+.custom-pills > .nav-pills > .nav-item > .nav-link {
+  background-color: $secondary !important;
+  border-color: $secondary !important;
+  color: #fff;
+}
+.custom-pills > .nav-pills > .nav-item > .active {
+  background-color: $peach !important;
+  border-color: $peach !important;
+  color: #fff;
+}
+.custom-pills > .nav-pills > .nav-item > .nav-link:hover {
+  background-color: $peach !important;
+  border-color: $peach !important;
+  color: #fff;
+}
+.custom-pills > .nav-pills > .nav-item {
+  margin: 6%;
+  margin-left:3%;
+  margin-right:3%;
+}
+ h3 > a {
+   text-decoration: none;
+   color: $primary;
+ }
+ h3 > a:hover {
+  text-decoration: none;
+  color: $secondary;
+}
+
+.bread-crumbs {
+  background: #FFD692;
+  top: 60px !important;
+  p{
+    padding-top: 7px;
+    font-size: 0.85rem;
+  }
+  min-height:50px;
+  max-height:50px;
+}
+
+#_navbar {
+  min-height: 60px;
+  max-height: 60px;
+}
+.outer_setting {
+  margin: 24px;
+  margin-top: 0px;
+}
+.div_setting {
+  border: 1px $primary solid;
+  margin: 0px;
+  padding: 0px; 
+  min-height:452px;
+  max-height:452px;
+}
+.inner_setting {
+  padding:2%;
+  
+}
+.in_setting {
+  min-height:448px;
+  max-height:448px;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .div_setting {
+    border:none;
+  }
+}

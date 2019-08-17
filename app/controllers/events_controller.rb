@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     @event.company_id = current_company.id
     if @event.save
       flash[:success] = t('.success_notice')
-      redirect_to index_events_path
+      redirect_to events_path
     else
       flash[:danger] = t('.error_notice')
       redirect_to menus_index_path
@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   def update
     if @event.update(event_params)
       flash[:success] = t('.success_notice')
-      redirect_to index_events_path
+      redirect_to events_path
     else
       flash[:danger] = t('.error_notice')
       redirect_to menus_index_path
