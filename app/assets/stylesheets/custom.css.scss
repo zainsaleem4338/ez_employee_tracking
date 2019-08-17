@@ -811,27 +811,27 @@ a[data-toggle="collapse"] {
   font-size: 24px;
   text-align: center;
   width: 90%;
-  height: 75px;
-  line-height: 75px;
+  height: 50px;
+  line-height: 50px;
   margin: 0 auto;
-  margin-top: 75px;
-  background-color: #222;
+  margin-top: 30px;
+  background-color: $primary;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 10px;
-  border: 3px solid #222;
+  border: 3px solid $primary;
 }
 
 .window {
   margin: 0 auto;
   width: 90%;
-  height: 450px;
+  height: 400px;
   background-color: #fff;
   overflow-x: hidden;
   overflow-y: auto;
-  border-left: 3px solid #222;
-  border-bottom: 3px solid #222;
-  border-right: 3px solid #222;
+  border-left: 3px solid $primary;
+  border-bottom: 3px solid $primary;
+  border-right: 3px solid $primary;
   z-index: 1;
 }
 
@@ -854,17 +854,17 @@ a[data-toggle="collapse"] {
   height: 100px;
   text-align: center;
   background-color: #fff;
-  border-left: 3px solid #222;
-  border-right: 3px solid #222;
+  border-left: 3px solid $primary;
+  border-right: 3px solid $primary;
   outline: none;
   margin: 25px auto;
   line-height: 100px;
   overflow: hidden;
-  color: #222;
+  color: $primary;
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
   letter-spacing: 2.5px;
-  border-top: 3px solid #222;
+  border-top: 3px solid $primary;
   z-index: 2;
   position: relative;
 }
@@ -909,11 +909,11 @@ a[data-toggle="collapse"] {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: $primary;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px $primary;
 }
 
 input:checked + .slider:before {
@@ -1321,14 +1321,13 @@ section {
 
 /* Settings Index */
 .custom-pills {
-  border: 1px #ced4da solid;
+  border: 1px $primary solid;
   padding: 2%;
+  padding-bottom: 0%;
   background-color: $primary;
-  height: 280px;
-  max-height: 280px;
-  border-radius: 5%;
-  -webkit-box-shadow: 0 0 10px $secondary;
-        box-shadow: 0 0 10px $secondary;
+  margin-bottom: 0px;
+  min-height: 450px !important;
+  max-height: 450px;
 }
 .custom-pills > .nav-pills > .nav-item > .nav-link {
   background-color: $secondary !important;
@@ -1346,7 +1345,9 @@ section {
   color: #fff;
 }
 .custom-pills > .nav-pills > .nav-item {
-  margin: 5%;
+  margin: 6%;
+  margin-left:3%;
+  margin-right:3%;
 }
  h3 > a {
    text-decoration: none;
@@ -1371,4 +1372,25 @@ section {
 #_navbar {
   min-height: 60px;
   max-height: 60px;
+}
+.outer_setting {
+  margin: 24px;
+  margin-top: 0px;
+}
+.div_setting {
+  border: 1px $primary solid;
+  margin: 0px;
+  padding: 0px; 
+  min-height:452px;
+  max-height:452px;
+}
+.inner_setting {
+  padding:2%;
+  overflow: auto;
+}
+
+@media (max-width: 768px) {
+  .div_setting {
+    border:none;
+  }
 }
