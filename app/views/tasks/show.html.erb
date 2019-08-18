@@ -1,20 +1,26 @@
-
-<p>
-  <strong>Task Title:</strong>
-  <%= @task.name %>
-</p>
-
-<p>
-  <strong>Task Start Date:</strong>
-  <%= @task.start_date.to_date %>
-</p>
-
-<p>
-  <strong>Task End Date:</strong>
-  <%= @task.expected_end_date.to_date %>
-</p>
-
-<p>
-  <strong>Task Description:</strong>
-  <%= @task.description %>
-</p>
+<div class="container">
+	<div class="row d-flex">
+		<div class="col-4">
+			<h3 class="text-prim"><b><%= @task.name %></b></h3>
+			<span class="text-peach"><b>Description:</b> <%= @task.description %></span>
+		</div>
+		<div class="col-4">
+			<div class="text-second"><small class="badge-md badge-light"><%= @task.status.downcase.capitalize %></small></div>
+		</div>
+		<div class="col-4">
+      <div class="table-details">
+        <div class="detail-head"></div>
+        <table class="table borderless">
+          <tr>
+            <td class="text-prim"><b>Start Date:</b></td>
+            <td class="text-peach"><%= @task.start_date.to_date %></td>
+          </tr>
+          <tr>
+            <td class="text-prim"><b>End Date:</b></td>
+            <td class="text-peach"><%= @task.expected_end_date.to_date %></td>
+          </tr>
+        </table>
+      </div>
+		</div>
+	</div>
+</div>

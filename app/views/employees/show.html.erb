@@ -1,1 +1,106 @@
-<% provide(:title, "Welcome "+ current_employee.name) %>
+<div class="container">
+  <div class="row d-flex employee-show">
+    <div class="col-4">
+      <div>
+        <%= image_tag @employee.avatar.url(:thumb), style:'width:300px; height:170px' %>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="row d-flex">
+        <div class="col-6 d-flex">
+          <div class="justify-content-left">
+            <h3 class="text-prim"><b><%= @employee.name %></b></h3>
+            <span class="text-peach"><small><%= @employee.email %></small></span>
+          </div>
+        </div>
+        <div class="col-6 d-flex employee-info">
+          <div class="table-details">
+            <div class="detail-head"></div>
+            <table class="table borderless">
+              <tr>
+                <td class="text-prim"><b>Role:</b></td>
+                <td class="text-peach"><%= @employee.role %></td>
+              </tr>
+              <tr>
+                <td class="text-prim"><b>Company:</b></td>
+                <td class="text-peach"><%= @employee.company.name %></td>
+              </tr>
+              <tr>
+                <td class="text-prim"><b>Department:</b></td>
+                <td class="text-peach"><%= @employee.department.name %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex employee-details">
+    <div class="col-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <a href="#collapseCardExample" class="row d-flex justify-content-between align-items-center p-1" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="card-title text-prim mb-0"><b>Teams <span class="count">(<%= @employee.teams.count %>)</span></b></h6>
+          </a>
+        </div>
+        <div class="card-body" id="collapseCardExample">
+          <% if @employee.teams.length > 0%>
+            <table class="table borderless">
+              <thead class="text-prim">
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Leader</th>
+                  <th>Members</th>
+                </tr>
+              </thead>
+
+              <tbody class="text-peach">
+                <% @employee.teams.order(created_at: :asc).last(5).each do |team| %>
+                  <tr>
+                    <td><%= image_tag team.team_pic.url(:thumb),class: "rounded-circle team-pic",style:'width:90px; height:50px' %></td>
+                    <td><%= team.name %></td>
+                    <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first %></td>
+                    <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <!--
+              Load More
+            </center> -->
+            <% else %>
+              <p><small>No teams found</small></p>
+            <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 mb-4">
+      <div class="row">
+      <div class="col-4"></div>
+      <div class="col-8 d-flex employee-info">
+      <div class="table-details">
+        <div class="detail-head"></div>
+        <table class="table borderless">
+          <tr>
+            <td class="text-prim"><b>Last sign in:</b></td>
+            <td class="text-peach">
+              <%unless @employee.last_sign_in_at.blank? %>
+                <%= I18n.l(@employee.last_sign_in_at, format: :short) %>
+              <%end%></td>
+          </tr>
+          <tr>
+            <td class="text-prim"><b>Leaves:</b></td>
+            <td class="text-peach"><%= @employee.leaves %></td>
+          </tr>
+          <tr>
+            <td class="text-prim"><b>Late Count:</b></td>
+            <td class="text-peach"><%= @employee.late_count %></td>
+          </tr>
+        </table>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

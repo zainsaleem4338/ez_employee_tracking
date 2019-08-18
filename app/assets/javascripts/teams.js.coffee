@@ -73,3 +73,16 @@ jQuery ->
       $.each employee_arr, (key, employee) ->
         added_employee_new_arr.push employee.value
       return added_employee_new_arr
+
+    $('#teams_table').DataTable 
+      'responsive': true,
+      'orderClasses': false,
+      'paging': false,
+      'info': false,
+      'columns': [
+        {'width': '17%',"className": "text-center"}
+        {'width': '17%',"className": "text-center"}
+        {'width': '17%',"className": "text-center"}
+        {'width': '17%',"className": "text-center"}
+        {'width': '15%', 'orderable': false,"className": "text-center"}
+      ]

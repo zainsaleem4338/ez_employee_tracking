@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  load_and_authorize_resource :employee, through_association: :company
+  load_and_authorize_resource through_association: :company
   load_and_authorize_resource :team, through_association: :company
 
   # get /employee_lists
@@ -35,6 +35,11 @@ class EmployeesController < ApplicationController
     else
       redirect_to menus_index_path
     end
+  end
+
+  # get /employees/:sequence_num/show
+  def show
+    @employee = Employee.find_by_sequence_num(params[:sequence_num])
   end
 
   private
