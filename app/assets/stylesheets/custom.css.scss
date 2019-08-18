@@ -73,6 +73,10 @@ a:focus {
   transition: all 0.3s;
 }
 
+.no-decoration, .no-decoration:hover {
+  text-decoration: none !important;
+}
+
 input[type=text], textarea {
   -webkit-transition: all 0.30s ease-in-out;
   -moz-transition: all 0.30s ease-in-out;
@@ -201,6 +205,70 @@ select[type=text]:focus, textarea:focus {
   margin-left: 10px !important;
 }
 
+.task-times {
+  padding-left: 40px;
+  padding-right: 30px;
+}
+
+.task-progress {
+  margin-right: 30px;
+}
+
+.task-show-div {
+  margin-left: 30px;
+}
+.task-logs{
+  padding-left: 30px;
+}
+
+.assigned-to-icon {
+  color: $primary;
+}
+
+.scroll-able {
+  overflow-y: scroll;
+  max-height: 400px;
+  min-height: 400px;
+}
+
+.progress {
+  box-shadow: 1px 2px 5px $skin;
+}
+
+.progress-bar {
+  width: 0%;
+  -webkit-transition: all 4s easeOutBounce;
+  transition: all 4s easeOutBounce;
+  -webkit-transition-delay: 1s;
+  transition-delay: 1s;
+  background-color: $peach !important;
+}
+
+.progress-bar-striped {
+    background-image: linear-gradient(45deg, $peach 25%, transparent 25%, transparent 50%, $peach 50%, $peach 75%, transparent 75%, transparent);
+    background-size: 1rem 1rem;
+}
+
+.lower-half-task-show {
+  padding-top: 30px;
+  border-top: 3px solid $primary;
+  border-radius: 5px;
+}
+
+.task-col {
+  padding-right: 30px;
+  padding-left: 10px; 
+}
+
+.rounded-complexity {
+  margin-right: 35px;
+  margin-left: 35px;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 1px 2px 5px $skin;
+}
+/*.container {
+  font-size: 0.85rem;
+}*/
 
 .checked-out-status {
   padding-top: 10px;
@@ -1620,4 +1688,131 @@ h6.card-title {
   color: $peach !important;
   background-color: $skin !important; 
   border-color: $peach !important;
+
+@keyframes scale-easeOutBounce {
+  0% {
+    transform: scale(1);
+  }
+
+  12% {
+    transform: scale(0.89);
+  }
+
+  24% {
+    transform: scale(0.56);
+  }
+
+  36% {
+    transform: scale(0.02);
+  }
+
+  54% {
+    transform: scale(0.25);
+  }
+
+  74% {
+    transform: scale(0.02);
+  }
+
+  82% {
+    transform: scale(0.06);
+  }
+
+  92% {
+    transform: scale(0.01);
+  }
+
+  96% {
+    transform: scale(0.02);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+
+}
+
+@keyframes undefined-easeOutBounce {
+  0% {
+    transform: translateX(0%);
+  }
+
+  12% {
+    transform: translateX(-10.89%);
+  }
+
+  24% {
+    transform: translateX(-43.56%);
+  }
+
+  36% {
+    transform: translateX(-98.01%);
+  }
+
+  54% {
+    transform: translateX(-75.02%);
+  }
+
+  74% {
+    transform: translateX(-98.37%);
+  }
+
+  82% {
+    transform: translateX(-93.75%);
+  }
+
+  92% {
+    transform: translateX(-99.34%);
+  }
+
+  96% {
+    transform: translateX(-98.46%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+
+}
+
+@keyframes opacity-easeOutBounce {
+  0% {
+    opacity: 1;
+  }
+
+  12% {
+    opacity: 0.89;
+  }
+
+  24% {
+    opacity: 0.56;
+  }
+
+  36% {
+    opacity: 0.02;
+  }
+
+  54% {
+    opacity: 0.25;
+  }
+
+  74% {
+    opacity: 0.02;
+  }
+
+  82% {
+    opacity: 0.06;
+  }
+
+  92% {
+    opacity: 0.01;
+  }
+
+  96% {
+    opacity: 0.02;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }

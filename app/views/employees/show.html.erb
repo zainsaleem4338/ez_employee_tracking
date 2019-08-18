@@ -9,7 +9,7 @@
       <div class="row d-flex">
         <div class="col-6 d-flex">
           <div class="justify-content-left">
-            <h3 class="text-prim"><b><%= @employee.name %></b></h3>
+            <h3 class="text-prim"><b><%= @employee.name.downcase.titleize %></b></h3>
             <span class="text-peach"><small><%= @employee.email %></small></span>
           </div>
         </div>
