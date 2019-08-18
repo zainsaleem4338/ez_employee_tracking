@@ -217,6 +217,7 @@ select[type=text]:focus, textarea:focus {
 .task-show-div {
   margin-left: 30px;
 }
+
 .task-logs{
   padding-left: 30px;
 }
@@ -245,8 +246,8 @@ select[type=text]:focus, textarea:focus {
 }
 
 .progress-bar-striped {
-    background-image: linear-gradient(45deg, $peach 25%, transparent 25%, transparent 50%, $peach 50%, $peach 75%, transparent 75%, transparent);
-    background-size: 1rem 1rem;
+  background-image: linear-gradient(45deg, $peach 25%, transparent 25%, transparent 50%, $peach 50%, $peach 75%, transparent 75%, transparent);
+  background-size: 1rem 1rem;
 }
 
 .lower-half-task-show {
@@ -266,9 +267,6 @@ select[type=text]:focus, textarea:focus {
   border-radius: 15px 15px 15px 15px;
   box-shadow: 1px 2px 5px $skin;
 }
-/*.container {
-  font-size: 0.85rem;
-}*/
 
 .checked-out-status {
   padding-top: 10px;
@@ -341,6 +339,18 @@ select[type=text]:focus, textarea:focus {
   color: #fff !important;
 }
 
+.btn-secondary {
+  background-color: transparent !important;
+  border-color: $secondary !important;
+  color: $secondary !important;
+}
+
+.btn-secondary:hover {
+  background-color: $secondary !important;
+  border-color: $secondary !important;
+  color: #fff !important;
+}
+
 .btn-circle.btn-lg {
   width: 35px;
   height: 35px;
@@ -363,7 +373,6 @@ select[type=text]:focus, textarea:focus {
   font-size: 0.65rem;
   border-radius: 30px;
 }
-
 
 .wrapper {
   display: flex;
@@ -407,8 +416,7 @@ select[type=text]:focus, textarea:focus {
   font-style: italic;
 }
 
-i,
-span {
+i,span {
   display: inline-block;
 }
 
@@ -416,12 +424,6 @@ span {
   color: $peach;
 }
 
-table.dataTable thead th, table.dataTable thead td {
-  border: 1px solid #E16363 !important;
-}
-.dataTables_wrapper.no-footer .dataTables_scrollBody {
-  border: 1px solid #E16363 !important;
-}
 .table-bordered {
   border: 1px solid #E16363 !important;
 }
@@ -445,7 +447,6 @@ table.dataTable thead th, table.dataTable thead td {
   color: #fff;
   transition: all 0.3s;
 }
-
 
 #sidebar.active {
   min-width: 80px;
@@ -708,9 +709,11 @@ thead{
 table.dataTable thead th, table.dataTable thead td {
   border: 1px solid #E16363 !important;
 }
+
 .dataTables_wrapper.no-footer .dataTables_scrollBody {
   border: 1px solid #E16363 !important;
 }
+
 .table-bordered {
   border: 1px solid #E16363 !important;
 }
@@ -1602,21 +1605,14 @@ i.action-edit:hover {
 i.action-delete {
   font-size:14px !important;
   background-color: #ffffff;
-  border: 2px #943855 !important;
+  border: 2px red !important;
   color: #943855 !important;
 }
 
 i.action-delete:hover {
   color:white !important;
-  border-color: #943855 !important;
-  background-color: #943855;
-}
-
-table.dataTable thead th, table.dataTable thead td {
-  border: 0px solid #e16363 !important;
-}
-.dataTables_scrollBody {
-  border: 1px solid #e16363 !important;
+  border-color: red !important;
+  background-color: red;
 }
 
 tbody tr:hover {
@@ -1645,7 +1641,7 @@ table.dataTable.no-footer {
 }
 
 .dataTables_wrapper .dataTables_filter input {
-     margin-left: 0em !important; 
+  margin-left: 0em !important; 
 }
 
 div.show-more{
@@ -1688,6 +1684,7 @@ h6.card-title {
   color: $peach !important;
   background-color: $skin !important; 
   border-color: $peach !important;
+}
 
 @keyframes scale-easeOutBounce {
   0% {

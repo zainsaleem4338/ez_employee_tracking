@@ -3,9 +3,9 @@
     <thead >
       <tr>
         <th>NAME</th>
-        <th>TeamS</th>
+        <th>TEAMS</th>
         <th>PROJECTS</th>
-        <th >ACTIONS</th>
+        <th>ACTIONS</th>
       </tr>
     </thead>
     <tbody>
@@ -13,12 +13,12 @@
       <tr>
         <td ><%= h truncate(department.name.downcase.titleize, :length => 21) %></td>
         <td>
-          <%= link_to department_teams_path(department), class: "btn btn-peach" do %>
+          <%= link_to department_teams_path(department), class: "btn btn-secondary" do %>
           <span class="pr-2"><%= department.teams.count %></span><i class="fa fa-arrow-right"></i>
           <% end %>
         </td>
         <td>
-          <%= link_to department_projects_path(department), class: "btn btn-peach" do %>
+          <%= link_to department_projects_path(department), class: "btn btn-secondary" do %>
           <span class="pr-2"><%= department.projects.count %></span><i class="fa fa-arrow-right"></i>
           <% end %>
         </td>
