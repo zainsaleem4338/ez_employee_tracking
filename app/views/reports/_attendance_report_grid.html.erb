@@ -5,6 +5,7 @@
 </div>
 <br>
 <% if @attendances.any? %>
+<div class="container table-responsive">
   <table id="attendancereport_table" style="width:100%" class="table data table-hover dt-responsive">
     <thead>
       <tr>
@@ -31,4 +32,5 @@
       <% end %>
     </tbody>
   </table>
+</div>
 <% end %>

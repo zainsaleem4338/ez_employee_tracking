@@ -29,7 +29,6 @@
     <% if employee_signed_in? %>
       <div class="wrapper" style='font-family: Roboto, sans-serif'>
         <%= render 'layouts/sidebar' %>
-        <div id="content" style='font-family: Roboto, sans-serif'>
           <div id="header_div">
             <%= render 'layouts/header' %>
           </div>
@@ -40,6 +39,7 @@
               </div>
             </div>
           </div>
+        <div id="content" style='font-family: Roboto, sans-serif'>
           <div class="yielded-area">
             <div id="notifications-flash">
               <%= render 'shared/notification' %>

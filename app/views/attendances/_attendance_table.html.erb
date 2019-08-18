@@ -1,7 +1,7 @@
 <% content_for :head do %>
   <%= javascript_include_tag 'attendance_table' %>
 <% end %>
-<div class="container" style="overflow-x:auto;">
+<div class="container table-responsive">
    <% if @attendances_list.any? %>
 <table id="attendanceslist_table" style="width:100%" class="table data table-hover dt-responsive">
   <thead>

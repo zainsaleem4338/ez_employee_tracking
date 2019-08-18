@@ -80,6 +80,19 @@
         <div class="col-md-1 p-0">
           <button type="button" class="btn btn-regular" id="ok">Ok</button>
         </div>
+        <span id="team_member_span" class="error"></span>
+      </div>  
+      <div class="form-group">
+        <%= form.label :team_pic, "Team Image" %><br>
+        <%= form.file_field :team_pic, class:"form-control" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :description %><br>
+        <%= form.text_area :description, class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= form.submit class: "btn btn-regular" %>
+        <%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>
       </div>
       <span id="team_member_span" class="error"></span>
     </div>  

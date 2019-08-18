@@ -16,69 +16,71 @@
       <% end %>
   </div>
 <% end %>
+
 <p id="notice"><%= notice %></p>
 <div>
-  <div class="row">
+  <div class="page-title row">
     <div class="col-12">
-      <h4><b><%= @department.name %></b></h4>
+      <h4><b><%= @department.name.downcase.titleize %></b></h4>
     </div>
   </div>
-  <div class="row">
+  <div class="page-desc row">
     <div class="col-12">
-      <span class="justify-content"><%= @department.description %></span>
+      <span class="justify-content"><%= @department.description if @department.description.present? %></span>
+      <span class="justify-content"><%= @department.description if @department.description.empty? %></span>
     </div>
   </div>
   <br>
   <div class="row">
-    <div class="col-6 mb-4">
+    <div class="col-sm-6 mb-4">
       <div class="card">
         <div class="card-header">
           <div class="row d-flex justify-content-between align-items-center p-1">
-              <h6 class="card-title mb-0"><b>Teams <%= @department.teams.count %></b></h6>
-              <% if can? :create, Team %>
-                <%= link_to new_department_team_path(@department),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add_team', class: 'btn btn-regular btn-circle btn-lg'} do %>
-                  <i class="fas fa-plus"></i>
-                <% end %>
+            <h6 class="card-title mb-0"><b>TEAMS</b></h6>
+            <% if can? :create, Team %>
+              <%= link_to new_department_team_path(@department),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add_team', class: 'btn btn-regular btn-circle btn-lg'} do %>
+                <i class="fas fa-plus"></i>
               <% end %>
+            <% end %>
           </div>
         </div>
         <div class="card-body">
           <% if @department.teams.length > 0%>
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th>Team Name</th>
-                  <th>Team Leader</th>
-                  <th>Team Members</th>
-                </tr>
-              </thead>
+            <div class="container table-responsive">
 
-              <tbody>
-                <% @department.teams.order(created_at: :asc).last(5).each do |team| %>
+              <table style="width:100%" class="table dataable-hover dt-responsive">
+                <thead>
                   <tr>
-                    <td><%= team.name %></td>
-                    <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first %></td>
-                    <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
+                    <th>Team Name</th>
+                    <th>Team Leader</th>
+                    <th>Team Members</th>
                   </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <center>
-              <%= link_to department_teams_path(@department), :class => "btn btn-regular" do %>
-                Load More
-              <% end %>
-            </center>
-            <% else %>
-              <p>No teams found</p>
-            <% end %>
+                </thead>
+                <tbody>
+                  <% @department.teams.order(created_at: :asc).last(5).each do |team| %>
+                    <tr>
+                      <td><%= team.name.downcase.titleize %></td>
+                      <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize %></td>
+                      <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            <div class="show-more">
+              <%= link_to "Show all #{@department.teams.count} teams...", department_teams_path(@department) %>
+            </div>
+          <% else %>
+            <p>No teams found</p>
+          <% end %>
         </div>
       </div>
     </div>
-    <div class="col-6 mb-4">
+    <div class="col-sm-6 mb-4">
       <div class="card">
         <div class="card-header">
           <div class="row d-flex justify-content-between align-items-center p-1">
-            <h6 class="card-title mb-0"><b>Projects <%= @department.projects.count %></b></h6>
+            <h6 class="card-title mb-0"><b>PROJECTS</b></h6>
             <% if can? :create, Project %>
               <%= link_to new_department_project_path(@department),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add_project', class: 'btn btn-regular btn-circle btn-lg'} do %>
                 <i class="fas fa-plus"></i>
@@ -88,80 +90,56 @@
         </div>
         <div class="card-body">
           <% if @department.projects.length > 0%>
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th>Name</th>
-                  <th>Start Date</th>
-                  <th>Expected End Date</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <% @department.projects.order(created_at: :asc).last(5).each do |project| %>
+            <div class="container table-responsive">
+              <table style="width:100%" class="table data table-hover dt-responsive">
+                <thead>
                   <tr>
-                    <td><%= project.name %></td>
+                    <th>Name</th>
+                    <th>Start Date</th>
+                    <th>Expected End Date</th>
+                    <th>Tasks</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% @department.projects.order(created_at: :asc).last(5).each do |project| %>
+                  <tr>
+                    <td><%= project.name.downcase.titleize %></td>
                     <td><%= project.start_date.to_date %></td>
                     <td><%= project.expected_end_date.to_date %></td>
+                    <td><%= project.tasks.count %></td>
                   </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <center>
-              <%= link_to department_projects_path(@department), :class => "btn btn-regular" do %>
-                Load More
-              <% end %>
-            </center>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            <div class="show-more">
+              <%= link_to "Show all #{@department.projects.count} projects...", department_projects_path(@department)%>
+            </div>
           <% else %>
             <p>No projects found</p>
           <% end %>
         </div>
       </div>
     </div>
-    <div class="col-12 mb-4">
-      <div class="card">
-        <div class="card-header">
-          <div class="row d-flex justify-content-between align-items-center p-1">
-            <h6 class="card-title mb-0"><b>Employees <%= @department.employees.count %></b></h6>
-            <% if can? :create, Employee %>
-              <%= link_to new_employee_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add_employee', class: 'btn btn-regular btn-circle btn-lg'} do %>
-                <i class="fas fa-plus"></i>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <div class="card-body">
-          <% if @department.employees.length > 0%>
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th>Profile Pic</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
+  </div>
+</div>
 
-              <tbody>
-                <% @department.employees.order(created_at: :asc).last(5).each do |employee| %>
-                  <tr>
-                    <td>
-                      <%= image_tag employee.avatar.url(:thumb), class: "rounded-circle employee-avatar mb-2", style:'width:60px; height:60px' %>
-                    </td>
-                    <td><%= employee.name %></td>
-                    <td><%= employee.email %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <center>
-              <%= link_to department_projects_path(@department), :class => "btn btn-regular" do %>
-                Load More
-              <% end %>
-            </center>
-          <% else %>
-            <p>No employees found</p>
-          <% end %>
-        </div>
+<div class="modal fade" id="add_team" tabindex="-1" role="dialog" aria-labelledby="team_modal_title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="team_modal_title">Add Team</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-peach" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-regular">Add</button>
       </div>
     </div>
   </div>
@@ -185,7 +163,6 @@
     </div>
   </div>
 </div>
-
 <div class="modal fade" id="add_project" tabindex="-1" role="dialog" aria-labelledby="project_modal_title" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

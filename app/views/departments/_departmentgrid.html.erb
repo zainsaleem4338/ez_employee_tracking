@@ -1,40 +1,54 @@
-<table id="department_table" style="width:100%" class="table data table-hover dt-responsive" >
-  <thead >
-    <tr>
-      <th >NAME</th>
-      <th >ACTIONS</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @departments.each do |department| %>
-    <tr>
-      <td ><%= h truncate(department.name.downcase.titleize, :length => 21) %></td>
-      <td  class="d-table-cell align-middle vertical-align">
-        <div class="row no-gutters justify-content-between">
-          <div class="actions">
-            <%= link_to department do %>
-            <i title="Show Department" class="table-options action-show fas fa-eye"></i>
-            <% end %>
-            <% if can? :create, department %>
-            <%= link_to edit_department_path(department), remote: :true do %>
-            <i title="Edit Department" class="table-options action-edit fas fa-edit"></i>
-            <% end %>
-            <%= link_to department, method: :delete, data: { confirm: 'Are you sure?' } do %>  
-            <i title="Delete Department" class="table-options action-delete fas fa-trash"></i>
-            <% end %>
-            <% end %>
-          </div>
-          <div class="btn-group dropleft">
-            <i class="fas fa-ellipsis-v" title="More..." style="cursor:pointer;font-size:16px" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
-            <div class="dropdown-menu">
-                  <%= link_to "Show Projects",department_projects_path(department), class:"dropdown-item" %>
-                  <%= link_to "Show Teams",department_teams_path(department), class:"dropdown-item" %>
+<div class="container table-responsive">
+  <table id="department_table" style="width:100%" class="table data table-hover dt-responsive" >
+    <thead >
+      <tr>
+        <th>NAME</th>
+        <th>TeamS</th>
+        <th>PROJECTS</th>
+        <th >ACTIONS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @departments.each do |department| %>
+      <tr>
+        <td ><%= h truncate(department.name.downcase.titleize, :length => 21) %></td>
+        <td>
+          <%= link_to department_teams_path(department), class: "btn btn-peach" do %>
+          <span class="pr-2"><%= department.teams.count %></span><i class="fa fa-arrow-right"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to department_projects_path(department), class: "btn btn-peach" do %>
+          <span class="pr-2"><%= department.projects.count %></span><i class="fa fa-arrow-right"></i>
+          <% end %>
+        </td>
+        <td  class="d-table-cell align-middle vertical-align">
+          <div class="row no-gutters justify-content-between">
+            <div class="actions">
+              <%= link_to department do %>
+                <i title="Show Department" class="table-options action-show fas fa-eye"></i>
+              <% end %>
+              <% if can? :create, department %>
+              <%= link_to edit_department_path(department), remote: :true do %>
+                <i title="Edit Department" class="table-options action-edit fas fa-edit"></i>
+              <% end %>
+              <%= link_to department, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i title="Delete Department" class="table-options action-delete fas fa-trash"></i>
+              <% end %>
+              <% end %>
             </div>
-          </div>
+            <div class="btn-group dropleft">
+              <i class="fas fa-ellipsis-v" title="More..." style="cursor:pointer;font-size:16px" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+              <div class="dropdown-menu">
+                <%= link_to "Show Projects",department_projects_path(department), class:"dropdown-item" %>
+                <%= link_to "Show Teams",department_teams_path(department), class:"dropdown-item" %>
+              </div>
+            </div>
 
-        </div>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

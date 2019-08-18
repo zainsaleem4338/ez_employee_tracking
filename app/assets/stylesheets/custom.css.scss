@@ -239,11 +239,14 @@ select[type=text]:focus, textarea:focus {
   font-size: 0.85rem;
 }
 
-
 .dropdown .dropdown-menu .dropdown-header {
   font-weight: 800;
   font-size: 0.65rem;
   color: $primary;
+}
+
+.sidebar-divider {
+  border-top: 1px solid $skin;
 }
 
 .btn-regular {
@@ -386,6 +389,11 @@ table.dataTable thead th, table.dataTable thead td {
   display: none;
 }
 
+#sidebar ul li a {
+  text-align: left;
+  color: $skin;
+}
+
 #sidebar.active .sidebar-header strong {
   display: block;
   font-size: 1.5rem;
@@ -473,8 +481,14 @@ table.dataTable thead th, table.dataTable thead td {
 }
 
 #sidebar ul li a:hover {
-  color: $primary;
-  background: #fff;
+  color: $peach;
+  background: $primary;
+}
+
+#sidebar ul li.active>a,
+#sidebar ul li > a[aria-expanded="true"] {
+  color: $peach;
+  background: $primary;
 }
 
 #sidebar ul li.active>a,
@@ -493,6 +507,20 @@ a[data-toggle="collapse"] {
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+}
+
+#sidebar ul ul a {
+  padding-left: 20px !important;
+  background: $secondary;
+  font-size: 0.7rem;
+  color: $skin;
+}
+
+#sidebar ul ul a:hover {
+  padding-left: 20px !important;
+  background: $secondary;
+  font-size: 0.7rem;
+  color: $peach;
 }
 
 #sidebar ul ul a {
@@ -1445,6 +1473,7 @@ table.data tr:hover div.actions {
 }
 th {
   color: #ffd692;
+  text-transform: uppercase;
 }
 
 td{
@@ -1545,4 +1574,50 @@ tbody tr:hover {
 table.dataTable.no-footer {
   border: 1px solid $peach;
   border-bottom: 1px solid $peach !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+     margin-left: 0em !important; 
+}
+
+div.show-more{
+  text-align: right;
+  font-size: 12px;
+  font-style: italic;
+  a {
+  color: $peach !important;
+  }
+  a:hover {
+    color: $secondary !important;
+  }
+}
+
+h6.card-title {
+  color: $secondary;
+}
+
+.page-title {
+  color: $primary;
+}
+
+.page-desc {
+  color: $secondary;
+  font-size: 12px;
+}
+
+.page-link {
+  border-color: $peach !important;
+  color: $peach !important;
+}
+
+.page-item.active .page-link{
+  color: $skin !important;
+  background-color: $peach !important; 
+  border-color: $peach !important;
+}
+
+.page-item:hover .page-link{
+  color: $peach !important;
+  background-color: $skin !important; 
+  border-color: $peach !important;
 }

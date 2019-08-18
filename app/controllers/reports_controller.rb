@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
 
   # get /reports/task_report
   def task_report
-    @tasks = current_employee.company.tasks.paginate(page: params[:page], per_page: 10)
+    @tasks = current_employee.company.tasks.paginate(page: params[:page], per_page: 2)
   end
 
   # get /reports/load_task_data_in_report
