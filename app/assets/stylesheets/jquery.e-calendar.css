@@ -1,6 +1,6 @@
 .calendar  * {
     box-sizing: border-box;
-    font-family: Tahoma;
+    font-family: Lato !important;
     font-size: 14px;
 }
 .calendar-sm {

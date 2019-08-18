@@ -1,6 +1,13 @@
 @import "bootstrap";
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
+$primary: #6e2142;
+$secondary: #943855;
+$peach: #e16363;
+$skin: #ffd692;
+$white: #fff;
+$success_notice: #F9DEDE;
+
 *,
 *::before,
 *::after {
@@ -9,21 +16,43 @@
 }
 
 html {
-  font-family: sans-serif;
+  font-family: Roboto,sans-serif !important;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.alert-success {
+  top: 20px !important;
+  margin: 0px !important;
+  color: $peach !important;
+  background-color: $success_notice !important;
+  border-color: $success_notice !important;
+}
+
+.alerts {
+    max-height: 4.5rem;
+    overflow: auto;
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: Lato !important;
   background: #fafafa;
   overflow-x:hidden;
   font-size: 0.9rem;
+  color: #6e2142 !important;
+}
+
+.bread-crumbs {
+  background: #FFD692;
+  top: 64px !important;
+  p{
+    font-size: 0.85rem;
+  }
 }
 
 p {
-  font-family: 'Poppins', sans-serif;
+  font-family: Lato !important;
   font-size: 1.1rem;
   font-weight: 300;
   line-height: 1.7rem;
@@ -191,22 +220,28 @@ span {
   display: inline-block;
 }
 
-.btn-purple {
-  background-color: #563d7c !important;
-  border-color: #563d7c !important;
-  color: #fff;
-}
-
 .btn-regular {
-  background-color: #9a6dde !important;
-  border-color: #9a6dde !important;
-  color: #fff;
+  background-color: transparent !important;
+  border-color: $primary !important;
+  color: $primary;
 }
 
 .btn-regular:hover {
-  background-color: #563d7c !important;
-  border-color: #563d7c !important;
+  background-color: $primary !important;
+  border-color: $primary !important;
   color: #fff;
+}
+
+.btn-peach {
+  background-color: transparent !important;
+  border-color: $peach !important;
+  color: $peach !important;
+}
+
+.btn-peach:hover {
+  background-color: $peach !important;
+  border-color: $peach !important;
+  color: #fff !important;
 }
 
 .wrapper {
@@ -372,7 +407,7 @@ a[data-toggle="collapse"] {
 }
 
 #content p {
-  color: #6f4da3;
+  color: #6e2142 !important;
 }
 
 #_navbar {
@@ -384,13 +419,71 @@ a[data-toggle="collapse"] {
 }
 
 .yielded-area {
-  padding-top: 90px;
   padding-left: 20px;
   padding-right: 20px;
+  margin-top: 60px;
+}
+
+.notice{
+  margin-top: 200px !important;
+  margin-bottom: 0px !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  margin-left: 0em !important;
+}
+
+thead,tbody{
+  text-align:center !important;
+}
+
+thead{
+  background: #E16363 !important;
+  color: #ffd692;
 }
 
 .text-purple {
 	color: #6f4da3;
+}
+
+.text-align-left{
+  text-align:left !important;
+}
+
+.text-align-right{
+  text-align:right !important;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+  border: 1px solid #E16363 !important;
+}
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border: 1px solid #E16363 !important;
+}
+.table-bordered {
+  border: 1px solid #E16363 !important;
+}
+.btn-circle.btn-lg {
+  width: 35px;
+  height: 35px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 6px;
+  padding-left: 6px;
+  font-size: 16px;
+  line-height: 1.33;
+  border-radius: 30px;
+}
+
+.btn-circle.btn-md {
+  width: 20px;
+  height: 20px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-right: 1px;
+  padding-left: 2px;
+  font-size: 0.65rem;
+  border-radius: 30px;
 }
 
 .card {
@@ -800,7 +893,7 @@ a[data-toggle="collapse"] {
 
 .title {
   color: #fff;
-  font-family: 'Raleway', sans-serif;
+  font-family: Lato !important;
   font-size: 24px;
   text-align: center;
   width: 90%;
@@ -829,7 +922,7 @@ a[data-toggle="collapse"] {
 }
 
 .text {
-  font-family: sans-serif;
+  font-family: Lato !important;
   font-size: 14px;
   margin: 25px;
   letter-spacing: 1px;
@@ -854,7 +947,7 @@ a[data-toggle="collapse"] {
   line-height: 100px;
   overflow: hidden;
   color: #222;
-  font-family: 'Raleway', sans-serif;
+  font-family: Lato !important;
   font-size: 14px;
   letter-spacing: 2.5px;
   border-top: 3px solid #222;

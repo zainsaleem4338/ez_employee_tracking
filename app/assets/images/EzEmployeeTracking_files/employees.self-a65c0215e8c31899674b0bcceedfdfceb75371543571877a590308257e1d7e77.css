@@ -1,0 +1,10 @@
+/* line 1, app/assets/stylesheets/employees.scss */
+.employee-avatar {
+  width: 30%;
+  height: 35%;
+}
+
+/* line 5, app/assets/stylesheets/employees.scss */
+.head-color {
+  color: black;
+}

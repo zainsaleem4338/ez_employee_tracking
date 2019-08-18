@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
     if params['department'].blank?
       @employees = current_employee.company.employees.active_members.order(:name)
     else
-      @employees = current_employee.company.departments.find(params['department'].to_i).employees.active_members.order(:name)
+      @employees = current_employee.company.departments.find_by(id: params['department'].to_i).employees.active_members.order(:name)
     end
     respond_to do |format|
       format.json { render json: @employees.where('role != ? AND name like ?', Employee::ADMIN_ROLE, "%#{params[:q]}%") }
@@ -34,15 +34,6 @@ class EmployeesController < ApplicationController
       redirect_to employees_path
     else
       redirect_to menus_index_path
-    end
-  end
-
-  # get '/employees/team_member_render_view'
-  def team_member_render_view
-    @team_members = Employee.where(id: params['employee_ids'])
-    @count = params['count']
-    respond_to do |format|
-      format.js
     end
   end
 

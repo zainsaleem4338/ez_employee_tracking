@@ -1,20 +1,18 @@
 class TeamsController < ApplicationController
-  load_and_authorize_resource :department, except: :teams_list
-  load_and_authorize_resource through: :department, except: :teams_list
-  load_and_authorize_resource :team, through_association: :company, only: :teams_list
+  load_and_authorize_resource :department, except: [:teams_list, :team_members]
+  load_and_authorize_resource through: :department, except: [:teams_list, :team_members]
+  load_and_authorize_resource :team, through_association: :company, only: [:teams_list, :team_members]
 
   # post /departments/:department_id/teams
   def create
     respond_to do |format|
-      if @team.create_team(params[:team][:team_lead_id], params[:employee_tokens], params[:department_id])
+      if @team.create_team(params[:department_id], params[:team][:employee_teams_attributes])
         format.html do
           flash[:success] = t('.success_notice')
           redirect_to department_teams_path(@department)
         end
-        format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -23,15 +21,13 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if params[:team].present? &&
-          @team.update_team(params[:team][:team_lead_id], params[:employee_tokens], team_params)
+          @team.update_team(params[:team][:employee_teams_attributes], team_params)
         format.html do
           flash[:success] = t('.success_notice')
           redirect_to department_teams_path(@department)
         end
-        format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,7 +41,6 @@ class TeamsController < ApplicationController
           flash[:success] = t('.success_notice')
           redirect_to department_teams_path(@department)
         end
-        format.json { head :no_content }
       else
         format.html do
           flash[:danger] = t('.error_notice')
@@ -62,8 +57,17 @@ class TeamsController < ApplicationController
     end
   end
 
+  # get '/teams/team_members'
+  def team_members
+    @team_members = Employee.where(id: params['employee_ids'])
+    @count = params['count']
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
   def team_params
-    params.require(:team).permit(:name, :description, :team_pic)
+    params.require(:team).permit(:name, :description, :team_pic, employee_teams_attributes: [:employee_id, :employee_type, :id, :_destroy])
   end
 end

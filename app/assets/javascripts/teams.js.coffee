@@ -18,17 +18,16 @@ jQuery ->
     $("#add_team_members").click ->
       $('#team_members_view').show()
       $('#add_team_members').hide()
-      $('#append_team_members').hide()
+      $('.append-team-members').hide()
 
     $("#ok").click ->
       employees = $('#team_employee_ids').val()
-      added_employees = $("#append_team_members input")
+      added_employees = $(".append-team-members input")
       added_employee_arr = members_array(added_employees)
       employees_arr = employees.split(",")
       employees = employees_arr.diff(added_employee_arr)
       team_leader = $('#team_team_lead_id').siblings("ul").find('li p').html()
       team_leader_value = $('#team_team_lead_id').val()
-
       if(jQuery.inArray( team_leader_value, employees ) != -1)
         $('#team_member_span').text(team_leader+" can't be team member & team leader at the same time.");
       else
@@ -36,11 +35,11 @@ jQuery ->
         rows = $('#member_table tr').length + 1
         $.ajax
           type: 'GET'
-          url: '/employees/team_member_render_view'
+          url: '/teams/team_members'
           data: {'employee_ids':employees,'count':rows}
           $('#team_members_view').hide()
           $('#add_team_members').show()
-          $('#append_team_members').show()
+          $('.append-team-members').show()
           $('#team_member_span').text("");
 
 
@@ -52,7 +51,7 @@ jQuery ->
     $("#ok_leader").click ->
       team_leader = $('#team_team_lead_id').siblings("ul").find('li p').html()
       team_leader_value = $('#team_team_lead_id').val()
-      team_members = $("#append_team_members input")
+      team_members = $(".append-team-members input")
       team_members_arr = members_array(team_members)
       if(jQuery.inArray( team_leader_value, team_members_arr ) != -1)
         $('#team_leader_span').text(team_leader+" can't be team leader & team member at the same time.");
@@ -63,8 +62,9 @@ jQuery ->
         $('#leader_edit').show()
         $('#team_leader_span').text("");
 
-    $('#append_team_members').on 'click', '.js-remove', ->
+    $('.append-team-members').on 'click', '.js-remove', ->
       data_member_id = $(this).attr('data-member-id')
+      $('#team_employee_teams_attributes_2__destroy').val(true)
       $('#' + data_member_id).remove()
       return
     

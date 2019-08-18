@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   get 'employees_report_pdf' => 'reports#attendance_report_pdf'
 
   get 'employee_lists' => 'employees#employees_lists'
-  get '/employees/team_member_render_view' => 'employees#team_member_render_view'
+  get '/teams/team_members' => 'teams#team_members'
 
   get 'employees/:id/projects' => 'projects#index', as: :projects_page
 
