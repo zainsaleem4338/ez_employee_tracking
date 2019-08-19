@@ -1,24 +1,44 @@
-<p id="notice"><%= notice %></p>
-
-<div class="row">
-  <div class="col-sm-2"></div>
-  <div class="col-sm-8">
-    <div class="card">
-      <div class="card-header"><h3 class="card-title mb-0"><%= @department.name %></h3></div>
-      <div class="card-body">
-        <b class="head-color">No of teams: </b><span class="card-text"><%= @department.teams.count %></span>
-        <br><b class="head-color">No of projects: </b><span class="card-text"><%= @department.projects.count %></span><br>
-        <b class="head-color">Description: </b>
-        <p class="card-text"><%= @department.description %></p>
-        <%= link_to 'Show projects', department_projects_path(@department), class: "btn btn-info" %>
-        <%= link_to 'See Teams', department_teams_path(@department), class: "btn btn-dark" %>
-        <br><br>
-        <% if can? :create, Department%>
-        <%= link_to 'Edit', edit_department_path(@department), class: "btn btn-regular" %>
-        <% end %>
-        <%= link_to 'Back', departments_path, class: "btn btn-secondary" %>
+<div class="container">
+  <div class="row d-flex">
+    <div class="col-8">
+        <h2 class="text-prim"><b><%= @department.name %></b></h2>
+      <br>
+      <div class="row d-flex">
+        <div class="col-12">
+          <div class="in-flex">
+            <%= image_tag('team-leader.svg', size: "40x40")%>
+            <p class="text-second mt-3 ml-3">Number of Teams: <span class="text-peach"><%= @department.teams.count %></span></p>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="in-flex">
+            <%= image_tag('work-secondary.svg', size: "40x40")%>
+            <p class="text-second mt-3 ml-3">No of projects: <span class="text-peach"><%= @department.projects.count %></span></p>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="col-4">
+      <%= link_to 'Show projects', department_projects_path(@department), class: "btn btn-peach" %>
+      <%= link_to 'See Teams', department_teams_path(@department), class: "btn btn-regular" %>
+    </div>
+  </div><br>
+  
+  <div class="row d-flex">
+    <div class="col-6">
+      <div class="show-col">
+          <span class="text-prim"><h5><b>Learn More about this team</b></h5></span>
+          <div class="card">
+            <div class="card-body" id="collapseCardDescription">
+              <span class="text-peach">
+                <%if @department.description.blank?%>
+                  *no description provided* 
+                <% else %>
+                  <%= @department.description %></span>
+                <% end %>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
-  <div class="col-sm-2"></div>
 </div>

@@ -2,11 +2,16 @@
   <%= javascript_include_tag 'task_show' %>
 <% end %>
 
-<div class="container task-show-div">
+<div class="container task-show-div" id="task_show_container">
   <div class="row d-flex">
     <div class="col-8">
         <h2 class="text-prim"><b><%= @task.name.downcase.titleize %></b></h2>
       <br>
+      <div class="row d-flex">
+        <div class="col-12">
+          <p class="text-second">Task Status: <span class="text-peach"><%=@task.status.downcase.titleize%></span></p>
+        </div>
+      </div>
       <div class="row d-flex">
         <div class="col-12">
           <div class="task-progress">
@@ -67,11 +72,11 @@
   <br><br>
   <div class="row d-flex lower-half-task-show task-logs">
       <div class="col-6">
-        <div class="task-col">
+        <div class="show-col-left">
           <% @time_logs = get_time_logs(@task) %>
-          <span class="text-prim"><h4>Time Logs for this task</h4></span>
+          <span class="text-prim"><h5><b>Time Logs for this task</b></h5></span>
           <% if @time_logs.any? %>
-            <table class="table table-hover text-prim">
+            <table class="table table-hover text-second">
               <thead>
                 <tr>
                   <th>Day</th>
@@ -85,26 +90,26 @@
                 
                 <% @time_logs.each do |log| %>
                   <tr>
-                    <td><%= log.created_at.to_formatted_s(:short) %></td>
-                    <td><% if log.hours.blank? %> - <% else %>
+                    <td class="text-second"><%= log.created_at.to_formatted_s(:short) %></td>
+                    <td class="text-second"><% if log.hours.blank? %> - <% else %>
                       <%= log.hours.to_formatted_s(:short).to_i %> hours
                       <% end %>
                     </td>
                     <% if @task.assignable_type == Task::TEAM %>
-                      <th><%= link_to log.employee.name, show_employee_path(log.employee), class: 'text-peach no-decoration' %></th>
+                      <td><%= link_to log.employee.name, show_employee_path(log.employee), class: 'text-peach no-decoration' %></td>
                     <% end %>
                   </tr>
                 <% end %>
               </tbody>
             </table>
           <%else%>
-            <span class="text-second"><h5>No Time Logs found</h5></span>
+            <span class="text-second"><h6>No Time Logs found</h6></span>
           <%end%>
         </div>
       </div>
       <div class="col-6">
-        <div class="task-col">
-          <span class="text-prim"><h4>Learn More about this task</h4></span>
+        <div class="show-col-right">
+          <span class="text-prim"><h5><b>Learn More about this task</b></h5></span>
           <div class="card">
             <div class="card-body" id="collapseCardDescription">
               <span class="text-peach">
