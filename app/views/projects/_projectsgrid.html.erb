@@ -12,7 +12,7 @@
   <tbody>
     <% @projects.each do |project| %>
     <tr>
-      <td ><%= project.name.downcase.titleize %></td>
+      <td class="clickable-item"><%= link_to project.name.downcase.titleize, department_project_tasks_path(@department,project) %></td>
       <td ><%= project.start_date.strftime("%B %e, %Y") %></td>
       <td ><%= project.expected_end_date.strftime("%B %e, %Y") %></td>
       <td ><%= project.status %></td>

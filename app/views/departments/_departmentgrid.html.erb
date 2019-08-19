@@ -11,7 +11,7 @@
     <tbody>
       <% @departments.each do |department| %>
       <tr>
-        <td ><%= department.name.downcase.titleize %></td>
+        <td class="clickable-item"><%= link_to department.name.downcase.titleize, department %></td>
         <td>
           <%= link_to department_teams_path(department), class: "btn btn-peach" do %>
           <span class="pr-2"><%= department.teams.count %></span><i class="fa fa-arrow-right"></i>

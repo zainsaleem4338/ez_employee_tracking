@@ -30,14 +30,14 @@
               <tr>
                 <th>Id</th>
                 <th>Member</th>
-                <th>Mail address</th>
+                <th>EMAIL</th>
               </tr>
             </thead>
             <tbody class="scroll-able text-peach">
               <% @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).each do |member| %>
                 <tr>
                   <td class="text-second"><%= member.id %></td>
-                  <td><%= link_to member.name.downcase.titleize, show_employee_path(member), class: 'text-peach no-decoration' %> </td>
+                  <td class="clickable-item"><%= link_to member.name.downcase.titleize, show_employee_path(member), class: 'text-peach no-decoration' %> </td>
                   <td class="text-second"><%= member.email %></td>
                 </tr>
               <% end %>

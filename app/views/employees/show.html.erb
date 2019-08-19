@@ -27,7 +27,9 @@
               </tr>
               <tr>
                 <td class="text-prim"><b>Department:</b></td>
-                <td class="text-peach"><%= @employee.department.name.downcase.capitalize %></td>
+                <td class="text-prim"><b>Department:</b></td>
+                <td class="text-peach"><%= link_to @employee.department.name, department_path(@employee.department), class: 'text-peach no-decoration' %></td>
+
               </tr>
             </table>
           </div>
@@ -75,27 +77,42 @@
         </div>
       </div>
     </div>
-    <div class="col-6 mb-4">
+    <div class="col-6">
       <div class="row">
       <div class="col-4"></div>
-      <div class="col-8 d-flex employee-info">
-      <div class="table-details">
+      <div class="col-8 d-flex">
+      <div>
         <div class="detail-head"></div>
         <table class="table borderless">
           <tr>
             <td class="text-prim"><b>Last sign in:</b></td>
             <td class="text-peach">
-              <%unless @employee.last_sign_in_at.blank? %>
+              <% if @employee.last_sign_in_at.blank? %>
+                -
+              <% else %>
                 <%= I18n.l(@employee.last_sign_in_at, format: :short) %>
-              <%end%></td>
+              <%end%>
+            </td>
           </tr>
           <tr>
             <td class="text-prim"><b>Leaves:</b></td>
-            <td class="text-peach"><%= @employee.leaves %></td>
+            <td class="text-peach">
+              <% if @employee.leaves.blank? %>
+                -
+              <%else %>
+              <%= @employee.leaves %>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <td class="text-prim"><b>Late Count:</b></td>
-            <td class="text-peach"><%= @employee.late_count %></td>
+            <td class="text-peach">
+              <% if @employee.late_count.blank? %>
+                -
+              <%else %>
+              <%= @employee.late_count %>
+              <% end %>
+            </td>
           </tr>
         </table>
       </div>

@@ -2,11 +2,16 @@
   <%= javascript_include_tag 'task_show' %>
 <% end %>
 
-<div class="container task-show-div">
+<div class="container task-show-div" id="task_show_container">
   <div class="row d-flex">
     <div class="col-8">
         <h2 class="text-prim"><b><%= @task.name.downcase.titleize %></b></h2>
       <br>
+      <div class="row d-flex">
+        <div class="col-12">
+          <p class="text-second">Task Status: <span class="text-peach"><%=@task.status.downcase.titleize%></span></p>
+        </div>
+      </div>
       <div class="row d-flex">
         <div class="col-12">
           <div class="task-progress">
@@ -33,18 +38,28 @@
     <div class="col-4">
       <center>
         <%= image_tag('work-secondary.svg', size: "80x80")%><br>
-        <span class="text-peach"><%= @task.assignable.name %> is working on this task.</span>
+        <span class="text-peach">
+          <% if @task.assignable_type == Task::TEAM %>
+          <%= link_to @task.assignable.name, department_team_path(@department, @task.assignable) , class: 'text-peach no-decoration' %>
+          <% elsif @task.assignable_type == Task::EMPLOYEE %>
+          <%= link_to @task.assignable.name, show_employee_path(@task.assignable), class: 'text-peach no-decoration' %>
+          <% end %>
+           is working on this task.</span>
       </center>
     </div>
     <div class="col-4">
       <center>
         <%= image_tag('customer-review-secondary.svg', size: "80x80")%><br>
-        <span class="text-peach"><%= @task.reviewer.name if @task.reviewer.present? %> <%= "No One" if @task.reviewer.nil? %> is reviewing this task.</span>
+        <% if !@task.reviewer.nil? %>
+        <span class="text-peach"><%= link_to @task.reviewer.name.downcase.titleize, show_employee_path(@task.reviewer), class: 'text-peach no-decoration' %> is reviewing this task.</span>
+        <% else %>
+        <span class="text-peach"><i>No one</i> is reviewing this task.</span>
+        <% end %>
       </center>
     </div>
     <div class="col-4">
       <div class="table-details task-times">
-        <div class="detail-head"></div>
+        <div class="detail-head-task"></div>
         <table class="table borderless">
           <tr>
             <td class="text-prim"><i class="fas fa-clock"></i><b> Start Date:</b></td>
@@ -61,11 +76,11 @@
   <br><br>
   <div class="row d-flex lower-half-task-show task-logs">
       <div class="col-6">
-        <div class="task-col">
+        <div class="show-col-left">
           <% @time_logs = get_time_logs(@task) %>
-          <span class="text-prim"><h4>Time Logs for this task</h4></span>
+          <span class="text-prim"><h5><b>Time Logs for this task</b></h5></span>
           <% if @time_logs.any? %>
-            <table class="table table-hover text-prim">
+            <table class="table table-hover text-second">
               <thead>
                 <tr>
                   <th>Day</th>
@@ -79,13 +94,13 @@
                 
                 <% @time_logs.each do |log| %>
                   <tr>
-                    <td><%= log.created_at.to_formatted_s(:short) %></td>
-                    <td><% if log.hours.blank? %> - <% else %>
+                    <td class="text-second"><%= log.created_at.to_formatted_s(:short) %></td>
+                    <td class="text-second"><% if log.hours.blank? %> - <% else %>
                       <%= log.hours.to_formatted_s(:short).to_i %> hours
                       <% end %>
                     </td>
                     <% if @task.assignable_type == Task::TEAM %>
-                      <td><%= log.employee.name.downcase.titleize %></td>
+                      <td><%= link_to log.employee.name.downcase.titleize , show_employee_path(log.employee), class: 'text-peach no-decoration' %></td>
                     <% end %>
                   </tr>
                 <% end %>
@@ -97,13 +112,13 @@
         </div>
       </div>
       <div class="col-6">
-        <div class="task-col">
-          <span class="text-prim"><h4>Learn More about this task</h4></span>
+        <div class="show-col-right">
+          <span class="text-prim"><h5><b>Learn More about this task</b></h5></span>
           <div class="card">
             <div class="card-body" id="collapseCardDescription">
               <span class="text-peach">
                 <%if @task.description.blank?%>
-                  *no description provided* 
+                  <i>*no description provided*</i> 
                 <% else %>
                   <%= @task.description %></span>
                 <% end %>
