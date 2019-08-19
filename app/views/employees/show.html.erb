@@ -9,7 +9,7 @@
       <div class="row d-flex">
         <div class="col-6 d-flex">
           <div class="justify-content-left">
-            <h3 class="text-prim"><b><%= @employee.name %></b></h3>
+            <h3 class="text-prim"><b><%= @employee.name.downcase.capitalize %></b></h3>
             <span class="text-peach"><small><%= @employee.email %></small></span>
           </div>
         </div>
@@ -19,15 +19,15 @@
             <table class="table borderless">
               <tr>
                 <td class="text-prim"><b>Role:</b></td>
-                <td class="text-peach"><%= @employee.role %></td>
+                <td class="text-peach"><%= @employee.role.downcase.capitalize %></td>
               </tr>
               <tr>
                 <td class="text-prim"><b>Company:</b></td>
-                <td class="text-peach"><%= @employee.company.name %></td>
+                <td class="text-peach"><%= @employee.company.name.downcase.capitalize %></td>
               </tr>
               <tr>
                 <td class="text-prim"><b>Department:</b></td>
-                <td class="text-peach"><%= @employee.department.name %></td>
+                <td class="text-peach"><%= @employee.department.name.downcase.capitalize %></td>
               </tr>
             </table>
           </div>
@@ -70,7 +70,7 @@
               Load More
             </center> -->
             <% else %>
-              <p><small>No teams found</small></p>
+              <p><small><i>No Teams Found.</i></small></p>
             <% end %>
         </div>
       </div>

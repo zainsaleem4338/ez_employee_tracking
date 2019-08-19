@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   get 'reports/velocity' => 'reports#show', as: :show_employee_velocity_report
   get 'reports/export_report' => 'reports#pdf_velocity_report', as: :pdf_velocity_report
+  get 'reports/single_team_tasks' => 'reports#single_team_tasks',as: :single_team_tasks_report
   get 'employees_attendance_report' => 'reports#attendance_report', as: :attendance_report
   get 'employees_report_pdf' => 'reports#attendance_report_pdf'
 

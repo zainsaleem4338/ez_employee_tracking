@@ -32,3 +32,6 @@
   </tbody>
 </table>
 </div>
+<div class="pagination-div">
+<%= will_paginate @employees, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
+</div>

@@ -9,7 +9,7 @@
   <div class="page-desc row">
     <div class="col-12">
       <span class="justify-content"><%= @department.description if @department.description.present? %></span>
-      <span class="justify-content"><%= @department.description if @department.description.empty? %></span>
+      <span class="justify-content"><i><%= "No Description found." if !@department.description.present? %></i></span>
     </div>
   </div>
   <br>
@@ -54,7 +54,7 @@
             <%= link_to "Show all #{@department.teams.count} teams...", department_teams_path(@department) %>
           </div>
           <% else %>
-          <p>No teams found</p>
+          <p><i>No Teams found.</i></p>
           <% end %>
         </div>
       </div>
@@ -100,7 +100,7 @@
             <%= link_to "Show all #{@department.projects.count} projects...", department_projects_path(@department)%>
           </div>
           <% else %>
-          <p>No projects found</p>
+          <p><i>No Projects found.</i></p>
           <% end %>
         </div>
       </div>

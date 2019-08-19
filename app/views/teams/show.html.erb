@@ -1,25 +1,65 @@
-<div class="row">
-  <div class="col-sm-2"></div>
-  <div class="col-sm-8">
-    <div class="card">
-      <div class="card-header"><h4 class="card-title mb-0"><b>Team Name: </b><%= @team.name.downcase.capitalize %></h4></div>
-      <div class="card-body">
-        <b class="head-color">Department: </b><span class="card-text"><%= @team.department.name.downcase.capitalize %></span><br>
-        <b class="head-color">Team Leader: </b><span class="card-text"><%= @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize %></span>
-        <br><b class="head-color">Team Members: </b>
-          <% @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).each do |member| %>
-            <br><span class="ml-5"><%= member.name.downcase.capitalize %></span>
-          <% end %>
-        <br><b class="head-color">Description: </b>
-        <p class="card-text"><%= @team.description %></p>
-        <% if can? :create, Team%>
-          <%= link_to 'Edit', edit_department_team_path(@department,@team), class: "btn btn-secondary" %>
-        <% end %>
-        <%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>
+<div class="container task-show-div" id="task_show_container">
+  <div class="row d-flex">
+    <div class="col-8">
+        <h2 class="text-prim"><b><%= @team.name.downcase.titleize %></b></h2>
+      <br>
+      <div class="row d-flex">
+        <div class="col-12">
+          <div class="in-flex">
+            <%= image_tag('team-leader.svg', size: "40x40")%>
+            <p class="text-second ml-3">Team Lead: <span class="text-peach"><%= link_to @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize, show_employee_path(@team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).first), class: 'text-peach no-decoration' %></span></p>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="col-4">
+      <div class="rounded-complexity">
+        <center>
+        <%= image_tag('account.svg', size: "30x30")%><br>
+        <span class="text-prim">Team Count <%= @team.employees.count %></span>
+      </center>
+      </div>
+    </div>
+  </div><br>
+  <div class="row d-flex">
+    <div class="col-6">
+      <div class="show-col-left">
+        <span class="text-prim"><h5><b>Team Members</b></h5></span>
+          <table class="table table-hover text-second">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Member</th>
+                <th>Mail address</th>
+              </tr>
+            </thead>
+            <tbody class="scroll-able text-peach">
+              <% @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).each do |member| %>
+                <tr>
+                  <td class="text-second"><%= member.id %></td>
+                  <td><%= link_to member.name.downcase.titleize, show_employee_path(member), class: 'text-peach no-decoration' %> </td>
+                  <td class="text-second"><%= member.email %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <div class="col-6">
+      <div class="show-col-right">
+          <span class="text-prim"><h5><b>Learn More about this team</b></h5></span>
+          <div class="text-second">Department: <span class="text-peach"><%= link_to @team.department.name, department_path(@team.department), class: 'text-peach no-decoration' %></span></div>
+          <div class="card">
+            <div class="card-body" id="collapseCardDescription">
+              <span class="text-peach">
+                <%if @team.description.blank?%>
+                  *no description provided* 
+                <% else %>
+                  <%= @team.description %></span>
+                <% end %>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
-  <div class="col-sm-2"></div>
 </div>
-
-

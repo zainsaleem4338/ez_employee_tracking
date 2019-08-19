@@ -2,6 +2,10 @@ class EmployeesController < ApplicationController
   load_and_authorize_resource through_association: :company
   load_and_authorize_resource :team, through_association: :company
 
+
+  def index
+    @employees = @employees.paginate(page: params[:page], per_page: 5)
+  end
   # get /employee_lists
   def employees_lists
     if params['department'].blank?

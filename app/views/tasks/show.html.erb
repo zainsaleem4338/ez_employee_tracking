@@ -1,26 +1,115 @@
-<div class="container">
-	<div class="row d-flex">
-		<div class="col-4">
-			<h3 class="text-prim"><b><%= @task.name %></b></h3>
-			<span class="text-peach"><b>Description:</b> <%= @task.description %></span>
-		</div>
-		<div class="col-4">
-			<div class="text-second"><small class="badge-md badge-light"><%= @task.status.downcase.capitalize %></small></div>
-		</div>
-		<div class="col-4">
-      <div class="table-details">
+<% content_for :head do %>
+  <%= javascript_include_tag 'task_show' %>
+<% end %>
+
+<div class="container task-show-div">
+  <div class="row d-flex">
+    <div class="col-8">
+        <h2 class="text-prim"><b><%= @task.name.downcase.titleize %></b></h2>
+      <br>
+      <div class="row d-flex">
+        <div class="col-12">
+          <div class="task-progress">
+            <input type="hidden" id="taskId" name="taskId" value="<%=task_status_percentage(@task)%>">
+            <div class="progress active" id="progressBar" data-toggle="popover" title="Task Status: <%=@task.status%>">
+              <div class="progress-bar progress-bar-animated" id="task_progress_bar" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+    <div class="col-4">
+      <div class="rounded-complexity">
+        <center>
+        <%= image_tag('ai-secondary.svg', size: "30x30")%><br>
+        <span class="text-prim">Complexity <%= @task.complexity%></span>
+      </center>
+      </div>
+    </div>
+  </div><br><br>
+  
+  <div class="row d-flex">
+    <div class="col-4">
+      <center>
+        <%= image_tag('work-secondary.svg', size: "80x80")%><br>
+        <span class="text-peach"><%= @task.assignable.name %> is working on this task.</span>
+      </center>
+    </div>
+    <div class="col-4">
+      <center>
+        <%= image_tag('customer-review-secondary.svg', size: "80x80")%><br>
+        <span class="text-peach"><%= @task.reviewer.name if @task.reviewer.present? %> <%= "No One" if @task.reviewer.nil? %> is reviewing this task.</span>
+      </center>
+    </div>
+    <div class="col-4">
+      <div class="table-details task-times">
         <div class="detail-head"></div>
         <table class="table borderless">
           <tr>
-            <td class="text-prim"><b>Start Date:</b></td>
+            <td class="text-prim"><i class="fas fa-clock"></i><b> Start Date:</b></td>
             <td class="text-peach"><%= @task.start_date.to_date %></td>
           </tr>
           <tr>
-            <td class="text-prim"><b>End Date:</b></td>
+            <td class="text-prim"><i class="fas fa-stopwatch"></i><b> End Date:</b></td>
             <td class="text-peach"><%= @task.expected_end_date.to_date %></td>
           </tr>
         </table>
       </div>
-		</div>
-	</div>
+    </div>
+  </div>
+  <br><br>
+  <div class="row d-flex lower-half-task-show task-logs">
+      <div class="col-6">
+        <div class="task-col">
+          <% @time_logs = get_time_logs(@task) %>
+          <span class="text-prim"><h4>Time Logs for this task</h4></span>
+          <% if @time_logs.any? %>
+            <table class="table table-hover text-prim">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Time Logged</th>
+                  <% if @task.assignable_type == Task::TEAM %>
+                    <th>Logger</th>
+                  <% end %>
+                </tr>
+              </thead>
+              <tbody class="scroll-able text-peach">
+                
+                <% @time_logs.each do |log| %>
+                  <tr>
+                    <td><%= log.created_at.to_formatted_s(:short) %></td>
+                    <td><% if log.hours.blank? %> - <% else %>
+                      <%= log.hours.to_formatted_s(:short).to_i %> hours
+                      <% end %>
+                    </td>
+                    <% if @task.assignable_type == Task::TEAM %>
+                      <td><%= log.employee.name.downcase.titleize %></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <%else%>
+            <span class="text-second"><h5><i>No Time Logs found.</i></h5></span>
+          <%end%>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="task-col">
+          <span class="text-prim"><h4>Learn More about this task</h4></span>
+          <div class="card">
+            <div class="card-body" id="collapseCardDescription">
+              <span class="text-peach">
+                <%if @task.description.blank?%>
+                  *no description provided* 
+                <% else %>
+                  <%= @task.description %></span>
+                <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
 </div>

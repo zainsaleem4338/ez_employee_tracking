@@ -29,3 +29,7 @@
 </table>
 
 <% end %>
+
+<div class="pagination-div">
+<%= will_paginate @attendances_list, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
+</div>

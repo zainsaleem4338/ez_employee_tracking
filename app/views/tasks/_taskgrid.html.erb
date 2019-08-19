@@ -21,7 +21,7 @@
       <td  class="d-table-cell align-middle vertical-align">
         <div class="row no-gutters justify-content-between">
           <div class="actions">
-            <%= link_to department_project_tasks_path(@department,task) do %>
+            <%= link_to department_project_task_path(@department, @project,task) do %>
             <i title="Show Tasks" class="table-options action-show fas fa-eye"></i>
             <% end %>
             <% if can? :create, task %>
@@ -75,3 +75,6 @@
   </tbody>
 </table>             
 <% end %>
+<div class="pagination-div">
+<%= will_paginate @tasks, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
+</div>
