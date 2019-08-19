@@ -1,3 +1,8 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+    <p class="m-0 align-middle"><%= link_to 'Employees', members_path %> > Add Employee </p>
+  </div>
+<% end %>
 <br>
 <%= render 'shared/errors', obj: @member %>
 

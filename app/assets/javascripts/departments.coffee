@@ -6,6 +6,8 @@ jQuery ->
       'paging': false,
       'info': false,
       'columns': [
-      	{'width': '70%'}
-      	{'width': '30%', 'orderable': false, "className": "text-center"}
+      	{'width': '45%'}
+      	{'width': '20%', 'orderable': false, "className": "text-center"}
+        {'width': '20%', 'orderable': false, "className": "text-center"}
+        {'width': '15%', 'orderable': false, "className": "text-center"}
       ]

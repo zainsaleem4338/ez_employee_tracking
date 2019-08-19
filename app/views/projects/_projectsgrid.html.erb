@@ -1,3 +1,4 @@
+<div class="container table-responsive">
 <table id="project_table" style="width:100%" class="table data table-hover dt-responsive">
   <thead>
     <tr>
@@ -11,7 +12,7 @@
   <tbody>
     <% @projects.each do |project| %>
     <tr>
-      <td ><%= project.name.downcase.titleize %></td>
+      <td class="clickable-item"><%= link_to project.name.downcase.titleize, department_project_tasks_path(@department,project) %></td>
       <td ><%= project.start_date.strftime("%B %e, %Y") %></td>
       <td ><%= project.expected_end_date.strftime("%B %e, %Y") %></td>
       <td ><%= project.status %></td>
@@ -44,3 +45,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
+<div class="pagination-div">
+<%= will_paginate @projects, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
+</div>

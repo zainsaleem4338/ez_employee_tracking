@@ -1,3 +1,4 @@
+<div class="container table-responsive">
 <table id="taskdetails_table" style="width:100%" class="table data table-hover dt-responsive">
   <thead>
     <tr>
@@ -24,6 +25,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
 <br>
 <% unless @pagination_disallow.present? %>
   <%= will_paginate @tasks, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>

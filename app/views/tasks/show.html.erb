@@ -103,7 +103,7 @@
               </tbody>
             </table>
           <%else%>
-            <span class="text-second"><h6>No Time Logs found</h6></span>
+            <span class="text-second"><h5><i>No Time Logs found.</i></h5></span>
           <%end%>
         </div>
       </div>
@@ -114,7 +114,7 @@
             <div class="card-body" id="collapseCardDescription">
               <span class="text-peach">
                 <%if @task.description.blank?%>
-                  *no description provided* 
+                  <i>*no description provided*</i> 
                 <% else %>
                   <%= @task.description %></span>
                 <% end %>

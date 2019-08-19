@@ -1,0 +1,172 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+    <p class="m-0 align-middle">Attendance</p>
+  </div>
+<% end %>
+<p id="notice"><%= notice %></p>
+<div>
+  <div class="page-title row">
+    <div class="col-12">
+      <h4><b><%= @department.name.downcase.titleize %></b></h4>
+    </div>
+  </div>
+  <div class="page-desc row">
+    <div class="col-12">
+      <span class="justify-content"><%= @department.description if @department.description.present? %></span>
+      <span class="justify-content"><i><%= "No Description found." if !@department.description.present? %></i></span>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <div class="row d-flex justify-content-between align-items-center p-1">
+            <h6 class="card-title mb-0"><b>TEAMS</b></h6>
+            <% if can? :create, Team %>
+            <%= link_to new_department_team_path(@department),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add_team', class: 'btn btn-regular btn-circle btn-lg'} do %>
+            <i class="fas fa-plus"></i>
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="card-body">
+          <% if @department.teams.length > 0%>
+          <div class="container table-responsive">
+
+            <table style="width:100%" class="table dataable-hover dt-responsive">
+              <thead>
+                <tr>
+                  <th>Team Name</th>
+                  <th>Team Leader</th>
+                  <th>Team Members</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @department.teams.order(created_at: :asc).last(5).each do |team| %>
+                <tr>
+                  <td class="clickable-item"><%= link_to team.name.downcase.titleize, department_team_path(@department,team) %></td>
+                  <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize %></td>
+                  <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="show-more">
+            <%= link_to "Show all #{@department.teams.count} teams...", department_teams_path(@department) %>
+          </div>
+          <% else %>
+          <p><i>No Teams found.</i></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <div class="row d-flex justify-content-between align-items-center p-1">
+            <h6 class="card-title mb-0"><b>PROJECTS</b></h6>
+            <% if can? :create, Project %>
+            <%= link_to new_department_project_path(@department),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add_project', class: 'btn btn-regular btn-circle btn-lg'} do %>
+            <i class="fas fa-plus"></i>
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="card-body">
+          <% if @department.projects.length > 0%>
+          <div class="container table-responsive">
+            <table style="width:100%" class="table data table-hover dt-responsive">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Start Date</th>
+                  <th>Expected End Date</th>
+                  <th>Tasks</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @department.projects.order(created_at: :asc).last(5).each do |project| %>
+                <tr>
+                  <td class="clickable-item"><%= link_to project.name.downcase.titleize, department_project_path(@department, project) %></td>
+                  <td><%= project.start_date.to_date %></td>
+                  <td><%= project.expected_end_date.to_date %></td>
+                  <td><%= project.tasks.count %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="show-more">
+            <%= link_to "Show all #{@department.projects.count} projects...", department_projects_path(@department)%>
+          </div>
+          <% else %>
+          <p><i>No Projects found.</i></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="add_team" tabindex="-1" role="dialog" aria-labelledby="team_modal_title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="team_modal_title">Add Team</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-peach" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-regular">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="add_project" tabindex="-1" role="dialog" aria-labelledby="project_modal_title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="project_modal_title">Add Project</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Add Project
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-peach" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-regular">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="add_employee" tabindex="-1" role="dialog" aria-labelledby="employee_modal_title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="employee_modal_title">Add Employee</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-peach" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-regular">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

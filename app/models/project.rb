@@ -5,7 +5,8 @@ class Project < ActiveRecord::Base
   belongs_to :company
   has_many :tasks, dependent: :destroy
   validates :start_date, :expected_end_date, :name, :department_id, presence: :true
-  validate :check_start_date, :check_start_and_end_date
+  validate :check_start_date, on: :create
+  validate :check_start_and_end_date
   scope :get_projects, ->(user) { joins(tasks: :project).where(tasks: { id: Task.all.get_tasks(user), company_id: user.company_id }).distinct }
   scope :employee_projects, ->(user) { joins(tasks: :project).where(tasks: { id: Task.all.employee_tasks(user), company_id: user.company_id }).distinct }
 

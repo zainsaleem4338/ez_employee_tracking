@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
 
   # get /reports/task_report
   def task_report
-    @tasks = current_employee.company.tasks.paginate(page: params[:page], per_page: 10)
+    @tasks = current_employee.company.tasks.paginate(page: params[:page], per_page: 5)
   end
 
   # get /reports/load_task_data_in_report
@@ -43,6 +43,7 @@ class ReportsController < ApplicationController
   # get /reports/velocity
   def show
     @employee_tasks_data = Report.compute_employees_velocity(current_employee)
+    # @employee_tasks_data = @employee_tasks_data.paginate(page: params[:page], per_page: 5)
   end
 
   # get /reports/export_report
@@ -63,6 +64,13 @@ class ReportsController < ApplicationController
   def attendance_report
     if current_employee.role == Employee::ADMIN_ROLE
       @attendances = Report.attendance_data(current_employee).paginate(page: params[:page], per_page: 10)
+    end
+  end
+
+  def single_team_tasks
+    @team_members_data = Report.single_team_velocity(current_employee,params[:team_id])
+    respond_to do |format|
+      format.js
     end
   end
 

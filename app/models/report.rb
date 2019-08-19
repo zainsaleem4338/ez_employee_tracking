@@ -64,6 +64,31 @@ class Report
     @employee_tasks_data
   end
 
+  def self.single_team_velocity(current_employee, team_id)
+    if current_employee.role == Employee::EMPLOYEE_ROLE
+      @employee_teams = current_employee.teams.find(team_id)
+    elsif current_employee.role == Employee::ADMIN_ROLE
+      @employee_teams = current_employee.company.teams.find(team_id)
+    end
+
+    @employee_tasks_data = {}
+    team = @employee_teams
+    @employees_list = team.employees
+    # @employee_tasks_data[team.id] = {}
+    @employees_list.each do |employee|
+      @employee_tasks = employee.company.tasks.get_employee_tasks(employee)
+      @employee_tasks_data[employee.id] = {
+        employee_id: employee.id,
+        employee_name: employee.name,
+        total_tasks: @employee_tasks.count,
+        total_time: time_spent_on_tasks(employee.id, @employee_tasks),
+        total_complexity: compute_total_complexity_of_tasks(@employee_tasks),
+        velocity: compute_one_employee_velocity(employee.id, @employee_tasks)
+      }
+    end
+    @employee_tasks_data
+  end
+
   def self.attendance_data(current_employee, all_employees = true)
     attendances_array = []
     holidays = []

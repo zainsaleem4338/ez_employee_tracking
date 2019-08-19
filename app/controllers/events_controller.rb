@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
-
   # get '/events/index'
   def index
     @settings = current_employee.company.setting.holidays
@@ -8,7 +7,6 @@ class EventsController < ApplicationController
       format.html
     end
   end
-
   # post '/events/create'
   def create
     @event.company_id = current_company.id
@@ -42,10 +40,6 @@ class EventsController < ApplicationController
 
   def home
     @events = @events.paginate(page: params[:page], per_page: 5)
-  end
-
-  def show
-    
   end
 
   protected

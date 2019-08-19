@@ -83,7 +83,7 @@ module ApplicationHelper
       id: 'dashboard_option'
     }
     @employee_attendance = {
-      name: 'My attendance',
+      name: 'My Attendance',
       link: attendance_path(current_employee),
       icon: 'fas fa-journal-whills',
       id: 'my_attendance_option'
@@ -139,9 +139,27 @@ module ApplicationHelper
       }
       @reports = {
         name: 'Reports',
-        link: reports_path,
+        link: '#',
         icon: 'fas fa-file',
-        id: 'reports_option'
+        id: 'reports_option',
+        submenu_id: 'reportSubmenu',
+        suboptions: [
+          {
+            name: 'Task Report',
+            link: task_report_reports_path,
+            icon: 'fa fa-tasks'
+          },
+          {
+            name: 'Velocity Report',
+            link: show_employee_velocity_report_path,
+            icon: 'fa fa-line-chart'
+          },
+          {
+            name: 'Attendance Report',
+            link: attendance_report_path,
+            icon: 'fa fa-tasks'
+          },
+        ]
       }
       @data.push(@employees).push(@departments).push(@reports).push(@attendance)
     else

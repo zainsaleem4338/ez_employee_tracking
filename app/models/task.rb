@@ -14,7 +14,8 @@ class Task < ActiveRecord::Base
   belongs_to :project
   belongs_to :assignable, polymorphic: true
   validates :start_date, :expected_end_date, :name, :company_id, :project_id, presence: :true
-  validate :check_start_date, :check_start_and_end_date
+  validate :check_start_date, on: :create
+  validate :check_start_and_end_date
   has_many :task_time_logs, dependent: :destroy
   validates :complexity, inclusion: { in: COMPLEXITY }, numericality: true
   belongs_to :reviewer, foreign_key: :reviewer_id, class_name: EMPLOYEE
