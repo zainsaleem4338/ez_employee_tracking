@@ -14,10 +14,9 @@ class EventsController < ApplicationController
     @event.company_id = current_company.id
     if @event.save
       flash[:success] = t('.success_notice')
-      redirect_to index_events_path
+      redirect_to home_events_path
     else
-      flash[:danger] = t('.error_notice')
-      redirect_to menus_index_path
+      render 'new'
     end
   end
 
@@ -25,22 +24,28 @@ class EventsController < ApplicationController
   def update
     if @event.update(event_params)
       flash[:success] = t('.success_notice')
-      redirect_to index_events_path
     else
       flash[:danger] = t('.error_notice')
-      redirect_to menus_index_path
     end
+    redirect_to home_events_path
   end
 
   # delete '/events/:id/destroy'
   def destroy
     if @event.destroy
       flash[:success] = t('.success_notice')
-      redirect_to index_events_path
     else
       flash[:danger] = t('.error_notice')
-      redirect_to menus_index_path
     end
+    redirect_to home_events_path
+  end
+
+  def home
+    @events = @events.paginate(page: params[:page], per_page: 5)
+  end
+
+  def show
+    
   end
 
   protected

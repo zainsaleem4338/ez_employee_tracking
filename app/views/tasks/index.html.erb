@@ -1,13 +1,12 @@
-<% provide(:title, "Project Tasks") %>
 <div class="container">
   <div class="card">
     <div class="card-header">
-      <h5>Project: <b><%= @project.name.capitalize %></b></h5>
+      <h5>Project: <b><%= @project.name.titleize %></b></h5>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col">
-          <h6><b>Department: </b><%= @project.department.name %></h6>
+          <h6><b>Department: </b><%= @project.department.name.titleize %></h6>
         </div>
         <div class="col">
           <h6><b>Status: </b><%= @project.status %></h6>

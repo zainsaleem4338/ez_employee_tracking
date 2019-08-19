@@ -2,10 +2,10 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.role == Employee::ADMIN_ROLE
+    if user.role == Employee::ADMIN_ROLE && user.department.nil?
       can :manage, Department, company_id: user.company_id
       can [:read, :employees_lists, :team_member_render_view, :pdf_velocity_report], Employee, active: true, company_id: user.company_id
-      can [:new, :create], Employee, company_id: user.company_id
+      can [:new, :create, :show], Employee, company_id: user.company_id
       can :destroy, Employee, company_id: user.company_id
       can :manage, Project, company_id: user.company_id
       can :manage, Task, company_id: user.company_id
@@ -15,10 +15,36 @@ class Ability
       can :manage, Team, company_id: user.company_id
       can :manage, Report, company_id: user.company_id
 
+    elsif user.role == Employee::ADMIN_ROLE && user.department.present?
+
+      can :manage, Employee, user.company.employees.where(department_id: user.department_id) do |employee|
+        employee.company_id == user.company_id
+      end
+
+      can :manage, Project, user.company.projects do |project|
+        project.department_id == user.department_id
+        project.company_id    == user.company_id
+      end
+
+      can :manage, Team, user.company.teams do |team|
+        team.department_id == user.department_id
+        team.company_id    == user.company_id
+      end
+
+      can :manage, Department, user.company.departments.where(id: user.department_id) do |department|
+        department.company_id == user.company_id && department.id == user.department_id
+      end
+
+      can :manage, Task, user.company.tasks do |task|
+        task.project.department.id == user.department_id
+        task.company_id            == user.company_id
+      end
+
     else
       can [:read, :pdf_velocity_report], Employee, Employee.team_employees(user) do |employee|
         employee.company_id == user.company_id
       end
+
       can :read, Project, Project.get_projects(user) do |project|
         project.company_id == user.company_id
       end

@@ -2,17 +2,13 @@ Rails.application.routes.draw do
   devise_for :employees, controllers: { sessions: 'sessions' }
 
   resources :attendances
-  resources :settings, except: [:new, :create, :edit, :update, :show, :destroy]
-  get '/settings/edit' => 'settings#edit', as: :edit_settings
-  patch '/settings/update' => 'settings#update', as: :update_settings
+  resources :settings, except: [:new, :create, :show, :destroy]
 
-  get '/events/index' => 'events#index', as: :index_events
-  get '/events/new' => 'events#new', as: :new_events
-  get '/events/home' => 'events#home', as: :home_events
-  post '/events/create' => 'events#create', as: :create_events
-  get '/events/:id/edit' => 'events#edit', as: :edit_events
-  patch '/events/:id/update' => 'events#update', as: :update_events
-  delete '/events/:id/destroy' => 'events#destroy', as: :destroy_events
+  resources :events do
+    collection do
+      get :home
+    end
+  end
 
   resources :departments do
     resources :teams
@@ -29,8 +25,8 @@ Rails.application.routes.draw do
 
   get 'menus/index' => 'menus#index'
   get 'menus/home' => 'menus#home'
-  post 'menus/home' => 'menus#home'
-  post 'menus/search_email' => 'menus#search_email'
+  # post 'menus/home' => 'menus#home'
+  get 'menus/search_email' => 'menus#search_email'
   root 'menus#home'
 
   get 'reports/velocity' => 'reports#show', as: :show_employee_velocity_report
@@ -40,12 +36,8 @@ Rails.application.routes.draw do
 
   get 'employee_tasks' => 'tasks#employee_tasks', :as => :employee_tasks_list
   patch 'tasks/:id/update_task_logtime' => 'tasks#update_task_logtime', :as => :update_task_logtime
-  get 'employee_lists' => 'employees#employees_lists'
-  get '/employees/index' => 'employees#index', :as => :employees
-  get '/employees/new' => 'employees#new', :as => :new_employee
-  get '/employees/:sequence_num/show' => 'employees#show', :as => :show_employee
-  post '/employees/create' => 'employees#create', :as => :create_employee
-  delete '/employees/:id' => 'employees#destroy', :as => :delete_employee
+  get 'employee_lists' => 'employees#employees_lists' 
+  resources :members
 
   get '/messages/index' => 'messages#index'
   post '/messages/' => 'messages#create'
@@ -69,4 +61,6 @@ Rails.application.routes.draw do
     end
   end
   get 'teamslist' => 'teams#teams_list'
+
+  get '404', to: 'menus#page_not_found'
 end
