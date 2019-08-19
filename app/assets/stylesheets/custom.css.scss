@@ -50,6 +50,20 @@ a:focus {
   transition: all 0.3s;
 }
 
+a.text-peach {
+  color: inherit;
+  text-decoration: none !important;
+  transition: all 0.3s;
+  &:hover {
+    color: $secondary;
+    text-decoration: none !important;
+  }
+}
+
+.no-decoration, .no-decoration:hover {
+  text-decoration: none !important;
+}
+
 input[type=text], textarea {
   -webkit-transition: all 0.30s ease-in-out;
   -moz-transition: all 0.30s ease-in-out;
@@ -67,6 +81,9 @@ select[type=text]:focus, textarea:focus {
   border: 1px solid $skin;
 }
 
+.in-flex{
+  display: inline-flex;
+}
 
 .navbar {
   padding: 5px 10px;
@@ -163,6 +180,7 @@ select[type=text]:focus, textarea:focus {
 }
 
 .table-details {
+  padding-left: 15px;
   border-radius: 1px solid $light_gray;
 }
 
@@ -178,6 +196,71 @@ select[type=text]:focus, textarea:focus {
   margin-top: 40px;
   margin-right: 20px;
   margin-left: 10px !important;
+}
+
+#task_show_container {
+
+}
+
+.task-times {
+  padding-left: 40px;
+  padding-right: 30px;
+}
+
+.task-progress {
+  margin-right: 40px;
+}
+
+.task-show-div {
+  margin-left: 30px;
+}
+.task-logs{
+  padding-left: 30px;
+}
+
+.assigned-to-icon {
+  color: $primary;
+}
+
+.scroll-able {
+  overflow-y: scroll;
+  max-height: 400px;
+  min-height: 400px;
+}
+
+.progress {
+  box-shadow: 1px 2px 5px $skin;
+}
+
+.progress-bar {
+  width: 0%;
+  -webkit-transition: all 4s easeOutBounce;
+  transition: all 4s easeOutBounce;
+  -webkit-transition-delay: 1s;
+  transition-delay: 1s;
+  background-color: $peach !important;
+}
+
+.lower-half-task-show {
+  padding-top: 30px;
+  border-top: 5px solid $primary;
+  border-radius: 5px;
+}
+
+.show-col-right {
+  padding-right: 20px;
+  padding-left: 10px;
+}
+
+.show-col-left {
+  margin-right: 60px;
+}
+
+.rounded-complexity {
+  margin-right: 35px;
+  margin-left: 35px;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 1px 2px 5px $skin;
 }
 
 /*.container {
@@ -303,16 +386,29 @@ table.dataTable thead th, table.dataTable thead td {
 }
 
 .btn-peach {
-  background-color: transparent !important;
+  background-color: $peach !important;
   border-color: $peach !important;
-  color: $peach !important;
+  color: $skin !important;
 }
 
 .btn-peach:hover {
   background-color: $peach !important;
   border-color: $peach !important;
-  color: #fff !important;
+  color: $secondary !important;
 }
+
+.btn-skin {
+  background-color: $skin !important;
+  border-color: $skin !important;
+  color: $peach !important;
+}
+
+.btn-skin:hover {
+  background-color: $skin !important;
+  border-color: $skin !important;
+  color: $secondary !important;
+}
+
 
 .btn-circle.btn-lg {
   width: 35px;
@@ -592,8 +688,21 @@ width: calc(100% - 180px);
 .detail-head {
   min-height: 5px;
   max-height: 5px;
+  min-width: 216px;
+  max-width: 216px;
   width: inherit;
   background-color: $secondary;
+  border-radius: 5px;
+}
+
+.detail-head-task {
+  min-height: 5px;
+  max-height: 5px;
+  min-width: 257px;
+  max-width: 257px;
+  width: inherit;
+  background-color: $secondary;
+  border-radius: 5px;
 }
 
 .card {
@@ -915,6 +1024,12 @@ width: calc(100% - 180px);
 #_navbar .navbar-toggler {
   margin-right: 30px;
 }
+
+#filter_btn {
+  min-width: 90px;
+  max-width: 90px;
+}
+
 @media (max-width: 992px) {
   #_navbar .navbar-header {
     margin-left: 10px;
@@ -1849,4 +1964,131 @@ section h3, h1, h2, h4 {
 }
 h4 {
   color: $primary !important;
+}
+@keyframes scale-easeOutBounce {
+  0% {
+    transform: scale(1);
+  }
+
+  12% {
+    transform: scale(0.89);
+  }
+
+  24% {
+    transform: scale(0.56);
+  }
+
+  36% {
+    transform: scale(0.02);
+  }
+
+  54% {
+    transform: scale(0.25);
+  }
+
+  74% {
+    transform: scale(0.02);
+  }
+
+  82% {
+    transform: scale(0.06);
+  }
+
+  92% {
+    transform: scale(0.01);
+  }
+
+  96% {
+    transform: scale(0.02);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+
+}
+
+@keyframes undefined-easeOutBounce {
+  0% {
+    transform: translateX(0%);
+  }
+
+  12% {
+    transform: translateX(-10.89%);
+  }
+
+  24% {
+    transform: translateX(-43.56%);
+  }
+
+  36% {
+    transform: translateX(-98.01%);
+  }
+
+  54% {
+    transform: translateX(-75.02%);
+  }
+
+  74% {
+    transform: translateX(-98.37%);
+  }
+
+  82% {
+    transform: translateX(-93.75%);
+  }
+
+  92% {
+    transform: translateX(-99.34%);
+  }
+
+  96% {
+    transform: translateX(-98.46%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+
+}
+
+@keyframes opacity-easeOutBounce {
+  0% {
+    opacity: 1;
+  }
+
+  12% {
+    opacity: 0.89;
+  }
+
+  24% {
+    opacity: 0.56;
+  }
+
+  36% {
+    opacity: 0.02;
+  }
+
+  54% {
+    opacity: 0.25;
+  }
+
+  74% {
+    opacity: 0.02;
+  }
+
+  82% {
+    opacity: 0.06;
+  }
+
+  92% {
+    opacity: 0.01;
+  }
+
+  96% {
+    opacity: 0.02;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
