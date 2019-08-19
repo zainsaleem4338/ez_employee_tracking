@@ -6,7 +6,7 @@ $secondary: #943855;
 $peach: #e16363;
 $skin: #ffd692;
 $white: #fff;
-$success_notice: #F9DEDE;
+$success_notice: #FFE2B2;
 $light_gray: #e3e6f0;
 
 *,
@@ -39,8 +39,9 @@ html {
 .alert-notice {
     top: 20px !important;
     margin: 0px !important;
-    background-color: #4CAF50;
-    color: white;
+    color: $peach !important;
+    background-color: $success_notice !important;
+    border-color: $success_notice !important;
 }
 
 .badge-danger {
