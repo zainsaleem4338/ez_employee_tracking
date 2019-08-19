@@ -86,7 +86,7 @@
               <tbody>
                 <% @department.projects.order(created_at: :asc).last(5).each do |project| %>
                 <tr>
-                  <td class="clickable-item"><%= link_to project.name.downcase.titleize, department_project_tasks_path(@department,project) %></td>
+                  <td class="clickable-item"><%= link_to project.name.downcase.titleize, department_project_path(@department, project) %></td>
                   <td><%= project.start_date.to_date %></td>
                   <td><%= project.expected_end_date.to_date %></td>
                   <td><%= project.tasks.count %></td>
@@ -122,49 +122,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-peach" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-regular">Add</button>
-=======
-<div class="container">
-  <div class="row d-flex">
-    <div class="col-8">
-        <h2 class="text-prim"><b><%= @department.name %></b></h2>
-      <br>
-      <div class="row d-flex">
-        <div class="col-12">
-          <div class="in-flex">
-            <%= image_tag('team-leader.svg', size: "40x40")%>
-            <p class="text-second mt-3 ml-3">Number of Teams: <span class="text-peach"><%= @department.teams.count %></span></p>
-          </div>
-        </div>
-        <div class="col-12">
-          <div class="in-flex">
-            <%= image_tag('work-secondary.svg', size: "40x40")%>
-            <p class="text-second mt-3 ml-3">No of projects: <span class="text-peach"><%= @department.projects.count %></span></p>
-          </div>
-        </div>
->>>>>>> 1c96a6efd50b06aca1df6f73d618fc064876758b
       </div>
-    </div>
-    <div class="col-4">
-      <%= link_to 'Show projects', department_projects_path(@department), class: "btn btn-peach" %>
-      <%= link_to 'See Teams', department_teams_path(@department), class: "btn btn-regular" %>
-    </div>
-  </div><br>
-  
-  <div class="row d-flex">
-    <div class="col-6">
-      <div class="show-col">
-          <span class="text-prim"><h5><b>Learn More about this team</b></h5></span>
-          <div class="card">
-            <div class="card-body" id="collapseCardDescription">
-              <span class="text-peach">
-                <%if @department.description.blank?%>
-                  *no description provided* 
-                <% else %>
-                  <%= @department.description %></span>
-                <% end %>
-            </div>
-          </div>
-        </div>
     </div>
   </div>
 </div>
