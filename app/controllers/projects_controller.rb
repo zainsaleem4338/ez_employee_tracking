@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   load_and_authorize_resource :department
-  load_and_authorize_resource through: :department
+  load_and_authorize_resource through: :department, find_by: :sequence_num
 
   # get /departments/:department_id/projects
   def index

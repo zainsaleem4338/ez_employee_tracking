@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190806131942) do
+ActiveRecord::Schema.define(version: 20190819173732) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "login_time"
@@ -53,14 +53,16 @@ ActiveRecord::Schema.define(version: 20190806131942) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "departments", force: :cascade do |t|
-    t.string   "name",        limit: 255,   null: false
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "company_id",  limit: 4
+    t.string   "name",         limit: 255,   null: false
+    t.text     "description",  limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "company_id",   limit: 4
+    t.integer  "sequence_num", limit: 4,     null: false
   end
 
   add_index "departments", ["company_id"], name: "index_departments_on_company_id", using: :btree
+  add_index "departments", ["sequence_num", "company_id"], name: "index_departments_on_sequence_num_and_company_id", unique: true, using: :btree
 
   create_table "employee_teams", force: :cascade do |t|
     t.integer  "employee_id",   limit: 4,   null: false
@@ -110,11 +112,15 @@ ActiveRecord::Schema.define(version: 20190806131942) do
   add_index "employees", ["sequence_num", "company_id"], name: "index_employees_on_sequence_num_and_company_id", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.string   "description", limit: 255
-    t.integer  "company_id",  limit: 4
-    t.datetime "event_date",              null: false
+    t.string   "title",        limit: 255
+    t.string   "description",  limit: 255
+    t.integer  "company_id",   limit: 4
+    t.datetime "event_date",               null: false
+    t.integer  "sequence_num", limit: 4,   null: false
+    t.datetime "created_at"
   end
+
+  add_index "events", ["sequence_num", "company_id"], name: "index_events_on_sequence_num_and_company_id", unique: true, using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.string  "message",     limit: 255
@@ -133,10 +139,12 @@ ActiveRecord::Schema.define(version: 20190806131942) do
     t.datetime "updated_at",                      null: false
     t.integer  "company_id",        limit: 4
     t.integer  "department_id",     limit: 4
+    t.integer  "sequence_num",      limit: 4,     null: false
   end
 
   add_index "projects", ["company_id"], name: "index_projects_on_company_id", using: :btree
   add_index "projects", ["department_id"], name: "index_projects_on_department_id", using: :btree
+  add_index "projects", ["sequence_num", "company_id"], name: "index_projects_on_sequence_num_and_company_id", unique: true, using: :btree
 
   create_table "settings", force: :cascade do |t|
     t.text    "working_days",     limit: 65535
@@ -177,12 +185,14 @@ ActiveRecord::Schema.define(version: 20190806131942) do
     t.string   "assignable_type",   limit: 255
     t.integer  "complexity",        limit: 4
     t.integer  "reviewer_id",       limit: 4
+    t.integer  "sequence_num",      limit: 4,     null: false
   end
 
   add_index "tasks", ["assignable_type", "assignable_id"], name: "index_tasks_on_assignable_type_and_assignable_id", using: :btree
   add_index "tasks", ["company_id"], name: "index_tasks_on_company_id", using: :btree
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id", using: :btree
   add_index "tasks", ["reviewer_id"], name: "index_tasks_on_reviewer_id", using: :btree
+  add_index "tasks", ["sequence_num", "company_id"], name: "index_tasks_on_sequence_num_and_company_id", unique: true, using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",                  limit: 255,   null: false
@@ -195,10 +205,12 @@ ActiveRecord::Schema.define(version: 20190806131942) do
     t.string   "team_pic_content_type", limit: 255
     t.integer  "team_pic_file_size",    limit: 8
     t.datetime "team_pic_updated_at"
+    t.integer  "sequence_num",          limit: 4,     null: false
   end
 
   add_index "teams", ["company_id"], name: "index_teams_on_company_id", using: :btree
   add_index "teams", ["department_id"], name: "index_teams_on_department_id", using: :btree
+  add_index "teams", ["sequence_num", "company_id"], name: "index_teams_on_sequence_num_and_company_id", unique: true, using: :btree
 
   add_foreign_key "attendances", "companies"
   add_foreign_key "attendances", "employees"

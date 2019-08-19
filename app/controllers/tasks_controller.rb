@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
   load_and_authorize_resource only: [:employee_tasks, :update_task_logtime]
-  load_and_authorize_resource :department
-  load_and_authorize_resource :project, through: :department, except: [:employee_tasks, :update_task_logtime]
-  load_and_authorize_resource :task, through: :project, except: [:employee_tasks, :update_task_logtime]
+  load_and_authorize_resource :department, find_by: :sequence_num
+  load_and_authorize_resource :project, through: :department, except: [:employee_tasks, :update_task_logtime], find_by: :sequence_num
+  load_and_authorize_resource :task, through: :project, except: [:employee_tasks, :update_task_logtime], find_by: :sequence_num
 
   # get /departments/:department_id/projects/:project_id/tasks
   def index

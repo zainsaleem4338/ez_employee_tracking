@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+	sequenceid :company , :tasks
   not_multitenant!
   EMPLOYEE = 'Employee'.freeze
   TEAM     = 'Team'.freeze

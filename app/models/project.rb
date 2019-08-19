@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+	sequenceid :company , :projects
   not_multitenant!
   NEW_STATUS = 'new'.freeze
   belongs_to :department

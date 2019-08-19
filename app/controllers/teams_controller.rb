@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   load_and_authorize_resource :department, except: :teams_list
   load_and_authorize_resource through: :department, except: :teams_list
-  load_and_authorize_resource :team, through_association: :company, only: :teams_list
+  load_and_authorize_resource :team, through_association: :company, only: :teams_list, find_by: :sequence_num
 
   # post /departments/:department_id/teams
   def create

@@ -1,4 +1,5 @@
 class Team < ActiveRecord::Base
+	sequenceid :company , :teams
   EMPLOYEE_TYPE = { team_member: 'Team Member', team_leader: 'Team Leader' }.freeze
   attr_reader :employee_tokens, :team_lead_id
   belongs_to :department

@@ -1,5 +1,5 @@
 class DepartmentsController < ApplicationController
-  load_and_authorize_resource through_association: :company
+  load_and_authorize_resource through_association: :company, find_by: :sequence_num
   # get /departments
   def index
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE

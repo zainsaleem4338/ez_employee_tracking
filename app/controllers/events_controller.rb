@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :event, through_association: :company, find_by: :sequence_num
   # get '/events/index'
   def index
     @settings = current_employee.company.setting.holidays

@@ -7,7 +7,7 @@
         <div class="col-12">
           <div class="in-flex">
             <%= image_tag('team-leader.svg', size: "40x40")%>
-            <p class="text-second ml-3">Team Lead: <span class="text-peach"><%= link_to @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize, show_employee_path(@team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).first), class: 'text-peach no-decoration' %></span></p>
+            <p class="text-second ml-3">Team Lead: <span class="text-peach"><%= link_to @team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize, member_path(@team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).first), class: 'text-peach no-decoration' %></span></p>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
               <% @team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).each do |member| %>
                 <tr>
                   <td class="text-second"><%= member.id %></td>
-                  <td class="clickable-item"><%= link_to member.name.downcase.titleize, show_employee_path(member), class: 'text-peach no-decoration' %> </td>
+                  <td class="clickable-item"><%= link_to member.name.downcase.titleize, member_path(member), class: 'text-peach no-decoration' %> </td>
                   <td class="text-second"><%= member.email %></td>
                 </tr>
               <% end %>

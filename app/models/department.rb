@@ -1,4 +1,5 @@
 class Department < ActiveRecord::Base
+	sequenceid :company , :departments
   not_multitenant!
   belongs_to :company
   has_many :projects, dependent: :destroy
