@@ -34,7 +34,7 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="days" role="tabpanel" aria-labelledby="days-tab">
               <h2>Working Days</h2>
-              <table class="table">
+              <table class="table data table-hover dt-responsive">
                 <thead>
                   <tr>
                     <th>Days</th>
@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th>Monday</th>
+                    <td>Monday</td>
                     <% if @settings.working_days['monday'] %>
                       <td><span class="badge badge-success">On</span></td>
                     <% else %>
@@ -55,7 +55,7 @@
                     <td><%= @settings.timings['monday_end_time'] %></td>
                   </tr>
                   <tr>
-                    <th>Tuesday</th>
+                    <td>Tuesday</td>
                     <% if @settings.working_days['tuesday'] %>
                       <td><span class="badge badge-success">On</span></td>
                     <% else %>
@@ -65,7 +65,7 @@
                     <td><%= @settings.timings['tuesday_end_time'] %></td>
                   </tr>
                   <tr>
-                    <th>Wednesday</th>
+                    <td>Wednesday</td>
                     <% if @settings.working_days['wednesday'] %>
                       <td><span class="badge badge-success">On</span></td>
                     <% else %>
@@ -75,7 +75,7 @@
                     <td><%= @settings.timings['wednesday_end_time'] %></td>
                   </tr>
                   <tr>
-                    <th>Thursday</th>
+                    <td>Thursday</td>
                     <% if @settings.working_days['thursday'] %>
                       <td><span class="badge badge-success">On</span></td>
                     <% else %>
@@ -85,7 +85,7 @@
                     <td><%= @settings.timings['thursday_end_time'] %></td>
                   </tr>
                   <tr>
-                    <th>Friday</th>
+                    <td>Friday</td>
                     <% if @settings.working_days['friday'] %>
                       <td><span class="badge badge-success">On</span></td>
                     <% else %>
@@ -95,7 +95,7 @@
                     <td><%= @settings.timings['friday_end_time'] %></td> 
                   </tr>
                   <tr>
-                    <th>Saturday</th>
+                    <td>Saturday</td>
                     <% if @settings.working_days['saturday'] %>
                       <td><span class="badge badge-success">On</span></td>
                     <% else %>
@@ -105,7 +105,7 @@
                     <td><%= @settings.timings['saturday_end_time'] %></td>
                   </tr>
                   <tr>
-                    <th>Sunday</th>
+                    <td>Sunday</td>
                     <% if @settings.working_days['sunday'] %>
                       <td><span class="badge badge-success">On</span></td>
                     <% else %>
@@ -120,12 +120,14 @@
             <div class="tab-pane fade" id="holidays" role="tabpanel" aria-labelledby="holidays-tab">
               <% if @settings.holidays.present? %>
                 <h2>Public Holidays</h2>
-                <table class="table">
+                <table class="table data table-hover dt-responsive">
                   <thead>
                     <tr>
                       <th>Holiday Date</th>
                       <th>Every Year</th>
                     </tr>
+                  </thead>
+                  <tbody>
                     <% @settings.holidays.each do |key, val| %>
                     <tr>
                       <td><%= @settings.holidays[key]["holiday_date_#{key}"] %></td>
@@ -136,7 +138,7 @@
                       <% end %>   
                     </tr>
                     <% end %>
-                  </thead>
+                  </tbody>
                 </table>
               <% else %>
                 <h3>No Holidays At The Moment!</h3>

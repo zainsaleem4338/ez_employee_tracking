@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
   def create
     @project.status = Project::NEW_STATUS
     if @project.save
-      flash[:success] = t('.success_notice')
+      flash[:success] = t('.success_notice', project_name: @project.name.downcase.titleize)
       redirect_to department_projects_path
     else
       flash[:danger] = t('.error_notice')

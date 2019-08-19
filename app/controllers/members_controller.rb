@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
-  load_and_authorize_resource :member, through_association: :company, class: 'Employee'
+  load_and_authorize_resource :member, through_association: :company, class: 'Employee', find_by: :sequence_num
+  # authorize_resource :member, through: :current_company
   load_and_authorize_resource :team, through_association: :company
 
   # get /employee_lists
@@ -34,6 +35,12 @@ class MembersController < ApplicationController
     else
       redirect_to menus_index_path
     end
+  end
+
+  # get /employees/:sequence_num/show
+  def show
+    # binding.pry
+    # @employee = Employee.find_by(sequence_num: params[:id])
   end
 
   # get '/employees/team_member_render_view'

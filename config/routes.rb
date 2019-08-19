@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   get 'menus/index' => 'menus#index'
   get 'menus/home' => 'menus#home'
-  post 'menus/home' => 'menus#home'
+  # post 'menus/home' => 'menus#home'
   get 'menus/search_email' => 'menus#search_email'
   root 'menus#home'
 

@@ -8,6 +8,14 @@ class AttendancesController < ApplicationController
     end
   end
 
+  # get /attendances/:id
+  def show
+    @attendances_list = current_employee.attendances
+    respond_to do |format|
+      format.html
+    end
+  end
+
   # post /attendances
   def create
     @employees_todays_attendance = current_employee.todays_attendance_of_employee

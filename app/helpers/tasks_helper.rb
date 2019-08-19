@@ -10,7 +10,7 @@ module TasksHelper
 
   def get_assignable_name(task)
     return Task::UNASSIGNED_STATUS if task.assignable.nil?
-    task.assignable.name.capitalize
+    task.assignable.name.titleize
   end
 
   def get_assignable_type(task)
