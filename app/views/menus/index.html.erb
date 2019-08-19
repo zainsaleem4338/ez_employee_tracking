@@ -1,84 +1,57 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">Dashboard</p>
+  </div>
+<% end %>
 <section id="cards" class="pb-5">
     <div class="container">
         <div class="row">
             <!-- Card -->
-            <div class="col-xs-12  col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside" id='front-card'>
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <h4 class="card-title"><b>Leaves Remaining</b></h4>
-                                    <p class="card-text"><i class="fas fa-envelope"></i></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside" id='back-card'>
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h2 class="card-title"><span class="badge badge-secondary"><%= @leaves_remaining %></span></h2>
-                                    <p class="card-text">Leaves left</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-xs-12  col-md-4 custom-card">
+              <div class="card border-success mb-1 text-transition" style="max-width: 50rem;border-color: #6e2142;">
+                <div class="card-body text-success">
+                  <h2 class="card-title">
+                  <% if @leaves_remaining.blank? || @leaves_remaining == 0 %>
+                    <center><span class="badge badge-danger"><%= 0 %></span></center>
+                  <% else %>
+                    <center><span class="badge badge-secondary"><%= @leaves_remaining %></span></center>
+                  <% end %>
+                  </h2>
+                  <center><b>Leaves Remaining</b></center>
                 </div>
+              </div>
             </div>
             <!-- ./Card -->
             <!-- Card -->
-            <div class="col-xs-12  col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside" id='front-card'>
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <h4 class="card-title"><b>Late Attendance</b></h4>
-                                    <p class="card-text"><i class="fas fa-bell"></i></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside" id='back-card'>
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                	<% if @late_count.nil? %>
-                                		 <h2 class="card-title"><span class="badge badge-danger">0</span></h2>
-                                	<% else %>
-                                		 <h2 class="card-title"><span class="badge badge-secondary"><%= @late_count %></span></h2>
-                                	<% end %>
-                                    <p class="card-text">Times</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-xs-12  col-md-4 custom-card">
+              <div class="card border-success mb-1 text-transition" style="max-width: 50rem;border-color: #6e2142;">
+                <div class="card-body text-success">
+                  <h2 class="card-title">
+                    <% if @late_count.blank? || @late_count == 0 %>
+                      <center><span class="badge badge-danger"><%= 0 %></span></center>
+                    <% else %>
+                      <center><span class="badge badge-secondary"><%= @late_count %></span></center>
+                    <% end %>
+                  </h2>
+                  <center><b>Time/s Late Attendance</b></center>
                 </div>
+              </div>
             </div>
             <!-- ./Card -->
             <!-- Card -->
-            <div class="col-xs-12  col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside" id='front-card'>
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <h4 class="card-title"><b>Allocated Leaves</b></h4>
-                                    <p class="card-text"><i class="fas fa-file-signature"></i></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside" id='back-card'>
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                   	<% if @settings.allocated_leaves.nil? %>
-                                		   <h2 class="card-title"><span class="badge badge-danger">0</span></h2>
-	                                	<% else %>
-	                                		 <h2 class="card-title"><span class="badge badge-secondary"><%= @settings.allocated_leaves %></span></h2>
-	                                	<% end %>
-                                    <p class="card-text">Leaves Allocated</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-xs-12  col-md-4 custom-card">
+              <div class="card border-success mb-1 text-transition" style="max-width: 50rem;border-color: #6e2142;">
+                <div class="card-body text-success">
+                  <h2 class="card-title">
+                    <% if @settings.allocated_leaves.blank? || @settings.allocated_leaves == 0 %>
+                      <center><span class="badge badge-danger"><%= 0 %></span></center>
+                    <% else %>
+                      <center><span class="badge badge-secondary"><%= @settings.allocated_leaves %></span></center>
+                    <% end %>
+                  </h2>
+                  <center><b>Allocated Leaves</b></center>
                 </div>
+              </div>
             </div>
             <!-- ./Card -->
         </div>
@@ -173,7 +146,7 @@
 
 <section>
   <div class='row'>
-    <div class='col-md-6' style='height:280px; overflow-y:scroll'>
+    <div class='col-md-6 dashboard_card' style='min-height:280px;overflow-y:scroll'>
       <h3>Tasks Reaching Deadline</h3>
       <% @tasks_reaching_deadline = get_tasks_reaching_deadline %>
       <div class="building">
@@ -189,90 +162,92 @@
         <% end %>
       </ul> 
     </div>
-    <div class='col-md-6' style='height:280px; overflow-y:scroll'>
+    <div class='col-md-6 dashboard_card'>
       <h3><%= current_company.name %> Timings</h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Days</th>
-            <th>Status</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Monday</th>
-            <% if @settings.working_days['monday'] %>
-              <td><span class="badge badge-success">On</span></td>
-            <% else %>
-              <td><span class="badge badge-danger">Off</span></td>
-            <% end %>   
-            <td><%= @settings.timings['monday_start_time'] %></td>
-            <td><%= @settings.timings['monday_end_time'] %></td>
-          </tr>
-          <tr>
-            <th>Tuesday</th>
-            <% if @settings.working_days['tuesday'] %>
-              <td><span class="badge badge-success">On</span></td>
-            <% else %>
-              <td><span class="badge badge-danger">Off</span></td>
-            <% end %>   
-            <td><%= @settings.timings['tuesday_start_time'] %></td>
-            <td><%= @settings.timings['tuesday_end_time'] %></td>
-          </tr>
-          <tr>
-            <th>Wednesday</th>
-            <% if @settings.working_days['wednesday'] %>
-              <td><span class="badge badge-success">On</span></td>
-            <% else %>
-              <td><span class="badge badge-danger">Off</span></td>
-            <% end %>   
-            <td><%= @settings.timings['wednesday_start_time'] %></td>
-            <td><%= @settings.timings['wednesday_end_time'] %></td>
-          </tr>
-          <tr>
-            <th>Thursday</th>
-            <% if @settings.working_days['thursday'] %>
-              <td><span class="badge badge-success">On</span></td>
-            <% else %>
-              <td><span class="badge badge-danger">Off</span></td>
-            <% end %>   
-            <td><%= @settings.timings['thursday_start_time'] %></td>
-            <td><%= @settings.timings['thursday_end_time'] %></td>
-          </tr>
-          <tr>
-            <th>Friday</th>
-            <% if @settings.working_days['friday'] %>
-              <td><span class="badge badge-success">On</span></td>
-            <% else %>
-              <td><span class="badge badge-danger">Off</span></td>
-            <% end %>  
-            <td><%= @settings.timings['friday_start_time'] %></td>
-            <td><%= @settings.timings['friday_end_time'] %></td> 
-          </tr>
-          <tr>
-            <th>Saturday</th>
-            <% if @settings.working_days['saturday'] %>
-              <td><span class="badge badge-success">On</span></td>
-            <% else %>
-              <td><span class="badge badge-danger">Off</span></td>
-            <% end %>   
-            <td><%= @settings.timings['saturday_start_time'] %></td>
-            <td><%= @settings.timings['saturday_end_time'] %></td>
-          </tr>
-          <tr>
-            <th>Sunday</th>
-            <% if @settings.working_days['sunday'] %>
-              <td><span class="badge badge-success">On</span></td>
-            <% else %>
-              <td><span class="badge badge-danger">Off</span></td>
-            <% end %>  
-            <td><%= @settings.timings['sunday_start_time'] %></td>
-            <td><%= @settings.timings['sunday_end_time'] %></td> 
-          </tr>
-        </tbody>
-      </table>
+      <div style='max-height:280px; min-height:280px; overflow-y:scroll'>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Days</th>
+              <th>Status</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Monday</th>
+              <% if @settings.working_days['monday'] %>
+                <td><span class="badge badge-success">On</span></td>
+              <% else %>
+                <td><span class="badge badge-danger">Off</span></td>
+              <% end %>   
+              <td><%= @settings.timings['monday_start_time'] %></td>
+              <td><%= @settings.timings['monday_end_time'] %></td>
+            </tr>
+            <tr>
+              <th>Tuesday</th>
+              <% if @settings.working_days['tuesday'] %>
+                <td><span class="badge badge-success">On</span></td>
+              <% else %>
+                <td><span class="badge badge-danger">Off</span></td>
+              <% end %>   
+              <td><%= @settings.timings['tuesday_start_time'] %></td>
+              <td><%= @settings.timings['tuesday_end_time'] %></td>
+            </tr>
+            <tr>
+              <th>Wednesday</th>
+              <% if @settings.working_days['wednesday'] %>
+                <td><span class="badge badge-success">On</span></td>
+              <% else %>
+                <td><span class="badge badge-danger">Off</span></td>
+              <% end %>   
+              <td><%= @settings.timings['wednesday_start_time'] %></td>
+              <td><%= @settings.timings['wednesday_end_time'] %></td>
+            </tr>
+            <tr>
+              <th>Thursday</th>
+              <% if @settings.working_days['thursday'] %>
+                <td><span class="badge badge-success">On</span></td>
+              <% else %>
+                <td><span class="badge badge-danger">Off</span></td>
+              <% end %>   
+              <td><%= @settings.timings['thursday_start_time'] %></td>
+              <td><%= @settings.timings['thursday_end_time'] %></td>
+            </tr>
+            <tr>
+              <th>Friday</th>
+              <% if @settings.working_days['friday'] %>
+                <td><span class="badge badge-success">On</span></td>
+              <% else %>
+                <td><span class="badge badge-danger">Off</span></td>
+              <% end %>  
+              <td><%= @settings.timings['friday_start_time'] %></td>
+              <td><%= @settings.timings['friday_end_time'] %></td> 
+            </tr>
+            <tr>
+              <th>Saturday</th>
+              <% if @settings.working_days['saturday'] %>
+                <td><span class="badge badge-success">On</span></td>
+              <% else %>
+                <td><span class="badge badge-danger">Off</span></td>
+              <% end %>   
+              <td><%= @settings.timings['saturday_start_time'] %></td>
+              <td><%= @settings.timings['saturday_end_time'] %></td>
+            </tr>
+            <tr>
+              <th>Sunday</th>
+              <% if @settings.working_days['sunday'] %>
+                <td><span class="badge badge-success">On</span></td>
+              <% else %>
+                <td><span class="badge badge-danger">Off</span></td>
+              <% end %>  
+              <td><%= @settings.timings['sunday_start_time'] %></td>
+              <td><%= @settings.timings['sunday_end_time'] %></td> 
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </section>

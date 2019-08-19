@@ -53,11 +53,12 @@
 
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
             <div class='dropdown-item'>
-	            <%= link_to  destroy_employee_session_path, class: 'nav-link small text-gray-400 dropdown-item' , method: :delete do %>
-	              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-	              Logout
+	            <%= link_to  destroy_employee_session_path, class: 'nav-link small dropdown-item' , method: :delete do %>
+	              <b><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
+	                Logout
+                </b>
 	            <% end %>
-          	</div>
+            </div>
           </div>
         </li>
       </ul>

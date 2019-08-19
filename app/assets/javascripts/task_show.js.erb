@@ -9,7 +9,6 @@ $(document).ready(function() {
         clearInterval(progress);
         $('.progress').removeClass('active');
     } else {
-        console.log("bar.widht", $bar.width());
         $bar.width($bar.width() + (10*bar_width/100));
     }
   }, 100);

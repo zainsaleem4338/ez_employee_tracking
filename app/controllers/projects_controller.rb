@@ -9,7 +9,6 @@ class ProjectsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.js
     end
   end
 
@@ -20,8 +19,7 @@ class ProjectsController < ApplicationController
       flash[:success] = t('.success_notice', project_name: @project.name.downcase.titleize)
       redirect_to department_projects_path
     else
-      flash[:danger] = t('.error_notice')
-      redirect_to new_department_project_path
+      render :new
     end
   end
 
@@ -40,10 +38,10 @@ class ProjectsController < ApplicationController
   def update
     if @project.update(project_params)
       flash[:success] = t('.success_notice')
+      redirect_to department_projects_path
     else
-      flash[:danger] = t('.error_notice')
+      render :new
     end
-    redirect_to department_projects_path
   end
 
   private

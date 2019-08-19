@@ -1,18 +1,18 @@
 <%= form_for(@department, remote: :true, html: {role: :form, 'data-model' => 'department'}) do |form| %>
   <div class="modal-body">
     <% if @department.errors.any? %>
-    <div class="container alerts p-0">
-      <div class='alert alert-danger' id="flash-alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-        <div class="mb-0">
-          <% @department.errors.full_messages.each do |message| %>
-            <div class="p-0"><i class="fa fa-exclamation-circle pr-2"></i><%= message %></div>
-          <% end %>
+      <div class="container alerts p-0">
+        <div class='alert alert-danger' id="flash-alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <div class="mb-0">
+            <% @department.errors.full_messages.each do |message| %>
+              <div class="p-0"><i class="fa fa-exclamation-circle pr-2"></i><%= message %></div>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
     <% end %>
     <div class="form-group">
       <%= form.label :name %><br>

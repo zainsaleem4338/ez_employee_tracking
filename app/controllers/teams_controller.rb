@@ -59,7 +59,7 @@ class TeamsController < ApplicationController
 
   # get '/teams/team_members'
   def team_members
-    @team_members = Employee.where(id: params['employee_ids'])
+    @team_members = Employee.where(id: params[:employee_ids])
     @count = params['count']
     respond_to do |format|
       format.js

@@ -62,9 +62,8 @@ module ApplicationHelper
     }
     @calendar = {
       name: 'Calendar',
-      link: index_events_path,
-      icon: 'far fa-calendar-minus',
-      id: 'calendar_option'
+      link: events_path,
+      icon: 'far fa-calendar-minus'
     }
     @settings = {
       name: 'Settings',
@@ -101,42 +100,15 @@ module ApplicationHelper
       }
       @employees = {
         name: 'Employees',
-        link: '#',
+        link: members_path,
         icon: 'fas fa-user',
-        id: 'employees_option',
-        submenu_id: 'empSubmenu',
-        suboptions: [
-          {
-            name: 'Add Employee',
-            link: new_employee_path,
-            icon: 'fas fa-plus'
-          },
-          {
-            name: 'View Employees',
-            link: employees_path,
-            icon: 'fas fa-eye'
-          }
-        ]
+        id: 'employees_option'
       }
-
       @departments = {
         name: 'Departments',
-        link: '#',
+        link: departments_path,
         icon: 'fas fa-building',
-        id: 'departments_option',
-        submenu_id: 'deptSubmenu',
-        suboptions: [
-          {
-            name: 'Add Department',
-            link: new_department_path,
-            icon: 'fas fa-plus'
-          },
-          {
-            name: 'View Departments',
-            link: departments_path,
-            icon: 'fas fa-eye'
-          }
-        ]
+        id: 'departments_option'
       }
       @reports = {
         name: 'Reports',
@@ -162,19 +134,7 @@ module ApplicationHelper
           },
         ]
       }
-      @add_events = {
-        name: 'Add Event',
-        link: new_events_path,
-        icon: 'fas fa-calendar-week',
-        id: 'add_events_option'
-      }
-      @edit_settings = {
-        name: 'Edit Settings',
-        link: edit_settings_path,
-        icon: 'fas fa-cogs',
-        id: 'edit_settings_option'
-      }
-      @data.push(@employees).push(@departments).push(@reports).push(@attendance).push(@add_events).push(@edit_settings)
+      @data.push(@employees).push(@departments).push(@reports).push(@attendance)
     else
       @departments = {
         name: 'Departments',

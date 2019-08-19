@@ -1,3 +1,8 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">Task Report</p>
+  </div>
+<% end %>
 <div class="container">
   <%= form_tag(task_pdf_csv_report_reports_path, method: :get) do %>
     <div class="row">

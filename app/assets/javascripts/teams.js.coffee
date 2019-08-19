@@ -29,7 +29,8 @@ jQuery ->
       team_leader = $('#team_team_lead_id').siblings("ul").find('li p').html()
       team_leader_value = $('#team_team_lead_id').val()
       if(jQuery.inArray( team_leader_value, employees ) != -1)
-        $('#team_member_span').text(team_leader+" can't be team member & team leader at the same time.");
+        if(team_leader_value != "")
+          $('#team_member_span').text(team_leader+" can't be team member & team leader at the same time.");
       else
         $('#team_employee_ids').tokenInput("clear")
         rows = $('#member_table tr').length + 1
@@ -60,7 +61,7 @@ jQuery ->
         $('#team_leader_field').hide()
         $('#leader').show()
         $('#leader_edit').show()
-        $('#team_leader_span').text("");
+        $('#team_leader_span').text("")
 
     $('.append-team-members').on 'click', '.js-remove', ->
       data_member_id = $(this).attr('data-member-id')

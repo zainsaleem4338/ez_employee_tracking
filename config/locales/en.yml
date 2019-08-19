@@ -30,7 +30,7 @@ en:
       success_notice: 'Event has been deleted!'
       error_notice: 'Event has not been delete!'
 
-  employees:
+  members:
     create:
       success_notice: 'Employee successfully created!'
     destroy:

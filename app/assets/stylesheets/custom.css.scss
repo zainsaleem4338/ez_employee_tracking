@@ -23,6 +23,11 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.modal-body{
+    max-height: 30rem;
+    overflow-y: auto;
+}
+
 .alert-success {
   top: 20px !important;
   margin: 0px !important;
@@ -31,9 +36,16 @@ html {
   border-color: $success_notice !important;
 }
 
-.alerts {
-    max-height: 4.5rem;
-    overflow: auto;
+.alert-notice {
+    top: 20px !important;
+    margin: 0px !important;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.badge-danger {
+    color: $white !important;
+    background-color: $peach !important;
 }
 
 body {
@@ -43,14 +55,6 @@ body {
   overflow-y: auto;
   font-size: 0.9rem;
   color: #6e2142 !important;
-}
-
-.bread-crumbs {
-  background: #FFD692;
-  top: 64px !important;
-  p{
-    font-size: 0.85rem;
-  }
 }
 
 p {
@@ -428,6 +432,7 @@ i,span {
   border: 1px solid #E16363 !important;
 }
 
+
 .wrapper {
   display: flex;
   width: 100%;
@@ -550,8 +555,8 @@ i,span {
 }
 
 #sidebar ul li a:hover {
-  color: $peach;
-  background: $primary;
+  color: $primary;
+  background: #fff;
 }
 
 #sidebar ul li.active>a,
@@ -576,13 +581,6 @@ a[data-toggle="collapse"] {
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
-}
-
-#sidebar ul ul a {
-  padding-left: 20px !important;
-  background: $secondary;
-  font-size: 0.7rem;
-  color: $skin;
 }
 
 #sidebar ul ul a:hover {
@@ -661,7 +659,7 @@ a[data-toggle="collapse"] {
 }
 
 .yielded-area {
-  padding-top: 90px;
+  padding-top: 55px;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -752,10 +750,10 @@ table.dataTable thead th, table.dataTable thead td {
 }
 
 .card-header {
-  -webkit-box-flex: 1;
+  -webkit-box-flex: 1 ;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1.25rem;
+  padding: .1rem 1.3rem !important;
   border: 1px solid $skin;
   color: $skin;
   background-color: $skin !important;
@@ -1021,7 +1019,7 @@ table.dataTable thead th, table.dataTable thead td {
   color: #4CAF50;
 }
 .text-transition:hover {
-  background-color: #4CAF50;
+  background-color: $primary;
   transition: 1s;
 }
 
@@ -1043,27 +1041,27 @@ table.dataTable thead th, table.dataTable thead td {
   font-size: 24px;
   text-align: center;
   width: 90%;
-  height: 75px;
-  line-height: 75px;
+  height: 50px;
+  line-height: 50px;
   margin: 0 auto;
-  margin-top: 75px;
-  background-color: #222;
+  margin-top: 30px;
+  background-color: $primary;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 10px;
-  border: 3px solid #222;
+  border: 3px solid $primary;
 }
 
 .window {
   margin: 0 auto;
   width: 90%;
-  height: 450px;
+  height: 400px;
   background-color: #fff;
   overflow-x: hidden;
   overflow-y: auto;
-  border-left: 3px solid #222;
-  border-bottom: 3px solid #222;
-  border-right: 3px solid #222;
+  border-left: 3px solid $primary;
+  border-bottom: 3px solid $primary;
+  border-right: 3px solid $primary;
   z-index: 1;
 }
 
@@ -1086,17 +1084,17 @@ table.dataTable thead th, table.dataTable thead td {
   height: 100px;
   text-align: center;
   background-color: #fff;
-  border-left: 3px solid #222;
-  border-right: 3px solid #222;
+  border-left: 3px solid $primary;
+  border-right: 3px solid $primary;
   outline: none;
   margin: 25px auto;
   line-height: 100px;
   overflow: hidden;
-  color: #222;
-  font-family: Roboto,sans-serif;
+  color: $primary;
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   letter-spacing: 2.5px;
-  border-top: 3px solid #222;
+  border-top: 3px solid $primary;
   z-index: 2;
   position: relative;
 }
@@ -1145,7 +1143,7 @@ input:checked + .slider {
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px $skin;
+  background-color: $primary;
 }
 
 input:checked + .slider:before {
@@ -1261,8 +1259,11 @@ section {
   color: $secondary;
   font-weight: bold;
 }
+.card-title {
+  color: $primary;
+}
 .backside .card .card-title {
-  color: $secondary;
+  color: white;
 }
 .frontside .card .card-text {
   color: white !important;
@@ -1284,7 +1285,7 @@ section {
 
 .background {
   position: relative;
-  background: linear-gradient(to bottom, $primary 0%, $secondary 100%);
+  background: linear-gradient(to bottom, $peach 0%, $primary 100%);
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -1526,31 +1527,30 @@ table.data div.actions {
   filter: alpha(opacity=0);
   opacity: 0;
 }
+
 table.data tr:hover div.actions {
   zoom: 1;
   filter: alpha(opacity=100);
   opacity: 1; 
 }
 
-.table{
+.table {
   font-size: 12px !important;
 }
 
-
-.table th, .table td{
+.table th, .table td {
   font-family: Roboto,sans-serif;
   vertical-align: middle !important;
-
 }
+
 th {
   color: #ffd692;
   text-transform: uppercase;
 }
 
-td{
+td {
   font-weight: bold;
   color: #943855;
-
 }
 
 thead {
@@ -1606,7 +1606,7 @@ i.action-delete {
   font-size:14px !important;
   background-color: #ffffff;
   border: 2px red !important;
-  color: #943855 !important;
+  color: red !important;
 }
 
 i.action-delete:hover {
@@ -1811,5 +1811,126 @@ h6.card-title {
 
   100% {
     opacity: 0;
+  }
+}
+/* Company List Via Email  */
+.div_email {
+  width: 50%;
+  border: 1px #ced4da solid;
+  border-radius: 5px;
+  margin:0 auto;
+  padding: 5%;
+  color: $primary;
+}
+.border-success:hover {
+  background-color:  $primary !important;
+  border-color: $primary !important;
+}
+.border-success {
+  border-color: $primary !important;
+}
+
+.custom-card > .border-success {
+  background-color:  $primary !important;
+  border-color: $primary !important;
+}
+.custom-card > .border-success:hover {
+  background-color:  white !important;
+  border-color: white !important;
+}
+.custom-card > .border-success > .card-body > .card-title {
+  color:white;
+}
+.custom-card > .border-success:hover > .card-body > .card-title {
+  color:$primary;
+}
+.custom-card > .border-success > .text-success {
+  color:white !important;
+}
+.custom-card > .border-success:hover > .text-success {
+  color:$primary !important;
+}
+
+.dashboard_card {
+  border: 1px #ced4da solid;
+  padding: 2%;
+}
+
+
+/* Settings Index */
+.custom-pills {
+  border: 1px $primary solid;
+  padding: 2%;
+  padding-bottom: 0%;
+  background-color: $primary;
+  margin-bottom: 0px;
+  min-height: 450px !important;
+  max-height: 450px;
+}
+.custom-pills > .nav-pills > .nav-item > .nav-link {
+  background-color: $secondary !important;
+  border-color: $secondary !important;
+  color: #fff;
+}
+.custom-pills > .nav-pills > .nav-item > .active {
+  background-color: $peach !important;
+  border-color: $peach !important;
+  color: #fff;
+}
+.custom-pills > .nav-pills > .nav-item > .nav-link:hover {
+  background-color: $peach !important;
+  border-color: $peach !important;
+  color: #fff;
+}
+.custom-pills > .nav-pills > .nav-item {
+  margin: 6%;
+  margin-left:3%;
+  margin-right:3%;
+}
+ h3 > a {
+   text-decoration: none;
+   color: $primary;
+ }
+ h3 > a:hover {
+  text-decoration: none;
+  color: $secondary;
+}
+
+.bread-crumbs {
+  background: #FFD692;
+  top: 60px !important;
+  p{
+    font-size: 0.85rem;
+  }
+}
+
+#_navbar {
+  min-height: 60px;
+  max-height: 60px;
+}
+.outer_setting {
+  margin: 24px;
+  margin-top: 0px;
+}
+.div_setting {
+  border: 1px $primary solid;
+  margin: 0px;
+  padding: 0px; 
+  min-height:452px;
+  max-height:452px;
+}
+.inner_setting {
+  padding:2%;
+  
+}
+.in_setting {
+  min-height:448px;
+  max-height:448px;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .div_setting {
+    border:none;
   }
 }

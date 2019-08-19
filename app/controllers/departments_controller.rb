@@ -7,7 +7,6 @@ class DepartmentsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.js
     end
   end
 
@@ -58,14 +57,14 @@ class DepartmentsController < ApplicationController
     @department.destroy
     respond_to do |format|
       if @department.destroyed?
-        format.html do
-          flash[:success] = t('.success_notice')
-          redirect_to request.referrer
+        flash[:success] = t('.success_notice')
+        format.js do
+          render js: "location.href = '#{departments_path}'"
         end
       else
-        format.html do
-          flash[:danger] = t('.error_notice')
-          redirect_to request.referrer
+        flash[:danger] = t('.error_notice')
+        format.js do
+          render js: "location.href = '#{request.referrer}'"
         end
       end
     end

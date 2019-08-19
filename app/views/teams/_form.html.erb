@@ -1,16 +1,22 @@
 <% if @team.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
-    <div class="mb-0">
-      <% @team.errors.full_messages.each do |message| %>
-        <i class="fa fa-exclamation-circle pr-3"></i><%= message %>
-      <% end %>
+  <div class="row p-0 ml-1 mr-1">
+    <div class="col-1"></div>
+    <div class='alert alert-danger col-10' id="flash-alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="mb-0">
+        <% @team.errors.full_messages.each do |message| %>
+          <div class="p-0"><i class="fa fa-exclamation-circle pr-2"></i><%= message %></div>
+        <% end %>
+      </div>
     </div>
+    <div class="col-1"></div>
   </div>
 <% end %>
 <div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
+  <div class="col-1"></div>
+  <div class="col-10">
     <input type="hidden" id="department" value='<%= @department.id %>' >
     <div class="form-group">
       <%= form.label :name %><br>
@@ -26,7 +32,7 @@
               <%= employee_team_form.object.employee.name %> 
             <% end %>
           </label>
-          <button type="button" class="btn-edit" id="leader_edit"><i class="fa fa-edit"></i></button>
+          <button type="button" class="btn btn-peach" id="leader_edit"><i class="fa fa-edit"></i></button>
           <div class="row" id="team_leader_field">
             <div class="col-md-11">
               <%= employee_team_form.text_field :employee_id, data: employee_team_form.object.employee_id.blank? ? {} : { load: [employee_team_form.object.employee] }, id: 'team_team_lead_id' %>
@@ -61,7 +67,7 @@
         </div>
       <% end %>
     <% end %>
-    <div class="form-group">
+    <div class="form-group append-team-members">
       <table class="table">
         <tbody id="member_table">
         </tbody>
@@ -80,20 +86,7 @@
         <div class="col-md-1 p-0">
           <button type="button" class="btn btn-regular" id="ok">Ok</button>
         </div>
-        <span id="team_member_span" class="error"></span>
       </div>  
-      <div class="form-group">
-        <%= form.label :team_pic, "Team Image" %><br>
-        <%= form.file_field :team_pic, class:"form-control" %>
-      </div>
-      <div class="form-group">
-        <%= form.label :description %><br>
-        <%= form.text_area :description, class: "form-control" %>
-      </div>
-      <div class="actions">
-        <%= form.submit class: "btn btn-regular" %>
-        <%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>
-      </div>
       <span id="team_member_span" class="error"></span>
     </div>  
     <div class="form-group">
@@ -105,10 +98,12 @@
       <%= form.text_area :description, class: "form-control" %>
     </div>
     <div class="actions">
+      <%= link_to department_teams_path(@department), :class => "btn btn-regular" do %>
+        <i class="fas fa-arrow-left"></i>
+      <% end %>
       <%= form.submit class: "btn btn-regular" %>
-      <%= link_to 'Back', department_teams_path(@department), class: "btn btn-secondary" %>
     </div>
   </div>
-  <div class="col-md-2"></div>
+  <div class="col-1"></div>
 </div>
-
+<br>

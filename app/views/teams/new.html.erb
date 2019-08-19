@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<% provide(:title, "New Team") %>
 <%= nested_form_for([@department, @team, @team.with_employee_teams], url: department_teams_path, html: { multipart: true }, method: :post) do |form| %>
-  <%= render 'form', form: form %>
+    <%= render 'form', form: form %>
 <% end %>
-=======
-<%= render 'form' %>
->>>>>>> 75218f1721ccc2f4444ba1aa6f7ca74cbbe50e18
+

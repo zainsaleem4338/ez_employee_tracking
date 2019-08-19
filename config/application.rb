@@ -26,6 +26,8 @@ module EzEmployeeTracking
     config.time_zone = 'Islamabad'
     config.web_console.development_only = true
 
+    config.exceptions_app = self.routes
+
     config.active_job.queue_adapter = :delayed_job
   end
 end

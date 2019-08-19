@@ -1,3 +1,8 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">Attendance Details</p>
+  </div>
+<% end %>
 <div class="container" style="height: 100%;display: table;text-align: center;vertical-align: middle;">
   <% if @attendances_list.any? %>
 
@@ -7,13 +12,6 @@
     </div>
   </div>
   <% else %>
-  <center>
-    <div style="display: inline-block;padding: 20px">
-     <img src="/assets/256.png" alt="Nothing found" width="260" style="padding:20px;">
-     <h3 class="page-title">Sorry we couldn't find any records.</h3>
-     <p class="page-desc"> Maybe it is due to the unavailability of data.</p>
-   </div>
- </center>
-
- <% end %>
+    <%= render '/shared/no_records' %>
+  <% end %>
 </div>
