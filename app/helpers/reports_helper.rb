@@ -3,7 +3,7 @@ module ReportsHelper
     if employee_velocity.to_f.nan? || (employee_velocity == (Float::INFINITY))
       return '-'
     else
-      return employee_velocity
+      return employee_velocity.round(2)
     end
   end
 

@@ -1,10 +1,5 @@
 class SessionsController < Devise::SessionsController
-
-  # get /employees/sign_in
-  def new
-    super
-  end
-
+  skip_before_filter :allow_params_authentication!
   # post /employees/sign_in
   def create
     if(current_company.blank?)

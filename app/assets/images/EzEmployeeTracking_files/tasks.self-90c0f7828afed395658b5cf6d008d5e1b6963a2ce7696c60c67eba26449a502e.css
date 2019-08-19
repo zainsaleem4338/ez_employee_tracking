@@ -1,0 +1,32 @@
+/* line 1, app/assets/stylesheets/tasks.scss */
+.token-input-list {
+  display: block !important;
+  width: 100% !important;
+  padding: 0.3rem !important;
+  font-size: 1rem !important;
+  line-height: 1.25 !important;
+  color: #464a4c !important;
+  background-color: #fff !important;
+  background-image: none !important;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border-radius: 0.25rem !important;
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s !important;
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s !important;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s !important;
+}
+
+/* line 21, app/assets/stylesheets/tasks.scss */
+.token-input-list::-ms-expand {
+  background-color: transparent !important;
+  border: 0 !important;
+}
+
+/* line 26, app/assets/stylesheets/tasks.scss */
+.token-input-list:focus {
+  color: #464a4c !important;
+  background-color: #fff !important;
+  border-color: #5cb3fd !important;
+  outline: none !important;
+}

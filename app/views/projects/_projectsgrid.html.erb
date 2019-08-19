@@ -1,20 +1,48 @@
-<div class="row">
-  <% @projects.each do |project| %>
+<div class="container table-responsive">
+<table id="project_table" style="width:100%" class="table data table-hover dt-responsive">
+  <thead>
+    <tr>
+      <th >NAME</th>
+      <th >START DATE</th>
+      <th >EXPECTED END DATE</th>
+      <th >STATUS</th>
+      <th >ACTIONS</th>
+    </tr>
+  </thead>
   <tbody>
-    <div class="card col-sm-4">
-      <div class="card-body">
-        <h5 class="card-title"><%= project.name %></h5>
-        <span class="badge badge-secondary"><%= project.status %></span>
-        <p class="card-text"><strong>Department: </strong><%= project.department.name %></p>
-        <p class="card-text"><strong>Start Date: </strong><%= project.start_date.to_date %></p>
-        <p class="card-text"><strong>Expected End Date  : </strong><%= project.expected_end_date.to_date %></p>
-        <%= link_to 'Details', department_project_tasks_path(@department,project), class: "btn btn-regular" %>
-        <% if can? :create, Project %>
-          <%= link_to 'Edit', edit_department_project_path(@department,project), class: "btn btn-secondary" %>
-          <%= link_to 'Destroy', department_project_path(@department,project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>  
-        <% end %>     
-      </div>
-    </div>
+    <% @projects.each do |project| %>
+    <tr>
+      <td ><%= project.name.downcase.titleize %></td>
+      <td ><%= project.start_date.strftime("%B %e, %Y") %></td>
+      <td ><%= project.expected_end_date.strftime("%B %e, %Y") %></td>
+      <td ><%= project.status %></td>
+      <td  class="d-table-cell align-middle vertical-align">
+        <div class="row no-gutters justify-content-between">
+          <div class="actions">
+            <%= link_to department_project_tasks_path(@department,project) do %>
+            <i title="Show Tasks" class="table-options action-show fas fa-eye"></i>
+            <% end %>
+            <% if can? :create, project %>
+            <%= link_to edit_department_project_path(@department,project) do %>
+            <i title="Edit Project" class="table-options action-edit fas fa-edit"></i>
+            <% end %>
+            <%= link_to department_project_path(@department,project), method: :delete, data: { confirm: 'Are you sure?' } do %>  
+            <i title="Delete Project" class="table-options action-delete fas fa-trash"></i>
+            <% end %>
+            <% end %>
+          </div>
+          <div class="btn-group dropleft">
+            <i class="fas fa-ellipsis-v" title="More..." style="cursor:pointer;font-size:16px" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+            <div class="dropdown-menu">
+                  <%= link_to "Show Tasks",department_project_tasks_path(project.department,project), class:"dropdown-item" %>
+            </div>
+          </div>
+
+        </div>
+      </td>
+    </tr>
+
     <% end %>
   </tbody>
+</table>
 </div>

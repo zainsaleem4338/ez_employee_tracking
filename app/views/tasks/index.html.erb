@@ -1,12 +1,12 @@
 <div class="container">
   <div class="card">
     <div class="card-header">
-      <h5>Project: <b><%= @project.name.capitalize %></b></h5>
+      <h5>Project: <b><%= @project.name.titleize %></b></h5>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col">
-          <h6><b>Department: </b><%= @project.department.name %></h6>
+          <h6><b>Department: </b><%= @project.department.name.titleize %></h6>
         </div>
         <div class="col">
           <h6><b>Status: </b><%= @project.status %></h6>
@@ -24,17 +24,19 @@
   </div>
 
 <br>
+<%= link_to request.env["HTTP_REFERER"], :class => "btn btn-regular" do %>
+  <i class="fas fa-arrow-left"></i>
+<% end %>
 <% if can? :create, Task%>
   <%= link_to 'Create a Task', new_department_project_task_path, class: "btn btn-regular" %>
 <% else %>
   <%= link_to "All Tasks", department_project_tasks_path(@department, @project), remote: true, class: "btn btn-secondary active"%>
   <%= link_to "My Tasks", department_project_tasks_path(@department, @project, show_employees_only: true), remote: true, class: "btn btn-secondary active" %>
 <% end %>
-<%= link_to 'Back', department_projects_url, class: "btn btn-secondary" %>
 <div id="tasks_grid" class="mt-3">
   <%= render partial: 'taskgrid', locals: {tasks: @tasks}  %>
 </div>
 <% if @project.tasks.empty? %>
-  <p id="notice">No records Found</p>
+  <%= render '/shared/no_records' %>
 <% end %>
 </div>

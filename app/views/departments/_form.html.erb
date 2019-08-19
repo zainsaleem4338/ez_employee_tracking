@@ -1,30 +1,31 @@
-<%= form_for(@department) do |form|%>
-  <% if @department.errors.any? %>
-  <div class="container">
-    <div class='alert alert-danger' id="flash-alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>
-      <h5><%= pluralize(@department.errors.count, "error") %> prohibited this department from being saved:</h5>
-      <ul>
-      <% @department.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for(@department, remote: :true, html: {role: :form, 'data-model' => 'department'}) do |form| %>
+  <div class="modal-body">
+    <% if @department.errors.any? %>
+      <div class="container alerts p-0">
+        <div class='alert alert-danger' id="flash-alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <div class="mb-0">
+            <% @department.errors.full_messages.each do |message| %>
+              <div class="p-0"><i class="fa fa-exclamation-circle pr-2"></i><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= form.label :name %><br>
+      <%= form.text_field :name, required: true, class: "form-control" %>
     </div>
+    <div class="from-group">
+      <%= form.label :description %><br>
+      <%= form.text_area :description, class: "form-control"%>
+    </div>
+    <br>
   </div>
-  <% end %>
-  <div class="form-group">
-    <%= form.label :name %><br>
-    <%= form.text_field :name, required: true, class: "form-control" %>
-  </div>
-  <div class="from-group">
-    <%= form.label :description %><br>
-    <%= form.text_area :description, class: "form-control"%>
-  </div>
-  <br>
-  <div class="actions">
+  <div class="modal-footer">
+    <button type="button" class="btn btn-peach" data-dismiss="modal">Close</button>
     <%= form.submit class: "btn btn-regular" %>
-    <%= link_to 'Back', departments_path, class: "btn btn-secondary" %>
   </div>
 <% end %>

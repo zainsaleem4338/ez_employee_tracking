@@ -1,0 +1,17 @@
+<%= form_tag(signin_url_path) do |form| %>
+
+<div class="field">
+  <%= label_tag :email %><br>
+  <%= text_field_tag :email %>
+</div>
+<div class="field">
+  <%= label_tag :password %><br>
+  <%= text_field_tag :password %>
+</div>
+
+<div >
+  <button type="submit" class="btn btn-regular">
+    <%= submit_tag %> Sign IN
+  </button>
+</div>
+<% end %>

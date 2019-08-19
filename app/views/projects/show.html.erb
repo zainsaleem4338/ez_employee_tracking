@@ -3,4 +3,4 @@
   <%= @project.name.downcase.capitalize %>
 </p>
 <%= link_to 'Edit', edit_employee_path(@employee) %> |
-<%= link_to 'Back', employees_path %>
+<%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>

@@ -1,5 +1,5 @@
 class DepartmentsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource through_association: :company
   # get /departments
   def index
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
@@ -7,7 +7,20 @@ class DepartmentsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.js
+    end
+  end
+
+  # get /departments/:id/edit
+  def edit
+    respond_to do |format|
+      format.js { render file: '/departments/modal.js.erb' }
+    end
+  end
+
+  # get /departments/new
+  def new
+    respond_to do |format|
+      format.js { render file: '/departments/modal.js.erb' }
     end
   end
 
@@ -15,17 +28,12 @@ class DepartmentsController < ApplicationController
   def create
     respond_to do |format|
       if @department.save
-        format.html do
-          flash[:success] = t('.success_notice')
-          redirect_to departments_path
+        flash[:success] = t('.success_notice')
+        format.js do
+          render js: "location.href = '#{departments_path}'"
         end
-        format.json { render :show, status: :created, location: @department }
       else
-        format.html { render :new }
-        format.json do
-          render json: @department.errors,
-          status: :unprocessable_entity
-        end
+        format.js { render file: '/departments/modal.js.erb' }
       end
     end
   end
@@ -34,17 +42,12 @@ class DepartmentsController < ApplicationController
   def update
     respond_to do |format|
       if @department.update(department_params)
-        format.html do
-          flash[:success] = t('.success_notice')
-          redirect_to @department
+        flash[:success] = t('.success_notice')
+        format.js do
+          render js: "location.href = '#{request.referrer}'"
         end
-        format.json { render :show, status: :ok, location: @department }
       else
-        format.html { render :edit }
-        format.json do
-          render json: @department.errors,
-          status: :unprocessable_entity
-        end
+        format.js { render file: '/departments/modal.js.erb' }
       end
     end
   end
@@ -54,15 +57,14 @@ class DepartmentsController < ApplicationController
     @department.destroy
     respond_to do |format|
       if @department.destroyed?
-        format.html do
-          flash[:success] = t('.success_notice')
-          redirect_to departments_path
+        flash[:success] = t('.success_notice')
+        format.js do
+          render js: "location.href = '#{departments_path}'"
         end
-        format.json { head :no_content }
       else
-        format.html do
-          flash[:danger] = t('.error_notice')
-          redirect_to departments_path
+        flash[:danger] = t('.error_notice')
+        format.js do
+          render js: "location.href = '#{request.referrer}'"
         end
       end
     end
