@@ -664,6 +664,16 @@ a[data-toggle="collapse"] {
   border-radius: 5px;
 }
 
+.detail-head-task {
+  min-height: 5px;
+  max-height: 5px;
+  min-width: 257px;
+  max-width: 257px;
+  width: inherit;
+  background-color: $secondary;
+  border-radius: 5px;
+}
+
 .card {
   position: relative;
   display: flex;
