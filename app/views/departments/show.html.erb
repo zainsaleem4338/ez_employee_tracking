@@ -82,7 +82,7 @@
           <div class="row d-flex justify-content-between align-items-center p-1">
             <h6 class="card-title mb-0"><b>PROJECTS</b></h6>
             <% if can? :create, Project %>
-              <%= link_to new_department_project_path(@department),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add_project', class: 'btn btn-regular btn-circle btn-lg'} do %>
+              <%= link_to new_department_project_path(@department), class: 'btn btn-regular btn-circle btn-lg' do %>
                 <i class="fas fa-plus"></i>
               <% end %>
             <% end %>

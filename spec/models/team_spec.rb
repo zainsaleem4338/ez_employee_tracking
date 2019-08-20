@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe Team, type: :model do
   department = FactoryGirl.create(:department)
   employee = FactoryGirl.create(:employee)
-  team = Team.new(name: 'Zain Team', description: 'This is our team', company_id: employee.company_id)
+  binding.pry
+  team = Team.new(name: 'Zain Team', description: 'This is our team', company_id: @employee.company_id)
   context 'Test Cases for create team' do
     it 'should return object' do
-      expect(team.create_team('2', [3], department.id)).to eql team
+      expect(team.create_team('2', [3], department.id)).to be true
     end
     it 'should return false' do
       expect(team.create_team('', [3], department.id)).to be false
@@ -40,7 +41,7 @@ RSpec.describe Team, type: :model do
     new_team = Team.create(name: 'the Zain Team', department_id: department.id)
     update_params = { name: 'Zain team', description: 'This is our team' }
     it 'should return object' do
-      expect(new_team.update_team('2', [3], update_params)).to eql new_team
+      expect(new_team.update_team('2', [3], update_params)).to eql true
     end
     it 'should return false' do
       expect(new_team.update_team('2', [], update_params)).to be false

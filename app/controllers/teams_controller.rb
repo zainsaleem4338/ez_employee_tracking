@@ -5,8 +5,9 @@ class TeamsController < ApplicationController
 
   # post /departments/:department_id/teams
   def create
+    team_creation_notice = @team.create_team(params[:department_id], params[:team][:employee_teams_attributes])
     respond_to do |format|
-      if @team.create_team(params[:department_id], params[:team][:employee_teams_attributes])
+      if team_creation_notice
         format.html do
           flash[:success] = t('.success_notice')
           redirect_to department_teams_path(@department)
@@ -19,9 +20,9 @@ class TeamsController < ApplicationController
 
   # patch /departments/:department_id/teams/:id
   def update
+    team_update_notice = @team.update_team(params[:team][:employee_teams_attributes], team_params)
     respond_to do |format|
-      if params[:team].present? &&
-          @team.update_team(params[:team][:employee_teams_attributes], team_params)
+      if team_update_notice
         format.html do
           flash[:success] = t('.success_notice')
           redirect_to department_teams_path(@department)
