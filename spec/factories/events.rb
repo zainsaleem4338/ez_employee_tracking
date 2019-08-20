@@ -4,5 +4,7 @@ FactoryGirl.define do
     f.title "New Event"
     f.description "Amazing Event"
     f.event_date "10:00 AM"
+    f.sequence_num 1
+    f.company_id 1
   end
 end

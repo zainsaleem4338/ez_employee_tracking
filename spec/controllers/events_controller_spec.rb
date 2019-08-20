@@ -8,7 +8,13 @@ RSpec.describe EventsController, type: :controller do
   end
   before :all do
     @event = build(:event)
+    @event.company_id = @company.id
     @event.save
+  end
+  before :all do
+    @setting = build(:setting)
+    @setting.company_id = @company.id
+    @setting.save
   end
   before :all do
     @employee = build(:employee)
@@ -25,9 +31,6 @@ RSpec.describe EventsController, type: :controller do
   before :each do
     sign_in @employee
   end
-
-  let(:event) { create(:event) }
-  let(:event_params) { { id: 1, title: 'Convocation', description: 'Event at night', event_date: '10:00 AM', company_id: @company.id } }
 
   context 'GET #index' do
     it 'directs to index successfully' do
@@ -48,16 +51,14 @@ RSpec.describe EventsController, type: :controller do
     end
   end
   context 'Create Event' do
-    let(:event_params1) { { title: 'Convocation', description: 'Event at night', company_id: @company.id } }
-    let(:event_params2) { { event_date: '10:00 AM' } }
     it 'should create event successfully' do
-      expect { post :create, event: event_params }.to change(Event, :count).by(1)
+      expect(put :create, event:  { id: @event.id, title: @event.title, description: @event.description, event_date: @event.event_date, company_id: @event.company_id}).to be_success
     end
-    it 'should not create event' do
-      expect { post :create, event: event_params1 }.to change(Event, :count).by(0)
+    it 'should not create event successfully' do
+      expect(put :create, event: {id: @event.id, title: @event.title, description: @event.description, company_id: @event.company_id}).to eq(false)
     end
-    it 'should create event just by date' do
-      expect { post :create, event: event_params2 }.to change(Event, :count).by(1)
+    it 'should notcreate event successfully' do
+      expect(put :create, event: {id: @event.id, description: @event.description, event_date: @event.event_date, company_id: @event.company_id}).to eq(false)
     end
   end
   context 'GET #edit' do

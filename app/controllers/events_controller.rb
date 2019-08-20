@@ -22,10 +22,10 @@ class EventsController < ApplicationController
   def update
     if @event.update(event_params)
       flash[:success] = t('.success_notice')
+      redirect_to home_events_path
     else
-      flash[:danger] = t('.error_notice')
+      render 'edit'
     end
-    redirect_to home_events_path
   end
 
   # delete '/events/:id/destroy'
