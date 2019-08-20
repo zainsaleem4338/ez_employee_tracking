@@ -13,46 +13,27 @@ class Team < ActiveRecord::Base
   scope :show_teams_employee, ->(user) { where(id: user.teams.pluck(:id)) }
   validate :validate_team
 
-  def create_team(department_id, employee_ids)
-    self.department_id = department_id
-    if self.save
-      return true
-    else
-      false
-    end
-  end
-
-  def update_team(employee_ids, team_params)
-    if self.update(team_params)
-      return true
-    else
-      false
-    end
-  end
-
   def validate_team
     team_lead_id = 0
-    if self.employee_teams.count.zero?
+    if employee_teams.length.zero?
       errors.add(:base, I18n.t('models.team.team_members_and_leader_name_require'))
     else
-      self.employee_teams.each do |employee_team|
-        if employee_team.employee_id.blank? && employee_team.employee_type == EMPLOYEE_TYPE[:team_leader]
+      employee_teams.detect(employee_type: EMPLOYEE_TYPE[:team_leader]) do |employee_team|
+        if employee_team.employee_id.blank?
           errors.add(:base, I18n.t('models.team.leader_name_require'))
-        elsif employee_team.employee_type == EMPLOYEE_TYPE[:team_leader]
+        else
           team_lead_id = employee_team.employee_id
         end
       end
     end
-    if self.employee_teams.count == 1
+    if employee_teams.length == 1
       errors.add(:base, I18n.t('models.team.team_members_require_error'))
     end
     unless team_lead_id.zero?
-      self.employee_teams.each do |employee_team|
-        if employee_team.employee_type == EMPLOYEE_TYPE[:team_member]
-          if employee_team.employee_id == team_lead_id
-            errors.add(:base, I18n.t('models.team.team_lead_member_conflict'))
-            break
-          end
+      employee_teams.detect(employee_type: EMPLOYEE_TYPE[:team_member]) do |employee_team|
+        if employee_team.employee_id == team_lead_id
+          errors.add(:base, I18n.t('models.team.team_lead_member_conflict'))
+          break
         end
       end
     end
