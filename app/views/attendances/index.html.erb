@@ -7,7 +7,7 @@
   <div class="row d-flex">
     <div class="col-2">
       <div class="align-content-right">
-        <%= link_to show_employee_attendance_path, class: 'btn btn-regular' do %>
+        <%= link_to show_employee_attendance_path(@current_employee), class: 'btn btn-regular' do %>
           My Attendance
           <i class="fas fa-journal-whills"></i>
         <% end %>

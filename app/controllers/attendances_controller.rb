@@ -1,8 +1,8 @@
 require 'date'
 class AttendancesController < ApplicationController
-  load_and_authorize_resource through_association: :company, except: :show
+  load_and_authorize_resource through: :current_employee, except: :show
 
-  # get /attendances
+  # GET    /employees/:employee_id/attendances
   def index
     @attendances = @attendances.paginate(page: params[:page], per_page: 5)
     respond_to do |format|
@@ -18,7 +18,7 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # post /attendances
+  # POST   /employees/:employee_id/attendances
   def create
     @employees_todays_attendance = current_employee.todays_attendance_of_employee
     if @employees_todays_attendance.blank?
@@ -33,12 +33,13 @@ class AttendancesController < ApplicationController
         current_employee.late_count = current_employee.late_count + 1
         current_employee.save
       end
-      @employee_attendance = current_employee.company.attendances.create(login_time: DateTime.now, status: Attendance::STATUS[:PRESENT], employee_id: current_employee.id)
-      if @employee_attendance.valid?
+
+      @attendance.login_time = DateTime.now
+      @attendance.status = 1
+      if @attendance.save
         flash[:success] = t('.success_notice')
       else
         flash[:danger] = t('.error_notice')
-        return false
       end
     end
     respond_to do |format|
@@ -46,18 +47,12 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # patch /attendances/:id
+  # PATCH  /employees/:employee_id/attendances/:id
   def update
-    @employees_todays_attendance = current_employee.todays_attendance_of_employee
-
-    unless @employees_todays_attendance.blank?
-      @employees_todays_attendance.logout_time = DateTime.now
-      @result = @employees_todays_attendance.save!
-      if @result
-        flash[:success] = t('.success_notice')
-      else
-        flash[:danger] = t('.error_notice')
-      end
+    if @attendance.update_attribute('logout_time',DateTime.now)
+      flash[:success] = t('.success_notice')
+    else
+      flash[:danger] = t('.error_notice')
     end
 
     respond_to do |format|
@@ -66,6 +61,7 @@ class AttendancesController < ApplicationController
   end
 
   protected
+
 
   def get_time_in_seconds(time)
     hours_in_seconds = time.strftime('%H').to_i * 3600

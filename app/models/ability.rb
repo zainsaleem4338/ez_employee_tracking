@@ -69,7 +69,7 @@ class Ability
       can :read, Event, company_id: user.company_id
       can :read, Setting, company_id: user.company_id
       can :manage, Message, company_id: user.company_id
-      can :read, Attendance, company_id: user.company_id
+      can :manage, Attendance, company_id: user.company_id
     end
   end
 end

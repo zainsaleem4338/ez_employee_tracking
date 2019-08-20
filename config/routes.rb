@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :employees, controllers: { sessions: 'sessions' }
 
-  resources :attendances, except: [:show, :destroy]
-  resources :settings, except: [:new, :create, :show, :destroy]
+  resources :employees do
+    resources :attendances, except: [:show, :destroy]
+  end
 
   resources :events do
     collection do
@@ -21,7 +22,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources :tasks, only: [:employee_tasks, :update_task_logtime]
+  resources :settings, except: [:new, :create, :show, :destroy]
 
   get 'menus/index' => 'menus#index'
   get 'menus/home' => 'menus#home'
@@ -50,9 +53,9 @@ Rails.application.routes.draw do
 
   get 'employees/:id/projects' => 'projects#index', as: :projects_page
 
-  get 'employee/attendance' => 'attendances#create', as: :employee_attendance
-  get 'employee/attendance/update' => 'attendances#update', as: :update_attendance
-  get 'employee/my_attendance' => 'attendances#show_employee_attendance', as: :show_employee_attendance
+  # get 'employee/attendance' => 'attendances#create', as: :employee_attendance
+  # get 'employee/attendance/update' => 'attendances#update', as: :update_attendance
+  get 'employee/:employee_id/my_attendance' => 'attendances#show_employee_attendance', as: :show_employee_attendance
 
   resources :reports do
     collection do

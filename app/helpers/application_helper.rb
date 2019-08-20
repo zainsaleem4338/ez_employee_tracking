@@ -87,7 +87,7 @@ module ApplicationHelper
     if admin?
       @attendance = {
         name: 'Company Attendance',
-        link: attendances_path,
+        link: employee_attendances_path(@current_employee),
         icon: 'fas fa-journal-whills',
         id: 'attendance_option'
       }
