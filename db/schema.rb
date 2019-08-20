@@ -96,12 +96,12 @@ ActiveRecord::Schema.define(version: 20190806131942) do
     t.integer  "sequence_num",           limit: 4,                  null: false
     t.integer  "department_id",          limit: 4
     t.boolean  "active",                 limit: 1,   default: true
+    t.integer  "leaves",                 limit: 4
+    t.integer  "late_count",             limit: 4
     t.string   "avatar_file_name",       limit: 255
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size",       limit: 8
     t.datetime "avatar_updated_at"
-    t.integer  "leaves",                 limit: 4
-    t.integer  "late_count",             limit: 4
   end
 
   add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
@@ -175,8 +175,8 @@ ActiveRecord::Schema.define(version: 20190806131942) do
     t.integer  "project_id",        limit: 4
     t.integer  "assignable_id",     limit: 4
     t.string   "assignable_type",   limit: 255
-    t.integer  "reviewer_id",       limit: 4
     t.integer  "complexity",        limit: 4
+    t.integer  "reviewer_id",       limit: 4
   end
 
   add_index "tasks", ["assignable_type", "assignable_id"], name: "index_tasks_on_assignable_type_and_assignable_id", using: :btree

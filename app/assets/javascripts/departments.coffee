@@ -1,3 +1,13 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+jQuery ->
+  $(document).ready ->
+    $('#department_table').DataTable 
+      'responsive': true,
+      'orderClasses': false,
+      'paging': false,
+      'info': false,
+      'columns': [
+      	{'width': '45%'}
+      	{'width': '20%', 'orderable': false, "className": "text-center"}
+        {'width': '20%', 'orderable': false, "className": "text-center"}
+        {'width': '15%', 'orderable': false, "className": "text-center"}
+      ]

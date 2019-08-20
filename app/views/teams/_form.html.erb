@@ -72,7 +72,7 @@
       </div>
       <div class="actions">
         <%= form.submit class: "btn btn-regular" %>
-        <%= link_to 'Back', department_teams_path(@department), class: "btn btn-secondary" %>
+        <%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>
       </div>
     </div>
     <div class="col-md-2"></div>

@@ -9,13 +9,13 @@
             <input type="radio" name="adding"; value="1" checked="checked" class="js-toggle-team-employee-input-token" data-type="Employee">
             Add a task for Employee
           </label>
+          <div class= "adding_employee_field js-toggleable-input-token">
+             <%= render partial: 'employee', locals: { form: form } %>
+          </div>
           <label class="col">
             <input type="radio" name="adding"; value="2" class="js-toggle-team-employee-input-token team_radio"  data-type="Team"/>
             Add a task for Team
           </label>
-          <div class= "adding_employee_field js-toggleable-input-token">
-             <%= render partial: 'employee', locals: { form: form } %>
-          </div>
           <div class= "adding_team_field collapse js-toggleable-input-token">
              <%= render partial: 'team', locals: { form: form } %>
           </div>
@@ -24,13 +24,13 @@
             <input type="radio" name="adding"; value="1" class="js-toggle-team-employee-input-token team_radio" data-type="Employee">
             Add a task for Employee
           </label>
+          <div class= "adding_employee_field collapse js-toggleable-input-token">
+             <%= render partial: 'employee', locals: { form: form } %>
+          </div>
           <label class="col">
             <input type="radio" name="adding"; value="2" checked="checked" class="js-toggle-team-employee-input-token"  data-type="Team"/>
             Add a task for Team
           </label>
-          <div class= "adding_employee_field collapse js-toggleable-input-token">
-             <%= render partial: 'employee', locals: { form: form } %>
-          </div>
           <div class= "adding_team_field js-toggleable-input-token">
              <%= render partial: 'team', locals: { form: form } %>
           </div>
@@ -50,7 +50,7 @@
   <div class="container">
     <div class="actions">
       <%= form.submit class: "btn btn-regular submit_form"  %>
-      <%= link_to 'Back', department_project_tasks_url(@department, @project), class: "btn btn-secondary" %>
+      <%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>
     </div>
   </div>
 

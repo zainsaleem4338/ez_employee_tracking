@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
       @projects = @projects.employee_projects(current_employee)
     end
+    @projects = @projects.paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html
       format.js
@@ -17,7 +18,7 @@ class ProjectsController < ApplicationController
   def create
     @project.status = Project::NEW_STATUS
     if @project.save
-      flash[:success] = t('.success_notice')
+      flash[:success] = t('.success_notice', project_name: @project.name.downcase.titleize)
       redirect_to department_projects_path
     else
       flash[:danger] = t('.error_notice')

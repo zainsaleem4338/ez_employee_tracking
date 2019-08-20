@@ -10,7 +10,7 @@ module TasksHelper
 
   def get_assignable_name(task)
     return Task::UNASSIGNED_STATUS if task.assignable.nil?
-    task.assignable.name.capitalize
+    task.assignable.name.titleize
   end
 
   def get_assignable_type(task)
@@ -27,6 +27,28 @@ module TasksHelper
     return [task.reviewer].to_json.html_safe
   end
 
+  def get_time_logs(task)
+    task.task_time_logs
+  end
+
+  def log_by_employee(log)
+    log.company.employees.find_by(log.employee_id).name
+    # Employee.find_by(log.employee_id).name
+  end
+
+  def task_status_percentage(task)
+    if task.status == Task::NEW_STATUS
+      return 10
+    elsif task.status == Task::ASSIGNED_STATUS
+      return 20
+    elsif task.status == Task::IN_PROGRESS
+      return 60
+    elsif task.status == Task::READY_TO_REVIEW
+      return 80
+    elsif task.status == Task::REVIEW_COMPLETED
+      return 100
+    end
+  end
 
   def task_time_logs_form(task)
     task.task_time_logs.where(employee_id: current_employee.id).first

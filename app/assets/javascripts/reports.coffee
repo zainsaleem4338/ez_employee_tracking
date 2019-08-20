@@ -1,10 +1,5 @@
 jQuery ->
   $(document).ready ->
-    $('#task_table').DataTable 
-      'scrollX': true,
-      "paging":   false,
-      "ordering": false,
-      "info":     false
 
     get_field_values = ->
      {  
@@ -43,3 +38,63 @@ jQuery ->
       $('#deadline_end').val('')
       $('#deadline_date_range').remove()
       $('#created_date_range').remove()
+
+    $('#attendancereport_table').DataTable 
+      'responsive': true,
+      'orderClasses': false,
+      'paging': false,
+      'info': false,
+      'columns': [
+        {'width': '5%',"className": "text-center"}
+        {'width': '15%',"className": "text-center"}
+        {'width': '20%',"className": "text-center"}
+        {'width': '15%',"className": "text-center"}
+        {'width': '15%',"className": "text-center"}
+        {'width': '15%',"className": "text-center"}
+        {'width': '15%',"className": "text-center"}
+      ]
+
+    $('#team-task-details').click ->
+      $('#velocityreport_table').DataTable 
+        'responsive': true,
+        'orderClasses': false,
+        'paging': false,
+        'info': false,
+        'columns': [
+          {'width': '5%',"className": "text-center"}
+          {'width': '17%',"className": "text-center"}
+          {'width': '17%',"className": "text-center"}
+          {'width': '17%',"className": "text-center"}
+          {'width': '17%',"className": "text-center"}
+          {'width': '17%',"className": "text-center"}
+        ]
+
+    $('#teamstasks_table').DataTable 
+      'responsive': true,
+      'orderClasses': false,
+      'paging': false,
+      'info': false,
+      'columns': [
+        {'width': '5%',"className": "text-center", "orderable": false}
+        {'width': '30%',"className": "text-center"}
+        {'width': '20%',"className": "text-center"}
+        {'width': '20%',"className": "text-center"}
+        {'width': '20%',"className": "text-center"}
+        {'width': '5%', "orderable": false}
+      ]
+
+
+  $('#taskdetails_table').DataTable 
+    'responsive': true,
+    'orderClasses': false,
+    'paging': false,
+    'info': false,
+    'columns': [
+      {'width': '20%'}
+      {'width': '20%'}
+      {'width': '13%'}
+      {'width': '13%'}
+      {'width': '12%',"className": "text-center"}
+      {'width': '12%',"className": "text-center"}
+      {'width': '10%',"className": "text-center"}
+    ]

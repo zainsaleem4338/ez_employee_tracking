@@ -2,7 +2,15 @@ require 'date'
 class AttendancesController < ApplicationController
   # get /attendances
   def index
-    @attendances_list = current_employee.all_attendances
+    @attendances_list = current_employee.all_attendances.paginate(page: params[:page], per_page: 5)
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  # get /attendances/:id
+  def show
+    @attendances_list = current_employee.attendances.paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html
     end

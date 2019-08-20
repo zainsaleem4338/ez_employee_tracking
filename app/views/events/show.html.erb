@@ -1,0 +1,33 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle"><%= link_to 'Events', home_events_path %> > Show </p>
+      <div class="m-0 pl-2 float-right ">
+        <% if can? :create, Event %>
+          <h3 style='float:right'><a href="<%= edit_event_path %>" title='Edit Event'><i class="fas fa-edit"></i></a> <a href="<%= event_path(@event) %>" data-confirm="Are you sure?" title='Delete Event' data-method='delete' ><i class="fas fa-trash"></i></a></h3>
+        <% end %>
+      </div>
+  </div>
+<% end %>
+<div class="row d-flex">
+  <div class="col-12">
+    <div class="show-col-left">
+      <span class="text-prim"><h5><b>Event</b></h5></span>
+        <table class="table table-hover text-second">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody class="scroll-able text-peach">
+              <tr>
+                <td class="text-second"><%= @event.title %></td>
+                <td><%= @event.description %></td>
+                <td class="text-second"><%= @event.event_date.strftime("%Y-%m-%d") %></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>

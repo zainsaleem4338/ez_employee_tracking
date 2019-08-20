@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
   before_filter :set_cache_buster
   around_filter :scope_current_company
-
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'text/html' }
@@ -49,5 +48,10 @@ class ApplicationController < ActionController::Base
     yield
   ensure
     Company.current_id = nil
+  end
+
+  private
+  def after_sign_out_path_for(resource_or_scope)
+    root_url(subdomain: false)
   end
 end

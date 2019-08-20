@@ -15,3 +15,17 @@ jQuery ->
     attendance_list.style.display = "none";
     calendar.style.display = "flex";  
 
+  $(document).ready ->
+    $('#attendanceslist_table').DataTable 
+      'responsive': true,
+      'orderClasses': false,
+      'paging': false,
+      'info': false,
+      'columns': [
+        {'width': '7%',"className": "text-center"}
+        {'width': '20%'}
+        {'width': '20%'}
+        {'width': '20%',"className": "text-center"}
+        {'width': '20%',"className": "text-center"}
+      ]
+

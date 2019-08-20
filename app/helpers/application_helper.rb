@@ -31,7 +31,12 @@ module ApplicationHelper
 
   def not_logged_out?
     @attendance = current_employee.todays_attendance_of_employee
-    @attendance.logout_empty?
+    @attendance.logout_time.blank?
+  end
+
+  def logged_out?
+    @attendance = current_employee.todays_attendance_of_employee
+    @attendance.logout_time.present?
   end
 
   def admin?
@@ -44,24 +49,27 @@ module ApplicationHelper
       @events = {
         name: 'Events',
         link: home_events_path,
-        icon: 'fas fa-calendar'
+        icon: 'fas fa-calendar',
+        id: 'events_option'
       }
       @data.push(@events)
     end
     @chat = {
       name: 'Messenger',
       link: messages_index_path,
-      icon: 'fas fa-comment'
+      icon: 'fas fa-comment',
+      id: 'chat_option'
     }
     @calendar = {
       name: 'Calendar',
-      link: index_events_path,
+      link: events_path,
       icon: 'far fa-calendar-minus'
     }
     @settings = {
       name: 'Settings',
       link: settings_path,
-      icon: 'fas fa-cog'
+      icon: 'fas fa-cog',
+      id: 'settings_option'
     }
     @data.push(@chat).push(@calendar).push(@settings)
   end
@@ -71,31 +79,40 @@ module ApplicationHelper
     @dashboard = {
       name: 'Dashboard',
       link: menus_index_path,
-      icon: 'fas fa-chart-line'
+      icon: 'fas fa-chart-line',
+      id: 'dashboard_option'
+    }
+    @employee_attendance = {
+      name: 'My Attendance',
+      link: attendance_path(current_employee),
+      icon: 'fas fa-journal-whills',
+      id: 'my_attendance_option'
     }
 
-    @data.push(@dashboard)
+    @data.push(@dashboard).push(@employee_attendance)
 
     if admin?
       @attendance = {
-        name: 'Attendance',
+        name: 'Company Attendance',
         link: attendances_path,
-        icon: 'fas fa-journal-whills'
+        icon: 'fas fa-journal-whills',
+        id: 'attendance_option'
       }
       @employees = {
         name: 'Employees',
         link: '#',
         icon: 'fas fa-user',
+        id: 'employees_option',
         submenu_id: 'empSubmenu',
         suboptions: [
           {
             name: 'Add Employee',
-            link: new_employee_path,
+            link: new_member_path,
             icon: 'fas fa-plus'
           },
           {
             name: 'View Employees',
-            link: employees_path,
+            link: members_path,
             icon: 'fas fa-eye'
           }
         ]
@@ -105,6 +122,7 @@ module ApplicationHelper
         name: 'Departments',
         link: '#',
         icon: 'fas fa-building',
+        id: 'departments_option',
         submenu_id: 'deptSubmenu',
         suboptions: [
           {
@@ -121,35 +139,47 @@ module ApplicationHelper
       }
       @reports = {
         name: 'Reports',
-        link: reports_path,
-        icon: 'fas fa-file'
+        link: '#',
+        icon: 'fas fa-file',
+        id: 'reports_option',
+        submenu_id: 'reportSubmenu',
+        suboptions: [
+          {
+            name: 'Task Report',
+            link: task_report_reports_path,
+            icon: 'fa fa-tasks'
+          },
+          {
+            name: 'Velocity Report',
+            link: show_employee_velocity_report_path,
+            icon: 'fa fa-line-chart'
+          },
+          {
+            name: 'Attendance Report',
+            link: attendance_report_path,
+            icon: 'fa fa-tasks'
+          },
+        ]
       }
-      @add_events = {
-        name: 'Add Event',
-        link: new_events_path,
-        icon: 'fas fa-calendar-week'
-      }
-      @edit_settings = {
-        name: 'Edit Settings',
-        link: edit_settings_path,
-        icon: 'fas fa-cogs'
-      }
-      @data.push(@employees).push(@departments).push(@reports).push(@attendance).push(@add_events).push(@edit_settings)
+      @data.push(@employees).push(@departments).push(@reports).push(@attendance)
     else
       @departments = {
         name: 'Departments',
         link: departments_path,
         icon: 'fas fa-building',
+        id: 'departments_option'
       }
       @employee_tasks = {
         name: 'My Tasks',
         link: employee_tasks_list_path(current_employee),
-        icon: 'fas fa-tasks'
+        icon: 'fas fa-tasks',
+        id: 'employee_tasks_option'
       }
       @reports = {
         name: 'Velocity Report',
         link: show_employee_velocity_report_path,
-        icon: 'fas fa-file'
+        icon: 'fas fa-file',
+        id: 'employee_reports_option'
       }
       @data.push(@employee_tasks).push(@departments).push(@reports)
     end
