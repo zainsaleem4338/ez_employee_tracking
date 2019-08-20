@@ -5,6 +5,7 @@ class DepartmentsController < ApplicationController
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
       @departments = @departments.employee_departments(current_employee)
     end
+    @departments = @departments.paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html
     end

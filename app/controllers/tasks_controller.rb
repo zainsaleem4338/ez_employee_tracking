@@ -9,6 +9,7 @@ class TasksController < ApplicationController
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
       @tasks = @tasks.get_employee_tasks(current_employee)
     end
+    @tasks = @tasks.paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html
     end

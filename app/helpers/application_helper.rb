@@ -82,14 +82,7 @@ module ApplicationHelper
       icon: 'fas fa-chart-line',
       id: 'dashboard_option'
     }
-    @employee_attendance = {
-      name: 'My Attendance',
-      link: attendance_path(current_employee),
-      icon: 'fas fa-journal-whills',
-      id: 'my_attendance_option'
-    }
-
-    @data.push(@dashboard).push(@employee_attendance)
+    @data.push(@dashboard)
 
     if admin?
       @attendance = {
@@ -154,7 +147,13 @@ module ApplicationHelper
         icon: 'fas fa-file',
         id: 'employee_reports_option'
       }
-      @data.push(@employee_tasks).push(@departments).push(@reports)
+      @employee_attendance = {
+        name: 'My Attendance',
+        link: attendance_path(current_employee),
+        icon: 'fas fa-journal-whills',
+        id: 'my_attendance_option'
+      }
+      @data.push(@employee_tasks).push(@departments).push(@reports).push(@employee_attendance)
     end
   end
 end

@@ -4,8 +4,19 @@
   </div>
 <% end %>
 <div class="conatiner">
-  <div class="row">
-    <div class="col-sm">
+  <div class="row d-flex">
+    <div class="col-2">
+      <div class="align-content-right">
+        <%= link_to attendance_path(@current_employee), class: 'btn btn-regular' do %>
+          My Attendance
+          <i class="fas fa-journal-whills"></i>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-10"></div>
+  </div>
+  <div class="row d-flex">
+    <div class="col-12">
       <% if admin? %>
         <%= render 'attendances/attendance_table' %>
       <% end %>

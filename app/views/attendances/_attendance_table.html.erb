@@ -2,7 +2,7 @@
   <%= javascript_include_tag 'attendance_table' %>
 <% end %>
 <div class="container table-responsive">
-   <% if @attendances_list.any? %>
+   <% if @attendances.any? %>
 <table id="attendanceslist_table" style="width:100%" class="table data table-hover dt-responsive">
   <thead>
     <tr>
@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @attendances_list.each do |attendance| %>
+    <% @attendances.each do |attendance| %>
         <% @company_employee = Employee.find(attendance.employee_id) %>
     <tr>
       <td><%= attendance.employee.sequence_num %></td>
@@ -29,3 +29,7 @@
 </table>
 
 <% end %>
+
+<div class="pagination-div">
+<%= will_paginate @attendances, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
+</div>
