@@ -33,7 +33,6 @@ module TasksHelper
 
   def log_by_employee(log)
     log.company.employees.find_by(log.employee_id).name
-    # Employee.find_by(log.employee_id).name
   end
 
   def task_status_percentage(task)
