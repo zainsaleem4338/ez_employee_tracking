@@ -15,11 +15,11 @@
   </thead>
   <tbody>
     <% @attendances.each do |attendance| %>
-        <% @company_employee = Employee.find(attendance.employee_id) %>
+        <% @company_employee = attendance.employee %>
     <tr>
-      <td><%= attendance.employee.sequence_num %></td>
-      <td><%= attendance.employee.name.downcase.titleize %></td>
-      <td><%= attendance.employee.email.downcase %></td>
+      <td><%= @company_employee.sequence_num %></td>
+      <td><%= @company_employee.name.downcase.titleize %></td>
+      <td><%= @company_employee.email.downcase %></td>
       <td><%= attendance.login_time.to_formatted_s(:long_ordinal) %></td>
       <td> <%= attendance_logout(attendance)%></td>
     </tr>

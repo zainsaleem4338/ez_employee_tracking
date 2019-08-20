@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :employees, controllers: { sessions: 'sessions' }
 
-  resources :attendances
+  resources :attendances, except: [:show, :destroy]
   resources :settings, except: [:new, :create, :show, :destroy]
 
   resources :events do
@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
   get 'employee/attendance' => 'attendances#create', as: :employee_attendance
   get 'employee/attendance/update' => 'attendances#update', as: :update_attendance
+  get 'employee/my_attendance' => 'attendances#show_employee_attendance', as: :show_employee_attendance
 
   resources :reports do
     collection do

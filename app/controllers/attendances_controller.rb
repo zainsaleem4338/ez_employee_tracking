@@ -10,9 +10,9 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # get /attendances/:id
-  def show
-    @attendances = current_employee.company.employees.find_by(sequence_num: params[:id]).attendances.paginate(page: params[:page], per_page: 5)
+  # get /attendances
+  def show_employee_attendance
+    @attendances = current_employee.company.employees.find_by(sequence_num: current_employee.sequence_num).attendances.paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html
     end
