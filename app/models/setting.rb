@@ -26,4 +26,8 @@ class Setting < ActiveRecord::Base
     end
     timings
   end
+
+  def self.set_up_settings
+    
+  end
 end

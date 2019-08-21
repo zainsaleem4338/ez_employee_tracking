@@ -499,20 +499,6 @@ i,span {
   color: $skin;
 }
 
-#sidebar.active .sidebar-header strong {
-  display: block;
-  font-size: 1.5rem;
-}
-
-#sidebar .sidebar-header h3 {
-  color: #fff !important;
-  font-size: 1.4rem;
-}
-
-#sidebar.active .sidebar-header h3 {
-  display: none;
-}
-
 #sidebar.active ul li a {
   margin-left: 15px;
   margin-right: 20px;
@@ -521,11 +507,6 @@ i,span {
 
 #sidebar.active ul ul a {
   padding: 15px !important;
-}
-
-#sidebar ul li a {
-  text-align: left;
-  color: #fff;
 }
 
 #sidebar.active ul li a {
@@ -601,8 +582,8 @@ i,span {
 }
 
 #sidebar ul li a:hover {
-  color: $primary;
-  background: #fff;
+  color: $peach;
+  background: $secondary;
 }
 
 #sidebar ul li.active>a,

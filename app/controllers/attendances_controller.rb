@@ -1,6 +1,6 @@
 require 'date'
 class AttendancesController < ApplicationController
-  load_and_authorize_resource through: :current_employee, except: :show
+  load_and_authorize_resource through: :current_employee
 
   # GET    /employees/:employee_id/attendances
   def index
@@ -10,9 +10,9 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # get /attendances
+  # GET    /employee/:employee_id/my_attendance
   def show_employee_attendance
-    @attendances = current_employee.company.employees.find_by(sequence_num: current_employee.sequence_num).attendances.paginate(page: params[:page], per_page: 5)
+    @attendances = current_employee.attendances.paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html
     end
