@@ -16,6 +16,7 @@ gem 'paperclip', '~> 6.1.0'
 gem 'popper_js', '~> 1.14', '>= 1.14.5'
 gem 'rails', '4.2.0'
 gem 'rails-jquery-tokeninput', '~> 0.2.6'
+gem 'rspec-rails', '~> 3.8'
 gem 'sass', '~> 3.7', '>= 3.7.4'
 gem 'sass-rails', '~> 5.0'
 gem 'sassc-rails', '>= 2.1.0'
@@ -45,6 +46,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rspec-rails', '~> 3.8'
   gem 'faker', '~> 1.6.1'
   gem 'simplecov', require: false
 end

@@ -27,8 +27,11 @@
               </tr>
               <tr>
                 <td class="text-prim"><b>Department:</b></td>
-                <td class="text-prim"><b>Department:</b></td>
+                <% if @employee.department.present? %>
                 <td class="text-peach"><%= link_to @employee.department.name, department_path(@employee.department), class: 'text-peach no-decoration' %></td>
+                <% else %>
+                <td></td>
+                <% end %>
 
               </tr>
             </table>

@@ -26,7 +26,7 @@ class Employee < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   has_many :tasks, as: :assignable
   has_many :attendances
-  has_many :tasks, foreign_key: :reviewer_id, class_name: 'Task'
+  has_many :reviewer_tasks, foreign_key: :reviewer_id, class_name: 'Task'
   scope :team_employees, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).where.not(employee_teams: {employee_id: user.id}).distinct}
   scope :team_employees_projects_tasks, ->(user){joins("LEFT JOIN employee_teams ON employees.id = employee_teams.employee_id").where('employee_teams.team_id in (?) OR employees.id = ?',user.employee_teams.pluck(:team_id), user.id)}
 

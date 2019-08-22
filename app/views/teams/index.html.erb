@@ -15,7 +15,7 @@
       <% @teams.each do |team| %>
       <tr>
         <td><%= image_tag team.team_pic.url(:thumb),class: "rounded-circle team-pic",style:'width:90px; height:50px' %></td>
-        <td><%= team.name.downcase.titleize %></td>
+        <td class="clickable-item"><%= link_to team.name.downcase.titleize, department_team_path(@department, team) %></td>
         <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize %></td>
         <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
         <td>

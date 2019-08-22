@@ -2,7 +2,6 @@ class EmployeesController < ApplicationController
   load_and_authorize_resource through_association: :company
   load_and_authorize_resource :team, through_association: :company
 
-
   def index
     @employees = @employees.paginate(page: params[:page], per_page: 5)
   end
@@ -43,7 +42,8 @@ class EmployeesController < ApplicationController
 
   # get /employees/:sequence_num/show
   def show
-    @employee = Employee.find_by_sequence_num(params[:sequence_num])
+    # binding.pry
+    @employee = current_employee.company.employees.find_by(sequence_num: params[:sequence_num])
   end
 
   # get '/employees/team_member_render_view'
