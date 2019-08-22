@@ -1,5 +1,5 @@
 class MenusController < ApplicationController
-  skip_before_action :authenticate_employee!, only: [:home, :search_email]
+  skip_before_action :authenticate_employee!, only: [:home, :search_email, :page_not_found]
 
   # get 'menus/index'
   def index
@@ -16,7 +16,7 @@ class MenusController < ApplicationController
     if current_employee.late_count.nil?
       @late_count = nil
     else
-      @late_count = current_employee.late_count 
+      @late_count = current_employee.late_count
     end
     respond_to do |format|
       format.html
@@ -42,7 +42,11 @@ class MenusController < ApplicationController
       end
     end
     respond_to do |format|
-      format.js
+      format.html
     end
+  end
+
+  def page_not_found
+    render 'page_not_found', layout: false
   end
 end

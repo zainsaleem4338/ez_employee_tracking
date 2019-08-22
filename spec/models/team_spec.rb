@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  department = FactoryGirl.create(:department)
-  employee = FactoryGirl.create(:employee)
-  team = Team.new(name: 'Zain Team', description: 'This is our team', company_id: employee.company_id)
+  before(:all) do
+    department = FactoryGirl.create(:department)
+    @employee = FactoryGirl.create(:employee)
+    team = Team.new(name: 'Zain Team', description: 'This is our team', company_id: @employee.company_id)
+  end
+
   context 'Test Cases for create team' do
     it 'should return object' do
       expect(team.create_team('2', [3], department.id)).to eql team

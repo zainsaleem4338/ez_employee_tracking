@@ -2,10 +2,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.role == Employee::ADMIN_ROLE 
+    if user.role == Employee::ADMIN_ROLE
       can :manage, Department, company_id: user.company_id
-      can [:read, :employees_lists, :team_member_render_view, :pdf_velocity_report], Employee, active: true, company_id: user.company_id
+      can [:read, :employees_lists, :pdf_velocity_report], Employee, active: true, company_id: user.company_id
       can [:new, :create], Employee, company_id: user.company_id
+      can :manage, Attendance, company_id: user.company_id
       can :destroy, Employee, company_id: user.company_id
       can :manage, Project, company_id: user.company_id
       can :manage, Task, company_id: user.company_id
@@ -14,7 +15,6 @@ class Ability
       can :manage, Message, company_id: user.company_id
       can :manage, Team, company_id: user.company_id
       can :manage, Report, company_id: user.company_id
-
     else
       can [:read, :pdf_velocity_report], Employee, user.company.employees.team_employees(user) do |employee|
         employee.company_id == user.company_id
@@ -43,6 +43,7 @@ class Ability
       can :read, Event, company_id: user.company_id
       can :read, Setting, company_id: user.company_id
       can :manage, Message, company_id: user.company_id
+      can :manage, Attendance, company_id: user.company_id
     end
   end
 end

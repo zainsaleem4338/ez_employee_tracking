@@ -1,0 +1,25 @@
+/* line 1, app/assets/stylesheets/reports.scss */
+.filter-text {
+  font-size: 13px;
+}
+
+/* line 4, app/assets/stylesheets/reports.scss */
+.dropdown-padding {
+  padding-left: 45%;
+}
+
+/* line 7, app/assets/stylesheets/reports.scss */
+.filter-line-height {
+  line-height: 1px;
+}
+
+/* line 10, app/assets/stylesheets/reports.scss */
+.btn-padding {
+  padding-left: 38%;
+}
+
+/* line 13, app/assets/stylesheets/reports.scss */
+.error {
+  color: red;
+  font-size: 13px;
+}

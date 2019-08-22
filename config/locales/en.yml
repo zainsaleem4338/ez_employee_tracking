@@ -10,13 +10,13 @@ en:
       
   departments:
     create:
-      success_notice: 'Department Created Successfully.'
+      success_notice: 'Department Created Successfully!'
 
     update:
-      success_notice: 'Department Updated Successfully.'
+      success_notice: 'Department Updated Successfully!'
 
     destroy:
-      success_notice: 'Department Deleted Successfully.'
+      success_notice: 'Department Deleted Successfully!'
       error_notice: 'Unable to delete department'
 
   events:
@@ -30,7 +30,7 @@ en:
       success_notice: 'Event has been deleted!'
       error_notice: 'Event has not been delete!'
 
-  employees:
+  members:
     create:
       success_notice: 'Employee successfully created!'
     destroy:
@@ -85,12 +85,14 @@ en:
 
   models:
     team:
-      team_members_require_error: 'Team members name are required'
-      team_lead_member_conflict: Employee can't be team member & team leader at the same time.
-      leader_name_require: 'Team leader name is required'
+      team_name_require: "Team name can't be blank"
+      team_members_and_leader_name_require: "Team leader and members name can't be blank"
+      team_members_require_error: "Team members name can't be blank"
+      team_lead_member_conflict: "Employee can't be team member & team leader at the same time"
+      leader_name_require: "Team leader name can't be blank"
     task_project:
       end_date_valid: 'cannot be before start date'
-      start_date_valid: "should be greater than equal to today's date."
+      start_date_valid: "should be greater than equal to today's date"
 
   task_mailer:
     assign_task_notify:

@@ -33,11 +33,7 @@ class Employee < ActiveRecord::Base
   def todays_attendance_of_employee
     @start_time = DateTime.now.change(hour: 10)
     @end_time = DateTime.now.change(hour: 20)
-    company.attendances.find_by(employee_id: id, login_time: (@start_time..@end_time))
-  end
-
-  def all_attendances
-    company.attendances.where(status: Attendance::STATUS[:PRESENT]).order(login_time: :desc)
+    attendances.find_by(login_time: (@start_time..@end_time))
   end
 
   def with_company
@@ -52,5 +48,27 @@ class Employee < ActiveRecord::Base
 
   def email_changed?
     false
+  end
+
+  def get_time_in_seconds(time)
+    hours_in_seconds = time.strftime('%H').to_i * 3600
+    minutes_in_seconds = time.strftime('%H').to_i * 60
+    hours_in_seconds + minutes_in_seconds
+  end
+
+  def late_count_of_employee
+    @employees_todays_attendance = todays_attendance_of_employee
+    if @employees_todays_attendance.blank?
+      setting = company.setting
+      today_start_time = setting.timings[Time.now.strftime('%A').downcase + '_start_time']
+      attendance_thresh = setting.attendance_time
+      attendance_thresh = 0 if attendance_thresh.nil?
+      if get_time_in_seconds(Time.now) > get_time_in_seconds(today_start_time.to_time) + attendance_thresh * 60
+        if late_count.nil?
+          self.late_count = 0
+        end
+        self.late_count = late_count + 1
+      end
+    end
   end
 end

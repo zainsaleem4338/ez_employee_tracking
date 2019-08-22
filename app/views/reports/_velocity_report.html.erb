@@ -1,3 +1,8 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">Employee Velocity Report</p>
+  </div>
+<% end %>
 <% @employee_tasks_data.each do |team_id, team_members_data| %>
 <div class="container velocity-report">
   <div class="col-md-10">
@@ -7,7 +12,7 @@
   </div>
 
 <div class="container table-responsive">
-<table id="velocityreport_table" style="width:100%" class="table data table-hover dt-responsive">
+<table id="velocityreport_table" class="table data table-hover dt-responsive full-width">
   <thead>
     <tr>
       <th >ID</th>
@@ -26,7 +31,7 @@
           <td><%= employee_velocity_data[:total_tasks] %></td>
           <td><%= employee_velocity_data[:total_complexity] %></td>
           <td><%= employee_velocity_data[:total_time] %></td>
-          <td><%= employee_velocity_nan?(employee_velocity_data[:velocity]) %></td>
+          <td><%= employee_velocity(employee_velocity_data[:velocity]) %></td>
         </tr> 
     <% end %>
   </tbody>

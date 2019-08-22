@@ -12,7 +12,6 @@ class TasksController < ApplicationController
     @tasks = @tasks.paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html
-      format.js
     end
   end
 
@@ -30,8 +29,7 @@ class TasksController < ApplicationController
       flash[:success] = t('.success_notice')
       redirect_to department_project_tasks_path
     else
-      flash[:danger] = t('.error_notice')
-      redirect_to new_department_project_task_path
+      render :new
     end
   end
 
@@ -47,8 +45,7 @@ class TasksController < ApplicationController
         flash[:success] = t('.success_notice')
         redirect_to department_project_tasks_path
       else
-        flash[:danger] = t('.error_notice')
-        redirect_to edit_department_project_task_path
+        rrender :new
       end
     end
   end

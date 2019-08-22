@@ -26,17 +26,16 @@ module ApplicationHelper
   def present_marked?
     @attendance = current_employee.todays_attendance_of_employee
     return false if @attendance.nil?
+    
     @attendance.attendance_present?
   end
 
-  def not_logged_out?
-    @attendance = current_employee.todays_attendance_of_employee
-    @attendance.logout_time.blank?
+  def not_checked_out?
+    current_employee.todays_attendance_of_employee.logout_time.blank?
   end
 
-  def logged_out?
-    @attendance = current_employee.todays_attendance_of_employee
-    @attendance.logout_time.present?
+  def checked_out?
+    current_employee.todays_attendance_of_employee.logout_time.present?
   end
 
   def admin?
@@ -44,101 +43,66 @@ module ApplicationHelper
   end
 
   def generate_sidebar_foot_options
-    @data = []
+    data = []
     if admin?
-      @events = {
+      events = {
         name: 'Events',
         link: home_events_path,
         icon: 'fas fa-calendar',
         id: 'events_option'
       }
-      @data.push(@events)
+      data.push(events)
     end
-    @chat = {
+    chat = {
       name: 'Messenger',
       link: messages_index_path,
       icon: 'fas fa-comment',
       id: 'chat_option'
     }
-    @calendar = {
+    calendar = {
       name: 'Calendar',
-      link: index_events_path,
-      icon: 'far fa-calendar-minus',
-      id: 'calendar_option'
+      link: events_path,
+      icon: 'far fa-calendar-minus'
     }
-    @settings = {
+    settings = {
       name: 'Settings',
       link: settings_path,
       icon: 'fas fa-cog',
       id: 'settings_option'
     }
-    @data.push(@chat).push(@calendar).push(@settings)
+    data.push(chat).push(calendar).push(settings)
   end
 
   def generate_sidebar_options
-    @data = []
-    @dashboard = {
+    data = []
+    dashboard = {
       name: 'Dashboard',
       link: menus_index_path,
       icon: 'fas fa-chart-line',
       id: 'dashboard_option'
     }
-    @employee_attendance = {
-      name: 'My Attendance',
-      link: attendance_path(current_employee),
-      icon: 'fas fa-journal-whills',
-      id: 'my_attendance_option'
-    }
-
-    @data.push(@dashboard).push(@employee_attendance)
+    data.push(dashboard)
 
     if admin?
-      @attendance = {
+      attendance = {
         name: 'Company Attendance',
-        link: attendances_path,
+        link: employee_attendances_path(@current_employee),
         icon: 'fas fa-journal-whills',
         id: 'attendance_option'
       }
-      @employees = {
+      employees = {
         name: 'Employees',
-        link: '#',
+        link: members_path,
         icon: 'fas fa-user',
-        id: 'employees_option',
-        submenu_id: 'empSubmenu',
-        suboptions: [
-          {
-            name: 'Add Employee',
-            link: new_employee_path,
-            icon: 'fas fa-plus'
-          },
-          {
-            name: 'View Employees',
-            link: employees_path,
-            icon: 'fas fa-eye'
-          }
-        ]
+        id: 'employees_option'
       }
-
-      @departments = {
+      departments = {
         name: 'Departments',
-        link: '#',
+        link: departments_path,
         icon: 'fas fa-building',
-        id: 'departments_option',
-        submenu_id: 'deptSubmenu',
-        suboptions: [
-          {
-            name: 'Add Department',
-            link: new_department_path,
-            icon: 'fas fa-plus'
-          },
-          {
-            name: 'View Departments',
-            link: departments_path,
-            icon: 'fas fa-eye'
-          }
-        ]
+        id: 'departments_option'
       }
-      @reports = {
+      reports = {
         name: 'Reports',
         link: '#',
         icon: 'fas fa-file',
@@ -159,42 +123,36 @@ module ApplicationHelper
             name: 'Attendance Report',
             link: attendance_report_path,
             icon: 'fa fa-tasks'
-          },
+          }
         ]
       }
-      @add_events = {
-        name: 'Add Event',
-        link: new_events_path,
-        icon: 'fas fa-calendar-week',
-        id: 'add_events_option'
-      }
-      @edit_settings = {
-        name: 'Edit Settings',
-        link: edit_settings_path,
-        icon: 'fas fa-cogs',
-        id: 'edit_settings_option'
-      }
-      @data.push(@employees).push(@departments).push(@reports).push(@attendance).push(@add_events).push(@edit_settings)
+      data.push(employees).push(departments).push(reports).push(attendance)
     else
-      @departments = {
+      departments = {
         name: 'Departments',
         link: departments_path,
         icon: 'fas fa-building',
         id: 'departments_option'
       }
-      @employee_tasks = {
+      employee_tasks = {
         name: 'My Tasks',
-        link: employee_tasks_list_path(current_employee),
+        link: employee_tasks_list_path(@current_employee),
         icon: 'fas fa-tasks',
         id: 'employee_tasks_option'
       }
-      @reports = {
+      reports = {
         name: 'Velocity Report',
         link: show_employee_velocity_report_path,
         icon: 'fas fa-file',
         id: 'employee_reports_option'
       }
-      @data.push(@employee_tasks).push(@departments).push(@reports)
+      employee_attendance = {
+        name: 'My Attendance',
+        link: employee_attendances_path(current_employee),
+        icon: 'fas fa-journal-whills',
+        id: 'my_attendance_option'
+      }
+      data.push(employee_tasks).push(departments).push(reports).push(employee_attendance)
     end
   end
 end
