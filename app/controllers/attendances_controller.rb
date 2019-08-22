@@ -21,10 +21,10 @@ class AttendancesController < ApplicationController
   # POST   /employees/:employee_id/attendances
   def create
     current_employee.company.attendances.transaction do
-      current_employee.late_count_of_employee
       @attendance.login_time = DateTime.now
       @attendance.status = 1
       @attendance.save
+      current_employee.late_count_of_employee
     end
     if @attendance.valid?
       flash[:success] = t('.success_notice')
