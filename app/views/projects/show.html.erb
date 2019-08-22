@@ -1,6 +1,6 @@
 <p>
   <strong>Project Title:</strong>
-  <%= @project.name.downcase.capitalize %>
+  <%= @project.name.downcase.titleize %>
 </p>
 <%= link_to 'Edit', edit_member_path(@employee) %> |
 <%= link_to 'Back', request.env["HTTP_REFERER"], class: "btn btn-secondary" %>

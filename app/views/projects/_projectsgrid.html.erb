@@ -1,5 +1,5 @@
 <div class="container table-responsive">
-<table id="project_table" style="width:100%" class="table data table-hover dt-responsive">
+<table id="project_table" class="table data table-hover dt-responsive full-width">
   <thead>
     <tr>
       <th >NAME</th>
@@ -32,7 +32,7 @@
             <% end %>
           </div>
           <div class="btn-group dropleft">
-            <i class="fas fa-ellipsis-v" title="More..." style="cursor:pointer;font-size:16px" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+            <i class="fas fa-ellipsis-v cursor-pointer" title="More..." class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
             <div class="dropdown-menu">
                   <%= link_to "Show Tasks",department_project_tasks_path(project.department,project), class:"dropdown-item" %>
             </div>

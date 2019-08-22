@@ -26,11 +26,11 @@
       	<% if check_today_timings? %>		
 	      	<li class="nav-item" id="attendance_button">
 	          <div class="d-flex align-items-center">
-	            <% if present_marked? && not_logged_out? %>
+	            <% if present_marked? && not_checked_out? %>
 	              <%= link_to 'Check out', employee_attendance_path(@current_employee, @current_employee.attendances.last), class: 'btn btn-sm btn-outline-danger update_attendance', method: :patch, remote: true %>
 	            <% elsif !present_marked? %>
 	              <%= link_to 'Check in', employee_attendances_path(@current_employee), class: 'btn btn-sm btn-regular btn-primary mark_present', method: :post, remote: true %>
-              <%elsif logged_out? %>
+              <%elsif checked_out? %>
                 <p class="checked-out-status" data-toggle="tooltip" data-placement="bottom" title="You have checked out!">Checked out</p>
 	             <% end %>
 	          </div>

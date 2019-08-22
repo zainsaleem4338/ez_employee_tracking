@@ -16,7 +16,7 @@
 <% end %>
 <% if @teams.present? %>
   <div class="container table-responsive">
-    <table id="teams_table" style="width:100%" class="table data table-hover dt-responsive">
+    <table id="teams_table" class="table data table-hover dt-responsive full-width">
       <thead>
         <tr>
           <th>TEAM PICTURE</th>
@@ -30,7 +30,7 @@
       <tbody>
         <% @teams.each do |team| %>
         <tr>
-          <td><%= image_tag team.team_pic.url(:thumb),class: "rounded-circle team-pic",style:'width:90px; height:50px' %></td>
+          <td><%= image_tag team.team_pic.url(:thumb), class: "rounded-circle img-90-50" %></td>
           <td><%= team.name.downcase.titleize %></td>
           <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize %></td>
           <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>

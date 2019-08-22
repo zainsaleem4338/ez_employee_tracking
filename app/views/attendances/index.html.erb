@@ -6,7 +6,7 @@
 <div class="conatiner">
   <div class="row d-flex">
     <div class="col-2">
-      <div class="align-content-right">
+      <div class="align-content-right ml-3">
         <%= link_to show_employee_attendance_path(@current_employee), class: 'btn btn-regular' do %>
           My Attendance
           <i class="fas fa-journal-whills"></i>
@@ -15,7 +15,7 @@
     </div>
     <div class="col-10"></div>
   </div>
-  <div class="row d-flex">
+  <div class="row d-flex mt-2">
     <div class="col-12">
       <% if admin? %>
         <%= render 'attendances/attendance_table' %>

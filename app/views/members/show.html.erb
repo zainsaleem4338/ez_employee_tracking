@@ -68,7 +68,7 @@
               <tbody class="text-peach">
                 <% @employee.teams.order(created_at: :asc).last(5).each do |team| %>
                   <tr>
-                    <td><%= image_tag team.team_pic.url(:thumb),class: "rounded-circle team-pic",style:'width:90px; height:50px' %></td>
+                    <td><%= image_tag team.team_pic.url(:thumb),class: "rounded-circle img-90-50" %></td>
                     <td><%= team.name %></td>
                     <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first %></td>
                     <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>

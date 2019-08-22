@@ -49,7 +49,7 @@
           <table class="table">
             <tbody id="member_table">
               <tr id="team_member_<%= @count.to_i %>" >
-                <td class="pb-0"><%= image_tag employee_team_form.object.employee.avatar.url(:thumb), class: "rounded-circle employee-avatar mb-2", style:'width:60px; height:60px' %></td>
+                <td class="pb-0"><%= image_tag employee_team_form.object.employee.avatar.url(:thumb), class: "rounded-circle employee-avatar mb-2 img-60-60" %></td>
                 <td>
                   <%= employee_team_form.object.employee.name %>
                   <%= hidden_field_tag "team[employee_teams_attributes][#{@count.to_i}][employee_id]", employee_team_form.object.employee.id %>

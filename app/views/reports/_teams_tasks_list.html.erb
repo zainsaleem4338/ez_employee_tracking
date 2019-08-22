@@ -1,5 +1,5 @@
 <div class="container velocity-report table-responsive">
-  <table id="teamstasks_table" style="width:100%" class="table data table-hover dt-responsive">
+  <table id="teamstasks_table" class="table data table-hover dt-responsive full-width">
     <thead>
       <tr>
         <th>ID</th>
@@ -22,7 +22,7 @@
         <td  class="d-table-cell align-middle vertical-align">
           <div class="row no-gutters justify-content-between">
             <div class="btn-group dropleft">
-              <i class="fas fa-ellipsis-v" title="More..." style="cursor:pointer;font-size:16px" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+              <i class="fas fa-ellipsis-v cursor-pointer" title="More..." class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
               <div class="dropdown-menu">
                 <%= link_to "Show Details",single_team_tasks_report_path(team_id: team_id), remote: true, class:"dropdown-item" %>
               </div>

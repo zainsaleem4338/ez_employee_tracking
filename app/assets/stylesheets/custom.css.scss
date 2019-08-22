@@ -113,6 +113,44 @@ select[type=text]:focus, textarea:focus {
   display: inline-flex;
 }
 
+.d-inline-block {
+	display: inline-block;
+}
+
+.no-records {
+	padding: 20px;
+}
+
+.float-right {
+  float: right;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.attendance-table-allign {
+  height: 100%;
+  display: table;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.cursor-pointer {
+  cursor:pointer;
+  font-size:16px
+}
+
+.img-60-60 {
+  width:60px;
+  height:60px;
+}
+
+.img-90-50 {
+  width:90px;
+  height:50px;
+}
+
 .navbar {
   padding: 5px 10px;
   background: #fff;
@@ -157,12 +195,12 @@ select[type=text]:focus, textarea:focus {
 }
 
 .align-content-right {
-	align-items: right !important;
-	align-content: right !important;
+  align-items: right !important;
+  align-content: right !important;
 }
 
 .ml-report-btn {
-	margin-left: 40px;
+  margin-left: 40px;
 }
 
 .mr-2 {
@@ -259,10 +297,26 @@ select[type=text]:focus, textarea:focus {
   color: $primary;
 }
 
+.min-height-280 {
+  min-height:280px;
+}
+
+.max-height-280 {
+  max-height:280px;
+}
+
+.scroll-y {
+  overflow-y: scroll !important;
+}
+
 .scroll-able {
   overflow-y: scroll;
   max-height: 400px;
   min-height: 400px;
+}
+
+.task-deadline-col {
+  height: 280px;
 }
 
 .progress {
@@ -696,16 +750,32 @@ a[data-toggle="collapse"] {
   max-height: 60px;
 }
 
+.text-prim {
+  color: $primary !important;
+}
+
 .text-second {
-  color: $secondary;
+  color: $secondary !important;
 }
 
 .text-peach {
-  color: $peach;
+  color: $peach !important;
 }
 
 .text-skin {
-  color: $skin;
+  color: $skin !important;
+}
+
+.border-prim {
+  border-color: $primary;
+}
+
+.max-width-50 {
+  max-width: 50rem;
+}
+
+.overflow-auto {
+  overflow-y: auto;
 }
 
 .notice{
@@ -1903,6 +1973,11 @@ h6.card-title {
 .dashboard_card {
   border: 1px #ced4da solid;
   padding: 2%;
+}
+
+.company-search-span {
+  font-size:150%;
+  padding-right:5%;
 }
 
 
