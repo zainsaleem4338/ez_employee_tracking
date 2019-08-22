@@ -41,7 +41,8 @@ class MembersController < ApplicationController
 
   # get /employees/:sequence_num/show
   def show
-    @employee = Employee.find_by_sequence_num(params[:sequence_num])
+    # binding.pry
+    @employee = current_employee.company.employees.find_by(sequence_num: params[:sequence_num])
   end
 
   private

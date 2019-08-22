@@ -26,34 +26,33 @@
           <th>ACTIONS</th>
         </tr>
       </thead>
-
-      <tbody>
-        <% @teams.each do |team| %>
-        <tr>
-          <td><%= image_tag team.team_pic.url(:thumb), class: "rounded-circle img-90-50" %></td>
-          <td><%= team.name.downcase.titleize %></td>
-          <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize %></td>
-          <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
-          <td>
-            <div class="actions">
-              <%= link_to department_team_path(team.department,team) do %>
-              <i title="Show Team" class="table-options action-show fas fa-eye"></i>
-              <% end %>
-              <% if can? :create, team %>
-              <%= link_to edit_department_team_path(team.department,team) do %>
-              <i title="Edit Team" class="table-options action-edit fas fa-edit"></i>
-              <% end %>
-              <%= link_to department_team_path(team.department,team), method: :delete, data: { confirm: 'Are you sure?' } do %>  
-              <i title="Delete Team" class="table-options action-delete fas fa-trash"></i>
-              <% end %>
-              <% end %>
-            </div>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+    <tbody>
+      <% @teams.each do |team| %>
+      <tr>
+        <td><%= image_tag team.team_pic.url(:thumb),class: "rounded-circle team-pic",style:'width:90px; height:50px' %></td>
+        <td class="clickable-item"><%= link_to team.name.downcase.titleize, department_team_path(@department, team) %></td>
+        <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize %></td>
+        <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
+        <td>
+          <div class="actions">
+            <%= link_to department_team_path(team.department,team) do %>
+            <i title="Show Team" class="table-options action-show fas fa-eye"></i>
+            <% end %>
+            <% if can? :create, team %>
+            <%= link_to edit_department_team_path(team.department,team) do %>
+            <i title="Edit Team" class="table-options action-edit fas fa-edit"></i>
+            <% end %>
+            <%= link_to department_team_path(team.department,team), method: :delete, data: { confirm: 'Are you sure?' } do %>  
+            <i title="Delete Team" class="table-options action-delete fas fa-trash"></i>
+            <% end %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <% else %>
   <%= render '/shared/no_records' %>
 <% end %>

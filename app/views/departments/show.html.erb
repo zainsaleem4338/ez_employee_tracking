@@ -46,30 +46,32 @@
           </div>
         </div>
         <div class="card-body">
-          <% if @department.teams.length > 0%>
-            <div class="container table-responsive">
-              <table class="table dataable-hover dt-responsive full-width">
-                <thead>
-                  <tr>
-                    <th>Team Name</th>
-                    <th>Team Leader</th>
-                    <th>Team Members</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @department.teams.order(created_at: :asc).last(5).each do |team| %>
-                    <tr>
-                      <td><%= h truncate(team.name.downcase.titleize, :length => 15) %></td>
-                      <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize %></td>
-                      <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-            <div class="show-more">
+          <% if @teams.length > 0%>
+          <div class="container table-responsive">
+
+            <table style="width:100%" class="table dataable-hover dt-responsive">
+              <thead>
+                <tr>
+                  <th>Team Name</th>
+                  <th>Team Leader</th>
+                  <th>Team Members</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @teams.order(created_at: :asc).last(5).each do |team| %>
+                <tr>
+                  <td class="clickable-item"><%= link_to team.name.downcase.titleize, department_team_path(@department,team) %></td>
+                  <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first.downcase.capitalize %></td>
+                  <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="show-more">
               <%= link_to "Show all teams...", department_teams_path(@department) %>
-            </div>
+          </div>
           <% else %>
             <p>No teams found</p>
           <% end %>
@@ -89,32 +91,33 @@
           </div>
         </div>
         <div class="card-body">
-          <% if @department.projects.length > 0%>
-            <div class="container table-responsive">
-              <table class="table data table-hover dt-responsive full-width">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Start Date</th>
-                    <th>Expected End Date</th>
-                    <th>Tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @department.projects.order(created_at: :asc).last(5).each do |project| %>
-                  <tr>
-                    <td><%= h truncate(project.name.downcase.titleize, :length => 15) %></td>
-                    <td><%= project.start_date.to_date %></td>
-                    <td><%= project.expected_end_date.to_date %></td>
-                    <td><%= project.tasks.count %></td>
-                  </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-            <div class="show-more">
+          <% if @projects.length > 0%>
+          <div class="container table-responsive">
+            <table style="width:100%" class="table data table-hover dt-responsive">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Start Date</th>
+                  <th>Expected End Date</th>
+                  <th>Tasks</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @projects.order(created_at: :asc).last(5).each do |project| %>
+                <tr>
+                  <td class="clickable-item"><%= link_to project.name.downcase.titleize, department_project_tasks_path(@department,project) %></td>
+                  <td><%= project.start_date.to_date %></td>
+                  <td><%= project.expected_end_date.to_date %></td>
+                  <td><%= project.tasks.count %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="show-more">
               <%= link_to "Show all projects...", department_projects_path(@department)%>
-            </div>
+          </div>
           <% else %>
             <p>No projects found</p>
           <% end %>
