@@ -18,13 +18,13 @@ class SettingsController < ApplicationController
 
   # patch '/settings/edit'
   def edit
-    @settings = @settings.first
-    if @settings.present?
-      if(@settings.working_days.class == String)
-        @settings.working_days = JSON.parse(@settings.working_days.gsub("'",'"').gsub('=>',':'))
-        @settings.timings = JSON.parse(@settings.timings.gsub("'",'"').gsub('=>',':'))
+    @setting = current_employee.company.setting
+    if @setting.present?
+      if(@setting.working_days.class == String)
+        @setting.working_days = JSON.parse(@setting.working_days.gsub("'",'"').gsub('=>',':'))
+        @setting.timings = JSON.parse(@setting.timings.gsub("'",'"').gsub('=>',':'))
       end
-      @settings
+      @setting
     end
     respond_to do |format|
       format.html
@@ -33,36 +33,16 @@ class SettingsController < ApplicationController
 
   # get '/settings/update'
   def update
-    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-    on_days = {}
-    days.each do |day|
-      if params[day].blank?
-        on_days[day] = false
-      else
-        on_days[day] = true
-      end
-    end
-    daily_timings = ['monday_start_time', 'monday_end_time', 'tuesday_start_time',
-                'tuesday_end_time', 'wednesday_start_time', 'wednesday_end_time',
-                'thursday_start_time', 'thursday_end_time', 'friday_start_time',
-                'friday_end_time', 'saturday_start_time', 'saturday_end_time',
-                'sunday_start_time', 'sunday_end_time']
-    timings = {}
-    daily_timings.each do |timing|
-      if params[timing].blank?
-        timings[timing] = '00:00 AM'
-      else
-        timings[timing] = params[timing]
-      end
-    end
-    @settings = @settings.first
-    @settings.working_days = on_days
-    @settings.timings = timings
-    @settings.task_alert = params[:task_alert]
-    @settings.holidays = JSON.parse(params[:holidays].gsub("'",'"').gsub('=>',':'))
-    @settings.allocated_leaves = params[:allocated_leaves]
-    @settings.attendance_time = params[:attendance_time]
-    if @settings.save
+    @setting = current_employee.company.setting
+    on_days = Setting.on_days(params)
+    timings = Setting.daily_timings(params)
+    @setting.working_days = on_days
+    @setting.timings = timings
+    @setting.task_alert = params[:task_alert]
+    @setting.holidays = JSON.parse(params[:holidays].gsub("'",'"').gsub('=>',':'))
+    @setting.allocated_leaves = params[:allocated_leaves]
+    @setting.attendance_time = params[:attendance_time]
+    if @setting.save
       redirect_to settings_path
     else
       redirect_to menus_index_path

@@ -1,9 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="_navbar">
-  <div class="container-fluid">
+  <div class="sidebarCollapseButton">
+    <button type="button" id="sidebarCollapse" class="btn btn-regular">
+      <i class="fas fa-align-justify"></i>
+    </button>
+  </div>
+  <div class="container-fluid header-container">
 
-    <button type="button" id="sidebarCollapse" class="btn btn-purple">
-        <i class="fas fa-align-left"></i>
-      </button>
+    <div class="topbar-divider d-sm-block header-divider"></div>
+    <div class="navbar-header">
+      <h5> <i class="fas fa-user-ninja"></i> EZ Employee Tracking</h5> 
+    </div>
 
     <button class="btn btn-dark d-inline-block d-lg-none ml-auto navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="fas fa-align-justify"></span>
@@ -20,13 +26,21 @@
       	<% if check_today_timings? %>		
 	      	<li class="nav-item" id="attendance_button">
 	          <div class="d-flex align-items-center">
-	            <% if present_marked? && not_logged_out? %>
-	              <%= link_to 'Check out', update_attendance_path, class: 'btn btn-sm btn-outline-danger update_attendance', remote: true %>
+	            <% if present_marked? && not_checked_out? %>
+	              <%= link_to 'Check out', employee_attendance_path(@current_employee, @current_employee.attendances.last), class: 'btn btn-sm btn-outline-danger update_attendance', method: :patch, remote: true %>
 	            <% elsif !present_marked? %>
-	              <%= link_to 'Check in', employee_attendance_path, class: 'btn btn-sm btn-regular btn-primary mark_present', remote: true %>
+	              <%= link_to 'Check in', employee_attendances_path(@current_employee), class: 'btn btn-sm btn-regular btn-primary mark_present', method: :post, remote: true %>
+              <%elsif checked_out? %>
+                <p class="checked-out-status" data-toggle="tooltip" data-placement="bottom" title="You have checked out!">Checked out</p>
 	             <% end %>
 	          </div>
 	        </li>
+          <!-- <li class="nav-item">
+            <div class="spinner">
+              <div class="cube1"></div>
+              <div class="cube2"></div>
+            </div>
+          </li> -->
       	<%	end %>
         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -39,11 +53,12 @@
 
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
             <div class='dropdown-item'>
-	            <%= link_to  destroy_employee_session_path, class: 'nav-link small text-gray-400 dropdown-item' , method: :delete do %>
-	              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-	              Logout
+	            <%= link_to  destroy_employee_session_path, class: 'nav-link small dropdown-item' , method: :delete do %>
+	              <b><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
+	                Logout
+                </b>
 	            <% end %>
-          	</div>
+            </div>
           </div>
         </li>
       </ul>

@@ -27,11 +27,18 @@
   </head>
   <body>
     <% if employee_signed_in? %>
-      <div class="wrapper">
+      <div class="wrapper" style='font-family: Roboto, sans-serif'>
         <%= render 'layouts/sidebar' %>
-        <div id="content">
           <div id="header_div">
             <%= render 'layouts/header' %>
+          </div>
+        <div id="content" style='font-family: Roboto, sans-serif'>
+          <div class="sticky-top bread-crumbs">
+            <div class="row pl-4">
+              <div class="col-12">
+                <%= yield :bread_crumbs %>
+              </div>
+            </div>
           </div>
           <div class="yielded-area">
             <div id="notifications-flash">
@@ -45,6 +52,6 @@
     <% else %>
       <%= yield %>
     <% end %>
-    <br><br>
+    
   </body>
 </html>

@@ -1,8 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-  company = FactoryGirl.create(:company)
-  current_user = FactoryGirl.create(:employee)
+  before(:all) do
+    company = FactoryGirl.create(:company)
+    current_user = FactoryGirl.create(:employee)
+  end
+  
   context 'Test Cases for create team' do
     let(:project1) { FactoryGirl.create(:project) }
     let(:project2) { FactoryGirl.create(:project, start_date: "01-07-2019") }

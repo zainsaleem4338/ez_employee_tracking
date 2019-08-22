@@ -1,4 +1,4 @@
-<% if @result.blank? %>
+<% if @attendance.logout_time.blank? %>
   $('#notifications-flash').append("<%= j render(:partial => 'shared/notification') %>");
 <% else %>
   var present_marked_btn = document.getElementsByClassName("update_attendance");;
