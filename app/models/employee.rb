@@ -33,7 +33,7 @@ class Employee < ActiveRecord::Base
   def todays_attendance_of_employee
     @start_time = DateTime.now.change(hour: 10)
     @end_time = DateTime.now.change(hour: 20)
-    self.attendances.find_by(login_time: (@start_time..@end_time))
+    attendances.find_by(login_time: (@start_time..@end_time))
   end
 
   def all_attendances
