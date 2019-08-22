@@ -25,6 +25,7 @@ class AttendancesController < ApplicationController
       @attendance.status = 1
       @attendance.save
       current_employee.late_count_of_employee
+      current_employee.save
     end
     if @attendance.valid?
       flash[:success] = t('.success_notice')

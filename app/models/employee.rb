@@ -71,8 +71,7 @@ class Employee < ActiveRecord::Base
         if late_count.nil?
           self.late_count = 0
         end
-        self.late_count = self.late_count + 1
-        self.save
+        self.late_count = late_count + 1
       end
     end
   end
