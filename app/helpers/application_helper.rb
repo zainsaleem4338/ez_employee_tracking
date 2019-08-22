@@ -148,7 +148,7 @@ module ApplicationHelper
       }
       employee_attendance = {
         name: 'My Attendance',
-        link: attendance_path(@current_employee),
+        link: employee_attendances_path(current_employee),
         icon: 'fas fa-journal-whills',
         id: 'my_attendance_option'
       }

@@ -6,7 +6,7 @@ class Attendance < ActiveRecord::Base
   validates :login_time, presence: true
   validates :employee_id, presence: true
   validates :status, inclusion: { in: ALLOWED_STATUS }, numericality: true
-  
+
   def attendance_present?
     status.eql? STATUS[:PRESENT]
   end

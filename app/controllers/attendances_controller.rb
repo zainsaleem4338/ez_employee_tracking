@@ -20,27 +20,16 @@ class AttendancesController < ApplicationController
 
   # POST   /employees/:employee_id/attendances
   def create
-    @employees_todays_attendance = current_employee.todays_attendance_of_employee
-    if @employees_todays_attendance.blank?
-      setting = current_employee.company.setting
-      today_start_time = setting.timings[Time.now.strftime('%A').downcase + '_start_time']
-      attendance_thresh = setting.attendance_time
-      attendance_thresh = 0 if attendance_thresh.nil?
-      if get_time_in_seconds(Time.now) > get_time_in_seconds(today_start_time.to_time) + attendance_thresh * 60
-        if current_employee.late_count.nil?
-          current_employee.late_count = 0
-        end
-        current_employee.late_count = current_employee.late_count + 1
-        current_employee.save
-      end
-
+    current_employee.company.attendances.transaction do
+      current_employee.late_count_of_employee
       @attendance.login_time = DateTime.now
       @attendance.status = 1
-      if @attendance.save
-        flash[:success] = t('.success_notice')
-      else
-        flash[:danger] = t('.error_notice')
-      end
+      @attendance.save
+    end
+    if @attendance.valid?
+      flash[:success] = t('.success_notice')
+    else
+      flash[:danger] = t('.error_notice')
     end
     respond_to do |format|
       format.js
@@ -60,12 +49,4 @@ class AttendancesController < ApplicationController
     end
   end
 
-  protected
-
-
-  def get_time_in_seconds(time)
-    hours_in_seconds = time.strftime('%H').to_i * 3600
-    minutes_in_seconds = time.strftime('%H').to_i * 60
-    hours_in_seconds + minutes_in_seconds
-  end
 end
