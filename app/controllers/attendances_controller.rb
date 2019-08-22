@@ -4,7 +4,7 @@ class AttendancesController < ApplicationController
 
   # GET    /employees/:employee_id/attendances
   def index
-    @attendances = @attendances.paginate(page: params[:page], per_page: 5)
+    @attendances = @attendances.order(login_time: :desc).paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html
     end
