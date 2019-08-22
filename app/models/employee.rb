@@ -29,11 +29,11 @@ class Employee < ActiveRecord::Base
   has_many :tasks, foreign_key: :reviewer_id, class_name: 'Task'
   scope :team_employees, ->(user){joins(employee_teams: :employee).where(employee_teams: {team_id: user.employee_teams.pluck(:team_id)}).where.not(employee_teams: {employee_id: user.id}).distinct}
   scope :team_employees_projects_tasks, ->(user){joins("LEFT JOIN employee_teams ON employees.id = employee_teams.employee_id").where('employee_teams.team_id in (?) OR employees.id = ?',user.employee_teams.pluck(:team_id), user.id)}
-  
+
   def todays_attendance_of_employee
     @start_time = DateTime.now.change(hour: 10)
     @end_time = DateTime.now.change(hour: 20)
-    company.attendances.find_by(employee_id: id, login_time: (@start_time..@end_time))
+    self.attendances.find_by(login_time: (@start_time..@end_time))
   end
 
   def all_attendances
@@ -52,5 +52,28 @@ class Employee < ActiveRecord::Base
 
   def email_changed?
     false
+  end
+
+  def get_time_in_seconds(time)
+    hours_in_seconds = time.strftime('%H').to_i * 3600
+    minutes_in_seconds = time.strftime('%H').to_i * 60
+    hours_in_seconds + minutes_in_seconds
+  end
+
+  def late_count_of_employee
+    @employees_todays_attendance = todays_attendance_of_employee
+    if @employees_todays_attendance.blank?
+      setting = company.setting
+      today_start_time = setting.timings[Time.now.strftime('%A').downcase + '_start_time']
+      attendance_thresh = setting.attendance_time
+      attendance_thresh = 0 if attendance_thresh.nil?
+      if get_time_in_seconds(Time.now) > get_time_in_seconds(today_start_time.to_time) + attendance_thresh * 60
+        if late_count.nil?
+          self.late_count = 0
+        end
+        self.late_count = self.late_count + 1
+        self.save
+      end
+    end
   end
 end
