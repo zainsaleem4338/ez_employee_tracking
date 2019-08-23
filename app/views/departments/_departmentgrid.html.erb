@@ -1,5 +1,5 @@
 <div class="container table-responsive">
-  <table id="department_table" style="width:100%" class="table data table-hover dt-responsive" >
+  <table id="department_table" class="table data table-hover dt-responsive full-width" >
     <thead >
       <tr>
         <th>NAME</th>
@@ -11,7 +11,7 @@
     <tbody>
       <% @departments.each do |department| %>
       <tr>
-        <td ><%= h truncate(department.name.downcase.titleize, :length => 21) %></td>
+        <td class="clickable-item"><%= link_to (h truncate(department.name.downcase.titleize, :length => 21)), department_path(department) %></td>
         <td>
           <%= link_to department_teams_path(department), class: "btn btn-secondary" do %>
           <span class="pr-2"><%= department.teams.count %></span><i class="fa fa-arrow-right"></i>
@@ -38,7 +38,7 @@
               <% end %>
             </div>
             <div class="btn-group dropleft">
-              <i class="fas fa-ellipsis-v" title="More..." style="cursor:pointer;font-size:16px" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+              <i class="fas fa-ellipsis-v cursor-pointer" title="More..." class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
               <div class="dropdown-menu">
                 <%= link_to "Show Projects",department_projects_path(department), class:"dropdown-item" %>
                 <%= link_to "Show Teams",department_teams_path(department), class:"dropdown-item" %>
@@ -51,4 +51,7 @@
       <% end %>
     </tbody>
   </table>
+</div>
+<div class="pagination-div">
+<%= will_paginate @departments, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
 </div>

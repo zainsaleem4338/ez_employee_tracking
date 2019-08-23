@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :employees, controllers: { sessions: 'sessions' }
 
-  resources :attendances
-  resources :settings, except: [:new, :create, :show, :destroy]
+  resources :employees do
+    resources :attendances, except: [:show, :destroy]
+  end
 
   resources :events do
     collection do
@@ -21,7 +22,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources :tasks, only: [:employee_tasks, :update_task_logtime]
+  resources :settings, except: [:new, :create, :show, :destroy]
 
   get 'menus/index' => 'menus#index'
   get 'menus/home' => 'menus#home'
@@ -31,6 +34,7 @@ Rails.application.routes.draw do
 
   get 'reports/velocity' => 'reports#show', as: :show_employee_velocity_report
   get 'reports/export_report' => 'reports#pdf_velocity_report', as: :pdf_velocity_report
+  get 'reports/single_team_tasks' => 'reports#single_team_tasks',as: :single_team_tasks_report
   get 'employees_attendance_report' => 'reports#attendance_report', as: :attendance_report
   get 'employees_report_pdf' => 'reports#attendance_report_pdf'
 
@@ -49,8 +53,9 @@ Rails.application.routes.draw do
 
   get 'employees/:id/projects' => 'projects#index', as: :projects_page
 
-  get 'employee/attendance' => 'attendances#create', as: :employee_attendance
-  get 'employee/attendance/update' => 'attendances#update', as: :update_attendance
+  # get 'employee/attendance' => 'attendances#create', as: :employee_attendance
+  # get 'employee/attendance/update' => 'attendances#update', as: :update_attendance
+  get 'employee/:employee_id/my_attendance' => 'attendances#show_employee_attendance', as: :show_employee_attendance
 
   resources :reports do
     collection do

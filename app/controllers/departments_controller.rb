@@ -1,10 +1,21 @@
 class DepartmentsController < ApplicationController
-  load_and_authorize_resource through_association: :company
+  load_and_authorize_resource :department, through_association: :company
+  # GET /departments/:id
+  def show
+    @teams = @department.teams
+    @projects = @department.projects
+    if current_employee.role != Employee::ADMIN_ROLE
+      @teams = @teams.show_teams_employee(current_employee)
+      @projects = @projects.get_projects(current_employee)
+    end
+  end
+
   # GET /departments
   def index
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
       @departments = @departments.employee_departments(current_employee)
     end
+    @departments = @departments.paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html
     end

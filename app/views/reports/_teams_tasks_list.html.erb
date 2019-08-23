@@ -1,0 +1,42 @@
+<div class="container velocity-report table-responsive">
+  <table id="teamstasks_table" class="table data table-hover dt-responsive full-width">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>DEPARTMENT</th>
+        <th>NO. OF TASKS</th>
+        <th>NO. OF EMPLOYEES</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @employee_tasks_data.each do |team_id, team_members_data| %>
+
+      <tr>
+        <td><%= team_id %></td>
+        <td id="team-task-details" class="clickable-item"><%= link_to team_name(team_id),single_team_tasks_report_path(team_id: team_id), remote: true, class:"clickable-item" %></td>
+        <td><%= team_department_name(team_id) %></td>
+        <td><%= team_tasks_count(team_id) %></td>
+        <td><%= team_employees_count(team_id) %></td>
+        <td  class="d-table-cell align-middle vertical-align">
+          <div class="row no-gutters justify-content-between">
+            <div class="btn-group dropleft">
+              <i class="fas fa-ellipsis-v cursor-pointer" title="More..." class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+              <div class="dropdown-menu">
+                <%= link_to "Show Details",single_team_tasks_report_path(team_id: team_id), remote: true, class:"dropdown-item" %>
+              </div>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+  <% end %>
+    </tbody>
+
+  </table>
+</div>
+
+<div id="task-details" class="container pagination-div">
+
+</div>

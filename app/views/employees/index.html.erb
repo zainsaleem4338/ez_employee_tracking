@@ -1,0 +1,37 @@
+<% provide(:title, "All Employees List") %>
+<div class="container table-responsive">
+<table id="employeeslist_table" style="width:100%" class="table data table-hover dt-responsive">
+  <thead>
+    <tr>
+      <th >ID</th>
+      <th >PICTURE</th>
+      <th >NAME</th>
+      <th >EMAIL</th>
+      <th >ROLE</th>
+      <th >DEPARTMENT</th>
+      <th >ACTIONS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employees.each do |employee| %>
+    <% if employee.active == true %>
+      <tr>
+        <td><%= employee.sequence_num %></td>
+        <td><%= image_tag employee.avatar.url(:thumb), class: "rounded-circle employee-avatar mb-2", style:'width:60px; height:60px'%></td>
+        <td class="clickable-item"><%= link_to employee.name.downcase.titleize, show_employee_path(employee) %></td>
+        <td><%= employee.email.downcase %></td>
+        <td><%= employee.role.downcase %></td>
+        <td> <%= employee.department.name.downcase.titleize if employee.department.present? %></td>
+        <td> <%= link_to delete_employee_path(employee), method: :delete, data: { confirm: 'Are you sure?' } do %>  
+            <i title="Delete Employee" class="table-options action-delete fas fa-trash"></i>
+            <% end %>
+        </td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<div class="pagination-div">
+<%= will_paginate @employees, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
+</div>

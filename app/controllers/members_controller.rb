@@ -2,6 +2,9 @@ class MembersController < ApplicationController
   load_and_authorize_resource :member, through_association: :company, class: 'Employee'
   load_and_authorize_resource :team, through_association: :company
 
+  def index
+    @members = @members.paginate(page: params[:page], per_page: 5)
+  end
   # get /employee_lists
   def employees_lists
     if params[:department].blank?
@@ -38,7 +41,8 @@ class MembersController < ApplicationController
 
   # get /employees/:sequence_num/show
   def show
-    @employee = Employee.find_by_sequence_num(params[:sequence_num])
+    # binding.pry
+    @employee = current_employee.company.employees.find_by(sequence_num: params[:sequence_num])
   end
 
   private

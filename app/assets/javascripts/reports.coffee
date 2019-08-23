@@ -54,19 +54,36 @@ jQuery ->
         {'width': '15%',"className": "text-center"}
       ]
 
-    $('#velocityreport_table').DataTable 
+    $('#team-task-details').click ->
+      $('#velocityreport_table').DataTable 
+        'responsive': true,
+        'orderClasses': false,
+        'paging': false,
+        'info': false,
+        'columns': [
+          {'width': '5%',"className": "text-center"}
+          {'width': '17%',"className": "text-center"}
+          {'width': '17%',"className": "text-center"}
+          {'width': '17%',"className": "text-center"}
+          {'width': '17%',"className": "text-center"}
+          {'width': '17%',"className": "text-center"}
+        ]
+
+    $('#teamstasks_table').DataTable 
       'responsive': true,
       'orderClasses': false,
       'paging': false,
       'info': false,
       'columns': [
-        {'width': '5%',"className": "text-center"}
-        {'width': '17%',"className": "text-center"}
-        {'width': '17%',"className": "text-center"}
-        {'width': '17%',"className": "text-center"}
-        {'width': '17%',"className": "text-center"}
-        {'width': '17%',"className": "text-center"}
+        {'width': '5%',"className": "text-center", "orderable": false}
+        {'width': '30%',"className": "text-center"}
+        {'width': '20%',"className": "text-center"}
+        {'width': '20%',"className": "text-center"}
+        {'width': '20%',"className": "text-center"}
+        {'width': '5%', "orderable": false}
       ]
+
+
   $('#taskdetails_table').DataTable 
     'responsive': true,
     'orderClasses': false,

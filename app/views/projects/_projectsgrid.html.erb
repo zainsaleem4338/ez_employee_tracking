@@ -1,5 +1,5 @@
 <div class="container table-responsive">
-<table id="project_table" style="width:100%" class="table data table-hover dt-responsive">
+<table id="project_table" class="table data table-hover dt-responsive full-width">
   <thead>
     <tr>
       <th >NAME</th>
@@ -12,7 +12,7 @@
   <tbody>
     <% @projects.each do |project| %>
     <tr>
-      <td ><%= project.name.downcase.titleize %></td>
+      <td class="clickable-item"><%= link_to project.name.downcase.titleize, department_project_tasks_path(@department,project) %></td>
       <td ><%= project.start_date.strftime("%B %e, %Y") %></td>
       <td ><%= project.expected_end_date.strftime("%B %e, %Y") %></td>
       <td ><%= project.status %></td>
@@ -32,7 +32,7 @@
             <% end %>
           </div>
           <div class="btn-group dropleft">
-            <i class="fas fa-ellipsis-v" title="More..." style="cursor:pointer;font-size:16px" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+            <i class="fas fa-ellipsis-v cursor-pointer" title="More..." class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
             <div class="dropdown-menu">
                   <%= link_to "Show Tasks",department_project_tasks_path(project.department,project), class:"dropdown-item" %>
             </div>
@@ -45,4 +45,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
+<div class="pagination-div">
+<%= will_paginate @projects, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
 </div>

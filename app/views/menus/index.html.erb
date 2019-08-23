@@ -8,7 +8,7 @@
         <div class="row">
             <!-- Card -->
             <div class="col-xs-12  col-md-4 custom-card">
-              <div class="card border-success mb-1 text-transition" style="max-width: 50rem;border-color: #6e2142;">
+              <div class="card mb-1 text-transition border-prim max-width-50">
                 <div class="card-body text-success">
                   <h2 class="card-title">
                   <% if @leaves_remaining.blank? || @leaves_remaining == 0 %>
@@ -24,7 +24,7 @@
             <!-- ./Card -->
             <!-- Card -->
             <div class="col-xs-12  col-md-4 custom-card">
-              <div class="card border-success mb-1 text-transition" style="max-width: 50rem;border-color: #6e2142;">
+              <div class="card border-success mb-1 text-transition border-prim max-width-50">
                 <div class="card-body text-success">
                   <h2 class="card-title">
                     <% if @late_count.blank? || @late_count == 0 %>
@@ -40,7 +40,7 @@
             <!-- ./Card -->
             <!-- Card -->
             <div class="col-xs-12  col-md-4 custom-card">
-              <div class="card border-success mb-1 text-transition" style="max-width: 50rem;border-color: #6e2142;">
+              <div class="card border-success mb-1 text-transition border-prim max-width-50">
                 <div class="card-body text-success">
                   <h2 class="card-title">
                     <% if @settings.allocated_leaves.blank? || @settings.allocated_leaves == 0 %>
@@ -59,7 +59,7 @@
 </section>
 <section id='task_deadline'>
   <div class='row'>
-    <div class='col-md-6' style='height:280px; overflow-y:scroll'>
+    <div class='col-md-6 scroll-y task-deadline-col'>
       <h3>On Going Tasks</h3>
       <% @on_going_tasks = get_on_going_tasks %>
       <table class="table">
@@ -74,7 +74,7 @@
           <% @on_going_tasks.each do |task| %>
           <tr>
             <td><%= task.id %></td>
-            <td><%= task.name %></td>
+            <td><%= task.name.downcase.titleize %></td>
             <td><span class="badge badge-<%=get_task_badge_class(task.status)%>">
               <%=task.status%>
               </span>
@@ -122,7 +122,7 @@
                       <% @overdue_tasks.each do |task|%>
                         <tr>
                           <td><%= task.id %></td>
-                          <td><%= task.name %></td>
+                          <td><%= task.name.downcase.titleize %></td>
                           <td><%= task.expected_end_date.to_formatted_s(:short) %></td>
                         </tr>
                       <% end %>
@@ -146,7 +146,7 @@
 
 <section>
   <div class='row'>
-    <div class='col-md-6 dashboard_card' style='min-height:280px;overflow-y:scroll'>
+    <div class='col-md-6 dashboard_card scroll-y min-height-280'>
       <h3>Tasks Reaching Deadline</h3>
       <% @tasks_reaching_deadline = get_tasks_reaching_deadline %>
       <div class="building">
@@ -155,7 +155,7 @@
       <ul class="list-group">
         <% if @tasks_reaching_deadline.any? %>
           <% @tasks_reaching_deadline.each do |task| %>
-            <li class="list-group-item list-group-item-warning"><%= task.name %></li>
+            <li class="list-group-item list-group-item-warning"><%= task.name.downcase.titleize %></li>
           <% end %>
         <% else %>
           <li class="list-group-item list-group-item-warning">No Tasks Reaching Deadline</li>
@@ -163,8 +163,8 @@
       </ul> 
     </div>
     <div class='col-md-6 dashboard_card'>
-      <h3><%= current_company.name %> Timings</h3>
-      <div style='max-height:280px; min-height:280px; overflow-y:scroll'>
+      <h3><%= current_company.name.downcase.titleize %> Timings</h3>
+      <div class="max-height-280 min-height-280 scroll-y">
         <table class="table">
           <thead>
             <tr>

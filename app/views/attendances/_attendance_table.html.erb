@@ -2,8 +2,8 @@
   <%= javascript_include_tag 'attendance_table' %>
 <% end %>
 <div class="container table-responsive">
-   <% if @attendances_list.any? %>
-<table id="attendanceslist_table" style="width:100%" class="table data table-hover dt-responsive">
+   <% if @attendances.any? %>
+<table id="attendanceslist_table" class="table data table-hover dt-responsive full-width">
   <thead>
     <tr>
       <th >ID</th>
@@ -14,12 +14,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @attendances_list.each do |attendance| %>
-        <% @company_employee = Employee.find(attendance.employee_id) %>
+    <% @attendances.each do |attendance| %>
+        <% @company_employee = attendance.employee %>
     <tr>
-      <td><%= attendance.employee.sequence_num %></td>
-      <td><%= attendance.employee.name.downcase.titleize %></td>
-      <td><%= attendance.employee.email.downcase %></td>
+      <td><%= @company_employee.sequence_num %></td>
+      <td><%= @company_employee.name.downcase.titleize %></td>
+      <td><%= @company_employee.email.downcase %></td>
       <td><%= attendance.login_time.to_formatted_s(:long_ordinal) %></td>
       <td> <%= attendance_logout(attendance)%></td>
     </tr>
@@ -29,3 +29,7 @@
 </table>
 
 <% end %>
+
+<div class="pagination-div">
+<%= will_paginate @attendances, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
+</div>
