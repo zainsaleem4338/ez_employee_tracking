@@ -1,6 +1,6 @@
 require 'csv'
 class Report
-  def self.to_csv(tasks)
+  def self.tasks_to_csv(tasks)
     options = {}
     header = ['Project Name', 'Task Name', 'Start Date', 'End Date',
               'Assigned To', 'Assigned Type', 'Status']
@@ -109,40 +109,6 @@ class Report
     full_days = actual_working_days - half_days
     absents = expected_working_days - actual_working_days
     return full_days, half_days, absents, (leaves - absents - (half_days / 2).floor)
-  end
-
-  def self.get_task_query_hash(param_project, status, created_start, created_end, deadline_start, deadline_end)
-    task_query_hash = {}
-    unless param_project.empty?
-      project = Project.find_by(name: param_project)
-      unless project.blank?
-        task_query_hash[:project_id] = project.id
-      else
-        task_query_hash[:project_id] = ''
-      end
-    end
-    unless status.empty?
-      task_query_hash[:status] = status
-    end
-    if !created_start.empty? || !created_end.empty?
-      if created_start.empty?
-        task_query_hash[:start_date] = Time.zone.parse(created_end)
-      elsif created_end.empty?
-        task_query_hash[:start_date] = Time.zone.parse(created_start)
-      else
-        task_query_hash[:start_date] = Time.zone.parse(created_start)..Time.zone.parse(created_end)
-      end
-    end
-    if !deadline_start.empty? || !deadline_end.empty?
-      if deadline_start.empty?
-        task_query_hash[:expected_end_date] = Time.zone.parse(deadline_end)
-      elsif deadline_end.empty?
-        task_query_hash[:expected_end_date] = Time.zone.parse(deadline_start)
-      else
-        task_query_hash[:expected_end_date] = Time.zone.parse(deadline_start)..Time.zone.parse(deadline_end)
-      end
-    end
-    task_query_hash
   end
 
   def self.get_task_query_hash(param_project, status, created_start, created_end, deadline_start, deadline_end)

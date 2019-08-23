@@ -14,28 +14,24 @@ class Team < ActiveRecord::Base
   validate :validate_team
 
   def validate_team
-    team_lead_id = 0
     if employee_teams.length.zero?
       errors.add(:base, I18n.t('models.team.team_members_and_leader_name_require'))
     else
-      employee_teams.detect(employee_type: EMPLOYEE_TYPE[:team_leader]) do |employee_team|
-        if employee_team.employee_id.blank?
-          errors.add(:base, I18n.t('models.team.leader_name_require'))
-        else
-          team_lead_id = employee_team.employee_id
+      lead = employee_teams.detect { |employee_team| employee_team.employee_type == EMPLOYEE_TYPE[:team_leader] }
+      if lead.employee_id.blank?
+        errors.add(:base, I18n.t('models.team.leader_name_require'))
+      else
+        members = employee_teams.select { |employee_team| employee_team.employee_type == EMPLOYEE_TYPE[:team_member] }
+        members.each do |employee_team|
+          if employee_team.employee_id == lead.employee_id
+            errors.add(:base, I18n.t('models.team.team_lead_member_conflict'))
+            break
+          end
         end
       end
     end
     if employee_teams.length == 1
       errors.add(:base, I18n.t('models.team.team_members_require_error'))
-    end
-    unless team_lead_id.zero?
-      employee_teams.detect(employee_type: EMPLOYEE_TYPE[:team_member]) do |employee_team|
-        if employee_team.employee_id == team_lead_id
-          errors.add(:base, I18n.t('models.team.team_lead_member_conflict'))
-          break
-        end
-      end
     end
   end
 
@@ -47,7 +43,7 @@ class Team < ActiveRecord::Base
     current_employee.company.departments.find(department_id).teams
   end
 
-  def with_employee_teams
+  def build_employee_teams
     employee_teams.build if employee_teams.blank?
     self
   end

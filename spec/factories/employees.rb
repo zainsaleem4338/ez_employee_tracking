@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Aghaaa#{n}" }
     sequence(:email) { |n| "aghaaa#{n}@gmail.com" }
     emp.password "netmail123"
-    emp.role "employee"
+    emp.role Employee::ADMIN_ROLE
     emp.company_id 1
     emp.confirmation_token true
   end
