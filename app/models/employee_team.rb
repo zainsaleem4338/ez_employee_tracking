@@ -1,5 +1,4 @@
 class EmployeeTeam < ActiveRecord::Base
-  not_multitenant!
   belongs_to :employee
   belongs_to :team
   belongs_to :company

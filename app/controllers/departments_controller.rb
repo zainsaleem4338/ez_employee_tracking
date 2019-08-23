@@ -1,6 +1,6 @@
 class DepartmentsController < ApplicationController
   load_and_authorize_resource :department, through_association: :company
-
+  # GET /departments/:id
   def show
     @teams = @department.teams
     @projects = @department.projects
@@ -10,8 +10,7 @@ class DepartmentsController < ApplicationController
     end
   end
 
-
-  # get /departments
+  # GET /departments
   def index
     if params[:show_employees_only].present? && current_employee.role != Employee::ADMIN_ROLE
       @departments = @departments.employee_departments(current_employee)
@@ -22,24 +21,25 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # get /departments/:id/edit
+  # GET /departments/:id/edit
   def edit
     respond_to do |format|
       format.js { render file: '/departments/modal.js.erb' }
     end
   end
 
-  # get /departments/new
+  # GET /departments/new
   def new
     respond_to do |format|
       format.js { render file: '/departments/modal.js.erb' }
     end
   end
 
-  # post /departments
+  # POST /departments
   def create
+    is_create = @department.save
     respond_to do |format|
-      if @department.save
+      if is_create
         flash[:success] = t('.success_notice')
         format.js do
           render js: "location.href = '#{departments_path}'"
@@ -50,10 +50,11 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # patch /departments/:id
+  # PATCH /departments/:id
   def update
+    is_update = @department.update(department_params)
     respond_to do |format|
-      if @department.update(department_params)
+      if is_update
         flash[:success] = t('.success_notice')
         format.js do
           render js: "location.href = '#{request.referrer}'"
@@ -64,11 +65,12 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # delete /departments/:id
+  # DELETE /departments/:id
   def destroy
     @department.destroy
+    is_destroy = @department.destroyed?
     respond_to do |format|
-      if @department.destroyed?
+      if is_destroy
         flash[:success] = t('.success_notice')
         format.js do
           render js: "location.href = '#{departments_path}'"
