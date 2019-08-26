@@ -1,0 +1,40 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">Employee Velocity Report</p>
+  </div>
+<% end %>
+<% @employee_tasks_data.each do |team_id, team_members_data| %>
+<div class="container velocity-report">
+  <div class="col-md-10">
+    <center>
+      <h5><%= team_name(team_id) %></h5>
+    </center>
+  </div>
+
+<div class="container table-responsive">
+<table id="velocityreport_table" class="table data table-hover dt-responsive full-width">
+  <thead>
+    <tr>
+      <th >ID</th>
+      <th >NAME</th>
+      <th >TOTAL TASKS</th>
+      <th >AVG. COMPLEXITY</th>
+      <th >AVG. TIME</th>
+      <th >VELOCITY <br> (avg. complexity / avg. time)</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% team_members_data.each do |employee_id, employee_velocity_data|  %>
+        <tr>
+          <td><%= employee_velocity_data[:employee_id] %></td>
+          <td><%= employee_velocity_data[:employee_name].downcase.titleize %></td>
+          <td><%= employee_velocity_data[:total_tasks] %></td>
+          <td><%= employee_velocity_data[:total_complexity] %></td>
+          <td><%= employee_velocity_data[:total_time] %></td>
+          <td><%= employee_velocity(employee_velocity_data[:velocity]) %></td>
+        </tr> 
+    <% end %>
+  </tbody>
+</table>
+</div>
+<% end %>

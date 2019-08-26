@@ -1,0 +1,28 @@
+<div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+  <div class="card">
+    <div class="card-header" role="tab" id="headingOne1">
+      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+        aria-controls="collapseOne1">
+        <p class="mb-0">
+          Reports <i class="fas fa-angle-down rotate-icon float-right"></i>
+        </p>
+      </a>
+    </div>
+    <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+      data-parent="#accordionEx">
+      <div class="card-body">
+        <div>
+          <%= link_to task_report_reports_path, class: "btn btn-secondary" do %>
+            <i class="fa fa-tasks"></i> Task Report
+          <% end %> 
+          <%= link_to show_employee_velocity_report_path, class: "btn btn-secondary" do %>
+            <i class="fa fa-line-chart"></i> Velocity Report
+          <% end %>    
+          <%= link_to attendance_report_path, class: "btn btn-secondary" do %>
+            <i class="fa fa-tasks"></i> Attendance Report
+          <% end %> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

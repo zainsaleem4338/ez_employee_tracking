@@ -1,0 +1,186 @@
+.calendar  * {
+    box-sizing: border-box;
+    font-family: Lato !important;
+    font-size: 14px;
+}
+.calendar-sm {
+    cursor: default;
+    width: 300px;
+    height: 370px;
+}
+.calendar {
+    cursor: default;
+    width: 100%;
+    height: 500px;
+}
+
+.calendar-sm .c-pad-top {
+    padding-top: 2%;
+}
+
+.calendar .c-pad-top {
+    padding-top: 3%;
+}
+
+.c-grid {
+    box-shadow: 2px 2px 5px #888888;
+    height: inherit;
+}
+.c-day {
+    width: 14.28%;
+    height: 13%;
+    background-color: white;
+    float: left;
+    text-align: center;
+    color: #211E25;
+    font-weight: bold;
+}
+
+.c-day-previous-month {
+    width: 14.28%;
+    height: 13%;
+    background-color: rgb(219, 208, 208);
+    float: left;
+    text-align: center;
+    color: #211E25;
+}
+
+.c-day-next-month {
+    width: 14.28%;
+    height: 13%;
+    background-color:rgb(219, 208, 208);
+    float: left;
+    text-align: center;
+    color: #211E25;
+}
+
+.c-week-day {
+    width: 14.28%;
+    height: 10.38%;
+    background-color: white;
+    color: #211E25;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 1%;
+}
+
+.c-next {
+    width: 12.5%;
+    height: 12%;
+    padding: 2% 2% 0 2%;
+    text-align: right;
+    cursor: pointer;
+}
+
+.c-previous {
+    width: 12.5%;
+    height: 12%;
+    padding: 2% 2% 0 2%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.c-month {
+    width: 75%;
+    height: 12%;
+    text-align: center;
+}
+
+.c-nav-btn-over {
+    background-color: rgb(219, 208, 208) !important;
+    font-weight: bold;
+}
+
+.c-today {
+    background-color: #cac5d3;
+}
+
+.c-event {
+    background-color: rgb(226, 221, 233);
+    color: #211E25;
+    font-weight: bold;
+    cursor: pointer;
+    display: list-item;                                   
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+.c-grid {
+    float: left;
+    width: 50%;
+}
+
+.c-event-grid {
+    margin-left: 1px;
+    height: inherit;
+    width: 49%;
+    float: left;
+    box-shadow: 2px 2px 5px #888888;
+}
+
+.c-grid-title {
+    font-weight: bold;
+    float: left;
+    background-color: white;
+    color: #211E25;
+}
+
+.c-event-title {
+    width: 100%;
+    height: 12%;
+    text-align: center;
+    font-weight: bold;
+    background-color: white;
+    color: #211E25;
+}
+
+.c-event-body {
+    background-color: white;
+    height: 88.1%;
+    color:#211E25;
+}
+
+.c-event-list {
+    padding: 7 0 0 0;
+    overflow: auto;
+    height: 95%;
+}
+
+.c-event-item > .title {
+    font-weight: bold;
+    background-color: rgb(219, 208, 208);
+    border-color: rgb(215, 212, 221);
+    color: #211E25;
+}
+.c-event-item > div {
+    text-overflow: ellipsis;
+    width: inherit;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.c-event-item {
+    margin: 0 0 0 0;
+}
+
+.c-event-over {
+    background-color: rgb(219, 208, 208);
+    font-weight: bold;
+    color: #211E25;
+}
+
+.c-event-over > .description {
+    font-weight: normal;
+}
+
+.title {
+  margin-top: 0px;
+}
+
+.description {
+  margin-top: 2%;
+  margin-left: 1%;
+  padding-bottom: 2%;
+  font-size: 120%;
+}

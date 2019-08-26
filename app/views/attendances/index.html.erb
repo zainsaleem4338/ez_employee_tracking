@@ -1,29 +1,25 @@
-<% provide(:title, "Welcome "+ current_employee.name) %>
-
-<div class="container-fluid" style="margin-top: 60px">
-  <div class="row">
-    <div class="col-md-12">
-
-      <!-- Badges -->
-      <ul class="nav nav-pills">
-        <li class="nav-item">
-           <a class="nav-link btn btn-regular btn-success" id="attendance_id">Attendance </a>
-        </li>
-        <li class="nav-item">
-           <a class="nav-link" id="calendar_id">Events <span class="badge badge-secondary">16</span></a>
-        </li>
-      </ul>
-
-      <div class="row" id="admin_attendance" style="margin-top: 20px">
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle"> Company Attendance</p>
+  </div>
+<% end %>
+<div class="conatiner">
+  <div class="row d-flex">
+    <div class="col-2">
+      <div class="align-content-right ml-3">
+        <%= link_to show_employee_attendance_path(@current_employee), class: 'btn btn-regular' do %>
+          My Attendance
+          <i class="fas fa-journal-whills"></i>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-10"></div>
+  </div>
+  <div class="row d-flex mt-2">
+    <div class="col-12">
+      <% if admin? %>
         <%= render 'attendances/attendance_table' %>
-
-      </div>
-
-      <div class="row" id="admin_calendar" style="margin-top: 20px; display: none">
-        <div class="col-md-12" style="margin-top: 20px;">
-          
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

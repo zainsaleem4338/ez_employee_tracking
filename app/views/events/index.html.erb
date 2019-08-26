@@ -1,0 +1,44 @@
+<div id="calendar" class="row"></div>
+
+<script>
+  $(document).ready(function () {
+   var events_arr = [];
+   <% @events.each do |event| %>
+    events_arr.push({
+      title: "<%= event.title %>",
+      description: "<%= event.description %>",
+      datetime: new Date(<%= event.event_date.year%>, <%= event.event_date.month %> -1, <%= event.event_date.day%>, <%= event.event_date.strftime("%H") %>)
+    })
+  <% end %>
+  <% if @settings.present? %>
+	  <% @settings.each do |key,val| %>
+	    events_arr.push({
+	      title: "Public Holiday",
+	      description: "This is a public holiday",
+	      datetime: new Date(<%= Date.parse(@settings[key]["holiday_date_#{key}"]).year %>, <%= Date.parse(@settings[key]["holiday_date_#{key}"]).month %> -1, <%= Date.parse(@settings[key]["holiday_date_#{key}"]).day%>, <%= Date.parse(@settings[key]["holiday_date_#{key}"]).strftime("%H") %>)
+	    })
+	    <% if @settings[key]["every_year_#{key}"] %>
+	    	<% (1..5).each do |count| %> 
+			    	events_arr.push({
+			      title: "Public Holiday",
+			      description: "This is a public holiday",
+			      datetime: new Date(<%= Date.parse(@settings[key]["holiday_date_#{key}"]).year + count %>, <%= Date.parse(@settings[key]["holiday_date_#{key}"]).month %> -1, <%= Date.parse(@settings[key]["holiday_date_#{key}"]).day%>, <%= Date.parse(@settings[key]["holiday_date_#{key}"]).strftime("%H") %>)
+			    })
+	    	<% end %>
+	    <% end %>
+	 <%end%>
+
+  <% end %>
+  $('#calendar').eCalendar({
+  weekDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  textArrows: {previous: '<', next: '>'},
+  eventTitle: 'Events',
+  url: '',
+  firstDayOfWeek: 0,
+  events : events_arr
+  });
+
+  });
+
+</script>

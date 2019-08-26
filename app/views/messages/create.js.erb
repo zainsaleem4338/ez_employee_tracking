@@ -1,0 +1,3 @@
+<% broadcast "/messages/public/#{current_company.id}" do %>
+   <%= @message.employee.name %> : <%= @message.message %>
+<% end %>

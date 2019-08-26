@@ -1,0 +1,12 @@
+<tr id="team_member_<%= @count.to_i %>" >
+  	<td class="pb-0"><%= image_tag member.avatar.url(:thumb), class: "rounded-circle employee-avatar mb-2 img-60-60" %></td>
+    <td><%= member.name %>
+    <%= hidden_field_tag "team[employee_teams_attributes][#{@count.to_i}][employee_id]", member.id %>
+    <%= hidden_field_tag "team[employee_teams_attributes][#{@count.to_i}][employee_type]", Team::EMPLOYEE_TYPE[:team_member] %> 
+    </td>
+    <td>
+      <button type="button" class="btn btn-outline-danger js-remove"
+          data-member-id="team_member_<%= @count.to_i %>">Remove</button>
+    </td>
+    <% @count = @count.to_i + 1 %>
+</tr>

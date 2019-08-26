@@ -1,0 +1,80 @@
+<% if !@tasks.empty? %> 
+<table id="taskgrid_table" class="table data table-hover dt-responsive full-width">
+  <thead>
+    <tr>
+      <th >NAME</th>
+      <th >ASSIGNED TO</th>
+      <th >START DATE</th>
+      <th >EXPECTED END DATE</th>
+      <th >STATUS</th>
+      <th >ACTIONS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+    <tr>
+      <td class="clickable-item"><%= link_to task.name.downcase.titleize, department_project_task_path(@department, @project,task) %></td>
+      <td><%= get_assignable_name(task) %></td>
+      <td ><%= task.start_date.strftime("%B %e, %Y") %></td>
+      <td ><%= task.expected_end_date.strftime("%B %e, %Y") %></td>
+        <td><span class="badge badge-success"><%= task.status.downcase %></span></td>
+      <td  class="d-table-cell align-middle vertical-align">
+        <div class="row no-gutters justify-content-between">
+          <div class="actions">
+            <%= link_to department_project_task_path(@department, @project,task) do %>
+            <i title="Show Tasks" class="table-options action-show fas fa-eye"></i>
+            <% end %>
+            <% if can? :create, task %>
+            <%= link_to edit_department_project_task_path(@department, @project, task) do %>
+            <i title="Edit Task" class="table-options action-edit fas fa-edit"></i>
+            <% end %>
+            <%= link_to department_project_task_path(@department, @project,task), method: :delete, data: { confirm: 'Are you sure?' } do %> 
+            <i title="Delete Task" class="table-options action-delete fas fa-trash"></i>
+            <% end %>
+            <% end %>
+          </div>
+          <div class="btn-group dropleft">
+            <i class="fas fa-ellipsis-v" title="More..." style="cursor:pointer;font-size:16px" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+            <div class="dropdown-menu">
+              <%= link_to 'Change Status', '#', { class: "dropdown-item", 'data-toggle' => 'modal',  'data-target' => '#taskStatusModal_'+task.id.to_s} %>
+            </div>
+          </div>
+                        <div class="modal fade" id="taskStatusModal_<%=task.id%>" tabindex="-1" role="dialog" aria-labelledby="taskStatusModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="taskStatusModalLabel">Change Task Status</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div>
+                        <strong>Task Title:</strong>
+                        <%= task.name.titleize %>
+                      </div><br>
+                      <div>
+                        <%= form_for task, url: update_status_department_project_task_path(@department, @project,task) do |form| %>
+                        <%= form.select(:status, ["In Progress","Ready to Review", "Review Completed"], {}, {class: 'form-control'}) %>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <%= form.submit class: "btn btn-regular" %>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+        </div>
+      </td>
+    </tr>
+
+    <% end %>
+  </tbody>
+</table>             
+<% end %>
+<div class="pagination-div">
+<%= will_paginate @tasks, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
+</div>

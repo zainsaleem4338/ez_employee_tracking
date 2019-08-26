@@ -6,7 +6,7 @@
  */
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: sans-serif;
+  font-family: Lato !important;
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -48,7 +48,7 @@ hr {
 }
 
 pre {
-  font-family: monospace, monospace;
+  font-family: Lato !important;
   font-size: 1em;
 }
 
@@ -81,7 +81,7 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace;
+  font-family: Lato !important;
   font-size: 1em;
 }
 
@@ -137,7 +137,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: sans-serif;
+  font-family: Lato !important;
   font-size: 100%;
   line-height: 1.15;
   margin: 0;
@@ -337,7 +337,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: Lato !important;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
@@ -533,7 +533,7 @@ output {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
-  font-family: inherit;
+  font-family: Lato !important;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -702,7 +702,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: Lato !important;
 }
 
 code {
@@ -2708,9 +2708,9 @@ fieldset[disabled] a.btn {
 }
 
 .btn-secondary {
-  color: #292b2c;
-  background-color: #fff;
-  border-color: #ccc;
+  color: #563d7c !important;
+  background-color: #e2e1e1 !important;
+  border-color: #563d7c !important;
 }
 
 .btn-secondary:hover {
@@ -5568,7 +5568,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: Lato !important;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5672,7 +5672,7 @@ button.close {
   display: block;
   max-width: 276px;
   padding: 1px;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: Lato !important;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -9317,4 +9317,5 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     display: none !important;
   }
 }
+
 /*# sourceMappingURL=bootstrap.css.map */

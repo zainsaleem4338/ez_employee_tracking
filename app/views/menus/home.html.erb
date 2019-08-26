@@ -1,0 +1,29 @@
+<br><br>
+<div class='div_email'>
+	<div class='div_title'>
+		<h4><i class="fas fa-user-ninja"></i> EZ Employee Tracking</h4>
+		<hr>
+	</div>
+	<div class='container'>
+		<%= form_tag( menus_search_email_path, method: "get") do %>
+		<div class='form-group'>
+			<div class='row'>
+				<div class='col-lg-12'>
+					<p><span class="text-prim"><b>Sign in</b></span><small> or <%= link_to 'Sign up', new_employee_registration_path, class: 'text-peach no-decoration' %></small></p>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-lg-4'>
+				  <label for='email'>Email*</label>
+				</div>
+				<div class='col-lg-8'>
+					<%= text_field_tag :email, '' , class:"form-control" ,placeholder:'Enter your email' %>
+				</div>
+			</div>
+		</div>
+		<div class='form-group'>
+			<%= submit_tag("Search", class:'btn btn-block btn-regular') %>
+		</div>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <center>
+        <h1>Employee Attendance Report</h1>
+      </center>
+    </div>
+    <div class="col-2">
+      <div class="align-content-right mr-0 pr-0 ml-report-btn">
+        <%= link_to  employees_report_pdf_path(format: :pdf), class: 'btn btn-regular', target: :_blank do %>
+          Export pdf
+          <i class="fas fa-file-pdf ml-2"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <center>
+    <h1></h1>
+  </center>
+</div>
+<br>
+<% if @attendances.any? %>
+<div class="container table-responsive">
+  <table id="attendancereport_table" class="table data table-hover dt-responsive full-width">
+    <thead>
+      <tr>
+        <th >ID</th>
+        <th >NAME</th>
+        <th >EMAIL</th>
+        <th >PRESENTS</th>
+        <th >HALF DAYS</th>
+        <th >ABSENTS</th>
+        <th >LEAVES REMAINING</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @attendances.each do |attendance|%>
+        <tr>
+          <td><%= attendance[:employee][:sequence_num] %></td>
+          <td><%= attendance[:employee][:name].downcase.capitalize %></td>
+          <td><%= attendance[:employee][:email].downcase %></td>
+          <td><%= attendance[:presents] %></td>
+          <td><%= attendance[:half_days] %></td>
+          <td><%= attendance[:absents] %></td>
+          <td><%= attendance[:leaves_remaining] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% end %>

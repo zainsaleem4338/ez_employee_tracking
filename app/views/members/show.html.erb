@@ -1,0 +1,131 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle"><%= link_to 'Employees', members_path, class: 'text-prim no-decoration' %> > Employee Details</p>
+      <div class="m-0 pl-2">
+      </div>
+  </div>
+<% end %>
+<div class="container">
+  <div class="row d-flex employee-show">
+    <div class="col-5 d-flex">
+      <div class="d-flex">
+          <%= image_tag @employee.avatar.url(:thumb), class: "rounded-circle employee-avatar" %>
+        <div class="p-4">
+            <h3 class="text-prim"><b><%= @employee.name.downcase.titleize %></b></h3>
+            <span class="text-peach"><small><%= @employee.email %></small></span>
+          </div>
+      </div>
+    </div>
+    <div class="col-7">
+      <div class="row d-flex">
+        <div class="col-6 d-flex">
+          
+        </div>
+        <div class="col-6 d-flex employee-info">
+          <div class="table-details">
+            <div class="detail-head"></div>
+            <table class="table borderless">
+              <tr>
+                <td class="text-prim"><b>Role:</b></td>
+                <td class="text-peach"><%= @employee.role.downcase.capitalize %></td>
+              </tr>
+              <tr>
+                <td class="text-prim"><b>Company:</b></td>
+                <td class="text-peach"><%= @employee.company.name.downcase.capitalize %></td>
+              </tr>
+              <% unless @employee.department.blank? %>
+                <tr>
+                  <td class="text-prim"><b>Department:</b></td>
+                  <td class="text-peach"><%= link_to @employee.department.name, department_path(@employee.department), class: 'text-peach no-decoration' %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex employee-details">
+    <div class="col-7 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <a href="#collapseCardExample" class="row d-flex justify-content-between align-items-center p-1" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="card-title text-prim mb-0"><b>Teams <span class="count">(<%= @employee.teams.count %>)</span></b></h6>
+          </a>
+        </div>
+        <div class="card-body" id="collapseCardExample">
+          <% if @employee.teams.length > 0%>
+            <table class="table borderless">
+              <thead class="text-prim">
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Leader</th>
+                  <th>Members</th>
+                </tr>
+              </thead>
+
+              <tbody class="text-peach">
+                <% @employee.teams.order(created_at: :asc).last(5).each do |team| %>
+                  <tr>
+                    <td><%= image_tag team.team_pic.url(:thumb),class: "rounded-circle img-90-50" %></td>
+                    <td><%= team.name %></td>
+                    <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_leader]).map(&:name).first %></td>
+                    <td><%= team.employee_lists(Team::EMPLOYEE_TYPE[:team_member]).count %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <!--
+              Load More
+            </center> -->
+            <% else %>
+              <p><small><i>No Teams Found.</i></small></p>
+            <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-5 mb-4">
+      <div class="row">
+      <div class="col-4"></div>
+      <div class="col-8 d-flex">
+      <div>
+        <div class="detail-head"></div>
+        <table class="table borderless">
+          <tr>
+            <td class="text-prim"><b>Last sign in:</b></td>
+            <td class="text-peach">
+              <% if @employee.last_sign_in_at.blank? %>
+                -
+              <% else %>
+                <%= I18n.l(@employee.last_sign_in_at, format: :short) %>
+              <%end%>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-prim"><b>Leaves:</b></td>
+            <td class="text-peach">
+              <% if @employee.leaves.blank? %>
+                -
+              <%else %>
+              <%= @employee.leaves %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-prim"><b>Late Count:</b></td>
+            <td class="text-peach">
+              <% if @employee.late_count.blank? %>
+                -
+              <%else %>
+              <%= @employee.late_count %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

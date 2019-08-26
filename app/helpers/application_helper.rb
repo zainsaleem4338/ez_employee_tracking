@@ -1,14 +1,41 @@
 require 'attendance'
 
 module ApplicationHelper
-  def present_marked?
-    @attendance = current_employee.todays_attendance_of_employee
-    @attendance.present?
+  def broadcast(channel, &block)
+    message = { channel: channel, data: capture(&block) }
+    uri = URI.parse('http://localhost:9292/faye')
+    Net::HTTP.post_form(uri, message: message.to_json)
   end
 
-  def not_logged_out?
+  def check_today_timings?
+    setting = current_employee.company.setting
+    today_start_time = setting.timings[Time.now.strftime('%A').downcase + '_start_time']
+    today_end_time = setting.timings[Time.now.strftime('%A').downcase + '_end_time']
+    if (setting.working_days[Time.now.strftime('%A').downcase] && (get_time_in_seconds(Time.now) >= get_time_in_seconds(today_start_time.to_time)) && (get_time_in_seconds(Time.now) <= get_time_in_seconds(today_end_time.to_time)))
+      return true
+    end
+    false
+  end
+
+  def get_time_in_seconds(time)
+    hours_in_seconds = time.strftime('%H').to_i * 3600
+    minutes_in_seconds = time.strftime('%H').to_i * 60
+    hours_in_seconds + minutes_in_seconds
+  end
+
+  def present_marked?
     @attendance = current_employee.todays_attendance_of_employee
-    @attendance.logout_empty?
+    return false if @attendance.nil?
+    
+    @attendance.attendance_present?
+  end
+
+  def not_checked_out?
+    current_employee.todays_attendance_of_employee.logout_time.blank?
+  end
+
+  def checked_out?
+    current_employee.todays_attendance_of_employee.logout_time.present?
   end
 
   def admin?
@@ -16,104 +43,116 @@ module ApplicationHelper
   end
 
   def generate_sidebar_foot_options
-    @data = []
-    @events = {
-      name: 'Events',
-      link: '#',
-      icon: 'fas fa-calendar'
+    data = []
+    if admin?
+      events = {
+        name: 'Events',
+        link: home_events_path,
+        icon: 'fas fa-calendar',
+        id: 'events_option'
+      }
+      data.push(events)
+    end
+    chat = {
+      name: 'Messenger',
+      link: messages_index_path,
+      icon: 'fas fa-comment',
+      id: 'chat_option'
     }
-    @chat = {
-      name: 'Chat',
-      link: '#',
-      icon: 'fas fa-comment'
+    calendar = {
+      name: 'Calendar',
+      link: events_path,
+      icon: 'far fa-calendar-minus'
     }
-    @about = {
-      name: 'About',
-      link: menus_index_path,
-      icon: 'fas fa-briefcase'
+    settings = {
+      name: 'Settings',
+      link: settings_path,
+      icon: 'fas fa-cog',
+      id: 'settings_option'
     }
-    @contact = {
-      name: 'Contact',
-      link: '#',
-      icon: 'fas fa-phone'
-    }
-    @data.push(@events).push(@chat).push(@about).push(@contact)
+    data.push(chat).push(calendar).push(settings)
   end
 
   def generate_sidebar_options
-    @data = []
-    @dashboard = {
+    data = []
+    dashboard = {
       name: 'Dashboard',
-      link: show_employee_path(current_employee),
-      icon: 'fas fa-chart-line'
+      link: menus_index_path,
+      icon: 'fas fa-chart-line',
+      id: 'dashboard_option'
     }
-    @data.push(@dashboard)
+    data.push(dashboard)
 
     if admin?
-      @teams = {
-        name: 'Teams',
-        link: teams_path,
-        icon: 'fas fa-user-friends'
+      attendance = {
+        name: 'Company Attendance',
+        link: employee_attendances_path(@current_employee),
+        icon: 'fas fa-journal-whills',
+        id: 'attendance_option'
       }
-      @employees = {
+      employees = {
         name: 'Employees',
-        link: '#',
+        link: members_path,
         icon: 'fas fa-user',
-        submenu_id: 'empSubmenu',
-        suboptions: [
-          {
-            name: 'Add Employee',
-            link: new_employee_path,
-            icon: 'fas fa-plus'
-          },
-          {
-            name: 'View Employees',
-            link: employees_path,
-            icon: 'fas fa-eye'
-          }
-        ]
+        id: 'employees_option'
       }
-
-      @departments = {
-        name: 'Department',
-        link: '#',
+      departments = {
+        name: 'Departments',
+        link: departments_path,
         icon: 'fas fa-building',
-        submenu_id: 'deptSubmenu',
-        suboptions: [
-          {
-            name: 'Add Department',
-            link: new_department_path,
-            icon: 'fas fa-plus'
-          },
-          {
-            name: 'View Departments',
-            link: departments_path,
-            icon: 'fas fa-eye'
-          }
-        ]
+        id: 'departments_option'
       }
-
-      @projects = {
-        name: 'Projects',
+      reports = {
+        name: 'Reports',
         link: '#',
-        icon: 'fas fa-tasks',
-        submenu_id: 'projectSubmenu',
+        icon: 'fas fa-file',
+        id: 'reports_option',
+        submenu_id: 'reportSubmenu',
         suboptions: [
           {
-            name: 'Add Project',
-            link: new_project_path,
-            icon: 'fas fa-plus'
+            name: 'Task Report',
+            link: task_report_reports_path,
+            icon: 'fa fa-tasks'
           },
           {
-            name: 'View Projects',
-            link: projects_path,
-            icon: 'fas fa-eye'
+            name: 'Velocity Report',
+            link: show_employee_velocity_report_path,
+            icon: 'fa fa-line-chart'
+          },
+          {
+            name: 'Attendance Report',
+            link: attendance_report_path,
+            icon: 'fa fa-tasks'
           }
         ]
       }
-      @data.push(@employees).push(@departments).push(@teams).push(@projects)
+      data.push(employees).push(departments).push(reports).push(attendance)
     else
-      @data
+      departments = {
+        name: 'Departments',
+        link: departments_path,
+        icon: 'fas fa-building',
+        id: 'departments_option'
+      }
+      employee_tasks = {
+        name: 'My Tasks',
+        link: employee_tasks_list_path(@current_employee),
+        icon: 'fas fa-tasks',
+        id: 'employee_tasks_option'
+      }
+      reports = {
+        name: 'Velocity Report',
+        link: show_employee_velocity_report_path,
+        icon: 'fas fa-file',
+        id: 'employee_reports_option'
+      }
+      employee_attendance = {
+        name: 'My Attendance',
+        link: employee_attendances_path(current_employee),
+        icon: 'fas fa-journal-whills',
+        id: 'my_attendance_option'
+      }
+      data.push(employee_tasks).push(departments).push(reports).push(employee_attendance)
     end
   end
 end

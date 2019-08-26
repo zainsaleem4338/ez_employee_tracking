@@ -6,18 +6,11 @@
 
 <nav id="sidebar">
 
-  <div class="sidebar-header">
-    <h3>EZ Employee</h3>
-    <STRONG>ET</STRONG>
-    <i class="fas fa-user-ninja"></i>
-  </div>
-
   <ul class="list-unstyled sidenav-menu components">
 
     <% @sidebar_data.each do |sidebar_option| %>
-
       <% if sidebar_option.key?(:suboptions) %>
-        <li>
+        <li id="<%=sidebar_option[:id]%>">
           <a data-toggle="collapse" aria-expanded="false" class="dropdown-toggle d-flex align-items-center" href=<%= "#"+sidebar_option[:submenu_id] %>>
             <i class="<%=sidebar_option[:icon]%>"></i>
             <span class="sidebar-option"><%= sidebar_option[:name] %></span>
@@ -35,7 +28,7 @@
           </ul>
         </lti>
       <% else %>
-        <li>
+        <li id="<%=sidebar_option[:id]%>">
           <a class="d-flex align-items-center" href=<%= sidebar_option[:link] %>>
             <i class="<%= sidebar_option[:icon] %>"></i>
             <span class="sidebar-option"><%= sidebar_option[:name] %></span>
@@ -50,7 +43,7 @@
     <% @sidebar_footer_data = generate_sidebar_foot_options %>
 
     <% @sidebar_footer_data.each do |sidebar_footer_option| %>
-      <li>
+      <li id="<%=sidebar_footer_option[:id]%>">
         <a class="d-flex align-items-center" href=<%= sidebar_footer_option[:link] %>>
           <i class="<%= sidebar_footer_option[:icon] %>"></i>
           <span class="sidebar-option"><%= sidebar_footer_option[:name] %></span>

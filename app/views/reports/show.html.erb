@@ -1,0 +1,26 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">Employee pdf_velocity_report_path Report</p>
+  </div>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <center>
+        <h1>Employee Velocity Report</h1>
+      </center>
+    </div>
+    <div class="col-2">
+        <div class="align-content-right mr-0 pr-0 ml-report-btn">
+        <%= link_to  pdf_velocity_report_path(format: :pdf), class: 'btn btn-regular', target: :_blank do %>
+          Export pdf
+          <i class="fas fa-file-pdf ml-2"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <%= render 'teams_tasks_list' %>
+  </div>
+</div>

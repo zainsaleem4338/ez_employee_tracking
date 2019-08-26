@@ -1,0 +1,194 @@
+<% provide(:title, "Company Settings") %>
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">Settings</p>
+      <div class="m-0 pl-2">
+        <% if can? :create, Setting %>
+          <%= link_to edit_setting_path(@settings),title: 'Edit Settings', class: "btn btn-peach btn-circle btn-md" do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
+        <% end %>
+      </div>
+  </div>
+<% end %>
+<div class='outer_setting'>
+  <div class="row div_setting">
+    <div class="col-md-2 mb-3 custom-pills">
+      <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="days-tab" data-toggle="tab" href="#days" role="tab" aria-controls="days" aria-selected="true">Working Days</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="holidays-tab" data-toggle="tab" href="#holidays" role="tab" aria-controls="holidays" aria-selected="false">Holidays</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="leaves-tab" data-toggle="tab" href="#leaves" role="tab" aria-controls="leaves" aria-selected="false">Leaves</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="alerts-tab" data-toggle="tab" href="#alerts" role="tab" aria-controls="alerts" aria-selected="false">Critical Alerts</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /.col-md-4 -->
+    <% if @settings.present? %>
+      <div class="col-md-10">
+        <div class='inner_setting'>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="days" role="tabpanel" aria-labelledby="days-tab">
+              <h2>Working Days</h2>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Days</th>
+                    <th>Status</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Monday</th>
+                    <% if @settings.working_days['monday'] %>
+                      <td><span class="badge badge-success">On</span></td>
+                    <% else %>
+                      <td><span class="badge badge-danger">Off</span></td>
+                    <% end %>   
+                    <td><%= @settings.timings['monday_start_time'] %></td>
+                    <td><%= @settings.timings['monday_end_time'] %></td>
+                  </tr>
+                  <tr>
+                    <th>Tuesday</th>
+                    <% if @settings.working_days['tuesday'] %>
+                      <td><span class="badge badge-success">On</span></td>
+                    <% else %>
+                      <td><span class="badge badge-danger">Off</span></td>
+                    <% end %>   
+                    <td><%= @settings.timings['tuesday_start_time'] %></td>
+                    <td><%= @settings.timings['tuesday_end_time'] %></td>
+                  </tr>
+                  <tr>
+                    <th>Wednesday</th>
+                    <% if @settings.working_days['wednesday'] %>
+                      <td><span class="badge badge-success">On</span></td>
+                    <% else %>
+                      <td><span class="badge badge-danger">Off</span></td>
+                    <% end %>   
+                    <td><%= @settings.timings['wednesday_start_time'] %></td>
+                    <td><%= @settings.timings['wednesday_end_time'] %></td>
+                  </tr>
+                  <tr>
+                    <th>Thursday</th>
+                    <% if @settings.working_days['thursday'] %>
+                      <td><span class="badge badge-success">On</span></td>
+                    <% else %>
+                      <td><span class="badge badge-danger">Off</span></td>
+                    <% end %>   
+                    <td><%= @settings.timings['thursday_start_time'] %></td>
+                    <td><%= @settings.timings['thursday_end_time'] %></td>
+                  </tr>
+                  <tr>
+                    <th>Friday</th>
+                    <% if @settings.working_days['friday'] %>
+                      <td><span class="badge badge-success">On</span></td>
+                    <% else %>
+                      <td><span class="badge badge-danger">Off</span></td>
+                    <% end %>  
+                    <td><%= @settings.timings['friday_start_time'] %></td>
+                    <td><%= @settings.timings['friday_end_time'] %></td> 
+                  </tr>
+                  <tr>
+                    <th>Saturday</th>
+                    <% if @settings.working_days['saturday'] %>
+                      <td><span class="badge badge-success">On</span></td>
+                    <% else %>
+                      <td><span class="badge badge-danger">Off</span></td>
+                    <% end %>   
+                    <td><%= @settings.timings['saturday_start_time'] %></td>
+                    <td><%= @settings.timings['saturday_end_time'] %></td>
+                  </tr>
+                  <tr>
+                    <th>Sunday</th>
+                    <% if @settings.working_days['sunday'] %>
+                      <td><span class="badge badge-success">On</span></td>
+                    <% else %>
+                      <td><span class="badge badge-danger">Off</span></td>
+                    <% end %>  
+                    <td><%= @settings.timings['sunday_start_time'] %></td>
+                    <td><%= @settings.timings['sunday_end_time'] %></td> 
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tab-pane fade" id="holidays" role="tabpanel" aria-labelledby="holidays-tab">
+              <% if @settings.holidays.present? %>
+                <h2>Public Holidays</h2>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Holiday Date</th>
+                      <th>Every Year</th>
+                    </tr>
+                    <% @settings.holidays.each do |key, val| %>
+                    <tr>
+                      <td><%= @settings.holidays[key]["holiday_date_#{key}"] %></td>
+                      <% if @settings.holidays[key]["every_year_#{key}"] %>
+                        <td><span class="badge badge-success">On</span></td>
+                      <% else %>
+                        <td><span class="badge badge-danger">Off</span></td>
+                      <% end %>   
+                    </tr>
+                    <% end %>
+                  </thead>
+                </table>
+              <% else %>
+                <h3>No Holidays At The Moment!</h3>
+              <% end %>
+            </div>
+            <div class="tab-pane fade" id="leaves" role="tabpanel" aria-labelledby="leaves-tab">
+              <h2>Allocated Leaves</h2>
+              <table class='table'>
+                <thead>
+                  <tr>
+                    <th>Leaves</th>
+                    <% if @settings.allocated_leaves.nil? || @settings.allocated_leaves == 0 %>
+                      <th><h4><span class="badge badge-danger">0</span></h4></th>
+                    <% else %>
+                      <th><h4><span class="badge badge-success"><%= @settings.allocated_leaves %></span></h4></th>
+                    <% end %>
+                  </tr>
+                  <tr>
+                    <th>Attendance Threshold</th>
+                    <% if @settings.attendance_time.nil? %>
+                      <th><h4><span class="badge badge-danger">Not Set</span></h4></th>
+                    <% else %>
+                      <th><h4><span class="badge badge-success"><%= @settings.attendance_time %> min</span></h4></th>
+                    <% end %>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+              <div class="tab-pane fade" id="alerts" role="tabpanel" aria-labelledby="alerts-tab">
+              <h2>Critical Task Deadline Alerts</h2>
+              <table class='table'>
+                <thead>
+                  <tr>
+                    <th>Alert in Days</th>
+                    <% if @settings.task_alert.nil? %>
+                      <th><h4><span class="badge badge-danger">Not Set</span></h4></th>
+                    <% else %>
+                      <th><h4><span class="badge badge-success"><%= @settings.task_alert %></span></h4></th>
+                    <% end %>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <h2>No Settings At The Moment! </h2>
+    <% end %>
+      <!-- /.col-md-8 -->
+  </div>
+</div>
+  

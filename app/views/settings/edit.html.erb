@@ -1,0 +1,253 @@
+<% provide(:title, "Company Setting") %>
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+    <p class="m-0 align-middle"><%= link_to 'Settings', settings_path %> > Edit Settings</p>
+  </div>
+<% end %>
+<div class='outer_setting'>
+	<div class='row div_setting'>
+		<div class="col-md-2 mb-3 custom-pills">
+			<ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="days-tab" data-toggle="tab" href="#days" role="tab" aria-controls="days" aria-selected="true">Working Days</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="holidays-tab" data-toggle="tab" href="#holiday" role="tab" aria-controls="holiday" aria-selected="false">Holidays</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="leaves-tab" data-toggle="tab" href="#leaves" role="tab" aria-controls="leaves" aria-selected="false">Leaves</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="alerts-tab" data-toggle="tab" href="#alerts" role="tab" aria-controls="alerts" aria-selected="false">Critical Alerts</a>
+				</li>
+			</ul>
+		</div>
+		<% if @setting.present? %>
+			<div class="col-md-10 in_setting">
+				<div class='inner_setting'>
+					<%= form_tag( setting_path ,method: "patch") do %>
+						<%= hidden_field_tag :holidays, id: 'holidays', value: "" %>
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="days" role="tabpanel" aria-labelledby="days-tab">
+								<h2>Adjust Working Days</h2>
+								<div id="_working_days">
+									<div class='row'>
+										<div class='col-sm-3'></div>
+										<div class='col-sm-3'>
+											Start Time
+										</div>
+										<div class='offset-sm-1 col-sm-4'>
+											End Time
+										</div>
+									</div>
+									<div class='form-group row'>
+										<div class='col-sm-1'>
+											<label class='control-label'>Mon</label>
+										</div>
+										<div class='col-sm-1'>
+											<label class="switch">
+												<%= check_box_tag :monday, false , @setting.working_days['monday'] %>
+												<span class="slider round"></span>
+											</label>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('monday_start_time', @setting.timings['monday_start_time'], class:'form-control') %>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('monday_end_time', @setting.timings['monday_end_time'], class:'form-control') %>
+										</div>
+									</div>
+									<div class='form-group row'>
+										<div class='col-sm-1'>
+											<label class='control-label'>Tue</label>
+										</div>
+										<div class='col-sm-1'>
+											<label class="switch">
+												<%= check_box_tag :tuesday, false, @setting.working_days['tuesday'] %>
+												<span class="slider round"></span>
+											</label>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('tuesday_start_time', @setting.timings['tuesday_start_time'], class:'form-control') %>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('tuesday_end_time', @setting.timings['tuesday_end_time'], class:'form-control') %>
+										</div>
+									</div>
+									<div class='form-group row'>
+										<div class='col-sm-1'>
+											<label class='control-label'>Wed</label>
+										</div>
+										<div class='col-sm-1'>
+											<label class="switch">
+												<%= check_box_tag :wednesday, false, @setting.working_days['wednesday'] %>
+												<span class="slider round"></span>
+											</label>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('wednesday_start_time', @setting.timings['wednesday_start_time'], class:'form-control') %>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('wednesday_end_time', @setting.timings['wednesday_end_time'], class:'form-control') %>
+										</div>
+									</div>
+									<div class='form-group row'>
+										<div class='col-sm-1'>
+											<label class='control-label'>Thu</label>
+										</div>
+										<div class='col-sm-1'>
+											<label class="switch">
+												<%= check_box_tag :thursday, false, @setting.working_days['thursday'] %>
+												<span class="slider round"></span>
+											</label>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('thursday_start_time', @setting.timings['thursday_start_time'], class:'form-control') %>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('thursday_end_time', @setting.timings['thursday_end_time'], class:'form-control') %>
+										</div>
+									</div>
+									<div class='form-group row'>
+										<div class='col-sm-1'>
+											<label class='control-label'>Fri</label>
+										</div>
+										<div class='col-sm-1'>
+											<label class="switch">
+												<%= check_box_tag :friday, false, @setting.working_days['friday'] %>
+												<span class="slider round"></span>
+											</label>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('friday_start_time', @setting.timings['friday_start_time'], class:'form-control') %>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('friday_end_time', @setting.timings['friday_end_time'], class:'form-control') %>
+										</div>
+									</div>
+									<div class='form-group row'>
+										<div class='col-sm-1'>
+											<label class='control-label'>Sat</label>
+										</div>
+										<div class='col-sm-1'>
+											<label class="switch">
+												<%= check_box_tag :saturday, false, @setting.working_days['saturday'] %>
+												<span class="slider round"></span>
+											</label>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('saturday_start_time', @setting.timings['saturday_start_time'], class:'form-control') %>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('saturday_end_time',  @setting.timings['saturday_end_time'], class:'form-control') %>
+										</div>
+									</div>
+									<div class='form-group row'>
+										<div class='col-sm-1'>
+											<label class='control-label'>Sun</label>
+										</div>
+										<div class='col-sm-1'>
+											<label class="switch">
+												<%= check_box_tag :sunday, false, @setting.working_days['sunday'] %>
+												<span class="slider round"></span>
+											</label>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('sunday_start_time', @setting.timings['sunday_start_time'], class:'form-control') %>
+										</div>
+										<div class='col-sm-4'>
+											<%= text_field_tag('sunday_end_time', @setting.timings['sunday_end_time'], class:'form-control') %>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="tab-pane fade" id="holiday" role="tabpanel" aria-labelledby="holidays-tab">
+								<h2>Public Holidays</h2>
+									<div id='_holidays'>
+										<div class='form-group'>
+											<button id='_btn_add' class='btn btn-regular' type='button'><i class="fas fa-plus-circle"></i> Add</button>
+										</div>
+										<div id='_labels'>
+											<div class='row'>
+												<div class='col-md-9'>
+													<center><b>Select Date</b></center>
+												</div>
+												<div class='col-md-1'>
+													<center><b>Every Year</b></center>
+												</div>
+											</div>
+											<br>
+										</div>
+										<% if @setting.holidays.present? %>
+											<% @setting.holidays.each do |key, val| %>
+												<div class='form-group holidays'>
+													<div class='row'>
+														<div class='col-md-9'>
+															<%= date_field_tag "holiday_date_#{key}", @setting.holidays[key]["holiday_date_#{key}"] ,class:'form-control holiday-date-field' %>
+														</div>
+														<div class='col-md-1'>
+															<center>
+																<label class='switch'>
+																	<%= check_box_tag "every_year_#{key}", true, @setting.holidays[key]["every_year_#{key}"] , class:'every_year-field'  %>
+																	<span class='slider round'></span>
+																</label>
+															</center>
+														</div>
+													</div>
+												</div>
+											<% end %>
+										<% end %>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="leaves" role="tabpanel" aria-labelledby="leaves-tab">
+								<h2>Allocated Leaves & Attendance Threshold</h2>
+								<div id='allocated_leaves'>
+									<div class='row'>
+										<div class='col-md-6'>
+											<%= number_field_tag :allocated_leaves, @setting.allocated_leaves, class:'form-control', placeholder:'Enter a number',step: :any %>
+										</div>
+										<div class='col-md-6'>
+											<%= number_field_tag(:attendance_time, @setting.attendance_time, class:'form-control', placeholder:'Enter Time(minutes)') %>
+										</div>
+									</div>
+									<br>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="alerts" role="tabpanel" aria-labelledby="alerts-tab">
+								<h2>Critical Alerts</h2>
+								<div id='task_alert'>
+									<div class='row'>
+										<div class='col-md-6'>
+											<%= number_field_tag :task_alert, @setting.task_alert, class:'form-control', placeholder:'Enter a number',step: :any %>
+										</div>
+										<div class='col-md-6'>
+											<span><b>Days</b></span>
+										</div>
+									</div>
+								</div><br>
+							</div>
+							<div class='form-group pull-left'>
+								<%= submit_tag("Save Setting", id:'save_btn', class:'btn btn-regular') %>
+							</div>
+						</div>
+					<% end %>
+				<% else %>
+					<h2>No Settings At The Moment! </h2>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type='text/javascript'> 
+  $(document).ready(function() {
+		$('#_btn_add').click(function() {
+			$('#_holidays').append("<div class='form-group holidays'><div class='row'><div class='col-md-9'><%= escape_javascript(date_field_tag 'holiday_date', {} ,class:'form-control holiday-date-field') %></div><div class='col-md-1'><center><label class='switch'><%= escape_javascript(check_box_tag 'every_year', false, false ,class:'every_year-field' ) %><span class='slider round'></span></label></center></div></div></div>");
+			$('.holiday-date-field:last').attr('id', 'holiday_date_' + $('.holidays').length);
+			$('.holiday-date-field:last').attr('name', 'holiday_date_' + $('.holidays').length);
+			$('.every_year-field:last').attr('id', 'every_year_' + $('.holidays').length);
+			$('.every_year-field:last').attr('name', 'every_year_' + $('.holidays').length);
+		});
+	});
+</script>

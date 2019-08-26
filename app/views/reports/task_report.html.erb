@@ -1,0 +1,87 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'filter' %>
+<% end %>
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">Task Report</p>
+  </div>
+<% end %>
+<div class="container">
+  <%= form_tag(task_pdf_csv_report_reports_path, method: :get) do %>
+    <div class="row d-flex">
+      <div class="col-8"></div>
+      <div class="col-4 d-flex">
+        <button class="btn btn-regular" id="filter_btn" type="button" data-toggle="collapse" data-target="#multiCollapseFilter" aria-expanded="false" aria-controls="multiCollapseFilter"><i class="fas fa-angle-up d-none" id="up_arrow"></i><p class="m-0">Filter By</p></button>
+        <button class="btn btn-regular ml-2" type="submit" name="pdf" target="_blank">Export pdf <i class="fas fa-file-pdf ml-2"></i></button>
+        <button class="btn btn-regular ml-2" type="submit" name="csv">Export csv <i class="fas fa-file-csv ml-2"></i></button>
+      </div>
+      <div class="col">
+        
+      </div>
+      <div class="col">
+        
+      </div>
+    </div>
+    <div class="collapse multi-collapse mt-2" id="multiCollapseFilter">  
+      <div class="row">
+        <div class="col">
+          <b class="filter-text">Start Date Range</b>
+        </div>
+        <div class="col">
+          <b class="filter-text">Expected End Date Range</b>
+        </div>
+      </div>
+      <div class="row filter-line-height">
+        <div class="col">
+          <div class="row">
+            <div class="col-6">
+              <%= date_field_tag 'created_start', nil, class: 'form-control' %>
+            </div>
+            <div class="col-6">
+              <%= date_field_tag 'created_end', nil, class: 'form-control' %>
+            </div>
+          </div>
+          <div id="created_date_range error"></div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col-6">
+              <%= date_field_tag 'deadline_start', nil, class: 'form-control' %> 
+            </div>
+            <div class="col-6">
+              <%= date_field_tag 'deadline_end', nil, class: 'form-control' %>
+            </div>
+          </div>
+           <span id="deadline_date_range error"></span>
+        </div>
+      </div>
+      <div class="row mt-0">
+        <div class="col-3">
+          <b class="filter-text">Project</b>
+        </div>
+        <div class="col-3">
+          <b class="filter-text">Status</b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <%= text_field_tag 'project', nil, class: 'form-control' %>
+        </div>
+        <div class="col-3">
+          <%= select_tag(:status, options_for_select([["--Choose Status--", ''], ["New", "New"], ["In Progress", "In Progress"], ["Review pending", "Review pending"], ["Reviewed", "Reviewed"], ["Completed", "Completed"]]),class: 'form-control') %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 btn-padding">
+          <button class="btn btn-regular" type="button" id="update">Filter</button>&nbsp;
+          <button class="btn btn-peach" type="button" id="clear">Clear</button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <br>
+  <div id="tasks_tablee">
+    <%= render 'reports/tasks_report_list', tasks: @tasks %>
+  </div>
+</div> 

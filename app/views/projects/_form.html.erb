@@ -1,56 +1,52 @@
-<div id ="notice" class="alert alert-primary <%= 'd-none' if notice.blank? %>" role="alert">
-  <%= notice %>
-</div>
-
-<%= form_for(@project) do |form| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-      <ul>
+<%= form_for [@department,@project] do |form| %>
+<% if @project.errors.any? %>
+  <div class="row p-0 ml-1 mr-1">
+    <div class="col-1"></div>
+    <div class='alert alert-danger col-10' id="flash-alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="mb-0">
         <% @project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <div class="p-0"><i class="fa fa-exclamation-circle pr-2"></i><%= message %></div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="row">
-
-    <div class="col-md-6">
-      <div class="row d-flex">
-        <div class="form-group col-md-6">
-          <%= form.label :name %><br>
-          <%= form.text_field :name, class: "form-control" %>
-        </div>
-      </div>
-      <div class="row d-flex">
-        <div class="form-group col-md-6">
-          <%= form.label :description %><br>
-          <%= form.text_field :description, class: "form-control", placeholder: "Enter description" %>
-        </div>
-      </div>
-      <div class="row d-flex">
-        <div class="form-group col-md-6">
-        <%= form.select :department_id, options_for_select(@departments.collect { | department | [department.name, department.id] }), {}, {} %>
-        </div>
       </div>
     </div>
-
-    <div class="col-md-6">
-      <div class="row d-flex justify-content-start">
-        <div class="form-group col-md-4">
-          <%= form.label "Start Date" %><br>
-          <%= form.date_field :start_date, class: "form-control" %>
-        </div>
-        <div class="form-group col-md-4">
-         <%= form.label "Expected End Date" %><br>
-         <%= form.date_field :expected_end_date, class: "form-control" %>
-       </div>
-      </div>
-      <div class="actions">
-        <%= form.submit class: "btn btn-regular btn-primary"  %>
-      </div>
-    </div>
-
+    <div class="col-1"></div>
   </div>
+<% end %>
+<div class="row">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div class="row d-flex justify-content-start">
+      <div class="form-group col-12">
+        <%= form.label :name %><br>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-start">
+      <div class="form-group col-12">
+        <%= form.label :description %><br>
+        <%= form.text_area :description, class: "form-control", placeholder: "Enter description" %>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-start">
+      <div class="form-group col-6">
+        <%= form.label "Start Date" %><br>
+        <%= form.date_field :start_date, class: "form-control" %>
+      </div>
+      <div class="form-group col-6">
+       <%= form.label "Expected End Date" %><br>
+       <%= form.date_field :expected_end_date, class: "form-control" %>
+     </div>
+    </div>
+    <div class="actions mt-2">
+      <%= link_to request.env["HTTP_REFERER"], :class => "btn btn-regular" do %>
+        <i class="fas fa-arrow-left"></i>
+      <% end %>
+      <%= form.submit class: "btn btn-regular"  %>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>
 <% end %>

@@ -1,57 +1,81 @@
-<h1><%= t('.sign_up') %></h1>
-
-<%= nested_form_for([resource_name, resource.with_company], url: registration_path(resource_name)) do |f| %>
-  <%= bootstrap_devise_error_messages! %>
-
-  <%= f.fields_for :company do |company_form| %>
-    <div class="form-group">
-      <%= company_form.label :name, "Company Name" %>
-      <%= company_form.text_field :name, class: 'form-control' %>
-    </div>
-    
-    <div class="form-group">
-      <%= company_form.label :description, "Company Description" %>
-      <%= company_form.text_field :description,  class: 'form-control' %>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
-  </div>
-
-   <div class="form-group">
-    <%= f.label :role %>
-    <%= f.select(:role, options_for_select([['Admin']]), {}, {class: "form-control"}) %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :department_id %>
-    <%= f.select(:department_id, options_for_select([['Development', 1],['Product', 2]]), {}, {class: "form-control"}) %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, autocomplete: 'email', class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :password %>
-    <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control' %>
-
-    <% if @minimum_password_length %>
-      <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit t('.sign_up'), class: 'btn btn-regular btn-primary' %>
-  </div>
+<% content_for :head do %>
+<%= javascript_include_tag 'signup_password' %>
 <% end %>
 
-<%= render 'devise/shared/links' %>
+<div class="bg-gradient-primary">
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="container sign-up-form">
+      <center><h3><%= t('.sign_up') %></h3></center>
+      <%= nested_form_for([resource_name, resource.with_company], url: registration_path(resource_name)) do |f| %>
+      <%= bootstrap_devise_error_messages! %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.fields_for :company do |company_form| %>
+          <div class="form-group">
+            <%= company_form.label :name, "Company Name" %>
+            <%= company_form.text_field :name, autofocus: true, class: 'form-control', id: 'company-name', placeholder: 'e.g. Hogwards inc.' %>
+          </div>
+
+          <div class="form-group">
+            <%= company_form.label :description, "Company Description" %>
+            <%= company_form.text_field :description, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= company_form.label :subdomain, "Company Subdomain" %>
+            <%= company_form.text_field :subdomain, class: 'form-control', id: 'company-subdomain', readonly: true %>
+          </div>
+            <%= company_form.fields_for :setting do |setting_form| %>
+            <%= setting_form.hidden_field :timings, :value => ('{ "monday_start_time" => "00:00 AM", "monday_end_time" => "00:00 AM", "tuesday_start_time" => "00:00 AM", "tuesday_end_time" => "00:00 AM", "wednesday_start_time" => "00:00 AM", "wednesday_end_time" => "00:00 AM", "thursday_start_time" => "00:00 AM", "thursday_end_time" => "00:00 AM", "friday_start_time" => "00:00 AM", "friday_end_time" => "00:00 AM", "saturday_start_time" => "00:00 AM", "saturday_end_time" => "00:00 AM", "sunday_start_time" => "00:00 AM", "sunday_end_time" => "00:00 AM" }') %>
+            <%= setting_form.hidden_field :working_days, :value => ('{ "monday" => true, "tuesday" => true, "wednesday" => true, "thursday" => true, "friday" => true, "saturday" => true, "sunday" => true}') %>
+            <%= setting_form.hidden_field :task_alert, :value => (1) %>
+            <% end %>
+          <% end %>
+          <div class="form-group">
+            <%= f.label :role %>
+            <%= f.select(:role, options_for_select([['Admin']]), {}, {class: "form-control"}) %>
+          </div>
+        </div>
+
+        <div class="col-md-6"> 
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, autocomplete: 'name', class: 'form-control', placeholder: 'e.g. Severus Snape' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, class: 'form-control', placeholder: 'e.g. severus.snape@hogwards.com' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'form-control', id: 'password-field' %>
+
+            <% if @minimum_password_length %>
+            <div id="min-password" class="hidden">
+              <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
+            </div>
+            <% end %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
+	        </div>
+          <div class="row">
+            <div class="form-group d-flex col-md-4">
+              <%= f.submit t('.sign_up'), class: 'btn btn-regular' %>
+            </div>
+            <div class="col-md-8">
+              <%= render 'devise/shared/links' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,41 @@
+<% provide(:title, "Peer Chatbox") %>
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">Messenger</p>
+  </div>
+<% end %>
+<div class="container">
+  <div class="title">Messenger</div>
+  <div class="window">
+    <div class="text" id="chat-output"></div>
+  </div>
+</div>
+<div class="container">
+  <div class="chatbox">
+    <%= form_for @message, remote: true do |msg| %>
+      <%= msg.text_field :message, id:'chat-input', placeholder:'Type something here...', autocomplete: 'off' %>
+      <%= msg.hidden_field :employee_id, value: current_employee.id %>
+      <%= msg.hidden_field :company_id, value: current_company.id %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    var faye = new Faye.Client('http://localhost:9292/faye');
+    faye.subscribe('/messages/public/'+"<%= current_company.id %>", function(data){
+      send(data);
+    });
+  });
+
+  $(document).ready(function() {
+    <% @messages.each do |msg| %>
+      var data = "<%= msg.employee.name %>";
+      data += " : ";
+      data += "<%= msg.message %>";
+      data += "\n";
+      send(data);
+      data = ""
+    <% end %>
+});
+</script>

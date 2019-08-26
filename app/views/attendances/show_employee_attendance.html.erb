@@ -1,0 +1,22 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">My Attendance Details</p>
+      <div class="m-0 pl-2">
+        <%= link_to employee_attendances_path(@current_employee), :class => "btn btn-regular btn-circle btn-md" do %>
+          <i class="fas fa-arrow-left"></i>
+        <% end %>
+      </div>
+  </div>
+<% end %>
+<div class="container attendance-table-allign">
+  <% if @attendances.any? %>
+
+  <div class="row">
+    <div class="col-lg">
+      <%= render 'attendances/attendance_table' %>
+    </div>
+  </div>
+  <% else %>
+    <%= render '/shared/no_records' %>
+  <% end %>
+</div>

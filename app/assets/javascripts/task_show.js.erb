@@ -1,0 +1,15 @@
+$(document).ready(function() {
+  var progress = setInterval(function () {
+    var t_percentage = $('#taskId').val();
+    var bar_width = $('.progress').width();
+
+    var $bar = $('.progress-bar');
+
+    if ($bar.width() >= t_percentage*bar_width/100) {
+        clearInterval(progress);
+        $('.progress').removeClass('active');
+    } else {
+        $bar.width($bar.width() + (10*bar_width/100));
+    }
+  }, 100);
+});

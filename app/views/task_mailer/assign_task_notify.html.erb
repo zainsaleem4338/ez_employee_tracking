@@ -1,0 +1,10 @@
+<h1>Your assigned task</h1>
+
+<p>Hi <%= @employee.name %>! You have been assigned "<%= @task.name %>".</p>
+<p><b>Start Time: </b><%= @task.start_date.to_date %></p>
+<p><b>End Time: </b><%= @task.expected_end_date.to_date %></p>
+<p><b>Description: </b><%= @task.description %></p>
+<p><b>Please see task at: </b></p>
+<a href="<%= @employee.company.subdomain %>://localhost:3000/tasks/<%= @task.id %>">
+	<%= @employee.company.subdomain %>://localhost:3000/tasks/<%= @task.id %> 
+</a>

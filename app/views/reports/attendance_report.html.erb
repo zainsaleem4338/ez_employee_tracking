@@ -1,0 +1,10 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle">Employee Attendance Report</p>
+  </div>
+<% end %>
+
+<%= render 'attendance_report_grid'%>
+<div>
+<%= will_paginate @attendances, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>
+</div>

@@ -13,8 +13,11 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  #404 Error
+  config.consider_all_requests_local       = false
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.perform_deliveries = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -29,10 +32,28 @@ Rails.application.configure do
 
   config.assets.debug = true
 
+  EzEmployeeTracking::Application.configure do
+    config.action_dispatch.tld_length = 0
+  end
+
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
+  config.action_mailer.default_options = {
+        from: 'pkenvisage@gmail.com'
+      }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: '127.0.0.1', port: 3000 }
+
+  config.action_mailer.smtp_settings = {
+    :address        => 'smtp.gmail.com',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => 'pkenvisage@gmail.com',#ENV['SENDGRID_USERNAME'],
+    :password       => 'netmail123',#ENV['SENDGRID_PASSWORD'],
+    :enable_starttls_auto => true
+}
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.

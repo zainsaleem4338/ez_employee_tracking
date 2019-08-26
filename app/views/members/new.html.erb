@@ -1,0 +1,63 @@
+<% content_for :bread_crumbs do %>
+  <div class="row d-flex p-1">
+      <p class="m-0 align-middle"><%= link_to 'Employees', members_path, class: 'text-prim no-decoration' %> > Add Employee</p>
+  </div>
+<% end %>
+<br>
+<%= render 'shared/errors', obj: @member %>
+
+<%= form_for @member, url: members_path(@method), method: :post ,html: { multipart: true }, :html => {class: "form-horizontal", role: "form"} do |form| %>
+  <div class="form-group pr-5 pl-5">
+    <div class="row">
+      <div class="control-label col-sm-6">
+        <%= form.label :name %>
+      </div>
+      <div class="control-label col-sm-6">
+        <%= form.label :email %> 
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <%= form.text_field :name, class:"form-control", placeholder:"Name of Employee", autofocus: true %>
+      </div>
+      <div class="col-sm-6">
+        <%= form.text_field :email, class:"form-control", placeholder:"Email of Employee" %>
+      </div>
+    </div>
+     <div class="row">
+      <div class="control-label col-sm-6">
+        <%= form.label :role %>
+      </div>
+      <div class="control-label col-sm-6">
+        <%= form.label :department_id %> 
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <%= form.select(:role, options_for_select([['Employee'], ['Admin']]), {}, {class: "form-control"}) %>
+      </div>
+      <div class="col-sm-6">
+        <%= form.collection_select :department_id, current_employee.company.departments.order(:name),:id,:name, {},class: "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <%= form.label :avatar, "Profile Picture" %> 
+        <%= form.file_field :avatar, class:"form-control" %>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <%= form.hidden_field :company_id, :value => @member.company_id %>
+        <%= link_to members_path, :class => "btn btn-regular" do %>
+          <i class="fas fa-arrow-left"></i>
+        <% end %>
+        <%= form.submit class:'btn btn-regular' %>
+      </div>
+    </div>
+
+    
+  </div>
+  
+<% end %>

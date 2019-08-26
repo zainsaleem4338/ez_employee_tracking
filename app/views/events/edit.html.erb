@@ -1,0 +1,34 @@
+<% provide(:title, "Edit Events") %>
+<%= form_for @event, :html => {class: "form-horizontal", role: "form"} do |form| %>
+  <div class="form-group">
+    <div class="control-label col-sm-2">
+      <%= form.label :title %>
+    </div>
+    <div class="col-sm-8">
+      <%= form.text_field :title, class:"form-control", placeholder:"Title of Event", autofocus: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="control-label col-sm-2">
+      <%= form.label :description %>
+    </div>
+    <div class="col-sm-8">
+      <%= form.text_area :description, class:"form-control", placeholder:"Descrition of Event" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="control-label col-sm-2">
+      <%= form.label :event_date %>
+    </div>
+    <div class="col-sm-8">
+      <%= form.date_field :event_date, type: "date", class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="from-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <%= form.submit class:'btn btn-primary btn-lg btn-block' %>
+    </div>
+  </div>
+<% end %>
+
