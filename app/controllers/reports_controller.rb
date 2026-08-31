@@ -2,12 +2,12 @@ require 'date'
 class ReportsController < ApplicationController
   protect_from_forgery except: :load_task_data_in_report
 
-  # get /reports/task_report
+  # GET /reports/task_report
   def task_report
     @tasks = current_employee.company.tasks.paginate(page: params[:page], per_page: 5)
   end
 
-  # get /reports/load_task_data_in_report
+  # GET /reports/load_task_data_in_report
   def load_task_data_in_report
     task_hash = Report.get_task_query_hash(params[:project], params[:status], params[:created_start], params[:created_end], params[:deadline_start], params[:deadline_end])
     @tasks = current_employee.company.tasks.where(task_hash).paginate(page: params[:page], per_page: 10)
@@ -16,7 +16,7 @@ class ReportsController < ApplicationController
     end
   end
 
-  # get /reports/task_pdf_csv_report
+  # GET /reports/task_pdf_csv_report
   def task_pdf_csv_report
     task_hash = Report.get_task_query_hash(params[:project], params[:status], params[:created_start], params[:created_end], params[:deadline_start], params[:deadline_end])
     @tasks = current_employee.company.tasks.where(task_hash)
@@ -28,7 +28,7 @@ class ReportsController < ApplicationController
     end
     respond_to do |format|
       format.csv do
-        send_data Report.to_csv(@tasks), filename: "task-#{Time.zone.now.to_datetime}.csv"
+        send_data Report.tasks_to_csv(@tasks), filename: "task-#{Time.zone.now.to_datetime}.csv"
       end
       format.pdf do
         render pdf: 'Tasks',
@@ -40,13 +40,13 @@ class ReportsController < ApplicationController
     end
   end
 
-  # get /reports/velocity
+  # GET /reports/velocity
   def show
     @employee_tasks_data = Report.compute_employees_velocity(current_employee)
     # @employee_tasks_data = @employee_tasks_data.paginate(page: params[:page], per_page: 5)
   end
 
-  # get /reports/export_report
+  # GET /reports/export_report
   def pdf_velocity_report
     @employee_tasks_data = Report.compute_employees_velocity(current_employee)
     respond_to do |format|
@@ -60,13 +60,14 @@ class ReportsController < ApplicationController
     end
   end
 
-  # get /employees_attendance_report
+  # GET /employees_attendance_report
   def attendance_report
     if current_employee.role == Employee::ADMIN_ROLE
       @attendances = Report.attendance_data(current_employee).paginate(page: params[:page], per_page: 10)
     end
   end
 
+  # GET /reports/single_team_tasks
   def single_team_tasks
     @team_members_data = Report.single_team_velocity(current_employee,params[:team_id])
     respond_to do |format|

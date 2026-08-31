@@ -11,6 +11,6 @@
   </div>
 <% end %>
 
-<%= nested_form_for([@department, @team, @team.with_employee_teams], url: department_team_path, html: { multipart: true }, method: :patch) do |form| %>
+<%= nested_form_for([@department, @team, @team.build_employee_teams], url: department_team_path, html: { multipart: true }, method: :patch) do |form| %>
   <%= render 'form', form: form %>
 <% end %>
